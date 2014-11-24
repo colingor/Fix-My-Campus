@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B24D3681A238B8100EE43C0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B24D3671A238B8100EE43C0 /* MapKit.framework */; };
 		3BCBBA561A237EF500A9A246 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA551A237EF500A9A246 /* main.m */; };
 		3BCBBA591A237EF500A9A246 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA581A237EF500A9A246 /* AppDelegate.m */; };
 		3BCBBA5C1A237EF500A9A246 /* Estates_Audit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA5A1A237EF500A9A246 /* Estates_Audit.xcdatamodeld */; };
@@ -15,6 +16,8 @@
 		3BCBBA641A237EF500A9A246 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BCBBA631A237EF500A9A246 /* Images.xcassets */; };
 		3BCBBA671A237EF500A9A246 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BCBBA651A237EF500A9A246 /* LaunchScreen.xib */; };
 		3BCBBA731A237EF500A9A246 /* Estates_AuditTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA721A237EF500A9A246 /* Estates_AuditTests.m */; };
+		3BCBBA7E1A2386A200A9A246 /* Report.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA7D1A2386A200A9A246 /* Report.m */; };
+		3BCBBA811A2386A200A9A246 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA801A2386A200A9A246 /* Photo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B24D3671A238B8100EE43C0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3BCBBA501A237EF500A9A246 /* Estates Audit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Estates Audit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BCBBA541A237EF500A9A246 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BCBBA551A237EF500A9A246 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -42,6 +46,10 @@
 		3BCBBA6C1A237EF500A9A246 /* Estates AuditTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Estates AuditTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BCBBA711A237EF500A9A246 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BCBBA721A237EF500A9A246 /* Estates_AuditTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Estates_AuditTests.m; sourceTree = "<group>"; };
+		3BCBBA7C1A2386A200A9A246 /* Report.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Report.h; path = Model/Report.h; sourceTree = "<group>"; };
+		3BCBBA7D1A2386A200A9A246 /* Report.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Report.m; path = Model/Report.m; sourceTree = "<group>"; };
+		3BCBBA7F1A2386A200A9A246 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Photo.h; path = Model/Photo.h; sourceTree = "<group>"; };
+		3BCBBA801A2386A200A9A246 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Photo.m; path = Model/Photo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B24D3681A238B8100EE43C0 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +74,7 @@
 		3BCBBA471A237EF500A9A246 = {
 			isa = PBXGroup;
 			children = (
+				3B24D3671A238B8100EE43C0 /* MapKit.framework */,
 				3BCBBA521A237EF500A9A246 /* Estates Audit */,
 				3BCBBA6F1A237EF500A9A246 /* Estates AuditTests */,
 				3BCBBA511A237EF500A9A246 /* Products */,
@@ -91,6 +101,10 @@
 				3BCBBA631A237EF500A9A246 /* Images.xcassets */,
 				3BCBBA651A237EF500A9A246 /* LaunchScreen.xib */,
 				3BCBBA5A1A237EF500A9A246 /* Estates_Audit.xcdatamodeld */,
+				3BCBBA7F1A2386A200A9A246 /* Photo.h */,
+				3BCBBA801A2386A200A9A246 /* Photo.m */,
+				3BCBBA7C1A2386A200A9A246 /* Report.h */,
+				3BCBBA7D1A2386A200A9A246 /* Report.m */,
 				3BCBBA531A237EF500A9A246 /* Supporting Files */,
 			);
 			path = "Estates Audit";
@@ -171,6 +185,11 @@
 				TargetAttributes = {
 					3BCBBA4F1A237EF500A9A246 = {
 						CreatedOnToolsVersion = 6.1;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					3BCBBA6B1A237EF500A9A246 = {
 						CreatedOnToolsVersion = 6.1;
@@ -222,9 +241,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BCBBA811A2386A200A9A246 /* Photo.m in Sources */,
 				3BCBBA591A237EF500A9A246 /* AppDelegate.m in Sources */,
 				3BCBBA5C1A237EF500A9A246 /* Estates_Audit.xcdatamodeld in Sources */,
 				3BCBBA5F1A237EF500A9A246 /* ViewController.m in Sources */,
+				3BCBBA7E1A2386A200A9A246 /* Report.m in Sources */,
 				3BCBBA561A237EF500A9A246 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,6 +369,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Estates Audit/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -358,6 +380,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Estates Audit/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -416,6 +439,7 @@
 				3BCBBA781A237EF500A9A246 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3BCBBA791A237EF500A9A246 /* Build configuration list for PBXNativeTarget "Estates AuditTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +448,7 @@
 				3BCBBA7B1A237EF500A9A246 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
