@@ -1,4 +1,4 @@
-//
+
 //  AppDelegate.m
 //  Estates Audit
 //
@@ -17,16 +17,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    UINavigationBar *bar = [UINavigationBar appearance];
+  UINavigationBar *bar = [UINavigationBar appearance];
 
     // Change navbar colour
-    UIColor *navBarColour = [UIColor colorWithRed:(0.0/ 255.0f) green:(39.0/ 255.0f) blue:(76.0/ 255.0f) alpha:(0.0f)];
+    UIColor *navBarColour = [UIColor colorWithRed:(0.0/ 255.0f) green:(39.0/ 255.0f) blue:(76.0/ 255.0f) alpha:(1.0f)];
 
-    if ([bar respondsToSelector:@selector(setBarTintColor:)]) { // iOS 7+
+    /*if ([bar respondsToSelector:@selector(setBarTintColor:)]) { // iOS 7+
         bar.barTintColor = navBarColour;
     } else { // what year is this? 2012?
         bar.tintColor = navBarColour;
-    }
+    }*/
+    
+    bar.barTintColor = navBarColour;
+    bar.tintColor = [UIColor whiteColor];
     
     // Change status bar text to white
     bar.barStyle = UIStatusBarStyleLightContent;
@@ -34,7 +37,29 @@
     // Change navbar text colour
     NSDictionary *textTitleOptions = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor whiteColor], UITextAttributeTextShadowColor, nil];
     [[UINavigationBar appearance] setTitleTextAttributes:textTitleOptions];
-
+    
+    bar.translucent = NO;
+    
+    // Override point for customization after application launch.
+   /* UINavigationBar *navBar = [UINavigationBar appearance];
+    NSArray *ver = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
+    
+    // Change status bar text to white
+    navBar.barStyle = UIStatusBarStyleLightContent;
+    
+    // Change navbar text colour
+    NSDictionary *textTitleOptions = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor whiteColor], UITextAttributeTextShadowColor, nil];
+    [[UINavigationBar appearance] setTitleTextAttributes:textTitleOptions];
+    
+    
+    if ([[ver objectAtIndex:0] intValue] >= 7) {
+        // iOS 7.0 or later00274C
+        navBar.barTintColor = navBarColour;
+        navBar.translucent = NO;
+    }else {
+        // iOS 6.1 or earlier
+        navBar.tintColor = navBarColour;
+    }*/
     return YES;
 }
 
