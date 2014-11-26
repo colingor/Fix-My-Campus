@@ -17,6 +17,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    UINavigationBar *navBar = [UINavigationBar appearance];
+    NSArray *ver = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
+    
+    UIColor *navBarColour = [UIColor colorWithRed:(0.0/ 255.0f) green:(39.0/ 255.0f) blue:(76.0/ 255.0f) alpha:(0.0f)];
+    
+    if ([[ver objectAtIndex:0] intValue] >= 7) {
+        // iOS 7.0 or later00274C
+        navBar.barTintColor = navBarColour;
+        navBar.translucent = NO;
+    }else {
+        // iOS 6.1 or earlier
+        navBar.tintColor = navBarColour;
+    }
     return YES;
 }
 
