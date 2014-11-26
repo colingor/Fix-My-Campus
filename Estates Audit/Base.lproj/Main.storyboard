@@ -144,11 +144,22 @@ Testing</string>
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="wZJ-b2-lim">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="CuN-rB-j3g" style="IBUITableViewCellStyleDefault" id="FXX-wO-d9g">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wZJ-b2-lim" id="6zk-qi-zrz">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FXX-wO-d9g" id="IQk-ht-Kc9">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CuN-rB-j3g">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -798,18 +809,10 @@ camera roll</string>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZuG-IX-nao">
                                 <rect key="frame" x="150" y="150" width="300" height="300"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DtW-8A-otZ">
-                                        <rect key="frame" x="110" y="135" width="80" height="30"/>
-                                        <state key="normal" title="Report Now">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="jvW-dv-7ro" kind="show" id="R6w-vE-Bht"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xnG-rz-SbG">
                                         <rect key="frame" x="110" y="173" width="83" height="30"/>
                                         <state key="normal" title="My Reports">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -817,26 +820,104 @@ camera roll</string>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.19607843137254902" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="xnG-rz-SbG" firstAttribute="leading" secondItem="DtW-8A-otZ" secondAttribute="leading" id="AOH-Iv-JN8"/>
-                                    <constraint firstItem="xnG-rz-SbG" firstAttribute="top" secondItem="DtW-8A-otZ" secondAttribute="bottom" constant="8" symbolic="YES" id="Dme-Pw-cAN"/>
-                                    <constraint firstItem="DtW-8A-otZ" firstAttribute="centerY" secondItem="ZuG-IX-nao" secondAttribute="centerY" id="IN9-6M-lJW"/>
-                                    <constraint firstItem="DtW-8A-otZ" firstAttribute="centerX" secondItem="ZuG-IX-nao" secondAttribute="centerX" id="RpT-3b-ohc"/>
+                                    <constraint firstItem="xnG-rz-SbG" firstAttribute="centerX" secondItem="ZuG-IX-nao" secondAttribute="centerX" id="3Nf-ck-8He"/>
+                                    <constraint firstAttribute="bottom" secondItem="xnG-rz-SbG" secondAttribute="bottom" constant="184" id="DTD-To-eXv"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="xnG-rz-SbG"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="3Nf-ck-8He"/>
+                                        <exclude reference="DTD-To-eXv"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="xnG-rz-SbG"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <include reference="3Nf-ck-8He"/>
+                                        <include reference="DTD-To-eXv"/>
+                                    </mask>
+                                </variation>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DtW-8A-otZ">
+                                <rect key="frame" x="110" y="135" width="80" height="30"/>
+                                <state key="normal" title="Report Now">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="jvW-dv-7ro" kind="show" id="R6w-vE-Bht"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ZuG-IX-nao" firstAttribute="centerX" secondItem="DtW-8A-otZ" secondAttribute="centerX" id="0Y7-04-o7l"/>
                             <constraint firstItem="79Q-XZ-k01" firstAttribute="bottom" secondItem="Ghw-sE-5Rz" secondAttribute="top" id="7j9-fQ-t12"/>
+                            <constraint firstItem="79Q-XZ-k01" firstAttribute="bottom" secondItem="Ghw-sE-5Rz" secondAttribute="top" id="8xv-IB-5La"/>
+                            <constraint firstItem="79Q-XZ-k01" firstAttribute="top" secondItem="wRh-DR-UKY" secondAttribute="top" id="9IL-bZ-cAi"/>
+                            <constraint firstItem="ZuG-IX-nao" firstAttribute="leading" secondItem="wRh-DR-UKY" secondAttribute="leadingMargin" constant="68" id="9nd-E4-4US"/>
                             <constraint firstItem="79Q-XZ-k01" firstAttribute="centerX" secondItem="ZuG-IX-nao" secondAttribute="centerX" id="9rh-ub-eVx"/>
+                            <constraint firstItem="ZuG-IX-nao" firstAttribute="centerY" secondItem="79Q-XZ-k01" secondAttribute="centerY" id="Aui-al-Kox"/>
+                            <constraint firstItem="79Q-XZ-k01" firstAttribute="leading" secondItem="wRh-DR-UKY" secondAttribute="leading" id="MpI-02-MDz"/>
                             <constraint firstItem="79Q-XZ-k01" firstAttribute="leading" secondItem="wRh-DR-UKY" secondAttribute="leading" id="Q4h-6A-yRV"/>
+                            <constraint firstItem="ZuG-IX-nao" firstAttribute="top" secondItem="NrV-Nr-sJk" secondAttribute="bottom" constant="103" id="TjR-S8-shD"/>
                             <constraint firstItem="79Q-XZ-k01" firstAttribute="centerY" secondItem="ZuG-IX-nao" secondAttribute="centerY" id="UWQ-lU-Uov"/>
                             <constraint firstAttribute="trailing" secondItem="79Q-XZ-k01" secondAttribute="trailing" id="YXP-0a-5ZB"/>
+                            <constraint firstAttribute="trailing" secondItem="79Q-XZ-k01" secondAttribute="trailing" id="ZEm-RQ-aWU"/>
                             <constraint firstItem="ZuG-IX-nao" firstAttribute="leading" secondItem="wRh-DR-UKY" secondAttribute="leading" constant="150" id="mwc-FJ-E0j"/>
+                            <constraint firstItem="DtW-8A-otZ" firstAttribute="centerY" secondItem="ZuG-IX-nao" secondAttribute="centerY" id="nBi-Sv-uiT"/>
                             <constraint firstItem="ZuG-IX-nao" firstAttribute="top" secondItem="NrV-Nr-sJk" secondAttribute="bottom" constant="130" id="rJE-XL-lLK"/>
+                            <constraint firstItem="DtW-8A-otZ" firstAttribute="centerX" secondItem="79Q-XZ-k01" secondAttribute="centerX" id="vVy-Hs-4Ba"/>
                             <constraint firstItem="79Q-XZ-k01" firstAttribute="top" secondItem="wRh-DR-UKY" secondAttribute="top" id="yZG-2G-3HC"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="DtW-8A-otZ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="8xv-IB-5La"/>
+                                <exclude reference="9IL-bZ-cAi"/>
+                                <exclude reference="MpI-02-MDz"/>
+                                <exclude reference="ZEm-RQ-aWU"/>
+                                <exclude reference="0Y7-04-o7l"/>
+                                <exclude reference="9nd-E4-4US"/>
+                                <exclude reference="Aui-al-Kox"/>
+                                <exclude reference="TjR-S8-shD"/>
+                                <exclude reference="nBi-Sv-uiT"/>
+                                <exclude reference="vVy-Hs-4Ba"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="DtW-8A-otZ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="7j9-fQ-t12"/>
+                                <include reference="8xv-IB-5La"/>
+                                <include reference="9IL-bZ-cAi"/>
+                                <exclude reference="9rh-ub-eVx"/>
+                                <include reference="MpI-02-MDz"/>
+                                <exclude reference="Q4h-6A-yRV"/>
+                                <exclude reference="UWQ-lU-Uov"/>
+                                <exclude reference="YXP-0a-5ZB"/>
+                                <include reference="ZEm-RQ-aWU"/>
+                                <exclude reference="yZG-2G-3HC"/>
+                                <include reference="0Y7-04-o7l"/>
+                                <include reference="9nd-E4-4US"/>
+                                <include reference="Aui-al-Kox"/>
+                                <include reference="TjR-S8-shD"/>
+                                <exclude reference="mwc-FJ-E0j"/>
+                                <exclude reference="rJE-XL-lLK"/>
+                                <include reference="nBi-Sv-uiT"/>
+                                <include reference="vVy-Hs-4Ba"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="DKg-Ae-4Hv"/>
                 </viewController>
