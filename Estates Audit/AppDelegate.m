@@ -20,8 +20,13 @@
     UINavigationBar *navBar = [UINavigationBar appearance];
     NSArray *ver = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
     
-    UIColor *navBarColour = [UIColor colorWithRed:(0.0/ 255.0f) green:(39.0/ 255.0f) blue:(76.0/ 255.0f) alpha:(0.0f)];
+    // Change navbar text colour
+    NSDictionary *textTitleOptions = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor whiteColor], UITextAttributeTextShadowColor, nil];
+    [[UINavigationBar appearance] setTitleTextAttributes:textTitleOptions];
     
+    // Change navbar colour
+    UIColor *navBarColour = [UIColor colorWithRed:(0.0/ 255.0f) green:(39.0/ 255.0f) blue:(76.0/ 255.0f) alpha:(0.0f)];
+
     if ([[ver objectAtIndex:0] intValue] >= 7) {
         // iOS 7.0 or later00274C
         navBar.barTintColor = navBarColour;
