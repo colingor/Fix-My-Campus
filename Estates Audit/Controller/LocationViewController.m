@@ -7,8 +7,11 @@
 //
 
 #import "LocationViewController.h"
+@import MapKit;
+@interface LocationViewController () <MKMapViewDelegate>
 
-@interface LocationViewController ()
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
 
 @end
 
@@ -18,8 +21,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = NO;
+    [self.mapView setDelegate:self];
+    [self.mapView setShowsUserLocation:YES];
 }
 
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    
+   // zoom to region containing the user location
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
+    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+    
+    // add the annotation
+    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+    point.coordinate = userLocation.coordinate;
+    point.title = @"The Location";
+    point.subtitle = @"Sub-title";
+    [self.mapView addAnnotation:point];
+}
 
 /*
 #pragma mark - Navigation
