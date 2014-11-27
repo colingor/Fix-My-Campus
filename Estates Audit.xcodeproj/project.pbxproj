@@ -21,6 +21,8 @@
 		3BCBBA731A237EF500A9A246 /* Estates_AuditTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA721A237EF500A9A246 /* Estates_AuditTests.m */; };
 		3BCBBA7E1A2386A200A9A246 /* Report.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA7D1A2386A200A9A246 /* Report.m */; };
 		3BCBBA811A2386A200A9A246 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA801A2386A200A9A246 /* Photo.m */; };
+		7DD86BD61A2746AA00ED3056 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DD86BD51A2746AA00ED3056 /* MessageUI.framework */; };
+		7DD86BDA1A2747CC00ED3056 /* EmailSupportTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD86BD91A2747CC00ED3056 /* EmailSupportTicket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,9 @@
 		3BCBBA7D1A2386A200A9A246 /* Report.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Report.m; path = Model/Report.m; sourceTree = "<group>"; };
 		3BCBBA7F1A2386A200A9A246 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Photo.h; path = Model/Photo.h; sourceTree = "<group>"; };
 		3BCBBA801A2386A200A9A246 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Photo.m; path = Model/Photo.m; sourceTree = "<group>"; };
+		7DD86BD51A2746AA00ED3056 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		7DD86BD81A2747CC00ED3056 /* EmailSupportTicket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailSupportTicket.h; sourceTree = "<group>"; };
+		7DD86BD91A2747CC00ED3056 /* EmailSupportTicket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailSupportTicket.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DD86BD61A2746AA00ED3056 /* MessageUI.framework in Frameworks */,
 				3B24D3681A238B8100EE43C0 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,6 +116,8 @@
 		3BCBBA471A237EF500A9A246 = {
 			isa = PBXGroup;
 			children = (
+				7DD86BD71A27477300ED3056 /* messaging */,
+				7DD86BD51A2746AA00ED3056 /* MessageUI.framework */,
 				3BC3AD211A25EA6500F2C6C0 /* Controller */,
 				3B24D3671A238B8100EE43C0 /* MapKit.framework */,
 				3BCBBA521A237EF500A9A246 /* Estates Audit */,
@@ -165,6 +173,15 @@
 				3BCBBA711A237EF500A9A246 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7DD86BD71A27477300ED3056 /* messaging */ = {
+			isa = PBXGroup;
+			children = (
+				7DD86BD81A2747CC00ED3056 /* EmailSupportTicket.h */,
+				7DD86BD91A2747CC00ED3056 /* EmailSupportTicket.m */,
+			);
+			name = messaging;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +295,7 @@
 				3BC3AD201A25EA5900F2C6C0 /* HomePageViewController.m in Sources */,
 				3BC3AD2E1A25EE6D00F2C6C0 /* ReportsTableTableViewController.m in Sources */,
 				3BCBBA5C1A237EF500A9A246 /* Estates_Audit.xcdatamodeld in Sources */,
+				7DD86BDA1A2747CC00ED3056 /* EmailSupportTicket.m in Sources */,
 				3BC3AD281A25ED6800F2C6C0 /* PictureViewController.m in Sources */,
 				3BCBBA7E1A2386A200A9A246 /* Report.m in Sources */,
 				3BCBBA561A237EF500A9A246 /* main.m in Sources */,
