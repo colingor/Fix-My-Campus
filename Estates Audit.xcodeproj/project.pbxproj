@@ -104,9 +104,9 @@
 		3BC3AD221A25EA8F00F2C6C0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3BCBBA801A2386A200A9A246 /* Photo.m */,
 				3BCBBA7C1A2386A200A9A246 /* Report.h */,
 				3BCBBA7D1A2386A200A9A246 /* Report.m */,
+				3BCBBA801A2386A200A9A246 /* Photo.m */,
 				3BCBBA7F1A2386A200A9A246 /* Photo.h */,
 				3BCBBA5A1A237EF500A9A246 /* Estates_Audit.xcdatamodeld */,
 			);
