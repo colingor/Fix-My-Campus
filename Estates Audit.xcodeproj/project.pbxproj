@@ -21,6 +21,7 @@
 		3BCBBA731A237EF500A9A246 /* Estates_AuditTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA721A237EF500A9A246 /* Estates_AuditTests.m */; };
 		3BCBBA7E1A2386A200A9A246 /* Report.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA7D1A2386A200A9A246 /* Report.m */; };
 		3BCBBA811A2386A200A9A246 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA801A2386A200A9A246 /* Photo.m */; };
+		7DD86BD61A2746AA00ED3056 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DD86BD51A2746AA00ED3056 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		3BCBBA7D1A2386A200A9A246 /* Report.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Report.m; path = Model/Report.m; sourceTree = "<group>"; };
 		3BCBBA7F1A2386A200A9A246 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Photo.h; path = Model/Photo.h; sourceTree = "<group>"; };
 		3BCBBA801A2386A200A9A246 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Photo.m; path = Model/Photo.m; sourceTree = "<group>"; };
+		7DD86BD51A2746AA00ED3056 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DD86BD61A2746AA00ED3056 /* MessageUI.framework in Frameworks */,
 				3B24D3681A238B8100EE43C0 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,6 +113,7 @@
 		3BCBBA471A237EF500A9A246 = {
 			isa = PBXGroup;
 			children = (
+				7DD86BD51A2746AA00ED3056 /* MessageUI.framework */,
 				3BC3AD211A25EA6500F2C6C0 /* Controller */,
 				3B24D3671A238B8100EE43C0 /* MapKit.framework */,
 				3BCBBA521A237EF500A9A246 /* Estates Audit */,
