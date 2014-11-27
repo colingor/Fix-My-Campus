@@ -46,8 +46,7 @@
     }
     [self.mapView setShowsUserLocation:YES];
     //[self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
-    
-    [self loadMapPin];
+
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
@@ -58,7 +57,6 @@
     region.span.longitudeDelta = 0.0137f;
     [self.mapView setRegion:region animated:YES];
     
-    //_initialPosition = NO;
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
@@ -99,19 +97,6 @@
     return pav;
 }
 
-/*
-- (void)viewWillAppear:(BOOL)animated
-{
-    [self loadMapPin];
-}*/
-
--(void)loadMapPin
-{
-    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-    annotation.coordinate = self.locationManager.location.coordinate;
-    [self.mapView addAnnotation:annotation];
-
-}
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState {
         if (newState == MKAnnotationViewDragStateEnding)
