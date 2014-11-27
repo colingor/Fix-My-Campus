@@ -119,16 +119,12 @@ Testing</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Reports" id="vyP-MU-cvH">
-                        <barButtonItem key="rightBarButtonItem" title="New" id="RLT-bR-d81">
-                            <connections>
-                                <segue destination="jvW-dv-7ro" kind="show" id="vfW-Cm-gGX"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="New" id="RLT-bR-d81"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mF6-nL-y8S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="525" y="1004.25"/>
+            <point key="canvasLocation" x="-385.5" y="1415.25"/>
         </scene>
         <!--Report Details-->
         <scene sceneID="MFh-y6-Vr1">
@@ -186,7 +182,7 @@ Testing</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LD6-iY-b8c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1455" y="1275"/>
+            <point key="canvasLocation" x="585" y="1415.25"/>
         </scene>
         <!--Location-->
         <scene sceneID="7CN-id-3qg">
@@ -346,7 +342,7 @@ Testing</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pGf-Dp-G9O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1473" y="510"/>
+            <point key="canvasLocation" x="495" y="510"/>
         </scene>
         <!--Picture-->
         <scene sceneID="MUf-4i-UoL">
@@ -481,7 +477,7 @@ Testing</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RF9-rW-04M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2341.5" y="510"/>
+            <point key="canvasLocation" x="1381.5" y="510"/>
         </scene>
         <!--Summary-->
         <scene sceneID="6Ng-FU-aHQ">
@@ -701,12 +697,16 @@ Testing</string>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Summary" id="LYr-rx-a4T">
-                        <barButtonItem key="rightBarButtonItem" title="Send" id="DSy-Ee-577"/>
+                        <barButtonItem key="rightBarButtonItem" title="Send" id="DSy-Ee-577">
+                            <connections>
+                                <segue destination="xrO-8q-dMj" kind="show" id="bOI-CQ-dk3"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gaQ-Yj-JfJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4300.5" y="612.75"/>
+            <point key="canvasLocation" x="3166.5" y="510"/>
         </scene>
         <!--Description-->
         <scene sceneID="HmD-PN-aMF">
@@ -782,7 +782,7 @@ Testing</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btz-zI-ALP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3376.5" y="510"/>
+            <point key="canvasLocation" x="2272.5" y="510"/>
         </scene>
         <!--Main Navigation-->
         <scene sceneID="8wW-Ms-uZC">
@@ -1041,7 +1041,7 @@ as they are resolved</string>
         <image name="Uoe logo" width="187" height="187"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="R6w-vE-Bht"/>
+        <segue reference="bOI-CQ-dk3"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

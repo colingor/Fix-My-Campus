@@ -25,17 +25,26 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = NO;
+    
+    
     [self.mapView setDelegate:self];
     
-    self.locationManager = [[CLLocationManager alloc] init];
+    
+    if (nil == self.locationManager)
+        self.locationManager = [[CLLocationManager alloc] init];
+    
     self.locationManager.delegate = self;
+   
+    // Set a movement threshold for new events.
+    //self.locationManager.distanceFilter = 500; // meters
+    
     
     if(IS_OS_8_OR_LATER) {
         //[self.locationManager requestWhenInUseAuthorization];
         [self.locationManager requestAlwaysAuthorization];
         [self.locationManager startUpdatingLocation];
     }
-    //[self.mapView setShowsUserLocation:YES];
+    [self.mapView setShowsUserLocation:YES];
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
     
     [self loadMapPin];
@@ -97,7 +106,7 @@
 -(void)loadMapPin
 {
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-    annotation.coordinate =  self.locationManager.location.coordinate;
+    annotation.coordinate = self.locationManager.location.coordinate;
     [self.mapView addAnnotation:annotation];
 
 }
