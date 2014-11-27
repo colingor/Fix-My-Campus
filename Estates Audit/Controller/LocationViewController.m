@@ -36,7 +36,7 @@
     self.locationManager.delegate = self;
    
     // Set a movement threshold for new events.
-    //self.locationManager.distanceFilter = 500; // meters
+    self.locationManager.distanceFilter = 20; // meters
     
     
     if(IS_OS_8_OR_LATER) {
@@ -45,12 +45,12 @@
         [self.locationManager startUpdatingLocation];
     }
     [self.mapView setShowsUserLocation:YES];
-    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+    //[self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
     
     [self loadMapPin];
 }
 
-/*-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
     region.center.latitude = self.locationManager.location.coordinate.latitude;
     region.center.longitude = self.locationManager.location.coordinate.longitude;
@@ -59,25 +59,26 @@
     [self.mapView setRegion:region animated:YES];
     
     //_initialPosition = NO;
-}*/
+}
 
-/*- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
     
    // zoom to region containing the user location
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
     
-    // add the annotation
+     //add the annotation
     MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
     point.coordinate = userLocation.coordinate;
     point.title = @"Report Location";
     point.subtitle = @"(Drag if location incorrect)";
     
     [self.mapView addAnnotation:point];
-}*/
+}
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
+ 
     if ([annotation isKindOfClass:[MKUserLocation class]])
         return nil;
     
@@ -87,6 +88,7 @@
     {
         pav = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
         pav.draggable = YES;
+        pav.animatesDrop = YES;
         pav.canShowCallout = YES;
     }
     else
