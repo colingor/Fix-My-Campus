@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3B24D3681A238B8100EE43C0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B24D3671A238B8100EE43C0 /* MapKit.framework */; };
+		3B599D191ADBBB27007F4D40 /* AppDelegate+MOC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B599D181ADBBB27007F4D40 /* AppDelegate+MOC.m */; };
 		3BC3AD201A25EA5900F2C6C0 /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC3AD1F1A25EA5900F2C6C0 /* HomePageViewController.m */; };
 		3BC3AD251A25EC3100F2C6C0 /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC3AD241A25EC3100F2C6C0 /* LocationViewController.m */; };
 		3BC3AD281A25ED6800F2C6C0 /* PictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC3AD271A25ED6800F2C6C0 /* PictureViewController.m */; };
@@ -37,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		3B24D3671A238B8100EE43C0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3B599D171ADBBB27007F4D40 /* AppDelegate+MOC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+MOC.h"; sourceTree = "<group>"; };
+		3B599D181ADBBB27007F4D40 /* AppDelegate+MOC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+MOC.m"; sourceTree = "<group>"; };
 		3BC3AD1E1A25EA5900F2C6C0 /* HomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomePageViewController.h; path = "Estates Audit/Controller/HomePageViewController.h"; sourceTree = "<group>"; };
 		3BC3AD1F1A25EA5900F2C6C0 /* HomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomePageViewController.m; path = "Estates Audit/Controller/HomePageViewController.m"; sourceTree = "<group>"; };
 		3BC3AD231A25EC3100F2C6C0 /* LocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationViewController.h; path = "Estates Audit/Controller/LocationViewController.h"; sourceTree = "<group>"; };
@@ -140,6 +143,8 @@
 			children = (
 				3BCBBA571A237EF500A9A246 /* AppDelegate.h */,
 				3BCBBA581A237EF500A9A246 /* AppDelegate.m */,
+				3B599D171ADBBB27007F4D40 /* AppDelegate+MOC.h */,
+				3B599D181ADBBB27007F4D40 /* AppDelegate+MOC.m */,
 				3BCBBA601A237EF500A9A246 /* Main.storyboard */,
 				3BCBBA651A237EF500A9A246 /* LaunchScreen.xib */,
 				3BC3AD221A25EA8F00F2C6C0 /* Model */,
@@ -299,6 +304,7 @@
 				3BC3AD281A25ED6800F2C6C0 /* PictureViewController.m in Sources */,
 				3BCBBA7E1A2386A200A9A246 /* Report.m in Sources */,
 				3BCBBA561A237EF500A9A246 /* main.m in Sources */,
+				3B599D191ADBBB27007F4D40 /* AppDelegate+MOC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
