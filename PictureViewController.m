@@ -8,7 +8,7 @@
 
 #import "PictureViewController.h"
 
-@interface PictureViewController ()
+@interface PictureViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (nonatomic) NSMutableArray *capturedImages;
 @property (nonatomic) UIImagePickerController *imagePickerController;
