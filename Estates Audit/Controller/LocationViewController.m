@@ -89,6 +89,7 @@
     
     [self.mapView addAnnotation:point];
     
+    // Only update value to be stored if user hasn't specified a location manually
     if (!self.userSpecfiedLocation) {
         [self.reportDict setValue:[NSNumber numberWithDouble:coord.latitude] forKey:@"lat"];
         [self.reportDict setValue:[NSNumber numberWithDouble:coord.longitude] forKey:@"lon"];
@@ -150,6 +151,7 @@
             NSLog(@" %@", locationDescription);
             
             [self.reportDict setValue:locationDescription forKey:@"loc_desc"];
+            [self.reportDict setValue:@"new" forKey:@"status"];
             
             Report *report = [Report reportFromReportInfo:self.reportDict inManangedObjectContext:self.managedObjectContext];
             

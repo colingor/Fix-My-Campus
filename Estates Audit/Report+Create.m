@@ -33,6 +33,7 @@
             report.loc_desc = locDesc;
             report.lon = (NSNumber *)[reportDictionary valueForKeyPath:@"lon"];
             report.lat = (NSNumber *)[reportDictionary valueForKeyPath:@"lat"];
+            report.status = (NSString *)[reportDictionary valueForKeyPath:@"status"];
             
         } else {
             report = [matches lastObject];
