@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *descriptionText;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) NSMutableDictionary *reportDict;
+@property (nonatomic, assign) BOOL userSpecfiedLocation;
 
 @end
 
@@ -51,9 +53,14 @@
     [self.mapView setShowsUserLocation:YES];
     //[self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
    
+    // Declare empty dict we can add report info to
+    _reportDict = [NSMutableDictionary dictionary];
     
+    // Use this to determine whether user overrides location from locationManager by movin pin
+    _userSpecfiedLocation = NO;
   
 }
+
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
@@ -73,11 +80,20 @@
     
      //add the annotation
     MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-    point.coordinate = userLocation.coordinate;
+    
+    CLLocationCoordinate2D coord = [userLocation coordinate];
+    
+    point.coordinate = coord;
     point.title = @"Report Location";
     point.subtitle = @"(Drag if location incorrect)";
     
     [self.mapView addAnnotation:point];
+    
+    if (!self.userSpecfiedLocation) {
+        [self.reportDict setValue:[NSNumber numberWithDouble:coord.latitude] forKey:@"lat"];
+        [self.reportDict setValue:[NSNumber numberWithDouble:coord.longitude] forKey:@"lon"];
+    }
+    
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
@@ -109,6 +125,11 @@
         {
             CLLocationCoordinate2D droppedAt = annotationView.annotation.coordinate;
             NSLog(@"dropped at %f,%f", droppedAt.latitude, droppedAt.longitude);
+         
+            [self.reportDict setValue:[NSNumber numberWithDouble:droppedAt.latitude] forKey:@"lat"];
+            [self.reportDict setValue:[NSNumber numberWithDouble:droppedAt.longitude] forKey:@"lon"];
+            
+            self.userSpecfiedLocation = YES;
         }
    }
 
@@ -125,11 +146,12 @@
             
             PictureViewController *picvc = (PictureViewController *)segue.destinationViewController;
             
-            NSString *description = self.descriptionText.text;
-            NSLog(@" %@", description);
-            NSDictionary *reportDict = [NSDictionary dictionaryWithObjectsAndKeys: description, @"desc", nil];
+            NSString *locationDescription = self.descriptionText.text;
+            NSLog(@" %@", locationDescription);
             
-            Report *report = [Report reportFromReportInfo:reportDict inManangedObjectContext:self.managedObjectContext];
+            [self.reportDict setValue:locationDescription forKey:@"loc_desc"];
+            
+            Report *report = [Report reportFromReportInfo:self.reportDict inManangedObjectContext:self.managedObjectContext];
             
             // Set report in next controller
             picvc.report = report;

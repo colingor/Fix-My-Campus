@@ -15,23 +15,25 @@
 {
     Report *report = nil;
     
-    NSString *desc = (NSString *)[reportDictionary valueForKeyPath:@"desc"];
+    NSString *locDesc = (NSString *)[reportDictionary valueForKeyPath:@"loc_desc"];
     
-    if ([desc length]) {
+    if ([locDesc length]) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Report"];
-        request.predicate = [NSPredicate predicateWithFormat:@"desc = %@", desc];
+        request.predicate = [NSPredicate predicateWithFormat:@"loc_desc = %@", locDesc];
         
         NSError *error;
         NSArray *matches = [context executeFetchRequest:request error:&error];
         
         if (!matches || error || ([matches count] > 1 )) {
             // handle error
-            NSLog(@"Something went wrong creating report with dectription: %@", desc);
+            NSLog(@"Something went wrong creating report with dectription: %@", locDesc);
         } else if (![matches count]) {
             report = [NSEntityDescription insertNewObjectForEntityForName:@"Report"
                                                     inManagedObjectContext:context];
-            report.desc = desc;
-          
+            report.loc_desc = locDesc;
+            report.lon = (NSNumber *)[reportDictionary valueForKeyPath:@"lon"];
+            report.lat = (NSNumber *)[reportDictionary valueForKeyPath:@"lat"];
+            
         } else {
             report = [matches lastObject];
         }

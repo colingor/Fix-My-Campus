@@ -22,15 +22,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Estates Audit/Controller/LocationViewController.m"
-            timestampString = "450862625.84118"
+            timestampString = "450869274.586826"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "-mapView:annotationView:didChangeDragState:fromOldState:"
             landmarkType = "5">
          </BreakpointContent>
@@ -57,28 +57,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Estates Audit/Controller/LocationViewController.m"
-            timestampString = "450862625.84118"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Estates Audit/Controller/LocationViewController.h"
-            timestampString = "450802640.693579"
+            timestampString = "450863962.039343"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18">
+            startingLineNumber = "17"
+            endingLineNumber = "17">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -100,15 +84,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Estates Audit/Controller/LocationViewController.m"
-            timestampString = "450863533.120082"
+            timestampString = "450869274.586826"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
@@ -136,11 +120,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Estates Audit/Controller/HomePageViewController.m"
-            timestampString = "450803011.733507"
+            timestampString = "450863962.039343"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "-prepareForSegue:sender:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Estates Audit/Controller/LocationViewController.m"
+            timestampString = "450869274.586826"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
@@ -152,12 +152,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Estates Audit/Report+Create.m"
-            timestampString = "450803277.094294"
+            timestampString = "450866324.050658"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
             landmarkName = "+reportFromReportInfo:inManangedObjectContext:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Estates Audit/Controller/LocationViewController.m"
+            timestampString = "450869260.182318"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "-mapView:didUpdateUserLocation:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -168,12 +184,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Estates Audit/Controller/LocationViewController.m"
-            timestampString = "450863533.120082"
+            timestampString = "450869262.218626"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "-prepareForSegue:sender:"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "-mapView:didUpdateUserLocation:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
