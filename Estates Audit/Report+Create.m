@@ -7,6 +7,7 @@
 //
 
 #import "Report+Create.h"
+#import "Photo+Create.h"
 
 @implementation Report (Create)
 
@@ -14,6 +15,8 @@
                inManangedObjectContext:(NSManagedObjectContext *)context
 {
     Report *report = nil;
+    
+    //********* TODO ******** : Report needs a proper unique key, not the location description
     
     NSString *locDesc = (NSString *)[reportDictionary valueForKeyPath:@"loc_desc"];
     
@@ -33,7 +36,7 @@
             report.loc_desc = locDesc;
             report.lon = (NSNumber *)[reportDictionary valueForKeyPath:@"lon"];
             report.lat = (NSNumber *)[reportDictionary valueForKeyPath:@"lat"];
-            report.status = (NSString *)[reportDictionary valueForKeyPath:@"status"];
+            report.status = (NSString *)[reportDictionary valueForKeyPath:@"status"];          
             
         } else {
             report = [matches lastObject];

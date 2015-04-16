@@ -10,4 +10,8 @@
 #import "Photo.h"
 @interface Photo (Create)
 
++ (Photo *)photoWithUrl:(NSString *)url
+            fromReport:(Report *)report
+ inManagedObjectContext:(NSManagedObjectContext *)context;
+
 @end

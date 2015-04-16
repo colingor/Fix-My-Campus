@@ -8,6 +8,7 @@
 
 #import "PictureViewController.h"
 #import "DescriptionViewController.h"
+#import "Photo+Create.h"
 
 @interface PictureViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -123,6 +124,12 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    
+    // Get image url and add to Report
+    NSURL *imageUrl = [info valueForKey:UIImagePickerControllerReferenceURL];
+    NSString *url = [imageUrl absoluteString];
+    
+    [Photo photoWithUrl:url fromReport:self.report inManagedObjectContext:self.report.managedObjectContext];
     
     [self.capturedImages addObject:image];
     

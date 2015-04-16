@@ -703,6 +703,7 @@ Testing</string>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="imageView" destination="VJn-D4-ast" id="WtK-hc-mVd"/>
                         <outlet property="locationDescription" destination="WpO-ia-1t2" id="AQe-Rh-xQR"/>
                         <outlet property="problemDescription" destination="rub-ol-8MG" id="UH4-Cx-o3v"/>
                     </connections>
