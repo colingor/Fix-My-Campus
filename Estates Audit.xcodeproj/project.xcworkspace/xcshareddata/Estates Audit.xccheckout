@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>0685A7A4-E322-4EAC-8280-CCA4E24E29D6</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Estates Audit</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>BE76FFC83CFC4B86E27AD47468C7146A21A6DB50</key>
 		<string>github.com:edina/Estates-Audit.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Estates Audit.xcodeproj</string>
+	<string>Estates Audit.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>BE76FFC83CFC4B86E27AD47468C7146A21A6DB50</key>

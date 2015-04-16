@@ -23,9 +23,30 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setReport:(Report *)report
+{
+    _report = report;
+   [self setupFetchedResultsController];
+}
+
+- (void)setupFetchedResultsController
+{
+//    NSManagedObjectContext *context = self.report.managedObjectContext;
+//    
+//    if (context) {
+//        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Report"];
+//        request.predicate = [NSPredicate predicateWithFormat:@"whoTook = %@", self.photographer];
+//        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"title"
+//                                                                  ascending:YES
+//                                                                   selector:@selector(localizedStandardCompare:)]];
+//        
+//        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+//                                                                            managedObjectContext:context
+//                                                                              sectionNameKeyPath:nil
+//                                                                                       cacheName:nil];
+//    } else {
+//        self.fetchedResultsController = nil;
+//    }
 }
 
 - (IBAction)showImagePickerForCamera:(id)sender {

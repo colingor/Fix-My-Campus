@@ -7,6 +7,8 @@
 //
 
 #import "LocationViewController.h"
+#import "PictureViewController.h"
+#import "Report+Create.h"
 #import <CoreLocation/CoreLocation.h>
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
@@ -14,12 +16,14 @@
 @import MapKit;
 @interface LocationViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
+@property (weak, nonatomic) IBOutlet UITextView *descriptionText;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
 
 @implementation LocationViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,7 +50,9 @@
     }
     [self.mapView setShowsUserLocation:YES];
     //[self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
-
+   
+    
+  
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
@@ -106,14 +112,31 @@
         }
    }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+
+    if ([[segue identifier] isEqualToString:@"Take Picture"]){
+        if ([segue.destinationViewController isKindOfClass:[PictureViewController class]]) {
+            
+            PictureViewController *picvc = (PictureViewController *)segue.destinationViewController;
+            
+            NSString *description = self.descriptionText.text;
+            NSLog(@" %@", description);
+            NSDictionary *reportDict = [NSDictionary dictionaryWithObjectsAndKeys: description, @"desc", nil];
+            
+            Report *report = [Report reportFromReportInfo:reportDict inManangedObjectContext:self.managedObjectContext];
+            
+            // Set report in next controller
+            picvc.report = report;
+
+
+        }
+    }
 }
-*/
 
 @end

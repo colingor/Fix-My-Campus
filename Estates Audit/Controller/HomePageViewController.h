@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HomePageViewController : UIViewController
-
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @end

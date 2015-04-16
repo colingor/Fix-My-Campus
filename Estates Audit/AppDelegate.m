@@ -6,8 +6,12 @@
 //
 
 #import "AppDelegate.h"
+#import "AppDelegate+MOC.h"
+#import "HomePageViewController.h"
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 @interface AppDelegate ()
+
+@property (strong, nonatomic) NSManagedObjectContext *reportDatabaseContext;
 
 @end
 
@@ -40,28 +44,16 @@
     if (IS_OS_8_OR_LATER) {
         bar.translucent = NO;
     }
-    
-    
+   
     // Override point for customization after application launch.
-   /* UINavigationBar *navBar = [UINavigationBar appearance];
-    NSArray *ver = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
+    self.reportDatabaseContext = [self createMainQueueManagedObjectContext];
     
-    // Change status bar text to white
-    navBar.barStyle = UIStatusBarStyleLightContent;
+    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    HomePageViewController *homevc = [[navigationController viewControllers] objectAtIndex:0];
+    homevc.managedObjectContext = self.reportDatabaseContext;
     
-    // Change navbar text colour
-    NSDictionary *textTitleOptions = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor whiteColor], UITextAttributeTextShadowColor, nil];
-    [[UINavigationBar appearance] setTitleTextAttributes:textTitleOptions];
+    //TODO: Maybe call API for existing report status in the background
     
-    
-    if ([[ver objectAtIndex:0] intValue] >= 7) {
-        // iOS 7.0 or later00274C
-        navBar.barTintColor = navBarColour;
-        navBar.translucent = NO;
-    }else {
-        // iOS 6.1 or earlier
-        navBar.tintColor = navBarColour;
-    }*/
     return YES;
 }
 
