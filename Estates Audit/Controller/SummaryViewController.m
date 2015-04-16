@@ -10,18 +10,24 @@
 
 @interface SummaryViewController ()
 
+@property (weak, nonatomic) IBOutlet UITextView *locationDescription;
+@property (weak, nonatomic) IBOutlet UITextView *problemDescription;
+
 @end
 
 @implementation SummaryViewController
 
+
+- (void)setReport:(Report *)report
+{
+    _report = report;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.locationDescription.text = self.report.loc_desc;
+    self.problemDescription.text = self.report.desc;
 }
 
 /*

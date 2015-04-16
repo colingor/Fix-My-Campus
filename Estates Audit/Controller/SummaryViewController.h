@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Report.h"
 
 @interface SummaryViewController : UIViewController
+
+@property (strong, nonatomic) Report *report;
 
 @end

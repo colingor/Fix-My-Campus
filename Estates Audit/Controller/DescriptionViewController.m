@@ -11,6 +11,8 @@
 
 @interface DescriptionViewController ()
 
+@property (weak, nonatomic) IBOutlet UITextView *problemDescription;
+
 @end
 
 @implementation DescriptionViewController
@@ -34,6 +36,8 @@
     if ([[segue identifier] isEqualToString:@"Show Summary"]){
         if ([segue.destinationViewController isKindOfClass:[SummaryViewController class]]) {
             SummaryViewController *sumvc = (SummaryViewController *)segue.destinationViewController;
+            
+            self.report.desc = self.problemDescription.text;
             
             // Set report in next controller
             sumvc.report = self.report;
