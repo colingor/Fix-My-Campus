@@ -7,6 +7,7 @@
 //
 
 #import "PictureViewController.h"
+#import "DescriptionViewController.h"
 
 @interface PictureViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -135,14 +136,26 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-}
-*/
+    
+    if ([[segue identifier] isEqualToString:@"Describe Problem"]){
+        if ([segue.destinationViewController isKindOfClass:[DescriptionViewController class]]) {
+            NSString *locDesc  =self.report.loc_desc;
+            NSNumber *lat = self.report.lat;
+            NSLog(@"%@  %@", locDesc, lat);
+            DescriptionViewController *descvc = (DescriptionViewController *)segue.destinationViewController;
 
+            // TODO: Save photo
+            
+            // Set report in next controller
+            descvc.report = self.report;
+        }
+    }
+
+}
 @end

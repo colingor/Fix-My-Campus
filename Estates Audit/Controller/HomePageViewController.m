@@ -34,7 +34,7 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
    
-    if ([[segue identifier] isEqualToString:@"Describe"]){
+    if ([[segue identifier] isEqualToString:@"Describe Location"]){
         if ([segue.destinationViewController isKindOfClass:[LocationViewController class]]) {
             
             // Need to pass managedObjectContext through

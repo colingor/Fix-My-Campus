@@ -468,7 +468,7 @@ Testing</string>
                     <navigationItem key="navigationItem" title="Picture" id="BRj-4B-Nff">
                         <barButtonItem key="rightBarButtonItem" title="Next" id="kaC-Ds-Zw1">
                             <connections>
-                                <segue destination="9uy-8i-H1c" kind="show" id="sJq-0F-pBI"/>
+                                <segue destination="9uy-8i-H1c" kind="show" identifier="Describe Problem" id="sJq-0F-pBI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -712,7 +712,7 @@ Testing</string>
         <!--Description-->
         <scene sceneID="HmD-PN-aMF">
             <objects>
-                <viewController title="Description" id="9uy-8i-H1c" sceneMemberID="viewController">
+                <viewController title="Description" id="9uy-8i-H1c" customClass="DescriptionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XSU-lf-IE9"/>
                         <viewControllerLayoutGuide type="bottom" id="TAr-yp-rK5"/>
@@ -776,7 +776,7 @@ Testing</string>
                     <navigationItem key="navigationItem" title="Description" id="UKY-FZ-PL7">
                         <barButtonItem key="rightBarButtonItem" title="Next" id="pDO-ER-8Nx">
                             <connections>
-                                <segue destination="wVt-uh-VWf" kind="show" id="hsl-pE-aFI"/>
+                                <segue destination="wVt-uh-VWf" kind="show" identifier="Show Summary" id="hsl-pE-aFI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -851,7 +851,7 @@ Testing</string>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="jvW-dv-7ro" kind="show" identifier="Describe" id="R6w-vE-Bht"/>
+                                            <segue destination="jvW-dv-7ro" kind="show" identifier="Describe Location" id="R6w-vE-Bht"/>
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPK-Lw-FZl">
@@ -1042,7 +1042,7 @@ as they are resolved</string>
         <image name="Uoe logo" width="187" height="187"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VL8-5R-2Wf"/>
+        <segue reference="bOI-CQ-dk3"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
