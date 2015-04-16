@@ -7,6 +7,7 @@
 //
 
 #import "DescriptionViewController.h"
+#import "SummaryViewController.h"
 
 @interface DescriptionViewController ()
 
@@ -15,11 +16,11 @@
 @implementation DescriptionViewController
 
 
-
 - (void)setReport:(Report *)report
 {
     _report = report;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -30,18 +31,12 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if ([[segue identifier] isEqualToString:@"Describe Problem"]){
-        if ([segue.destinationViewController isKindOfClass:[DescriptionViewController class]]) {
-            NSString *locDesc  =self.report.loc_desc;
-            NSNumber *lat = self.report.lat;
-            NSLog(@"%@  %@", locDesc, lat);
-            DescriptionViewController *descvc = (DescriptionViewController *)segue.destinationViewController;
-         
+    if ([[segue identifier] isEqualToString:@"Show Summary"]){
+        if ([segue.destinationViewController isKindOfClass:[SummaryViewController class]]) {
+            SummaryViewController *sumvc = (SummaryViewController *)segue.destinationViewController;
             
             // Set report in next controller
-            descvc.report = self.report;
-            
-            
+            sumvc.report = self.report;
         }
     }
     
