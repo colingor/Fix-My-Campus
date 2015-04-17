@@ -9,6 +9,7 @@
 #import "PictureViewController.h"
 #import "DescriptionViewController.h"
 #import "Photo+Create.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface PictureViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -21,34 +22,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.capturedImages = [[NSMutableArray alloc] init];
-    // Do any additional setup after loading the view.
+    self.capturedImages = [[NSMutableArray alloc] init];
 }
 
 - (void)setReport:(Report *)report
 {
     _report = report;
-   [self setupFetchedResultsController];
-}
-
-- (void)setupFetchedResultsController
-{
-//    NSManagedObjectContext *context = self.report.managedObjectContext;
-//    
-//    if (context) {
-//        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Report"];
-//        request.predicate = [NSPredicate predicateWithFormat:@"whoTook = %@", self.photographer];
-//        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"title"
-//                                                                  ascending:YES
-//                                                                   selector:@selector(localizedStandardCompare:)]];
-//        
-//        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-//                                                                            managedObjectContext:context
-//                                                                              sectionNameKeyPath:nil
-//                                                                                       cacheName:nil];
-//    } else {
-//        self.fetchedResultsController = nil;
-//    }
 }
 
 - (IBAction)showImagePickerForCamera:(id)sender {
@@ -124,18 +103,31 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    
-    // Get image url and add to Report
-    NSURL *imageUrl = [info valueForKey:UIImagePickerControllerReferenceURL];
-    NSString *url = [imageUrl absoluteString];
-    
-    [Photo photoWithUrl:url fromReport:self.report inManagedObjectContext:self.report.managedObjectContext];
-    
     [self.capturedImages addObject:image];
     
+    NSURL *imageUrl = [info valueForKey:UIImagePickerControllerReferenceURL];
     
-    [self finishAndUpdate];
+    if (imageUrl == nil) {
+        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    
+        [library writeImageToSavedPhotosAlbum:((UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage]).CGImage
+                                     metadata:[info objectForKey:UIImagePickerControllerMediaMetadata]
+                              completionBlock:^(NSURL *imageUrl, NSError *error) {
+                                  
+                                  NSLog(@"imageUrl %@", imageUrl);
+                                  NSString *url = [imageUrl absoluteString];
+                                  [Photo photoWithUrl:url fromReport:self.report inManagedObjectContext:self.report.managedObjectContext];
+                                  
+                                  [self finishAndUpdate];
+                              }];
+    }else{
+        // Get image url and add to Report
+        NSString *url = [imageUrl absoluteString];
+        [Photo photoWithUrl:url fromReport:self.report inManagedObjectContext:self.report.managedObjectContext];
+        [self finishAndUpdate];
+    }
 }
+
 
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
