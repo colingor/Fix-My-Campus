@@ -10,11 +10,14 @@
 #import "Photo.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@interface SummaryViewController ()
+@import MapKit;
+
+@interface SummaryViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *locationDescription;
 @property (weak, nonatomic) IBOutlet UITextView *problemDescription;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @end
 
@@ -30,12 +33,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.mapView setDelegate:self];
+    
+    // Zoom map to region and add pin
+    [self setupMap];
+    
     // Do any additional setup after loading the view.
     self.locationDescription.text = self.report.loc_desc;
     self.problemDescription.text = self.report.desc;
 }
 
-
+-(void)setupMap{
+    [self.mapView setDelegate:self];
+    
+    NSNumber *lat = self.report.lat;
+    NSNumber *lon = self.report.lon;
+    
+    NSLog(@"%@, %@", lat, lon);
+    CLLocationCoordinate2D reportLocation = CLLocationCoordinate2DMake([lat doubleValue] ,[lon doubleValue]);
+    
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(reportLocation, 800, 800);
+    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+    
+    //add the annotation
+    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+    
+    point.coordinate = reportLocation;
+    point.title = @"Report Location";
+    
+    [self.mapView addAnnotation:point];
+}
 
 -(void)loadImageFromAssets{
     
@@ -60,7 +88,7 @@
     ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
     {
         NSLog(@"Can't get image - %@",[myerror localizedDescription]);
-    };
+    };  
     
     ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
     [assetslibrary assetForURL:assetUrl
