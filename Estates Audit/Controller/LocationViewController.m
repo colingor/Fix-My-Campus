@@ -14,7 +14,7 @@
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
 @import MapKit;
-@interface LocationViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
+@interface LocationViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *descriptionText;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -34,7 +34,7 @@
     
     
     [self.mapView setDelegate:self];
-    
+    self.descriptionText.delegate = self;
     
     if (nil == self.locationManager)
         self.locationManager = [[CLLocationManager alloc] init];
@@ -59,6 +59,17 @@
     // Use this to determine whether user overrides location from locationManager by movin pin
     _userSpecfiedLocation = NO;
   
+}
+
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
 }
 
 

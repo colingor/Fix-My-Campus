@@ -9,7 +9,7 @@
 #import "DescriptionViewController.h"
 #import "SummaryViewController.h"
 
-@interface DescriptionViewController ()
+@interface DescriptionViewController () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *problemDescription;
 
@@ -25,8 +25,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    // Hook up UITextViewDelegate so we can hide keyboard on return
+    self.problemDescription.delegate = self;
+
 }
+
+
+// Hack so we can hide the keyboard when return is hit - seems to be the only way to do it for UITextViews
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
+}
+
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
