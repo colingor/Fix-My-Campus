@@ -187,7 +187,7 @@ Testing</string>
         <!--Location-->
         <scene sceneID="7CN-id-3qg">
             <objects>
-                <viewController title="Location" id="jvW-dv-7ro" customClass="LocationViewController" sceneMemberID="viewController">
+                <viewController title="Location" automaticallyAdjustsScrollViewInsets="NO" id="jvW-dv-7ro" customClass="LocationViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O5V-Yb-UVi"/>
                         <viewControllerLayoutGuide type="bottom" id="hwr-Ng-tiy"/>
