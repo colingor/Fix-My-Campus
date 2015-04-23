@@ -104,22 +104,26 @@
 {
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
     [self.capturedImages addObject:image];
+    [self finishAndUpdate];
     
     NSURL *imageUrl = [info valueForKey:UIImagePickerControllerReferenceURL];
     
     if (imageUrl == nil) {
         ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-    
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
         [library writeImageToSavedPhotosAlbum:((UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage]).CGImage
                                      metadata:[info objectForKey:UIImagePickerControllerMediaMetadata]
                               completionBlock:^(NSURL *imageUrl, NSError *error) {
                                   
-                                  NSLog(@"imageUrl %@", imageUrl);
-                                  NSString *url = [imageUrl absoluteString];
-                                  [Photo photoWithUrl:url fromReport:self.report inManagedObjectContext:self.report.managedObjectContext];
+                                    NSLog(@"imageUrl %@", imageUrl);
+                                    NSString *url = [imageUrl absoluteString];
+                                    [Photo photoWithUrl:url fromReport:self.report inManagedObjectContext:self.report.managedObjectContext];
                                   
-                                  [self finishAndUpdate];
-                              }];
+        }];
+
+    });
+
     }else{
         // Get image url and add to Report
         NSString *url = [imageUrl absoluteString];
