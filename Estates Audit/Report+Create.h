@@ -14,6 +14,8 @@
 + (Report *)reportFromReportInfo:(NSDictionary *)reportDictionary
          inManangedObjectContext:(NSManagedObjectContext *)context;
 
++(Report *)  insertNewObjectFromDict:(NSDictionary *)reportDictionary inManagedContext:(NSManagedObjectContext *)context ;
+
          
 +(NSArray *) allReportsInManagedObjectContext:(NSManagedObjectContext *)context;
 

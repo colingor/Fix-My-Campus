@@ -17,5 +17,6 @@
 @dynamic desc;
 @dynamic status;
 @dynamic photos;
+@dynamic guid;
 
 @end
