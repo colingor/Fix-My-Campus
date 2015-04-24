@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface LocationViewController : UIViewController
+#import "AcceptsManagedContext.h"
+@interface LocationViewController : UIViewController<AcceptsManagedContext>
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

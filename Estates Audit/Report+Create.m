@@ -45,4 +45,17 @@
     
     return report;
 }
+
++(NSArray *) allReportsInManagedObjectContext:(NSManagedObjectContext *)context {
+      NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Report"];
+    
+        
+        NSError *error;
+        NSArray *matches = [context executeFetchRequest:request error:&error];
+        if(error){
+            NSLog(@"%@",[error localizedDescription]);
+            return [[NSArray alloc] init];
+        }
+        return matches;
+}
 @end

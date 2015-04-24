@@ -14,4 +14,7 @@
 + (Report *)reportFromReportInfo:(NSDictionary *)reportDictionary
          inManangedObjectContext:(NSManagedObjectContext *)context;
 
+         
++(NSArray *) allReportsInManagedObjectContext:(NSManagedObjectContext *)context;
+
 @end

@@ -8,7 +8,7 @@
 
 #import "HomePageViewController.h"
 #import "LocationViewController.h"
-
+#import "AcceptsManagedContext.h"
 @interface HomePageViewController ()
 
 @end
@@ -33,15 +33,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
    
-    if ([[segue identifier] isEqualToString:@"Describe Location"]){
-        if ([segue.destinationViewController isKindOfClass:[LocationViewController class]]) {
+    if ([segue.destinationViewController conformsToProtocol:@protocol(AcceptsManagedContext)]) {
             
-            // Need to pass managedObjectContext through
-            LocationViewController *locvc = (LocationViewController *)segue.destinationViewController;
-            locvc.managedObjectContext  = self.managedObjectContext;
-        }
+        // Need to pass managedObjectContext through
+        id<AcceptsManagedContext> controller = segue.destinationViewController;
+        controller.managedObjectContext  = self.managedObjectContext;
     }
+    
 }
 
 
