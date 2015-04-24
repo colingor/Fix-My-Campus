@@ -78,6 +78,7 @@
 		3BF6B2731ADBC8BD00CFC50B /* Photo+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Photo+Create.m"; sourceTree = "<group>"; };
 		3BF6B2751ADBC8D000CFC50B /* Report+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Report+Create.h"; sourceTree = "<group>"; };
 		3BF6B2761ADBC8D000CFC50B /* Report+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Report+Create.m"; sourceTree = "<group>"; };
+		7D95AF071AE92DA90074D8E5 /* AcceptsManagedContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcceptsManagedContext.h; sourceTree = "<group>"; };
 		7DD86BD51A2746AA00ED3056 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		7DD86BD81A2747CC00ED3056 /* EmailSupportTicket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailSupportTicket.h; sourceTree = "<group>"; };
 		7DD86BD91A2747CC00ED3056 /* EmailSupportTicket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailSupportTicket.m; sourceTree = "<group>"; };
@@ -135,6 +136,7 @@
 				3BCBBA801A2386A200A9A246 /* Photo.m */,
 				3BCBBA7F1A2386A200A9A246 /* Photo.h */,
 				3BCBBA5A1A237EF500A9A246 /* Estates_Audit.xcdatamodeld */,
+				7D95AF071AE92DA90074D8E5 /* AcceptsManagedContext.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
