@@ -138,6 +138,16 @@
 #pragma mark - Navigation
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    
+    // Ensure context is set if we want to create a new report
+    if ([segue.destinationViewController conformsToProtocol:@protocol(AcceptsManagedContext)]) {
+        
+        // Need to pass managedObjectContext through
+        id<AcceptsManagedContext> controller = segue.destinationViewController;
+        controller.managedObjectContext  = self.managedObjectContext;
+    }
+    
+    
     if ([[segue identifier] isEqualToString:@"ReportDetails"])
     {
         ReportDetailsViewController *detailViewController =

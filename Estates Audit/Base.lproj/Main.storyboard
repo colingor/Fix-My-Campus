@@ -44,7 +44,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Reports" id="vyP-MU-cvH">
-                        <barButtonItem key="rightBarButtonItem" title="New" id="RLT-bR-d81"/>
+                        <barButtonItem key="rightBarButtonItem" title="New" id="RLT-bR-d81">
+                            <connections>
+                                <segue destination="jvW-dv-7ro" kind="show" id="VX7-ui-gdz"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mF6-nL-y8S" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -85,7 +89,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LD6-iY-b8c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="307" y="1415"/>
+            <point key="canvasLocation" x="495" y="1414.5"/>
         </scene>
         <!--Location-->
         <scene sceneID="7CN-id-3qg">
@@ -851,6 +855,7 @@ as they are resolved</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="bOI-CQ-dk3"/>
+        <segue reference="R6w-vE-Bht"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
