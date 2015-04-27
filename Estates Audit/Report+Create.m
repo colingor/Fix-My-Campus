@@ -16,8 +16,6 @@
 {
     Report *report = nil;
     
-    //********* TODO ******** : Report needs a proper unique key, not the location description
-    
     NSString *guid = (NSString *)[reportDictionary valueForKeyPath:@"guid"];
     
     if ([guid length]) {
@@ -46,28 +44,28 @@
 }
 
 +(Report *)  insertNewObjectFromDict:(NSDictionary *)reportDictionary inManagedContext:(NSManagedObjectContext *)context {
-            Report * report = [NSEntityDescription insertNewObjectForEntityForName:@"Report"
+    Report * report = [NSEntityDescription insertNewObjectForEntityForName:@"Report"
                                                     inManagedObjectContext:context];
-            report.loc_desc = (NSString *)[reportDictionary valueForKeyPath:@"loc_desc"];
-            report.lon = (NSNumber *)[reportDictionary valueForKeyPath:@"lon"];
-            report.lat = (NSNumber *)[reportDictionary valueForKeyPath:@"lat"];
-            report.status = (NSString *)[reportDictionary valueForKeyPath:@"status"];
-            NSUUID  *UUID = [NSUUID UUID];
-            NSString* stringUUID = [UUID UUIDString];
-            report.guid = stringUUID;
-            return report;
+    report.loc_desc = (NSString *)[reportDictionary valueForKeyPath:@"loc_desc"];
+    report.lon = (NSNumber *)[reportDictionary valueForKeyPath:@"lon"];
+    report.lat = (NSNumber *)[reportDictionary valueForKeyPath:@"lat"];
+    report.status = (NSString *)[reportDictionary valueForKeyPath:@"status"];
+    NSUUID  *UUID = [NSUUID UUID];
+    NSString* stringUUID = [UUID UUIDString];
+    report.guid = stringUUID;
+    return report;
 }
 
 +(NSArray *) allReportsInManagedObjectContext:(NSManagedObjectContext *)context {
-      NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Report"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Report"];
     
-        
-        NSError *error;
-        NSArray *matches = [context executeFetchRequest:request error:&error];
-        if(error){
-            NSLog(@"%@",[error localizedDescription]);
-            return [[NSArray alloc] init];
-        }
-        return matches;
+    
+    NSError *error;
+    NSArray *matches = [context executeFetchRequest:request error:&error];
+    if(error){
+        NSLog(@"%@",[error localizedDescription]);
+        return [[NSArray alloc] init];
+    }
+    return matches;
 }
 @end

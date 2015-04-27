@@ -17,11 +17,9 @@
 {
     Photo *photo = nil;
     
-    // TODO: ****************  Need to use a proper report identifier
-    
     if ([url length]) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Photo"];
-        request.predicate = [NSPredicate predicateWithFormat:@"url = %@ && report.loc_desc = %@", url, report.loc_desc];
+        request.predicate = [NSPredicate predicateWithFormat:@"url = %@ && report.guid = %@", url, report.guid];
         
         NSError *error;
         NSArray *matches = [context executeFetchRequest:request error:&error];
