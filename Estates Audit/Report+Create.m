@@ -12,7 +12,7 @@
 @implementation Report (Create)
 
 + (Report *)reportFromReportInfo:(NSDictionary *)reportDictionary
-               inManangedObjectContext:(NSManagedObjectContext *)context
+         inManangedObjectContext:(NSManagedObjectContext *)context
 {
     Report *report = nil;
     
