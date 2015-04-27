@@ -10,6 +10,7 @@
 #import "Report+Create.h"
 #import "Photo+Create.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "ReportDetailsViewController.h"
 
 @interface ReportsTableTableViewController ()
 
@@ -133,14 +134,23 @@
 }
 */
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Navigation
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"ReportDetails"])
+    {
+        ReportDetailsViewController *detailViewController =
+        [segue destinationViewController];
+
+        NSIndexPath *myIndexPath = [self.tableView
+                                    indexPathForSelectedRow];
+
+        Report *selectedReport  = self.reports[myIndexPath.row];
+        detailViewController.report = selectedReport;
+        
+        
+    }
 }
-*/
 
 @end
