@@ -71,30 +71,32 @@
     NSSet *photos = self.report.photos;
     
     NSArray *photoArray = [photos allObjects];
-    Photo *photo = [photoArray objectAtIndex:0];
-    
-    NSURL *assetUrl = [NSURL URLWithString:photo.url];
-    
-    ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
-    {
-        ALAssetRepresentation *rep = [myasset defaultRepresentation];
-        CGImageRef iref = [rep fullResolutionImage];
-        if (iref) {
-            UIImage *largeimage = [UIImage imageWithCGImage:iref];
-            
-            [self.imageView setImage:largeimage];
-        }
-    };
-    
-    ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
-    {
-        NSLog(@"Can't get image - %@",[myerror localizedDescription]);
-    };  
-    
-    ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
-    [assetslibrary assetForURL:assetUrl
-                   resultBlock:resultblock
-                  failureBlock:failureblock];
+    if ([photoArray count] > 0){
+        Photo *photo = [photoArray objectAtIndex:0];
+        
+        NSURL *assetUrl = [NSURL URLWithString:photo.url];
+        
+        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
+        {
+            ALAssetRepresentation *rep = [myasset defaultRepresentation];
+            CGImageRef iref = [rep fullResolutionImage];
+            if (iref) {
+                UIImage *largeimage = [UIImage imageWithCGImage:iref];
+                
+                [self.imageView setImage:largeimage];
+            }
+        };
+        
+        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
+        {
+            NSLog(@"Can't get image - %@",[myerror localizedDescription]);
+        };
+        
+        ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+        [assetslibrary assetForURL:assetUrl
+                       resultBlock:resultblock
+                      failureBlock:failureblock];
+    }
 
 }
 
