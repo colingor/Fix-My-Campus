@@ -105,6 +105,9 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
+    // Ensure context is saved
+    [self.report.managedObjectContext save:NULL];
+    
     // Need to ensure the context is not nil
     if ([segue.destinationViewController conformsToProtocol:@protocol(AcceptsManagedContext)]) {
         
