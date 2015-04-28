@@ -12,7 +12,7 @@
 
 @interface ReportDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *locationDescription;
-
+@property (weak, nonatomic) IBOutlet UILabel *fullDescription;
 
 @end
 
@@ -22,6 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.locationDescription.text =  self.report.loc_desc;
+    self.fullDescription.text = self.report.desc;
     self.photoCollectionView.delegate = self;
     self.photoCollectionView.dataSource = self;
     self.photos =  [NSArray arrayWithArray:[self.report.photos allObjects]];
