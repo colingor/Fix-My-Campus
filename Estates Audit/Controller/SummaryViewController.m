@@ -10,6 +10,7 @@
 #import "Photo.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "AcceptsManagedContext.h"
+#import "HomePageViewController.h"
 
 @import MapKit;
 
@@ -116,9 +117,20 @@
         // Need to pass managedObjectContext through
         id<AcceptsManagedContext> controller = segue.destinationViewController;
         controller.managedObjectContext  = self.report.managedObjectContext;
+        
+        
+    }
+    if ([[segue identifier] isEqualToString:@"Send"])
+    {
+        HomePageViewController *homevc = (HomePageViewController *)segue.destinationViewController;
+        UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStyleBordered target:self action:@selector(home:)];
+        homevc.navigationItem.leftBarButtonItem=newBackButton;
     }
     
 }
 
+-(void)home:(UIBarButtonItem *)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 @end
