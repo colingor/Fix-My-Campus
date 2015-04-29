@@ -11,10 +11,11 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "AcceptsManagedContext.h"
 #import "HomePageViewController.h"
+#import "EmailSupportTicket.h"
 
 @import MapKit;
 
-@interface SummaryViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
+@interface SummaryViewController () <MKMapViewDelegate, CLLocationManagerDelegate, MFMailComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *locationDescription;
 @property (weak, nonatomic) IBOutlet UITextView *problemDescription;
@@ -108,6 +109,15 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
+    
+    
+    EmailSupportTicket *emailSupportTicket =
+    [[EmailSupportTicket alloc] initWithSubject:@"Estates Audit Test" message:@"This is a test message" imageAttachment:[UIImage imageNamed:@"screenshot"] viewController:self];
+    
+    [emailSupportTicket sendSupportEmail];
+
+    
+    
     // Ensure context is saved
     [self.report.managedObjectContext save:NULL];
     
@@ -128,6 +138,32 @@
     }
     
 }
+
+
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result) {
+        case MFMailComposeResultSent:
+            NSLog(@"You sent the email.");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"You saved a draft of this email");
+            break;
+        case MFMailComposeResultCancelled:
+            NSLog(@"You cancelled sending this email.");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail failed:  An error occurred when trying to compose this email");
+            break;
+        default:
+            NSLog(@"An error occurred when trying to compose this email");
+            break;
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 
 -(void)home:(UIBarButtonItem *)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
