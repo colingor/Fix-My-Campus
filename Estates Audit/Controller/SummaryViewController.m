@@ -15,7 +15,7 @@
 
 @import MapKit;
 
-@interface SummaryViewController () <MKMapViewDelegate, CLLocationManagerDelegate, MFMailComposeViewControllerDelegate>
+@interface SummaryViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *locationDescription;
 @property (weak, nonatomic) IBOutlet UITextView *problemDescription;
@@ -102,23 +102,63 @@
 
 }
 
-
+-(void)postToJitBit{
+    
+    NSString *apiStr = @"https://eaudit.jitbit.com/helpdesk/api/ticket";
+    
+    
+    NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
+    [request setHTTPMethod:@"POST"];
+    
+    
+    NSString *body = [NSString stringWithFormat:@"%@", self.report.loc_desc];
+    
+    NSString *postString = [NSString stringWithFormat:@"categoryId=0&body=%@&subject=%@&priorityId=0", body, @"Estates Audit Report"];
+    
+    [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    // TODO: Credentials in code is bad...
+    [request setValue:@"Basic Y2dvcm1sZTFAc3RhZmZtYWlsLmVkLmFjLnVrOmVzdGF0ZXNhdWRpdDM=" forHTTPHeaderField:@"Authorization"];
+    
+    // another configuration option is backgroundSessionConfiguration (multitasking API required though)
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    
+    // create the session without specifying a queue to run completion handler on (thus, not main queue)
+    // we also don't specify a delegate (since completion handler is all we need)
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    
+    NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request
+                                                    completionHandler:^(NSURL *localfile, NSURLResponse *response, NSError *error) {
+                                                        // this handler is not executing on the main queue, so we can't do UI directly here
+                                                        if (!error) {
+                                                            if ([request.URL isEqual:apiUrl]) {
+                                                          
+                                                                NSData *contents = [NSData dataWithContentsOfURL:localfile];
+                                                                NSString *ticketId = [[NSString alloc]initWithData:contents encoding:NSUTF8StringEncoding];
+                                                                NSLog(@"%@",ticketId);
+                                                                
+                                                                //TODO: Set ticketId in report
+                                                      
+                                                                dispatch_async(dispatch_get_main_queue(), ^{});
+                                                            }
+                                                        }
+                                                    }];
+    [task resume]; // don't forget that all NSURLSession tasks start out suspended!
+    
+}
 
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
+    // POST to JitBit API and store ticketId
+    [self postToJitBit];
     
-    
-    EmailSupportTicket *emailSupportTicket =
-    [[EmailSupportTicket alloc] initWithSubject:@"Estates Audit Test" message:@"This is a test message" imageAttachment:[UIImage imageNamed:@"screenshot"] viewController:self];
-    
-    [emailSupportTicket sendSupportEmail];
-
-    
-    
-    // Ensure context is saved
+       // Ensure context is saved
     [self.report.managedObjectContext save:NULL];
     
     // Need to ensure the context is not nil
@@ -137,31 +177,6 @@
         homevc.navigationItem.leftBarButtonItem=newBackButton;
     }
     
-}
-
-
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
-    switch (result) {
-        case MFMailComposeResultSent:
-            NSLog(@"You sent the email.");
-            break;
-        case MFMailComposeResultSaved:
-            NSLog(@"You saved a draft of this email");
-            break;
-        case MFMailComposeResultCancelled:
-            NSLog(@"You cancelled sending this email.");
-            break;
-        case MFMailComposeResultFailed:
-            NSLog(@"Mail failed:  An error occurred when trying to compose this email");
-            break;
-        default:
-            NSLog(@"An error occurred when trying to compose this email");
-            break;
-    }
-    
-    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 
