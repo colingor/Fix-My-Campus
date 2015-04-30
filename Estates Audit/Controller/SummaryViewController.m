@@ -155,7 +155,13 @@
                                               NSString *ticketId = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
                                               NSLog(@"%@",ticketId);
                                               
-                                              //TODO: Set ticketId in report
+                                              // Set ticketId in report
+                                              self.report.ticket_id = ticketId;
+                                              
+                                              // Save just to be sure
+                                              [self.report.managedObjectContext save:NULL];
+                                              
+                                              // Post any additional photos
                                               if([self.report.photos count] > 0){
                                                   [self postPhotoToTicket:ticketId];
                                               }

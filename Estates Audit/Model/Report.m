@@ -18,5 +18,6 @@
 @dynamic status;
 @dynamic photos;
 @dynamic guid;
+@dynamic ticket_id;
 
 @end

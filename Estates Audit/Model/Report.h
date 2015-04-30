@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSString * status;
 @property (nonatomic, retain) NSString * guid;
 @property (nonatomic, retain) NSSet *photos;
+@property (nonatomic, retain) NSString * ticket_id;
 @end
 
 @interface Report (CoreDataGeneratedAccessors)

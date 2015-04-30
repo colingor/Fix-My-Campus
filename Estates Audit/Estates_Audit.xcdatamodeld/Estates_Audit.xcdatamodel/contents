@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="13F1077" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14C1514" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Photo" representedClassName="Photo" syncable="YES">
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="report" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Report" inverseName="photos" inverseEntity="Report" syncable="YES"/>
@@ -11,10 +11,11 @@
         <attribute name="loc_desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lon" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ticket_id" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Photo" inverseName="report" inverseEntity="Photo" syncable="YES"/>
     </entity>
     <elements>
         <element name="Photo" positionX="2484" positionY="2568" width="128" height="75"/>
-        <element name="Report" positionX="2106" positionY="2556" width="128" height="148"/>
+        <element name="Report" positionX="2106" positionY="2556" width="128" height="165"/>
     </elements>
 </model>
