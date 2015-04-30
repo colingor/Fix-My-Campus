@@ -113,15 +113,20 @@
     
     NSString *apiStr = @"https://eaudit.jitbit.com/helpdesk/api/ticket";
     
-    
     NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
     [request setHTTPMethod:@"POST"];
     
+    NSMutableString *body = [NSMutableString string];
     
-    NSString *body = [NSString stringWithFormat:@"%@\r%@", self.report.loc_desc, self.report.desc];
-    
+    if([self.report.loc_desc length] != 0){
+        [body appendString:[NSString stringWithFormat:@"[b]Location Description[/b]\n\n %@ \n", self.report.loc_desc]];
+    }
+    if([self.report.desc length] != 0){
+        [body appendString:[NSString stringWithFormat:@"\n[b]Problem Description[/b]\n\n %@ \n", self.report.desc]];
+    }
+
     NSString *postString = [NSString stringWithFormat:@"categoryId=0&body=%@&subject=%@&priorityId=0", body, @"Estates Audit Report"];
     
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
@@ -147,7 +152,10 @@
                                               NSLog(@"%@",ticketId);
                                               
                                               //TODO: Set ticketId in report
-                                              [self postPhotoToTicket:ticketId];
+                                              if([self.report.photos count] > 0){
+                                                  [self postPhotoToTicket:ticketId];
+                                              }
+                                              
                                           }
                                       }
                                   }];
