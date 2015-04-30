@@ -123,8 +123,12 @@
     if([self.report.loc_desc length] != 0){
         [body appendString:[NSString stringWithFormat:@"[b]Location Description[/b]\n\n %@ \n", self.report.loc_desc]];
     }
+    
+    // Add link to map
+    [body appendString:[NSString stringWithFormat:@"\n[b]Location Map[/b]\n\n [url]http://maps.google.com/maps?q=loc:%@+%@[/url]\n", self.report.lat, self.report.lon]];
+    
     if([self.report.desc length] != 0){
-        [body appendString:[NSString stringWithFormat:@"\n[b]Problem Description[/b]\n\n %@ \n", self.report.desc]];
+        [body appendString:[NSString stringWithFormat:@"\n[b]Problem Description[/b]\n\n %@ \n\n", self.report.desc]];
     }
 
     NSString *postString = [NSString stringWithFormat:@"categoryId=0&body=%@&subject=%@&priorityId=0", body, @"Estates Audit Report"];
