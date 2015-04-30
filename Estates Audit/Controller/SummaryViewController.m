@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *problemDescription;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (copy, nonatomic) void (^assetsFailureBlock)();
 
 @end
 
@@ -30,6 +31,12 @@
 - (void)setReport:(Report *)report
 {
     _report = report;
+    
+    self.assetsFailureBlock  = ^(NSError *myerror)
+    {
+        NSLog(@"Can't get image - %@",[myerror localizedDescription]);
+    };
+    
     // Try and load image as soon as possible (asynchronous) so it's there when page loads
     [self loadImageFromAssets];
 }
@@ -73,6 +80,7 @@
     NSSet *photos = self.report.photos;
     
     NSArray *photoArray = [photos allObjects];
+    
     if ([photoArray count] > 0){
         Photo *photo = [photoArray objectAtIndex:0];
         
@@ -88,16 +96,15 @@
                 [self.imageView setImage:largeimage];
             }
         };
-        
-        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
-        {
-            NSLog(@"Can't get image - %@",[myerror localizedDescription]);
-        };
-        
+
         ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
-        [assetslibrary assetForURL:assetUrl
-                       resultBlock:resultblock
-                      failureBlock:failureblock];
+        [
+         assetslibrary assetForURL:assetUrl
+         resultBlock:resultblock
+         failureBlock: ^(NSError *myerror)
+         {
+             NSLog(@"Can't get image - %@",[myerror localizedDescription]);
+         }];
     }
     
 }
@@ -154,7 +161,6 @@
     
     NSString *apiStr = [NSString stringWithFormat:@"https://eaudit.jitbit.com/helpdesk/api/AttachFile?id=%@", ticketId];
     
-    
     NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
@@ -162,90 +168,61 @@
 
     // post body
     NSMutableData *body = [NSMutableData data];
+ 
+    // the boundary string : a random string, that will not repeat in post data, to separate post data fields.
+    NSString *BoundaryConstant = @"----------V2ymHFg03ehbqgZCaKO6jy";
     
-    NSSet *photos = self.report.photos;
+    // set Content-Type in HTTP header
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BoundaryConstant];
+    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
     
-    NSArray *photoArray = [photos allObjects];
+    // string constant for the post parameter 'file'. My server uses this name: `file`. Your's may differ
+    NSString* FileParamConstant = @"fn";
     
-    if ([photoArray count] > 0){
-        Photo *photo = [photoArray objectAtIndex:0];
-        NSURL *assetUrl = [NSURL URLWithString:photo.url];
-        
-        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
-        {
-            ALAssetRepresentation *rep = [myasset defaultRepresentation];
-            CGImageRef iref = [rep fullResolutionImage];
-            if (iref) {
-                
-                // the boundary string : a random string, that will not repeat in post data, to separate post data fields.
-                NSString *BoundaryConstant = @"----------V2ymHFg03ehbqgZCaKO6jy";
-                
-                // set Content-Type in HTTP header
-                NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BoundaryConstant];
-                [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
-                
-                // string constant for the post parameter 'file'. My server uses this name: `file`. Your's may differ
-                NSString* FileParamConstant = @"fn";
-
-                UIImage *photo = [UIImage imageWithCGImage:iref];
-                
-                // add image data
-                NSData *imageData = UIImageJPEGRepresentation(photo, 1.0);
-                if (imageData) {
-                    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
-                    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"image.jpg\"\r\n", FileParamConstant] dataUsingEncoding:NSUTF8StringEncoding]];
-                    [body appendData:[@"Content-Type: image/jpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-                    [body appendData:imageData];
-                    [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-                }
-                
-                [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
-                
-                // setting the body of the post to the reqeust
-                [request setHTTPBody:body];
-                
-                // set the content-length
-                NSString *postLength = [NSString stringWithFormat:@"%d", [body length]];
-                [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-                
-                // TODO: Credentials in code is bad...
-                [request setValue:@"Basic Y2dvcm1sZTFAc3RhZmZtYWlsLmVkLmFjLnVrOmVzdGF0ZXNhdWRpdDM=" forHTTPHeaderField:@"Authorization"];
-                
-                // another configuration option is backgroundSessionConfiguration (multitasking API required though)
-                NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-                
-                // create the session without specifying a queue to run completion handler on (thus, not main queue)
-                // we also don't specify a delegate (since completion handler is all we need)
-                NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-                
-                NSURLSessionDataTask *task = [session dataTaskWithRequest:request
-                                                        completionHandler:
-                                              ^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                  // this handler is not executing on the main queue, so we can't do UI directly here
-                                                  // No content expected - only check for error
-                                                  if (error) {
-                                                      NSLog(@"%@",error);
-                                                  }else{
-                                                      NSLog(@"Image Uploaded successfully");
-                                                  }
-                                                  
-                                              }];
-
-                [task resume]; // don't forget that all NSURLSession tasks start out suspended!
-                
-            }
-        };
-        
-        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
-        {
-            NSLog(@"Can't get image - %@",[myerror localizedDescription]);
-        };
-        
-        ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
-        [assetslibrary assetForURL:assetUrl
-                       resultBlock:resultblock
-                      failureBlock:failureblock];
+    // add image data
+    NSData *imageData = UIImageJPEGRepresentation(self.imageView.image, 1.0);
+    if (imageData) {
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"image.jpg\"\r\n", FileParamConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"Content-Type: image/jpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:imageData];
+        [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     }
+    
+    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // setting the body of the post to the reqeust
+    [request setHTTPBody:body];
+    
+    // set the content-length
+    NSString *postLength = [NSString stringWithFormat:@"%d", [body length]];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    // TODO: Credentials in code is bad...
+    [request setValue:@"Basic Y2dvcm1sZTFAc3RhZmZtYWlsLmVkLmFjLnVrOmVzdGF0ZXNhdWRpdDM=" forHTTPHeaderField:@"Authorization"];
+    
+    // another configuration option is backgroundSessionConfiguration (multitasking API required though)
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    
+    // create the session without specifying a queue to run completion handler on (thus, not main queue)
+    // we also don't specify a delegate (since completion handler is all we need)
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                            completionHandler:
+                                  ^(NSData *data, NSURLResponse *response, NSError *error) {
+                                      // this handler is not executing on the main queue, so we can't do UI directly here
+                                      // No content expected - only check for error
+                                      if (error) {
+                                          NSLog(@"%@",error);
+                                      }else{
+                                          NSLog(@"Image Uploaded successfully");
+                                      }
+                                      
+                                  }];
+    
+    [task resume]; // don't forget that all NSURLSession tasks start out suspended!
+    
 }
 
 
