@@ -9,10 +9,12 @@
 #import "ReportDetailsViewController.h"
 #import "Photo+Create.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+@import MapKit;
 
-@interface ReportDetailsViewController ()
+@interface ReportDetailsViewController ()<MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *locationDescription;
 @property (weak, nonatomic) IBOutlet UILabel *fullDescription;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @end
 
@@ -26,6 +28,8 @@
     self.photoCollectionView.delegate = self;
     self.photoCollectionView.dataSource = self;
     self.photos =  [NSArray arrayWithArray:[self.report.photos allObjects]];
+    // Zoom map to region and add pin
+    [self setupMap];
     
 }
 
@@ -43,6 +47,27 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void)setupMap{
+    [self.mapView setDelegate:self];
+    
+    NSNumber *lat = self.report.lat;
+    NSNumber *lon = self.report.lon;
+    
+    NSLog(@"%@, %@", lat, lon);
+    CLLocationCoordinate2D reportLocation = CLLocationCoordinate2DMake([lat doubleValue] ,[lon doubleValue]);
+    
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(reportLocation, 800, 800);
+    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+    
+    //add the annotation
+    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+    
+    point.coordinate = reportLocation;
+    point.title = @"Report Location";
+    
+    [self.mapView addAnnotation:point];
+}
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -72,7 +97,6 @@
     
             UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
             photoImageView.image = thumbImage;
-            cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"photo-frame.png"]];
             [cell setNeedsLayout];
             }
         );
