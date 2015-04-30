@@ -113,7 +113,7 @@
     [request setHTTPMethod:@"POST"];
     
     
-    NSString *body = [NSString stringWithFormat:@"%@", self.report.loc_desc];
+    NSString *body = [NSString stringWithFormat:@"%@\r%@", self.report.loc_desc, self.report.desc];
     
     NSString *postString = [NSString stringWithFormat:@"categoryId=0&body=%@&subject=%@&priorityId=0", body, @"Estates Audit Report"];
     
@@ -129,22 +129,21 @@
     // create the session without specifying a queue to run completion handler on (thus, not main queue)
     // we also don't specify a delegate (since completion handler is all we need)
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-    
-    NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request
-                                                    completionHandler:^(NSURL *localfile, NSURLResponse *response, NSError *error) {
-                                                        // this handler is not executing on the main queue, so we can't do UI directly here
-                                                        if (!error) {
-                                                            if ([request.URL isEqual:apiUrl]) {
-                                                                
-                                                                NSData *contents = [NSData dataWithContentsOfURL:localfile];
-                                                                NSString *ticketId = [[NSString alloc]initWithData:contents encoding:NSUTF8StringEncoding];
-                                                                NSLog(@"%@",ticketId);
-                                                                
-                                                                //TODO: Set ticketId in report
-                                                                [self postPhotoToTicket:ticketId];
-                                                            }
-                                                        }
-                                                    }];
+   
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                            completionHandler:
+                                  ^(NSData *data, NSURLResponse *response, NSError *error) {
+                                      // this handler is not executing on the main queue, so we can't do UI directly here
+                                      if (!error) {
+                                          if ([request.URL isEqual:apiUrl]) {
+                                              NSString *ticketId = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                              NSLog(@"%@",ticketId);
+                                              
+                                              //TODO: Set ticketId in report
+                                              [self postPhotoToTicket:ticketId];
+                                          }
+                                      }
+                                  }];
     [task resume]; // don't forget that all NSURLSession tasks start out suspended!
     
 }
@@ -219,15 +218,19 @@
                 // we also don't specify a delegate (since completion handler is all we need)
                 NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
                 
-                NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request
-                                                                completionHandler:^(NSURL *localfile, NSURLResponse *response, NSError *error) {
-                                                                    // this handler is not executing on the main queue, so we can't do UI directly here
-                                                                    
-                                                                    // No content expected - only check for error
-                                                                    if (error) {
-                                                                            NSLog(@"%@",error);
-                                                                    }
-                                                                }];
+                NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                                        completionHandler:
+                                              ^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                  // this handler is not executing on the main queue, so we can't do UI directly here
+                                                  // No content expected - only check for error
+                                                  if (error) {
+                                                      NSLog(@"%@",error);
+                                                  }else{
+                                                      NSLog(@"Image Uploaded successfully");
+                                                  }
+                                                  
+                                              }];
+
                 [task resume]; // don't forget that all NSURLSession tasks start out suspended!
                 
             }
