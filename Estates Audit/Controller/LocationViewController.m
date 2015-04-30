@@ -162,7 +162,7 @@
             NSLog(@" %@", locationDescription);
             
             [self.reportDict setValue:locationDescription forKey:@"loc_desc"];
-            [self.reportDict setValue:@"new" forKey:@"status"];
+            [self.reportDict setValue:@"New" forKey:@"status"];
             
             Report *report = [Report reportFromReportInfo:self.reportDict inManangedObjectContext:self.managedObjectContext];
             
