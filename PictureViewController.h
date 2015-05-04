@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Report.h"
 
-@interface PictureViewController : UIViewController
+@interface PictureViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (strong, nonatomic) Report *report;
+@property (nonatomic, strong)Report * report;
+@property (nonatomic, weak) IBOutlet UICollectionView *photoCollectionView;
+@property (nonatomic, strong) NSArray *photos;
+
 
 @end

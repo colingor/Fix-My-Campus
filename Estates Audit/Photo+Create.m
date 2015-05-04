@@ -39,8 +39,7 @@
     }
     
     return photo;
-    
-    return nil;
+
 }
     
 

@@ -12,9 +12,11 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 
 @interface PictureViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
 @property (nonatomic) NSMutableArray *capturedImages;
 @property (nonatomic) UIImagePickerController *imagePickerController;
+@property (weak, nonatomic) IBOutlet UIImageView *cameraIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *cameraRoll;
 
 @end
 
@@ -23,6 +25,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.capturedImages = [[NSMutableArray alloc] init];
+
+    [self.cameraIcon setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *cameraClick =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showImagePickerForCamera:)];
+    [cameraClick setNumberOfTapsRequired:1];
+    [self.cameraIcon addGestureRecognizer:cameraClick];
+    
+    [self.cameraRoll setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *cameraRollClick =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showImagePickerForPhotoPicker:)];
+    [cameraRollClick setNumberOfTapsRequired:1];
+    [self.cameraRoll addGestureRecognizer:cameraRollClick];
+    
+    self.photoCollectionView.delegate = self;
+    self.photoCollectionView.dataSource = self;
+    self.photos =  [NSArray arrayWithArray:[self.report.photos allObjects]];
+
 }
 
 - (void)setReport:(Report *)report
@@ -40,11 +57,7 @@
 
 - (void)showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType
 {
-    if (self.imageView.isAnimating)
-    {
-        [self.imageView stopAnimating];
-    }
-    
+  
     if (self.capturedImages.count > 0)
     {
         [self.capturedImages removeAllObjects];
@@ -72,7 +85,7 @@
 - (void)finishAndUpdate
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
-    
+    /*
     if ([self.capturedImages count] > 0)
     {
         if ([self.capturedImages count] == 1)
@@ -91,9 +104,10 @@
         
         // To be ready to start again, clear the captured images array.
         [self.capturedImages removeAllObjects];
-    }
+    }*/
     
     self.imagePickerController = nil;
+    self.photos =  [NSArray arrayWithArray:[self.report.photos allObjects]];
 }
 
 
@@ -128,9 +142,73 @@
         // Get image url and add to Report
         NSString *url = [imageUrl absoluteString];
         [Photo photoWithUrl:url fromReport:self.report inManagedObjectContext:self.report.managedObjectContext];
+        
         [self finishAndUpdate];
     }
+    
+    [self.photoCollectionView reloadData];
 }
+
+
+#pragma mark - UICOLLECTION view data source
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    
+    return [self.report.photos count];
+}
+
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *identifier = @"Cell";
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
+    
+
+    Photo *photo = self.photos[indexPath.row];
+    NSURL *assetUrl = [NSURL URLWithString:photo.url];
+    
+    ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
+    {
+        CGImageRef iref = [myasset thumbnail];
+        if (iref) {
+            UIImage *thumbImage = [UIImage imageWithCGImage:iref];
+               dispatch_async(dispatch_get_main_queue(), ^{
+        /* This is the main thread again, where we set the tableView's image to
+         be what we just fetched. */
+    
+            UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
+            photoImageView.image = thumbImage;
+            [cell setNeedsLayout];
+            }
+        );
+            
+     
+        }
+    };
+    
+    ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
+    {
+        NSLog(@"Can't get image - %@",[myerror localizedDescription]);
+    };  
+    
+    ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+    [assetslibrary assetForURL:assetUrl
+                   resultBlock:resultblock
+                  failureBlock:failureblock];
+
+   
+    
+    
+    return cell;
+
+
+}
+
+
+
+
+
 
 
 
