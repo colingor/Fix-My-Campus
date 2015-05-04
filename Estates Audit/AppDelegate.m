@@ -85,9 +85,6 @@
             NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
             [request setHTTPMethod:@"GET"];
             
-            // TODO: Credentials in code is bad...
-            [request setValue:@"Basic Y2dvcm1sZTFAc3RhZmZtYWlsLmVkLmFjLnVrOmVzdGF0ZXNhdWRpdDM=" forHTTPHeaderField:@"Authorization"];
-            
             NSURLSessionDownloadTask *task = [self.jitBitDownloadSession downloadTaskWithRequest:request];
             task.taskDescription = JITBIT_FETCH;
             
@@ -110,6 +107,11 @@
             // that means that we will (eventually) get the results even if we are not the foreground application
             // even if our application crashed, it would get relaunched (eventually) to handle this URL's results!
             NSURLSessionConfiguration *urlSessionConfig = [NSURLSessionConfiguration backgroundSessionConfiguration:JITBIT_FETCH];
+            
+            
+            // TODO:  *********NEED TO ADD SOME USER AUTHENTICATION - can't leave this hardcoded here **********
+            [urlSessionConfig setHTTPAdditionalHeaders:@{@"Authorization": @"Basic Y2dvcm1sZTFAc3RhZmZtYWlsLmVkLmFjLnVrOmVzdGF0ZXNhdWRpdDM="}];
+            
             _jitBitDownloadSession = [NSURLSession sessionWithConfiguration:urlSessionConfig
                                                                    delegate:self    // we MUST have a delegate for background configurations
                                                               delegateQueue:nil];   // nil means "a random, non-main-queue queue"
@@ -164,9 +166,6 @@
             
             NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
             [request setHTTPMethod:@"GET"];
-            
-            // TODO: Credentials in code is bad...
-            [request setValue:@"Basic Y2dvcm1sZTFAc3RhZmZtYWlsLmVkLmFjLnVrOmVzdGF0ZXNhdWRpdDM=" forHTTPHeaderField:@"Authorization"];
             
             // Query on a particular ticket id
             NSURLSessionDownloadTask *task = [self.jitBitDownloadSession downloadTaskWithRequest:request];
