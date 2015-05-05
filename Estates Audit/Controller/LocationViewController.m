@@ -21,6 +21,7 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSMutableDictionary *reportDict;
 @property (nonatomic, assign) BOOL userSpecfiedLocation;
+@property (strong, nonatomic) Report *report;
 
 @end
 
@@ -152,7 +153,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-
+    
+    
     if ([[segue identifier] isEqualToString:@"Take Picture"]){
         if ([segue.destinationViewController isKindOfClass:[PictureViewController class]]) {
             
@@ -161,13 +163,19 @@
             NSString *locationDescription = self.descriptionText.text;
             NSLog(@" %@", locationDescription);
             
+            if(self.report){
+            
+                self.report.loc_desc =locationDescription;
+            } else {
+            
             [self.reportDict setValue:locationDescription forKey:@"loc_desc"];
             [self.reportDict setValue:@"New" forKey:@"status"];
             
             Report *report = [Report reportFromReportInfo:self.reportDict inManangedObjectContext:self.managedObjectContext];
-            
+            self.report = report;
             // Set report in next controller
-            picvc.report = report;
+            }
+            picvc.report = self.report;
 
 
         }
