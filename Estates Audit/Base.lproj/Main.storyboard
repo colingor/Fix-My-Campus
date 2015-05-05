@@ -89,12 +89,6 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXx-sX-eNs">
-                                        <rect key="frame" x="8" y="419" width="304" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="phd-Hs-EGZ">
                                         <rect key="frame" x="8" y="246" width="304" height="136"/>
                                         <constraints>
@@ -135,30 +129,40 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCl-qf-WBW">
+                                        <rect key="frame" x="8" y="419" width="304" height="77"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="77" id="NwY-Sg-ktN"/>
+                                        </constraints>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="gr4-Af-CKm" firstAttribute="leading" secondItem="XXx-sX-eNs" secondAttribute="leading" id="3Fu-VQ-JHu"/>
+                                    <constraint firstAttribute="trailing" secondItem="sCl-qf-WBW" secondAttribute="trailing" constant="8" id="BZu-Gb-1Q7"/>
                                     <constraint firstItem="QZy-k4-9Ch" firstAttribute="trailing" secondItem="nJZ-oF-33W" secondAttribute="trailing" id="BzT-zk-7xn"/>
-                                    <constraint firstAttribute="bottom" secondItem="XXx-sX-eNs" secondAttribute="bottom" constant="64" id="EoI-Gi-62O"/>
+                                    <constraint firstItem="gr4-Af-CKm" firstAttribute="trailing" secondItem="sCl-qf-WBW" secondAttribute="trailing" id="Dag-Uj-Qap"/>
+                                    <constraint firstItem="sCl-qf-WBW" firstAttribute="top" secondItem="gr4-Af-CKm" secondAttribute="bottom" constant="8" id="EJR-br-umG"/>
                                     <constraint firstItem="USX-Jz-vAS" firstAttribute="trailing" secondItem="phd-Hs-EGZ" secondAttribute="trailing" id="ErM-k9-fhk"/>
                                     <constraint firstItem="gr4-Af-CKm" firstAttribute="leading" secondItem="phd-Hs-EGZ" secondAttribute="leading" id="FOE-tX-NUI"/>
                                     <constraint firstItem="Sqe-HE-v0k" firstAttribute="trailing" secondItem="nJZ-oF-33W" secondAttribute="trailing" id="Gjw-aL-Dsk"/>
                                     <constraint firstItem="USX-Jz-vAS" firstAttribute="leading" secondItem="cLV-0j-kcA" secondAttribute="leading" constant="13" id="IIh-aP-uxS"/>
-                                    <constraint firstItem="XXx-sX-eNs" firstAttribute="top" secondItem="gr4-Af-CKm" secondAttribute="bottom" constant="8" symbolic="YES" id="IYO-ca-Ay5"/>
                                     <constraint firstItem="USX-Jz-vAS" firstAttribute="top" secondItem="QZy-k4-9Ch" secondAttribute="bottom" constant="8" symbolic="YES" id="Jcp-TY-BjQ"/>
                                     <constraint firstItem="Sqe-HE-v0k" firstAttribute="leading" secondItem="nJZ-oF-33W" secondAttribute="leading" id="MA8-Bq-761"/>
                                     <constraint firstItem="QZy-k4-9Ch" firstAttribute="leading" secondItem="nJZ-oF-33W" secondAttribute="leading" id="SCw-iq-CJN"/>
                                     <constraint firstItem="phd-Hs-EGZ" firstAttribute="top" secondItem="USX-Jz-vAS" secondAttribute="bottom" constant="8" symbolic="YES" id="YzZ-lB-vkS"/>
+                                    <constraint firstItem="gr4-Af-CKm" firstAttribute="leading" secondItem="sCl-qf-WBW" secondAttribute="leading" id="dKh-hm-5KC"/>
                                     <constraint firstItem="nJZ-oF-33W" firstAttribute="top" secondItem="Sqe-HE-v0k" secondAttribute="bottom" constant="8" symbolic="YES" id="db1-ue-VL1"/>
+                                    <constraint firstAttribute="bottom" secondItem="sCl-qf-WBW" secondAttribute="bottom" constant="8" id="eGZ-iM-9ib"/>
                                     <constraint firstItem="QZy-k4-9Ch" firstAttribute="trailing" secondItem="USX-Jz-vAS" secondAttribute="trailing" id="eWV-3m-RSH"/>
-                                    <constraint firstItem="XXx-sX-eNs" firstAttribute="trailing" secondItem="cLV-0j-kcA" secondAttribute="trailingMargin" id="f6k-xX-7DB"/>
                                     <constraint firstItem="Sqe-HE-v0k" firstAttribute="top" secondItem="cLV-0j-kcA" secondAttribute="topMargin" id="kUt-p1-2vI"/>
+                                    <constraint firstItem="sCl-qf-WBW" firstAttribute="leading" secondItem="cLV-0j-kcA" secondAttribute="leading" constant="8" id="kiq-xN-sZL"/>
                                     <constraint firstItem="phd-Hs-EGZ" firstAttribute="trailing" secondItem="gr4-Af-CKm" secondAttribute="trailing" id="p2V-Xn-DEb"/>
                                     <constraint firstItem="phd-Hs-EGZ" firstAttribute="leading" secondItem="QZy-k4-9Ch" secondAttribute="leading" id="r4k-UI-gbN"/>
-                                    <constraint firstItem="XXx-sX-eNs" firstAttribute="trailing" secondItem="gr4-Af-CKm" secondAttribute="trailing" id="rbe-hj-nld"/>
                                     <constraint firstItem="QZy-k4-9Ch" firstAttribute="top" secondItem="nJZ-oF-33W" secondAttribute="bottom" constant="1" id="tDn-oL-rk9"/>
                                     <constraint firstItem="Sqe-HE-v0k" firstAttribute="centerX" secondItem="cLV-0j-kcA" secondAttribute="centerX" id="tfR-hU-7gD"/>
-                                    <constraint firstItem="XXx-sX-eNs" firstAttribute="leading" secondItem="cLV-0j-kcA" secondAttribute="leadingMargin" id="vws-O3-QBU"/>
                                     <constraint firstItem="gr4-Af-CKm" firstAttribute="top" secondItem="phd-Hs-EGZ" secondAttribute="bottom" constant="8" symbolic="YES" id="zfR-Mm-k9v"/>
                                 </constraints>
                             </scrollView>
@@ -173,7 +177,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Report Details" id="T4e-M0-gFK"/>
                     <connections>
-                        <outlet property="fullDescription" destination="XXx-sX-eNs" id="hrk-1e-SuI"/>
+                        <outlet property="fullDescription" destination="sCl-qf-WBW" id="qFj-0B-MaN"/>
                         <outlet property="locationDescription" destination="nJZ-oF-33W" id="kfL-mt-93T"/>
                         <outlet property="mapView" destination="QZy-k4-9Ch" id="8XC-AL-Bpp"/>
                         <outlet property="photoCollectionView" destination="phd-Hs-EGZ" id="lYJ-BE-iAC"/>
