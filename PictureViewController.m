@@ -13,7 +13,7 @@
 
 @interface PictureViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (nonatomic) NSMutableArray *capturedImages;
+
 @property (nonatomic) UIImagePickerController *imagePickerController;
 @property (weak, nonatomic) IBOutlet UIImageView *cameraIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *cameraRoll;
@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.capturedImages = [[NSMutableArray alloc] init];
+ 
 
     [self.cameraIcon setUserInteractionEnabled:YES];
     UITapGestureRecognizer *cameraClick =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showImagePickerForCamera:)];
@@ -58,10 +58,6 @@
 - (void)showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType
 {
   
-    if (self.capturedImages.count > 0)
-    {
-        [self.capturedImages removeAllObjects];
-    }
     
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
@@ -84,30 +80,14 @@
 
 - (void)finishAndUpdate
 {
-    [self dismissViewControllerAnimated:YES completion:NULL];
-    /*
-    if ([self.capturedImages count] > 0)
-    {
-        if ([self.capturedImages count] == 1)
-        {
-            // Camera took a single picture.
-            [self.imageView setImage:[self.capturedImages objectAtIndex:0]];
-        }
-        else
-        {
-            // Camera took multiple pictures; use the list of images for animation.
-            self.imageView.animationImages = self.capturedImages;
-            self.imageView.animationDuration = 5.0;    // Show each captured photo for 5 seconds.
-            self.imageView.animationRepeatCount = 0;   // Animate forever (show all photos).
-            [self.imageView startAnimating];
-        }
-        
-        // To be ready to start again, clear the captured images array.
-        [self.capturedImages removeAllObjects];
-    }*/
     
+
     self.imagePickerController = nil;
     self.photos =  [NSArray arrayWithArray:[self.report.photos allObjects]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+       [self.photoCollectionView reloadData];
+    });
+    
 }
 
 
@@ -116,15 +96,14 @@
 // This method is called when an image has been chosen from the library or taken from the camera.
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    [self.capturedImages addObject:image];
-    [self finishAndUpdate];
+
+    [self dismissViewControllerAnimated:YES completion:NULL];
     
     NSURL *imageUrl = [info valueForKey:UIImagePickerControllerReferenceURL];
     
     if (imageUrl == nil) {
         ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         
         [library writeImageToSavedPhotosAlbum:((UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage]).CGImage
                                      metadata:[info objectForKey:UIImagePickerControllerMediaMetadata]
@@ -133,6 +112,8 @@
                                     NSLog(@"imageUrl %@", imageUrl);
                                     NSString *url = [imageUrl absoluteString];
                                     [Photo photoWithUrl:url fromReport:self.report inManagedObjectContext:self.report.managedObjectContext];
+                                    [self finishAndUpdate];
+    
                                   
         }];
 
@@ -146,7 +127,7 @@
         [self finishAndUpdate];
     }
     
-    [self.photoCollectionView reloadData];
+    
 }
 
 
