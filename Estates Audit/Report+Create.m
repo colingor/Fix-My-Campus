@@ -47,6 +47,7 @@
     Report * report = [NSEntityDescription insertNewObjectForEntityForName:@"Report"
                                                     inManagedObjectContext:context];
     report.loc_desc = (NSString *)[reportDictionary valueForKeyPath:@"loc_desc"];
+    report.desc = (NSString *)[reportDictionary valueForKeyPath:@"desc"];
     report.lon = (NSNumber *)[reportDictionary valueForKeyPath:@"lon"];
     report.lat = (NSNumber *)[reportDictionary valueForKeyPath:@"lat"];
     report.status = (NSString *)[reportDictionary valueForKeyPath:@"status"];
@@ -68,4 +69,41 @@
     }
     return matches;
 }
+
+
+
++ (void)loadReportsFromJitBitDictionary:(NSDictionary *)ticketsFromJitBit
+               intoManagedObjectContext:(NSManagedObjectContext *)context
+{
+    
+    // For each ticket, add a report to Core Data
+    for(id key in ticketsFromJitBit){
+        
+        NSDictionary *ticket = [ticketsFromJitBit objectForKey:key];
+        
+        if(ticket){
+            
+            NSString *status = [ticket valueForKey:@"Status"];
+            
+            NSLog(@" Status %@", status);
+            
+            NSString *body = [ticket valueForKey:@"Body"];
+            
+            NSLog(@" body %@", body);
+            
+            // Create new report to add to Core Data
+            NSMutableDictionary *report = [NSMutableDictionary dictionary];
+            
+            [report setValue: body forKey:@"desc"];
+            [report setValue: status forKey:@"status"];
+            
+            [self reportFromReportInfo:report inManangedObjectContext:context];
+        }
+    }
+    
+    // Save just to be sure
+    [context save:NULL];
+}
+
+
 @end

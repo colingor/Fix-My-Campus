@@ -8,6 +8,8 @@
 #import "AppDelegate.h"
 #import "AppDelegate+MOC.h"
 #import "HomePageViewController.h"
+#import "Report+Create.h"
+
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 @interface AppDelegate () <NSURLSessionDownloadDelegate>
 
@@ -302,7 +304,8 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
             NSLog(@"********* TICKET DOWNLOAD COMPLETE***********");
             NSLog(@"%@", self.ticketsFromJitBit);
             
-            // Now we need to write appropriate ticket info to core data
+            // Load Reports into Core Data
+            [Report loadReportsFromJitBitDictionary:self.ticketsFromJitBit intoManagedObjectContext: self.reportDatabaseContext];
             
             // nope, then invoke flickrDownloadBackgroundURLSessionCompletionHandler (if it's still not nil)
             //                    void (^completionHandler)() = self.flickrDownloadBackgroundURLSessionCompletionHandler;

@@ -16,7 +16,10 @@
 
 +(Report *)  insertNewObjectFromDict:(NSDictionary *)reportDictionary inManagedContext:(NSManagedObjectContext *)context ;
 
-         
+
 +(NSArray *) allReportsInManagedObjectContext:(NSManagedObjectContext *)context;
+
++ (void)loadReportsFromJitBitDictionary:(NSDictionary *)ticketsFromJitBit
+               intoManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end
