@@ -78,7 +78,15 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reportcell" forIndexPath:indexPath];
     Report * report = [self.reports objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = report.loc_desc ;
+    NSMutableString *text = [NSMutableString string];
+  
+    if([report.loc_desc length] > 0){
+        [text appendString:[NSString stringWithFormat:@"%@", report.loc_desc]];
+    }
+    
+    cell.textLabel.text = text;
+    cell.detailTextLabel.text = report.status;
+ 
     NSSet * photos = report.photos;
     Photo * photo = [photos anyObject];
     

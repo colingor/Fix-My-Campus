@@ -156,7 +156,7 @@
                                               NSLog(@"%@",ticketId);
                                               
                                               // Set ticketId in report
-                                              self.report.ticket_id = ticketId;
+                                              self.report.ticket_id = @([ticketId floatValue]);
                                               
                                               // Save just to be sure
                                               [self.report.managedObjectContext save:NULL];

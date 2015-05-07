@@ -18,16 +18,26 @@
     
     NSString *guid = (NSString *)[reportDictionary valueForKeyPath:@"guid"];
     
-    if ([guid length]) {
+//    NSString *ticketId = (NSString *)[reportDictionary valueForKeyPath:@"ticket_id"];
+    
+//    NSNumber *myNumber = [numberFromString:[reportDictionary valueForKeyPath:@"ticket_id"]];
+//    NSNumber *ticketId = @([[reportDictionary valueForKeyPath:@"ticket_id"] floatValue]);
+    NSNumber *ticketId = [reportDictionary valueForKeyPath:@"ticket_id"];
+
+    
+//    if ([guid length]) {
+    if (ticketId) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Report"];
-        request.predicate = [NSPredicate predicateWithFormat:@"guid = %@", guid];
+//        request.predicate = [NSPredicate predicateWithFormat:@"guid = %@", guid];
+        request.predicate = [NSPredicate predicateWithFormat:@"ticket_id = %@", ticketId];
         
         NSError *error;
         NSArray *matches = [context executeFetchRequest:request error:&error];
         
         if (!matches || error || ([matches count] > 1 )) {
             // handle error
-            NSLog(@"Something went wrong creating report with dectription: %@", guid);
+            NSLog(@"Something went wrong creating report : %@", ticketId);
+//             NSLog(@"Something went wrong creating report : %@", guid);
         } else if (![matches count]) {
             //record guid doesn't exist for whatever reason just create a new one
             report = [Report insertNewObjectFromDict:reportDictionary inManagedContext:context];
@@ -36,6 +46,9 @@
             report = [matches lastObject];
         }
     } else {
+        
+        
+        
         report = [Report insertNewObjectFromDict:reportDictionary inManagedContext:context];
         
     }
@@ -51,6 +64,14 @@
     report.lon = (NSNumber *)[reportDictionary valueForKeyPath:@"lon"];
     report.lat = (NSNumber *)[reportDictionary valueForKeyPath:@"lat"];
     report.status = (NSString *)[reportDictionary valueForKeyPath:@"status"];
+    
+    
+    NSNumber *ticketId = [reportDictionary valueForKeyPath:@"ticket_id"];
+    if(ticketId){
+        report.ticket_id = ticketId;
+    }
+  
+    
     NSUUID  *UUID = [NSUUID UUID];
     NSString* stringUUID = [UUID UUIDString];
     report.guid = stringUUID;
@@ -85,13 +106,13 @@
         if(ticket){
             
             NSString *status = [ticket valueForKey:@"Status"];
-     
-            NSString *body = [ticket valueForKey:@"Body"];
+            NSString *ticketId = [ticket valueForKey:@"TicketID"];
             
             // Create new report to add to Core Data
             NSMutableDictionary *report = [NSMutableDictionary dictionary];
 
             [report setValue: status forKey:@"status"];
+            [report setValue: ticketId forKey:@"ticket_id"];
             
             NSArray *customFields = [ticketsCustomFieldsFromJitBit valueForKey:key];
          
