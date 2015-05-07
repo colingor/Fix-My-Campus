@@ -166,11 +166,71 @@
                                                   [self postPhotoToTicket:ticketId];
                                               }
                                               
+                                              [self postCustomFieldsToTicket:ticketId];
+                                              
                                           }
                                       }
                                   }];
     [task resume]; // don't forget that all NSURLSession tasks start out suspended!
     
+}
+
+
+-(void)postCustomFieldsToTicket: (NSString *)ticketId{
+   
+    
+    // another configuration option is backgroundSessionConfiguration (multitasking API required though)
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    
+    // create the session without specifying a queue to run completion handler on (thus, not main queue)
+    // we also don't specify a delegate (since completion handler is all we need)
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    
+    NSString *apiStr = [NSString stringWithFormat:@"https://eaudit.jitbit.com/helpdesk/api/SetCustomField"];
+    
+    NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
+    [request setHTTPMethod:@"POST"];
+   
+    // TODO: Credentials in code is bad...
+    [request setValue:@"Basic Y2dvcm1sZTFAc3RhZmZtYWlsLmVkLmFjLnVrOmVzdGF0ZXNhdWRpdDM=" forHTTPHeaderField:@"Authorization"];
+    
+    // Description
+    NSString *postString = [NSString stringWithFormat:@"ticketId=%@&fieldId=%@&value=%@", ticketId, @"9434", self.report.desc];
+    [self postField:request :postString :session];
+    
+    // Location Description
+    postString = [NSString stringWithFormat:@"ticketId=%@&fieldId=%@&value=%@", ticketId, @"9435", self.report.loc_desc];
+    [self postField:request :postString :session];
+    
+    // Lat lon
+    postString = [NSString stringWithFormat:@"ticketId=%@&fieldId=%@&value=%@ %@", ticketId, @"9450", self.report.lat, self.report.lon];
+    [self postField:request :postString :session];
+    
+    
+}
+
+
+- (void) postField:(NSMutableURLRequest *)request
+                  :(NSString *)postString
+                  :(NSURLSession *)session
+{
+    
+    [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                            completionHandler:
+                                  ^(NSData *data, NSURLResponse *response, NSError *error) {
+                                      // this handler is not executing on the main queue, so we can't do UI directly here
+                                      if (error) {
+                                          NSLog(@"%@",error);
+                                      }else{
+                                          NSLog(@"Field posted successfully");
+                                      }
+                                      
+                                  }];
+    [task resume]; // don't forget that all NSURLSession tasks start out suspended!
 }
 
 

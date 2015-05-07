@@ -73,6 +73,7 @@
 
 
 + (void)loadReportsFromJitBitDictionary:(NSDictionary *)ticketsFromJitBit
+                      withCustomFields :(NSDictionary *)ticketsCustomFieldsFromJitBit
                intoManagedObjectContext:(NSManagedObjectContext *)context
 {
     
@@ -93,9 +94,44 @@
             
             // Create new report to add to Core Data
             NSMutableDictionary *report = [NSMutableDictionary dictionary];
-            
-            [report setValue: body forKey:@"desc"];
+
             [report setValue: status forKey:@"status"];
+            
+            NSArray *customFields = [ticketsCustomFieldsFromJitBit valueForKey:key];
+            NSLog(@"%@", customFields);
+            
+            for (id customField in customFields) {
+                // do something with object
+                NSNumber *fieldId = [customField valueForKey:@"FieldID"];
+                NSString *value = [customField valueForKey:@"Value"];
+                
+                //description
+                if([fieldId isEqualToNumber: @9434]){
+                    if(![value isKindOfClass:[NSNull class]]){
+                        [report setValue: value forKey:@"desc"];
+
+                    }
+                }
+                // Location Description
+                else if ([fieldId isEqualToNumber: @9435]){
+                    if(![value isKindOfClass:[NSNull class]]){
+                        [report setValue: value forKey:@"loc_desc"];
+                        
+                    }
+                }
+                // Location coords
+                else if ([fieldId isEqualToNumber: @9450]){
+                    if(![value isKindOfClass:[NSNull class]]){
+                        NSArray* coords = [value componentsSeparatedByString:@" "];
+                        NSNumber *lat = @([coords[0] floatValue]);
+                        NSNumber *lon = @([coords[1] floatValue]);
+                        [report setValue: lat forKey:@"lat"];
+                        [report setValue: lon forKey:@"lon"];
+                        
+                    }
+                }
+            }
+            
             
             [self reportFromReportInfo:report inManangedObjectContext:context];
         }

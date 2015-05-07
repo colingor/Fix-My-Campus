@@ -20,6 +20,6 @@
 +(NSArray *) allReportsInManagedObjectContext:(NSManagedObjectContext *)context;
 
 + (void)loadReportsFromJitBitDictionary:(NSDictionary *)ticketsFromJitBit
+                      withCustomFields :(NSDictionary *)ticketsCustomFieldsFromJitBit
                intoManagedObjectContext:(NSManagedObjectContext *)context;
-
 @end

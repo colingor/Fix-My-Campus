@@ -16,11 +16,14 @@
 @property (strong, nonatomic) NSManagedObjectContext *reportDatabaseContext;
 @property (strong, nonatomic) NSURLSession *jitBitDownloadSession;
 @property (strong, nonatomic) NSMutableDictionary *ticketsFromJitBit;
+@property (strong, nonatomic) NSMutableDictionary *ticketsCustomFieldsFromJitBit;
+
 @end
 
 // name of the Flickr fetching background download session
 #define JITBIT_FETCH @"Fetch tickets from JitBit"
 #define JITBIT_FETCH_TICKET @"Fetch individual ticket from JitBit"
+#define JITBIT_FETCH_ADDITIONAL_FIELDS @"Fetch aditional ticket fields from JitBit"
 
 
 @implementation AppDelegate
@@ -79,6 +82,8 @@
             
             // Create new dict to store ticket results
             _ticketsFromJitBit = [NSMutableDictionary dictionary];
+            _ticketsCustomFieldsFromJitBit = [NSMutableDictionary dictionary];
+            
             
             NSString *apiStr = @"https://eaudit.jitbit.com/helpdesk/api/Tickets";
             
@@ -179,9 +184,38 @@
             [task setAccessibilityLabel:issueID];
             
             [task resume]; // don't forget that all NSURLSession tasks start out suspended!
+            
+            // Now we also need to get the custom fields for this issue
+            [self fetchAdditionalTicketDetails: issueID];
         }
     }
 }
+
+
+
+// Get additional ticket fields
+- (void)fetchAdditionalTicketDetails:(NSString *)issueID{
+
+            // Need to do a GET on this ticket
+            NSString *apiStr = [NSString stringWithFormat:@"https://eaudit.jitbit.com/helpdesk/api/TicketCustomFields?id=%@", issueID];
+            
+            NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
+            [request setHTTPMethod:@"GET"];
+            
+            // Query on a particular ticket id
+            NSURLSessionDownloadTask *task = [self.jitBitDownloadSession downloadTaskWithRequest:request];
+    
+            task.taskDescription = JITBIT_FETCH_ADDITIONAL_FIELDS;
+            
+            // Set the ticket Id so we can reference it when we get a result
+            [task setAccessibilityLabel:issueID];
+            
+            [task resume]; // don't forget that all NSURLSession tasks start out suspended!
+}
+
+
 
 
 #pragma mark - NSURLSessionDownloadDelegate
@@ -209,7 +243,7 @@
 }
 
 
-- (void)loadLoadIndividualTicketFromLocalURL:(NSURL *)localFile
+- (void)loadIndividualTicketFromLocalURL:(NSURL *)localFile
                                 downloadTask:(NSURLSessionDownloadTask *)downloadTask
 {
     
@@ -236,6 +270,30 @@
 }
 
 
+- (void)loadAdditionalTicketDetailsFromLocalURL:(NSURL *)localFile
+                                downloadTask:(NSURLSessionDownloadTask *)downloadTask
+{
+    
+    if(![downloadTask error]){
+        NSString *ticketID  = [downloadTask accessibilityLabel];
+        NSDictionary *additonalTicketDetails;
+        NSData *jitbitTicketsJSONData = [NSData dataWithContentsOfURL:localFile];
+        
+        if (jitbitTicketsJSONData) {
+            additonalTicketDetails = [NSJSONSerialization JSONObjectWithData:jitbitTicketsJSONData
+                                                     options:0
+                                                       error:NULL];
+            NSLog(@"Additional ticket details found for %@", ticketID);
+            
+            [self.ticketsCustomFieldsFromJitBit setObject:additonalTicketDetails forKey:ticketID];
+            
+            // Call completion handler to see if all tasks are complete
+            [self ticketListMightBeComplete];
+        }
+    }
+}
+
+
 // required by the protocol
 - (void)URLSession:(NSURLSession *)session
       downloadTask:(NSURLSessionDownloadTask *)downloadTask
@@ -251,7 +309,14 @@ didFinishDownloadingToURL:(NSURL *)localFile
     // Check if this is task for downloading individual tickets
     if ([downloadTask.taskDescription isEqualToString:JITBIT_FETCH_TICKET]) {
         
-        [self loadLoadIndividualTicketFromLocalURL:localFile downloadTask:downloadTask];
+        [self loadIndividualTicketFromLocalURL:localFile downloadTask:downloadTask];
+        
+    }
+    
+    // Get custom fields for each ticket
+    if ([downloadTask.taskDescription isEqualToString:JITBIT_FETCH_ADDITIONAL_FIELDS]) {
+        
+        [self loadAdditionalTicketDetailsFromLocalURL:localFile downloadTask:downloadTask];
         
     }
     
@@ -305,8 +370,8 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
             NSLog(@"%@", self.ticketsFromJitBit);
             
             // Load Reports into Core Data
-            [Report loadReportsFromJitBitDictionary:self.ticketsFromJitBit intoManagedObjectContext: self.reportDatabaseContext];
             
+            [Report loadReportsFromJitBitDictionary:self.ticketsFromJitBit withCustomFields:self.ticketsCustomFieldsFromJitBit intoManagedObjectContext:self.reportDatabaseContext];
             // nope, then invoke flickrDownloadBackgroundURLSessionCompletionHandler (if it's still not nil)
             //                    void (^completionHandler)() = self.flickrDownloadBackgroundURLSessionCompletionHandler;
             //                    self.flickrDownloadBackgroundURLSessionCompletionHandler = nil;
