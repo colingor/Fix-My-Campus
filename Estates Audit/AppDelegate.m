@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) NSManagedObjectContext *reportDatabaseContext;
 @property (strong, nonatomic) NSURLSession *jitBitDownloadSession;
+@property (strong, nonatomic) NSTimer *jitBitForegroundFetchTimer;
 @property (strong, nonatomic) NSMutableDictionary *ticketsFromJitBit;
 @property (strong, nonatomic) NSMutableDictionary *ticketsCustomFieldsFromJitBit;
 
@@ -25,6 +26,8 @@
 #define JITBIT_FETCH_TICKET @"Fetch individual ticket from JitBit"
 #define JITBIT_FETCH_ADDITIONAL_FIELDS @"Fetch aditional ticket fields from JitBit"
 
+// Update every 10 mins
+#define FOREGROUND_JITBIT_FETCH_INTERVAL (10*60)
 
 @implementation AppDelegate
 
@@ -68,6 +71,49 @@
     
     
     return YES;
+}
+
+
+#pragma mark - Database Context
+
+// we do some stuff when our database's context becomes available
+// we kick off our foreground NSTimer so that we are fetching every once in a while in the foreground
+// we post a notification to let others know the context is available
+
+- (void)setReportDatabaseContext:(NSManagedObjectContext *)reportDatabaseContext
+{
+    _reportDatabaseContext = reportDatabaseContext;
+    
+    // every time the context changes, we'll restart our timer
+    // so kill (invalidate) the current one
+    // (we didn't get to this line of code in lecture, sorry!)
+    [self.jitBitForegroundFetchTimer invalidate];
+    self.jitBitForegroundFetchTimer = nil;
+    
+    if (self.reportDatabaseContext)
+    {
+        // this timer will fire only when we are in the foreground
+        self.jitBitForegroundFetchTimer = [NSTimer scheduledTimerWithTimeInterval:FOREGROUND_JITBIT_FETCH_INTERVAL
+                                                                           target:self
+                                                                         selector:@selector(syncWithJitBit:)
+                                                                         userInfo:nil
+                                                                          repeats:YES];
+    }
+    
+    // let everyone who might be interested know this context is available
+    // this happens very early in the running of our application
+    // it would make NO SENSE to listen to this radio station in a View Controller that was segued to, for example
+    // (but that's okay because a segued-to View Controller would presumably be "prepared" by being given a context to work in)
+//    NSDictionary *userInfo = self.photoDatabaseContext ? @{ PhotoDatabaseAvailabilityContext : self.photoDatabaseContext } : nil;
+//    [[NSNotificationCenter defaultCenter] postNotificationName:PhotoDatabaseAvailabilityNotification
+//                                                        object:self
+//                                                      userInfo:userInfo];
+}
+
+
+- (void)syncWithJitBit:(NSTimer *)timer // NSTimer target/action always takes an NSTimer as an argument
+{
+    [self syncWithJitBit];
 }
 
 
@@ -367,11 +413,12 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
         //  (another thread might have sent it already in a multiple-tasks-at-once implementation)
         if (![downloadTasks count]) {  // any more ticket downloads left?
             NSLog(@"********* TICKET DOWNLOAD COMPLETE***********");
-            NSLog(@"%@", self.ticketsFromJitBit);
+
             
             // Load Reports into Core Data
-            
-            [Report loadReportsFromJitBitDictionary:self.ticketsFromJitBit withCustomFields:self.ticketsCustomFieldsFromJitBit intoManagedObjectContext:self.reportDatabaseContext];
+            [Report loadReportsFromJitBitDictionary:self.ticketsFromJitBit withCustomFields
+                                                   :self.ticketsCustomFieldsFromJitBit intoManagedObjectContext
+                                                   :self.reportDatabaseContext];
             // nope, then invoke flickrDownloadBackgroundURLSessionCompletionHandler (if it's still not nil)
             //                    void (^completionHandler)() = self.flickrDownloadBackgroundURLSessionCompletionHandler;
             //                    self.flickrDownloadBackgroundURLSessionCompletionHandler = nil;

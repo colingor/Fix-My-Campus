@@ -85,12 +85,8 @@
         if(ticket){
             
             NSString *status = [ticket valueForKey:@"Status"];
-            
-            NSLog(@" Status %@", status);
-            
+     
             NSString *body = [ticket valueForKey:@"Body"];
-            
-            NSLog(@" body %@", body);
             
             // Create new report to add to Core Data
             NSMutableDictionary *report = [NSMutableDictionary dictionary];
@@ -98,7 +94,7 @@
             [report setValue: status forKey:@"status"];
             
             NSArray *customFields = [ticketsCustomFieldsFromJitBit valueForKey:key];
-            NSLog(@"%@", customFields);
+         
             
             for (id customField in customFields) {
                 // do something with object
