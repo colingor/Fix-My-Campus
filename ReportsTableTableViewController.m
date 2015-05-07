@@ -9,6 +9,7 @@
 #import "ReportsTableTableViewController.h"
 #import "Report+Create.h"
 #import "Photo+Create.h"
+#import "AppDelegate.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ReportDetailsViewController.h"
 
@@ -38,11 +39,28 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (IBAction)refresh:(id)sender {
+   
+    NSLog(@"Refreshing");
+    
+    [self.refreshControl beginRefreshing];
+    
+    // Trigger calls to jitBit
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate syncWithJitBit];
+ 
+    appDelegate.onCompletion = ^{
+        [self.refreshControl endRefreshing];
+        NSLog(@"End refreshing");
+    };
+}
+
+
+
 #pragma mark - Table view data source
 
 
- - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
+ - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {     
     return 1;
 }
 

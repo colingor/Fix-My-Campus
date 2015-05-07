@@ -66,7 +66,7 @@
     HomePageViewController *homevc = [[navigationController viewControllers] objectAtIndex:0];
     homevc.managedObjectContext = self.reportDatabaseContext;
     
-    //TODO: Maybe call API for existing report status in the background
+    //Fire off a sync when app starts
     [self syncWithJitBit];
     
     
@@ -413,18 +413,18 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
         //  (another thread might have sent it already in a multiple-tasks-at-once implementation)
         if (![downloadTasks count]) {  // any more ticket downloads left?
             NSLog(@"********* TICKET DOWNLOAD COMPLETE***********");
-
+            
+            
+            // We can hide the refresh control on ReportsTable using this callback
+            if (self.onCompletion) {
+                self.onCompletion();
+            }
             
             // Load Reports into Core Data
-            [Report loadReportsFromJitBitDictionary:self.ticketsFromJitBit withCustomFields
-                                                   :self.ticketsCustomFieldsFromJitBit intoManagedObjectContext
-                                                   :self.reportDatabaseContext];
-            // nope, then invoke flickrDownloadBackgroundURLSessionCompletionHandler (if it's still not nil)
-            //                    void (^completionHandler)() = self.flickrDownloadBackgroundURLSessionCompletionHandler;
-            //                    self.flickrDownloadBackgroundURLSessionCompletionHandler = nil;
-            //                    if (completionHandler) {
-            //                        completionHandler();
-            //                    }
+            [Report loadReportsFromJitBitDictionary:self.ticketsFromJitBit
+                                   withCustomFields:self.ticketsCustomFieldsFromJitBit
+                           intoManagedObjectContext:self.reportDatabaseContext];
+        
         }else{
             NSLog(@"Ticket download still ongoing");
         }// else other downloads going, so let them call this method when they finish

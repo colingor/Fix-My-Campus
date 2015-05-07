@@ -12,6 +12,9 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, copy) void (^onCompletion)(void);
+
+- (void)syncWithJitBit;
 
 @end
 
