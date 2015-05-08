@@ -142,6 +142,7 @@
             NSURLSessionDownloadTask *task = [self.jitBitDownloadSession downloadTaskWithRequest:request];
             task.taskDescription = JITBIT_FETCH;
             
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
             [task resume];
             
         } else {
@@ -420,6 +421,8 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
             if (self.onCompletion) {
                 self.onCompletion();
             }
+            
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             
             // Load Reports into Core Data
             [Report loadReportsFromJitBitDictionary:self.ticketsFromJitBit
