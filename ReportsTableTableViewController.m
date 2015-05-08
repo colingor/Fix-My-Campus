@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ReportDetailsViewController.h"
+#import "ReportDatabaseAvailability.h"
 
 @interface ReportsTableTableViewController ()
 
@@ -37,6 +38,39 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)awakeFromNib
+{
+    [[NSNotificationCenter defaultCenter] addObserverForName:ReportDatabaseAvailabilityNotification
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                      self.managedObjectContext = note.userInfo[ReportDatabaseAvailabilityContext];
+                                                  }];
+}
+
+
+- (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+{
+    _managedObjectContext = managedObjectContext;
+    
+    NSArray *reports = [Report allReportsInManagedObjectContext:self.managedObjectContext];
+    self.reports = reports;
+
+    
+//    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Report"];
+//    request.predicate = [NSPredicate predicateWithFormat:@"active = %@", @YES];
+//    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"displayOrder"
+//                                                              ascending:YES
+//                                                               selector:@selector(compare:)]];
+//    
+    
+    
+//    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+//                                                                        managedObjectContext:managedObjectContext
+//                                                                          sectionNameKeyPath:nil
+//                                                                                   cacheName:nil];
 }
 
 - (IBAction)refresh:(id)sender {

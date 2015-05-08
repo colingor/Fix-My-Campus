@@ -9,6 +9,7 @@
 #import "AppDelegate+MOC.h"
 #import "HomePageViewController.h"
 #import "Report+Create.h"
+#import "ReportDatabaseAvailability.h"
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 @interface AppDelegate () <NSURLSessionDownloadDelegate>
@@ -104,10 +105,10 @@
     // this happens very early in the running of our application
     // it would make NO SENSE to listen to this radio station in a View Controller that was segued to, for example
     // (but that's okay because a segued-to View Controller would presumably be "prepared" by being given a context to work in)
-//    NSDictionary *userInfo = self.photoDatabaseContext ? @{ PhotoDatabaseAvailabilityContext : self.photoDatabaseContext } : nil;
-//    [[NSNotificationCenter defaultCenter] postNotificationName:PhotoDatabaseAvailabilityNotification
-//                                                        object:self
-//                                                      userInfo:userInfo];
+    NSDictionary *userInfo = self.reportDatabaseContext ? @{ ReportDatabaseAvailabilityContext : self.reportDatabaseContext } : nil;
+    [[NSNotificationCenter defaultCenter] postNotificationName:ReportDatabaseAvailabilityNotification
+                                                        object:self
+                                                      userInfo:userInfo];
 }
 
 
