@@ -20,26 +20,6 @@
 
 @implementation ReportsTableTableViewController
 
-
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.navigationController.navigationBarHidden = NO;
-    
-    //get the saved reports
-
-    
-    NSArray *reports = [Report allReportsInManagedObjectContext:self.managedObjectContext];
-    self.reports = reports;
-    NSLog(@"reports %@ ", reports);
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
 - (void)awakeFromNib
 {
     [[NSNotificationCenter defaultCenter] addObserverForName:ReportDatabaseAvailabilityNotification
@@ -50,27 +30,35 @@
                                                   }];
 }
 
-
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
     _managedObjectContext = managedObjectContext;
     
-    NSArray *reports = [Report allReportsInManagedObjectContext:self.managedObjectContext];
-    self.reports = reports;
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Report"];
+    //    request.predicate = [NSPredicate predicateWithFormat:@"active = %@", @YES];
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"ticket_id"
+                                                                  ascending:YES
+                                                                   selector:@selector(compare:)]];
+    
+    
+    
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                                        managedObjectContext:managedObjectContext
+                                                                          sectionNameKeyPath:nil
+                                                                                   cacheName:nil];
+}
 
-    
-//    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Report"];
-//    request.predicate = [NSPredicate predicateWithFormat:@"active = %@", @YES];
-//    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"displayOrder"
-//                                                              ascending:YES
-//                                                               selector:@selector(compare:)]];
-//    
-    
-    
-//    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-//                                                                        managedObjectContext:managedObjectContext
-//                                                                          sectionNameKeyPath:nil
-//                                                                                   cacheName:nil];
+
+-(void) viewWillAppear:(BOOL)animated {
+    // We need to do this explictely otherwise the navbar won't appear
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+}
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
 }
 
 - (IBAction)refresh:(id)sender {
@@ -94,23 +82,11 @@
 #pragma mark - Table view data source
 
 
- - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {     
-    return 1;
-}
-
-
-
- - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return [self.reports count];
-}
-
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reportcell" forIndexPath:indexPath];
-    Report * report = [self.reports objectAtIndex:indexPath.row];
+    
+    Report * report = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     NSMutableString *text = [NSMutableString string];
   
@@ -153,46 +129,8 @@
                    resultBlock:resultblock
                   failureBlock:failureblock];
 
-   
-    
-    
     return cell;
 }
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 
 #pragma mark - Navigation
@@ -216,10 +154,8 @@
         NSIndexPath *myIndexPath = [self.tableView
                                     indexPathForSelectedRow];
 
-        Report *selectedReport  = self.reports[myIndexPath.row];
+        Report *selectedReport = [self.fetchedResultsController objectAtIndexPath:myIndexPath];
         detailViewController.report = selectedReport;
-        
-        
     }
 }
 

@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 #import "AcceptsManagedContext.h"
+#import "CoreDataTableViewController.h"
 
-@interface ReportsTableTableViewController : UITableViewController<AcceptsManagedContext>
+@interface ReportsTableTableViewController : CoreDataTableViewController<AcceptsManagedContext, NSFetchedResultsControllerDelegate>
+
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (strong, nonatomic) NSArray *reports;
 
 @end
