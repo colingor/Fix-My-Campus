@@ -28,7 +28,6 @@
 
 @implementation LocationViewController
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -74,7 +73,6 @@
             [self.mapView addOverlay:(id <MKOverlay>)shape];
         }
     }
-  
 }
 
 
@@ -100,12 +98,7 @@
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-    
-   // zoom to region containing the user location
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
-    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
-    
-     //add the annotation
+    //add the annotation
     MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
     
     CLLocationCoordinate2D coord = [userLocation coordinate];
@@ -121,6 +114,19 @@
         [self.reportDict setValue:[NSNumber numberWithDouble:coord.latitude] forKey:@"lat"];
         [self.reportDict setValue:[NSNumber numberWithDouble:coord.longitude] forKey:@"lon"];
     }
+    
+    // zoom map to bounding box containing all annotations including user location
+    MKMapRect zoomRect = MKMapRectNull;
+    for (id <MKAnnotation> annotation in mapView.annotations) {
+        MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+        MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0, 0);
+        if (MKMapRectIsNull(zoomRect)) {
+            zoomRect = pointRect;
+        } else {
+            zoomRect = MKMapRectUnion(zoomRect, pointRect);
+        }
+    }
+    [mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(50, 50, 20, 20) animated:YES];
     
 }
 
