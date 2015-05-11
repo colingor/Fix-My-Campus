@@ -17,7 +17,6 @@
 @property (nonatomic, retain) NSString * loc_desc;
 @property (nonatomic, retain) NSString * desc;
 @property (nonatomic, retain) NSString * status;
-@property (nonatomic, retain) NSString * guid;
 @property (nonatomic, retain) NSSet *photos;
 @property (nonatomic, retain) NSNumber * ticket_id;
 @end

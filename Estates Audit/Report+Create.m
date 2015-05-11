@@ -15,20 +15,11 @@
          inManangedObjectContext:(NSManagedObjectContext *)context
 {
     Report *report = nil;
-    
-    NSString *guid = (NSString *)[reportDictionary valueForKeyPath:@"guid"];
-    
-//    NSString *ticketId = (NSString *)[reportDictionary valueForKeyPath:@"ticket_id"];
-    
-//    NSNumber *myNumber = [numberFromString:[reportDictionary valueForKeyPath:@"ticket_id"]];
-//    NSNumber *ticketId = @([[reportDictionary valueForKeyPath:@"ticket_id"] floatValue]);
+
     NSNumber *ticketId = [reportDictionary valueForKeyPath:@"ticket_id"];
 
-    
-//    if ([guid length]) {
     if (ticketId) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Report"];
-//        request.predicate = [NSPredicate predicateWithFormat:@"guid = %@", guid];
         request.predicate = [NSPredicate predicateWithFormat:@"ticket_id = %@", ticketId];
         
         NSError *error;
@@ -37,20 +28,15 @@
         if (!matches || error || ([matches count] > 1 )) {
             // handle error
             NSLog(@"Something went wrong creating report : %@", ticketId);
-//             NSLog(@"Something went wrong creating report : %@", guid);
         } else if (![matches count]) {
-            //record guid doesn't exist for whatever reason just create a new one
+            //record ticketid doesn't exist for whatever reason just create a new one
             report = [Report insertNewObjectFromDict:reportDictionary inManagedContext:context];
             
         } else {
             report = [matches lastObject];
         }
     } else {
-        
-        
-        
         report = [Report insertNewObjectFromDict:reportDictionary inManagedContext:context];
-        
     }
     
     return report;

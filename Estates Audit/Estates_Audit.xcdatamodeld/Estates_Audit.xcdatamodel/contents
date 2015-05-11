@@ -6,7 +6,6 @@
     </entity>
     <entity name="Report" representedClassName="Report" syncable="YES">
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="guid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lat" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="loc_desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lon" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -16,6 +15,6 @@
     </entity>
     <elements>
         <element name="Photo" positionX="2484" positionY="2568" width="128" height="75"/>
-        <element name="Report" positionX="2106" positionY="2556" width="128" height="165"/>
+        <element name="Report" positionX="2106" positionY="2556" width="128" height="150"/>
     </elements>
 </model>
