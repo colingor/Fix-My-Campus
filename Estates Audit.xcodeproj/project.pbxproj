@@ -30,6 +30,7 @@
 		3BF6B2771ADBC8D000CFC50B /* Report+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF6B2761ADBC8D000CFC50B /* Report+Create.m */; };
 		3C7D925C1B00E74200503300 /* uoe-estates-buildings.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D925B1B00E74200503300 /* uoe-estates-buildings.json */; };
 		3C7D925F1B00EFD500503300 /* GeoJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7D925E1B00EFD500503300 /* GeoJSONSerialization.m */; };
+		3C7D92611B00FA6600503300 /* Edinburgh.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D92601B00FA6600503300 /* Edinburgh.gpx */; };
 		7DCB426A1AF777550037C939 /* camera_roll.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DCB42691AF777550037C939 /* camera_roll.png */; };
 		7DD86BD61A2746AA00ED3056 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DD86BD51A2746AA00ED3056 /* MessageUI.framework */; };
 		7DD86BDA1A2747CC00ED3056 /* EmailSupportTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD86BD91A2747CC00ED3056 /* EmailSupportTicket.m */; };
@@ -90,6 +91,7 @@
 		3C7D925B1B00E74200503300 /* uoe-estates-buildings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "uoe-estates-buildings.json"; sourceTree = "<group>"; };
 		3C7D925D1B00EFD500503300 /* GeoJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoJSONSerialization.h; sourceTree = "<group>"; };
 		3C7D925E1B00EFD500503300 /* GeoJSONSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoJSONSerialization.m; sourceTree = "<group>"; };
+		3C7D92601B00FA6600503300 /* Edinburgh.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Edinburgh.gpx; sourceTree = "<group>"; };
 		7D95AF071AE92DA90074D8E5 /* AcceptsManagedContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcceptsManagedContext.h; sourceTree = "<group>"; };
 		7DCB42691AF777550037C939 /* camera_roll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_roll.png; sourceTree = "<group>"; };
 		7DD86BD51A2746AA00ED3056 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -213,6 +215,7 @@
 		3BCBBA531A237EF500A9A246 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3C7D92601B00FA6600503300 /* Edinburgh.gpx */,
 				3C7D925D1B00EFD500503300 /* GeoJSONSerialization.h */,
 				3C7D925E1B00EFD500503300 /* GeoJSONSerialization.m */,
 				3C7D925B1B00E74200503300 /* uoe-estates-buildings.json */,
@@ -339,6 +342,7 @@
 				7DCB426A1AF777550037C939 /* camera_roll.png in Resources */,
 				3BCBBA621A237EF500A9A246 /* Main.storyboard in Resources */,
 				3BCBBA671A237EF500A9A246 /* LaunchScreen.xib in Resources */,
+				3C7D92611B00FA6600503300 /* Edinburgh.gpx in Resources */,
 				3BCBBA641A237EF500A9A246 /* Images.xcassets in Resources */,
 				3C7D925C1B00E74200503300 /* uoe-estates-buildings.json in Resources */,
 			);
