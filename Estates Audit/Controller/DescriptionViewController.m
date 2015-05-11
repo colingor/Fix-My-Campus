@@ -43,6 +43,23 @@
     return YES;
 }
 
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    NSString *trimmedDescription = [self.problemDescription.text stringByTrimmingCharactersInSet:
+                                    [NSCharacterSet whitespaceCharacterSet]];
+    
+    if ( trimmedDescription == nil || [trimmedDescription isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Problem Description" message: @"Please Enter a Problem Description" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return NO;
+    } else {
+        
+        return YES;
+    }
+}
+
+
+
+
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
