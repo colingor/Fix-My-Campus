@@ -10,6 +10,7 @@
 #import "PictureViewController.h"
 #import "Report+Create.h"
 #import <CoreLocation/CoreLocation.h>
+#import "GeoJSONSerialization.h"
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
@@ -59,6 +60,20 @@
     
     // Use this to determine whether user overrides location from locationManager by movin pin
     _userSpecfiedLocation = NO;
+    
+    // load estates buildings information from geojson file and draw on map view
+    NSURL *URL = [[NSBundle mainBundle] URLForResource:@"uoe-estates-buildings" withExtension:@"json"];
+    NSData *data = [NSData dataWithContentsOfURL:URL];
+    NSDictionary *geoJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    NSArray *shapes = [GeoJSONSerialization shapesFromGeoJSONFeatureCollection:geoJSON error:nil];
+    
+    for (MKShape *shape in shapes) {
+        if ([shape isKindOfClass:[MKPointAnnotation class]]) {
+            [self.mapView addAnnotation:shape];
+        } else if ([shape conformsToProtocol:@protocol(MKOverlay)]) {
+            [self.mapView addOverlay:(id <MKOverlay>)shape];
+        }
+    }
   
 }
 
