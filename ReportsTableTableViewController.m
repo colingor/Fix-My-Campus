@@ -85,11 +85,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reportcell" forIndexPath:indexPath];
-    
+    cell.imageView.image = nil;
+        
     Report * report = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     NSMutableString *text = [NSMutableString string];
-  
+
+    [text appendString:[NSString stringWithFormat:@"ID: %@ ", report.ticket_id]];
+    
     if([report.loc_desc length] > 0){
         [text appendString:[NSString stringWithFormat:@"%@", report.loc_desc]];
     }
