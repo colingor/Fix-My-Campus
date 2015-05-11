@@ -67,14 +67,14 @@
     
     
     NSNumber *ticketId = [reportDictionary valueForKeyPath:@"ticket_id"];
-    if(ticketId){
+    if(ticketId > 0){
         report.ticket_id = ticketId;
+    }else{
+        // TODO - needs a more robust solution - remote chance that a ticket id could have the same id
+        NSInteger rdmNumber = arc4random()%500;
+        report.ticket_id = [NSNumber numberWithInt: rdmNumber];
+        
     }
-  
-    
-    NSUUID  *UUID = [NSUUID UUID];
-    NSString* stringUUID = [UUID UUIDString];
-    report.guid = stringUUID;
     return report;
 }
 

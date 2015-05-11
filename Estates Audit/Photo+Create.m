@@ -19,7 +19,7 @@
     
     if ([url length]) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Photo"];
-        request.predicate = [NSPredicate predicateWithFormat:@"url = %@ && report.guid = %@", url, report.guid];
+        request.predicate = [NSPredicate predicateWithFormat:@"url = %@ && report.ticket_id = %@", url, report.ticket_id];
         
         NSError *error;
         NSArray *matches = [context executeFetchRequest:request error:&error];
