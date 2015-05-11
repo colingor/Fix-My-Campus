@@ -37,7 +37,7 @@
                             },
                             {  
                                 "description":"Shows Disabled Parking Bay",
-                                "notes":" Egress from this car park is via several steps which do not incorporate handrails",
+                                "notes":"Egress from this car park is via several steps which do not incorporate handrails",
                                 "type":"Car Park",
                                 "image":"322_Disabled Parking"
                             },
@@ -158,7 +158,7 @@
                         ]
                     },
                     {  
-                        "econd floor":[  
+                        "second floor":[
                             {  
                                 "description":"Edinburgh Research and Innovation Ltd",
                                 "notes":"See Plan",
