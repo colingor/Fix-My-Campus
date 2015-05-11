@@ -161,7 +161,18 @@
             // notice the configuration here is "backgroundSessionConfiguration:"
             // that means that we will (eventually) get the results even if we are not the foreground application
             // even if our application crashed, it would get relaunched (eventually) to handle this URL's results!
-            NSURLSessionConfiguration *urlSessionConfig = [NSURLSessionConfiguration backgroundSessionConfiguration:JITBIT_FETCH];
+            
+            NSURLSessionConfiguration *urlSessionConfig;
+            
+            // To avoid deprecation warning on iOS 8
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] >=8.0f)
+            {
+                urlSessionConfig =[NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:JITBIT_FETCH];
+            }
+            else
+            {
+                urlSessionConfig = [NSURLSessionConfiguration backgroundSessionConfiguration:JITBIT_FETCH];
+            }
             
             
             // TODO:  *********NEED TO ADD SOME USER AUTHENTICATION - can't leave this hardcoded here **********
