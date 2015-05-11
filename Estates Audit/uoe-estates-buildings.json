@@ -11,8 +11,8 @@
                 ]
             },
             "properties":{  
-                "address":"1-7 Roxburgh Street, Edinburgh, EH8 9TA",
-                "department":"Edinburgh Research and Innovation",
+                "title":"1-7 Roxburgh Street",
+                "subtitle":"Edinburgh Research and Innovation",
                 "area":"Central Area",
                 "information":[  
                     {  
@@ -198,8 +198,8 @@
                 ]
             },
             "properties":{  
-                "address":"1 Drummond Street, Edinburgh, EH8 9XP",
-                "department":"Geoscience",
+                "title":"1 Drummond Street",
+                "subtitle":"Geoscience",
                 "area":"Central Area"
             },
             "information":[  
