@@ -441,8 +441,14 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
                            intoManagedObjectContext:self.reportDatabaseContext];
         
         }else{
-            NSLog(@"Ticket download still ongoing");
-        }// else other downloads going, so let them call this method when they finish
+            NSLog(@"%lu Tasks remaining", (unsigned long)[downloadTasks count]);
+            
+            // Nasty hack to get last task oterhwise we might never complete
+            if([downloadTasks count] == 1){
+                [NSThread sleepForTimeInterval:1];
+                [self ticketListMightBeComplete];
+                
+        }}// else other downloads going, so let them call this method when they finish
     }];
     //        }
 }
