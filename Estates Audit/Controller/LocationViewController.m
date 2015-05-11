@@ -161,6 +161,20 @@
         }
    }
 
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    NSString *trimmedDescription = [self.descriptionText.text stringByTrimmingCharactersInSet:
+                                    [NSCharacterSet whitespaceCharacterSet]];
+    
+    if ( trimmedDescription == nil || [trimmedDescription isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Location Description" message: @"Please Enter a Location Description" delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return NO;
+    } else {
+        
+        return YES;
+    }
+}
+
 
 #pragma mark - Navigation
 
