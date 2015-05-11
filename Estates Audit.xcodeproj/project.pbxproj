@@ -51,12 +51,12 @@
 		3B599D181ADBBB27007F4D40 /* AppDelegate+MOC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+MOC.m"; sourceTree = "<group>"; };
 		3B5BB0C51AFCC4EA00B5CDD6 /* CoreDataTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
 		3B5BB0C61AFCC4FF00B5CDD6 /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
+		3B5BB0CA1B00B27200B5CDD6 /* ReportDatabaseAvailability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReportDatabaseAvailability.h; sourceTree = "<group>"; };
 		3BA1EDFB1ADFC514004D9470 /* DescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DescriptionViewController.h; path = "Estates Audit/Controller/DescriptionViewController.h"; sourceTree = "<group>"; };
 		3BA1EDFC1ADFC514004D9470 /* DescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DescriptionViewController.m; path = "Estates Audit/Controller/DescriptionViewController.m"; sourceTree = "<group>"; };
 		3BA1EDFE1ADFC7EE004D9470 /* SummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SummaryViewController.h; path = "Estates Audit/Controller/SummaryViewController.h"; sourceTree = "<group>"; };
 		3BA1EDFF1ADFC7EE004D9470 /* SummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SummaryViewController.m; path = "Estates Audit/Controller/SummaryViewController.m"; sourceTree = "<group>"; };
 		3BA1EE021AE00219004D9470 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
-		3BBF00D21AFBB91B00FA6FC8 /* ReportDatabaseAvailability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ReportDatabaseAvailability.h; path = "../../../../../../Downloads/Photomania I18N/Photomania/ReportDatabaseAvailability.h"; sourceTree = "<group>"; };
 		3BC3AD1E1A25EA5900F2C6C0 /* HomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomePageViewController.h; path = "Estates Audit/Controller/HomePageViewController.h"; sourceTree = "<group>"; };
 		3BC3AD1F1A25EA5900F2C6C0 /* HomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomePageViewController.m; path = "Estates Audit/Controller/HomePageViewController.m"; sourceTree = "<group>"; };
 		3BC3AD231A25EC3100F2C6C0 /* LocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationViewController.h; path = "Estates Audit/Controller/LocationViewController.h"; sourceTree = "<group>"; };
@@ -190,7 +190,7 @@
 		3BCBBA521A237EF500A9A246 /* Estates Audit */ = {
 			isa = PBXGroup;
 			children = (
-				3BBF00D21AFBB91B00FA6FC8 /* ReportDatabaseAvailability.h */,
+				3B5BB0CA1B00B27200B5CDD6 /* ReportDatabaseAvailability.h */,
 				7DCB42691AF777550037C939 /* camera_roll.png */,
 				7DFD69281AEE840B002F608B /* photo-frame.png */,
 				3BCBBA571A237EF500A9A246 /* AppDelegate.h */,
