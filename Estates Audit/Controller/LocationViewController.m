@@ -141,7 +141,9 @@
     if (pav == nil)
     {
         pav = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
-        pav.draggable = YES;
+        if ([annotation.title isEqualToString:@"Report Location"]){
+            pav.draggable = YES;
+        }
         pav.animatesDrop = YES;
         pav.canShowCallout = YES;
     }
