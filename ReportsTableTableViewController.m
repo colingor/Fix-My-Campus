@@ -14,6 +14,7 @@
 #import "ReportDetailsViewController.h"
 #import "ReportDatabaseAvailability.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "CustomTableViewCell.h"
 
 @interface ReportsTableTableViewController ()
 
@@ -85,7 +86,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reportcell" forIndexPath:indexPath];
+    
+    CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reportcell" forIndexPath:indexPath];
+
     cell.imageView.image = nil;
         
     Report * report = [self.fetchedResultsController objectAtIndexPath:indexPath];

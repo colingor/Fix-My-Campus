@@ -10,6 +10,7 @@
 		3B24D3681A238B8100EE43C0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B24D3671A238B8100EE43C0 /* MapKit.framework */; };
 		3B599D191ADBBB27007F4D40 /* AppDelegate+MOC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B599D181ADBBB27007F4D40 /* AppDelegate+MOC.m */; };
 		3B5BB0C71AFCC4FF00B5CDD6 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BB0C61AFCC4FF00B5CDD6 /* CoreDataTableViewController.m */; };
+		3B71FF1D1B0210070023516B /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B71FF1C1B0210070023516B /* CustomTableViewCell.m */; };
 		3BA1EDFD1ADFC514004D9470 /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA1EDFC1ADFC514004D9470 /* DescriptionViewController.m */; };
 		3BA1EE001ADFC7EE004D9470 /* SummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA1EDFF1ADFC7EE004D9470 /* SummaryViewController.m */; };
 		3BA1EE031AE00219004D9470 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA1EE021AE00219004D9470 /* AssetsLibrary.framework */; };
@@ -56,6 +57,8 @@
 		3B5BB0C51AFCC4EA00B5CDD6 /* CoreDataTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
 		3B5BB0C61AFCC4FF00B5CDD6 /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 		3B5BB0CA1B00B27200B5CDD6 /* ReportDatabaseAvailability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReportDatabaseAvailability.h; sourceTree = "<group>"; };
+		3B71FF1B1B0210070023516B /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
+		3B71FF1C1B0210070023516B /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 		3BA1EDFB1ADFC514004D9470 /* DescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DescriptionViewController.h; path = "Estates Audit/Controller/DescriptionViewController.h"; sourceTree = "<group>"; };
 		3BA1EDFC1ADFC514004D9470 /* DescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DescriptionViewController.m; path = "Estates Audit/Controller/DescriptionViewController.m"; sourceTree = "<group>"; };
 		3BA1EDFE1ADFC7EE004D9470 /* SummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SummaryViewController.h; path = "Estates Audit/Controller/SummaryViewController.h"; sourceTree = "<group>"; };
@@ -152,6 +155,8 @@
 				3BC3AD1F1A25EA5900F2C6C0 /* HomePageViewController.m */,
 				7DFD69251AEE4AE6002F608B /* ReportDetailsViewController.h */,
 				7DFD69261AEE4AE6002F608B /* ReportDetailsViewController.m */,
+				3B71FF1B1B0210070023516B /* CustomTableViewCell.h */,
+				3B71FF1C1B0210070023516B /* CustomTableViewCell.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -420,6 +425,7 @@
 				3BCBBA591A237EF500A9A246 /* AppDelegate.m in Sources */,
 				3BF6B2741ADBC8BD00CFC50B /* Photo+Create.m in Sources */,
 				3BC3AD251A25EC3100F2C6C0 /* LocationViewController.m in Sources */,
+				3B71FF1D1B0210070023516B /* CustomTableViewCell.m in Sources */,
 				3BC3AD201A25EA5900F2C6C0 /* HomePageViewController.m in Sources */,
 				3B5BB0C71AFCC4FF00B5CDD6 /* CoreDataTableViewController.m in Sources */,
 				3BC3AD2E1A25EE6D00F2C6C0 /* ReportsTableTableViewController.m in Sources */,

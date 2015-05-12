@@ -15,7 +15,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="reportcell" textLabel="Nax-pJ-ZS8" detailTextLabel="DjU-x7-1JI" rowHeight="94" style="IBUITableViewCellStyleSubtitle" id="Abu-bt-dR3">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="reportcell" textLabel="Nax-pJ-ZS8" detailTextLabel="DjU-x7-1JI" rowHeight="94" style="IBUITableViewCellStyleSubtitle" id="Abu-bt-dR3" customClass="CustomTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Abu-bt-dR3" id="dbe-yq-qsi">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -34,6 +34,7 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <connections>
                                     <segue destination="dD1-wL-clO" kind="push" identifier="ReportDetails" id="cGO-tE-3aP"/>
                                 </connections>
