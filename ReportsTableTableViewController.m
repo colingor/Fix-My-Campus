@@ -13,6 +13,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ReportDetailsViewController.h"
 #import "ReportDatabaseAvailability.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ReportsTableTableViewController ()
 
@@ -104,6 +105,11 @@
     Photo * photo = [photos anyObject];
     
     NSURL *assetUrl = [NSURL URLWithString:photo.url];
+ 
+    
+    // TODO: Placeholder
+    [cell.imageView sd_setImageWithURL:assetUrl
+                      placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
     ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
     {

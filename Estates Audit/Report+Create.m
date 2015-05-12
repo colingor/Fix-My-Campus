@@ -34,6 +34,26 @@
             
         } else {
             report = [matches lastObject];
+
+            NSArray *remoteImageUrls = [reportDictionary objectForKey:@"remoteImageUrls"];
+            
+            if([remoteImageUrls count] > 0){
+                NSLog(@"Check if local photo");
+                
+                NSArray *photoArray = [report.photos allObjects];
+                if ([photoArray count] > 0){
+                    // Check image name?
+                    
+                }else{
+                    // No local photo
+                    for(id imageUrl in remoteImageUrls){
+                        NSLog(@"Storing remote image url: %@?", imageUrl);
+                        // Store url
+                        [Photo photoWithUrl:imageUrl fromReport:report inManagedObjectContext:report.managedObjectContext];
+                    }
+                }
+            }
+            
         }
     } else {
         report = [Report insertNewObjectFromDict:reportDictionary inManagedContext:context];
@@ -93,12 +113,20 @@
             
             NSString *status = [ticket valueForKey:@"Status"];
             NSString *ticketId = [ticket valueForKey:@"TicketID"];
+            NSArray *remoteImages = [ticket valueForKeyPath:@"Attachments"];
+            
+            NSMutableArray *remoteImageUrls = [[NSMutableArray alloc] init];
+            for (id attachment in remoteImages) {
+                NSString *remoteUrl = [attachment valueForKeyPath:@"Url"];
+                [remoteImageUrls addObject:remoteUrl];
+            }
             
             // Create new report to add to Core Data
             NSMutableDictionary *report = [NSMutableDictionary dictionary];
 
             [report setValue: status forKey:@"status"];
             [report setValue: ticketId forKey:@"ticket_id"];
+            [report setObject: remoteImageUrls forKey:@"remoteImageUrls"];
             
             NSArray *customFields = [ticketsCustomFieldsFromJitBit valueForKey:key];
          
