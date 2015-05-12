@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bFV-OF-uIC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bFV-OF-uIC">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -254,11 +254,54 @@
                     <connections>
                         <outlet property="descriptionText" destination="Baz-XX-yze" id="Gwq-nZ-xw9"/>
                         <outlet property="mapView" destination="bOS-W0-eF6" id="kf0-l2-l4B"/>
+                        <segue destination="ZJK-kJ-2lz" kind="push" identifier="Location Details" id="W03-1U-3Oj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pGf-Dp-G9O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="264" y="482.80000000000001"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="VhX-Lk-EhU">
+            <objects>
+                <viewController id="ZJK-kJ-2lz" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oIf-6R-ERo"/>
+                        <viewControllerLayoutGuide type="bottom" id="aYD-Lu-fuI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gLB-iR-eUG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xE8-sr-fy0">
+                                <rect key="frame" x="0.0" y="151" width="320" height="437"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3WD-sd-Zpe">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="ToQ-xa-tG9"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="3WD-sd-Zpe" firstAttribute="leading" secondItem="gLB-iR-eUG" secondAttribute="leading" id="7Kg-db-1sK"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="xE8-sr-fy0" secondAttribute="bottom" constant="-20" id="Dpn-0X-VZ8"/>
+                            <constraint firstAttribute="trailing" secondItem="3WD-sd-Zpe" secondAttribute="trailing" id="Gon-H6-sn5"/>
+                            <constraint firstItem="xE8-sr-fy0" firstAttribute="top" secondItem="3WD-sd-Zpe" secondAttribute="bottom" constant="1" id="ara-mf-07h"/>
+                            <constraint firstItem="xE8-sr-fy0" firstAttribute="leading" secondItem="3WD-sd-Zpe" secondAttribute="leading" id="l7J-xt-8P0"/>
+                            <constraint firstItem="3WD-sd-Zpe" firstAttribute="top" secondItem="gLB-iR-eUG" secondAttribute="top" id="oSo-X1-hdZ"/>
+                            <constraint firstItem="xE8-sr-fy0" firstAttribute="trailing" secondItem="3WD-sd-Zpe" secondAttribute="trailing" id="pOi-aD-9s5"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="nIw-n0-MTv">
+                        <barButtonItem key="backBarButtonItem" title="Location" id="yPl-Ew-W68"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1C3-EO-Ywt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="739" y="-177"/>
         </scene>
         <!--Picture-->
         <scene sceneID="MUf-4i-UoL">
