@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (copy, nonatomic) void (^assetsFailureBlock)();
+-(void) postPhotos:(NSSet *) photos withTicketId:(NSString *) ticketId;
+- (void)postPhoto: (NSData *)imageData ToTicket:(NSString *)ticketId;
 
 @end
 
@@ -162,10 +164,8 @@
                                               [self.report.managedObjectContext save:NULL];
                                               
                                               // Post any additional photos
-                                              if([self.report.photos count] > 0){
-                                                  [self postPhotoToTicket:ticketId];
-                                              }
                                               
+                                              [self postPhotos:self.report.photos withTicketId:ticketId];
                                               [self postCustomFieldsToTicket:ticketId];
                                               
                                           }
@@ -211,6 +211,36 @@
     
 }
 
+-(void) postPhotos:(NSSet *) photos withTicketId:(NSString *) ticketId{
+    for( Photo * photo in self.report.photos ){
+        NSURL *assetUrl = [NSURL URLWithString:photo.url];
+        
+        
+        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset){
+            ALAssetRepresentation *rep = [myasset defaultRepresentation];
+            CGImageRef iref = [rep fullResolutionImage];
+            
+            if (iref) {
+                UIImage *fullSize = [UIImage imageWithCGImage:iref];
+                NSData *imageData = UIImageJPEGRepresentation(fullSize, 1.0);
+                [self postPhoto:imageData ToTicket:ticketId];
+                
+            }
+        };
+        
+        ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+        [
+         assetslibrary assetForURL:assetUrl
+         resultBlock:resultblock
+         failureBlock: ^(NSError *myerror)
+         {
+             NSLog(@"Can't get image - %@",[myerror localizedDescription]);
+         }];
+        
+    }
+    
+}
+
 
 - (void) postField:(NSMutableURLRequest *)request
                   :(NSString *)postString
@@ -234,7 +264,7 @@
 }
 
 
-- (void)postPhotoToTicket:(NSString *)ticketId
+- (void)postPhoto: (NSData *)imageData ToTicket:(NSString *)ticketId
 {
     
     NSString *apiStr = [NSString stringWithFormat:@"https://eaudit.jitbit.com/helpdesk/api/AttachFile?id=%@", ticketId];
@@ -258,7 +288,7 @@
     NSString* FileParamConstant = @"fn";
     
     // add image data
-    NSData *imageData = UIImageJPEGRepresentation(self.imageView.image, 1.0);
+   
     if (imageData) {
         [body appendData:[[NSString stringWithFormat:@"--%@\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"image.jpg\"\r\n", FileParamConstant] dataUsingEncoding:NSUTF8StringEncoding]];
