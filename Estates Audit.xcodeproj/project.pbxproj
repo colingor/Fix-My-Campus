@@ -29,6 +29,7 @@
 		3BCBBA811A2386A200A9A246 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA801A2386A200A9A246 /* Photo.m */; };
 		3BF6B2741ADBC8BD00CFC50B /* Photo+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF6B2731ADBC8BD00CFC50B /* Photo+Create.m */; };
 		3BF6B2771ADBC8D000CFC50B /* Report+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF6B2761ADBC8D000CFC50B /* Report+Create.m */; };
+		3C2060411B02445700AD71F3 /* LocationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2060401B02445700AD71F3 /* LocationDetailsViewController.m */; };
 		3C7D925C1B00E74200503300 /* uoe-estates-buildings.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D925B1B00E74200503300 /* uoe-estates-buildings.json */; };
 		3C7D92611B00FA6600503300 /* Edinburgh.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D92601B00FA6600503300 /* Edinburgh.gpx */; };
 		7DCB426A1AF777550037C939 /* camera_roll.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DCB42691AF777550037C939 /* camera_roll.png */; };
@@ -92,6 +93,8 @@
 		3BF6B2731ADBC8BD00CFC50B /* Photo+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Photo+Create.m"; sourceTree = "<group>"; };
 		3BF6B2751ADBC8D000CFC50B /* Report+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Report+Create.h"; sourceTree = "<group>"; };
 		3BF6B2761ADBC8D000CFC50B /* Report+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Report+Create.m"; sourceTree = "<group>"; };
+		3C20603F1B02445700AD71F3 /* LocationDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationDetailsViewController.h; path = "Estates Audit/Controller/LocationDetailsViewController.h"; sourceTree = "<group>"; };
+		3C2060401B02445700AD71F3 /* LocationDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationDetailsViewController.m; path = "Estates Audit/Controller/LocationDetailsViewController.m"; sourceTree = "<group>"; };
 		3C7D925B1B00E74200503300 /* uoe-estates-buildings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "uoe-estates-buildings.json"; sourceTree = "<group>"; };
 		3C7D92601B00FA6600503300 /* Edinburgh.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Edinburgh.gpx; sourceTree = "<group>"; };
 		422F1D710949E86B62365152 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +154,8 @@
 				3BC3AD271A25ED6800F2C6C0 /* PictureViewController.m */,
 				3BC3AD231A25EC3100F2C6C0 /* LocationViewController.h */,
 				3BC3AD241A25EC3100F2C6C0 /* LocationViewController.m */,
+				3C20603F1B02445700AD71F3 /* LocationDetailsViewController.h */,
+				3C2060401B02445700AD71F3 /* LocationDetailsViewController.m */,
 				3BC3AD1E1A25EA5900F2C6C0 /* HomePageViewController.h */,
 				3BC3AD1F1A25EA5900F2C6C0 /* HomePageViewController.m */,
 				7DFD69251AEE4AE6002F608B /* ReportDetailsViewController.h */,
@@ -426,6 +431,7 @@
 				3BF6B2741ADBC8BD00CFC50B /* Photo+Create.m in Sources */,
 				3BC3AD251A25EC3100F2C6C0 /* LocationViewController.m in Sources */,
 				3B71FF1D1B0210070023516B /* CustomTableViewCell.m in Sources */,
+				3C2060411B02445700AD71F3 /* LocationDetailsViewController.m in Sources */,
 				3BC3AD201A25EA5900F2C6C0 /* HomePageViewController.m in Sources */,
 				3B5BB0C71AFCC4FF00B5CDD6 /* CoreDataTableViewController.m in Sources */,
 				3BC3AD2E1A25EE6D00F2C6C0 /* ReportsTableTableViewController.m in Sources */,

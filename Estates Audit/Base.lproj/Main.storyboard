@@ -261,10 +261,10 @@
             </objects>
             <point key="canvasLocation" x="264" y="482.80000000000001"/>
         </scene>
-        <!--View Controller-->
+        <!--Location Details View Controller-->
         <scene sceneID="VhX-Lk-EhU">
             <objects>
-                <viewController id="ZJK-kJ-2lz" sceneMemberID="viewController">
+                <viewController id="ZJK-kJ-2lz" customClass="LocationDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oIf-6R-ERo"/>
                         <viewControllerLayoutGuide type="bottom" id="aYD-Lu-fuI"/>
