@@ -126,7 +126,8 @@
             zoomRect = MKMapRectUnion(zoomRect, pointRect);
         }
     }
-    [mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(110, 50, 50, 50) animated:YES];
+    //[mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(110, 50, 50, 50) animated:YES];
+    [mapView showAnnotations:mapView.annotations animated:true];
     
 }
 
