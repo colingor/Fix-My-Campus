@@ -142,16 +142,18 @@
     if (pav == nil)
     {
         pav = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
-        if ([annotation.title isEqualToString:@"Report Location"]){
-            pav.draggable = YES;
-        }
         pav.animatesDrop = YES;
         UIImageView *leftIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout" inBundle:nil compatibleWithTraitCollection:nil]];
         leftIconView.frame = CGRectMake(0,0,53,53);
         pav.leftCalloutAccessoryView = leftIconView;
-        UIButton *rightIconView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        rightIconView.tintColor = [UIColor darkTextColor];
-        pav.rightCalloutAccessoryView = rightIconView;
+        
+        if ([annotation.title isEqualToString:@"Report Location"]){
+            pav.draggable = YES;
+        } else {
+            UIButton *rightIconView = [UIButton buttonWithType:UIButtonTypeInfoDark];
+            rightIconView.tintColor = [UIColor darkTextColor];
+            pav.rightCalloutAccessoryView = rightIconView;
+        }
         pav.canShowCallout = YES;
     }
     else
