@@ -138,7 +138,7 @@
     }else{
         // TODO: Placeholder
         [cell.imageView sd_setImageWithURL:assetUrl
-                          placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+                          placeholderImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout"]];
     }
     
     return cell;
