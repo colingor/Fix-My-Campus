@@ -6,6 +6,12 @@
 // project.
 
 
+// GeoJSONSerialization
+#define COCOAPODS_POD_AVAILABLE_GeoJSONSerialization
+#define COCOAPODS_VERSION_MAJOR_GeoJSONSerialization 0
+#define COCOAPODS_VERSION_MINOR_GeoJSONSerialization 0
+#define COCOAPODS_VERSION_PATCH_GeoJSONSerialization 4
+
 // SDWebImage
 #define COCOAPODS_POD_AVAILABLE_SDWebImage
 #define COCOAPODS_VERSION_MAJOR_SDWebImage 3
