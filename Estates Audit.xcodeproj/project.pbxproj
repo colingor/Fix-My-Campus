@@ -30,6 +30,7 @@
 		3BF6B2741ADBC8BD00CFC50B /* Photo+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF6B2731ADBC8BD00CFC50B /* Photo+Create.m */; };
 		3BF6B2771ADBC8D000CFC50B /* Report+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF6B2761ADBC8D000CFC50B /* Report+Create.m */; };
 		3C2060411B02445700AD71F3 /* LocationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2060401B02445700AD71F3 /* LocationDetailsViewController.m */; };
+		3C2060431B0362EB00AD71F3 /* EstatesBuildingsImages in Resources */ = {isa = PBXBuildFile; fileRef = 3C2060421B0362EB00AD71F3 /* EstatesBuildingsImages */; };
 		3C7D925C1B00E74200503300 /* uoe-estates-buildings.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D925B1B00E74200503300 /* uoe-estates-buildings.json */; };
 		3C7D92611B00FA6600503300 /* Edinburgh.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D92601B00FA6600503300 /* Edinburgh.gpx */; };
 		7DCB426A1AF777550037C939 /* camera_roll.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DCB42691AF777550037C939 /* camera_roll.png */; };
@@ -96,6 +97,7 @@
 		3BF6B2761ADBC8D000CFC50B /* Report+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Report+Create.m"; sourceTree = "<group>"; };
 		3C20603F1B02445700AD71F3 /* LocationDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationDetailsViewController.h; path = "Estates Audit/Controller/LocationDetailsViewController.h"; sourceTree = "<group>"; };
 		3C2060401B02445700AD71F3 /* LocationDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationDetailsViewController.m; path = "Estates Audit/Controller/LocationDetailsViewController.m"; sourceTree = "<group>"; };
+		3C2060421B0362EB00AD71F3 /* EstatesBuildingsImages */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EstatesBuildingsImages; sourceTree = "<group>"; };
 		3C7D925B1B00E74200503300 /* uoe-estates-buildings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "uoe-estates-buildings.json"; sourceTree = "<group>"; };
 		3C7D92601B00FA6600503300 /* Edinburgh.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Edinburgh.gpx; sourceTree = "<group>"; };
 		422F1D710949E86B62365152 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -237,6 +239,7 @@
 				3C7D92601B00FA6600503300 /* Edinburgh.gpx */,
 				3C7D925B1B00E74200503300 /* uoe-estates-buildings.json */,
 				3BCBBA631A237EF500A9A246 /* Images.xcassets */,
+				3C2060421B0362EB00AD71F3 /* EstatesBuildingsImages */,
 				3BCBBA541A237EF500A9A246 /* Info.plist */,
 				3BCBBA551A237EF500A9A246 /* main.m */,
 			);
@@ -380,6 +383,7 @@
 				3BCBBA671A237EF500A9A246 /* LaunchScreen.xib in Resources */,
 				3C7D92611B00FA6600503300 /* Edinburgh.gpx in Resources */,
 				3BCBBA641A237EF500A9A246 /* Images.xcassets in Resources */,
+				3C2060431B0362EB00AD71F3 /* EstatesBuildingsImages in Resources */,
 				3C7D925C1B00E74200503300 /* uoe-estates-buildings.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
