@@ -143,7 +143,7 @@
     {
         pav = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
         pav.animatesDrop = YES;
-        UIImageView *leftIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout" inBundle:nil compatibleWithTraitCollection:nil]];
+        UIImageView *leftIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout" ]];
         leftIconView.frame = CGRectMake(0,0,53,53);
         pav.leftCalloutAccessoryView = leftIconView;
         
