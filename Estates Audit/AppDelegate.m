@@ -75,10 +75,17 @@
     
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
-    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-    if (localNotification) {
-        application.applicationIconBadgeNumber = 0;
-    }   
+
+    NSDictionary *notificationOptions = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if ([notificationOptions objectForKey:@"message"]) {
+        NSLog(@"%@", [notificationOptions objectForKey:@"message"]);
+        application.applicationIconBadgeNumber -= 1;
+     
+    } else {
+        NSLog(@"Haven't been launched as a result of my notification");
+    }
+    
+    
     
     return YES;
 }
@@ -86,8 +93,8 @@
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
-    application.applicationIconBadgeNumber = 0;
 
+    application.applicationIconBadgeNumber -= 1;
     UIAlertView *notificationAlert = [[UIAlertView alloc] initWithTitle:@"Notification"    message: [notification alertBody]
                                                                delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
     
