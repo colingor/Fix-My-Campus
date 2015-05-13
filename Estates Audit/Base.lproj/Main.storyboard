@@ -304,22 +304,22 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSY-7O-ShW">
-                                <rect key="frame" x="16" y="45" width="288" height="28"/>
+                                <rect key="frame" x="16" y="49" width="288" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="qRX-WU-9LH"/>
+                                    <constraint firstAttribute="height" constant="24" id="5BD-n6-EaZ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="-1" height="-1"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cox-U9-p8T">
-                                <rect key="frame" x="16" y="81" width="288" height="24"/>
+                                <rect key="frame" x="16" y="81" width="288" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="OOZ-Ma-HXq"/>
+                                    <constraint firstAttribute="height" constant="20" id="SXj-6v-xEM"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -328,20 +328,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Cox-U9-p8T" firstAttribute="trailing" secondItem="lSY-7O-ShW" secondAttribute="trailing" id="2PU-DG-SYp"/>
-                            <constraint firstItem="Cox-U9-p8T" firstAttribute="top" secondItem="lSY-7O-ShW" secondAttribute="bottom" constant="8" symbolic="YES" id="AHg-Ma-Fun"/>
-                            <constraint firstItem="3WD-sd-Zpe" firstAttribute="leading" secondItem="gLB-iR-eUG" secondAttribute="leading" id="AHl-Yn-VHs"/>
-                            <constraint firstItem="xE8-sr-fy0" firstAttribute="top" secondItem="3WD-sd-Zpe" secondAttribute="bottom" constant="1" id="Fss-RB-adH"/>
-                            <constraint firstItem="lSY-7O-ShW" firstAttribute="top" secondItem="oIf-6R-ERo" secondAttribute="bottom" constant="25" id="IP2-4h-rhC"/>
-                            <constraint firstItem="xE8-sr-fy0" firstAttribute="top" secondItem="Cox-U9-p8T" secondAttribute="bottom" constant="46" id="MSM-AB-qhd"/>
-                            <constraint firstItem="Cox-U9-p8T" firstAttribute="leading" secondItem="gLB-iR-eUG" secondAttribute="leadingMargin" id="Ov3-nt-hcP"/>
-                            <constraint firstAttribute="trailing" secondItem="3WD-sd-Zpe" secondAttribute="trailing" id="UJ0-AK-fa5"/>
-                            <constraint firstItem="lSY-7O-ShW" firstAttribute="leading" secondItem="Cox-U9-p8T" secondAttribute="leading" id="aOx-Uw-iXS"/>
-                            <constraint firstItem="3WD-sd-Zpe" firstAttribute="top" secondItem="gLB-iR-eUG" secondAttribute="top" id="oHm-Yu-5Rf"/>
-                            <constraint firstItem="3WD-sd-Zpe" firstAttribute="centerX" secondItem="Cox-U9-p8T" secondAttribute="centerX" id="qMr-c7-R4r"/>
-                            <constraint firstItem="3WD-sd-Zpe" firstAttribute="leading" secondItem="xE8-sr-fy0" secondAttribute="leading" id="vPU-Br-1le"/>
-                            <constraint firstItem="3WD-sd-Zpe" firstAttribute="trailing" secondItem="xE8-sr-fy0" secondAttribute="trailing" id="who-oP-1nu"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="xE8-sr-fy0" secondAttribute="bottom" constant="-20" id="xpy-Ly-HVP"/>
+                            <constraint firstItem="xE8-sr-fy0" firstAttribute="top" secondItem="3WD-sd-Zpe" secondAttribute="bottom" constant="1" id="0PK-Wh-DH5"/>
+                            <constraint firstItem="lSY-7O-ShW" firstAttribute="top" secondItem="oIf-6R-ERo" secondAttribute="bottom" constant="29" id="3CV-qC-SPF"/>
+                            <constraint firstAttribute="trailing" secondItem="3WD-sd-Zpe" secondAttribute="trailing" id="4Gp-as-Bhd"/>
+                            <constraint firstItem="Cox-U9-p8T" firstAttribute="leading" secondItem="lSY-7O-ShW" secondAttribute="leading" id="581-le-Cf4"/>
+                            <constraint firstItem="3WD-sd-Zpe" firstAttribute="centerX" secondItem="Cox-U9-p8T" secondAttribute="centerX" id="6D2-mp-o8P"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="xE8-sr-fy0" secondAttribute="bottom" constant="-20" id="Cnh-TQ-sb1"/>
+                            <constraint firstItem="lSY-7O-ShW" firstAttribute="leading" secondItem="gLB-iR-eUG" secondAttribute="leadingMargin" id="DR6-eg-jvk"/>
+                            <constraint firstItem="3WD-sd-Zpe" firstAttribute="leading" secondItem="gLB-iR-eUG" secondAttribute="leading" id="ECf-6e-Rgs"/>
+                            <constraint firstItem="3WD-sd-Zpe" firstAttribute="top" secondItem="gLB-iR-eUG" secondAttribute="top" id="WrP-0P-Wkl"/>
+                            <constraint firstItem="xE8-sr-fy0" firstAttribute="leading" secondItem="3WD-sd-Zpe" secondAttribute="leading" id="Ya3-4S-cYP"/>
+                            <constraint firstItem="Cox-U9-p8T" firstAttribute="top" secondItem="lSY-7O-ShW" secondAttribute="bottom" constant="8" symbolic="YES" id="eVO-BN-9FN"/>
+                            <constraint firstItem="3WD-sd-Zpe" firstAttribute="trailing" secondItem="xE8-sr-fy0" secondAttribute="trailing" id="ufO-lE-oFs"/>
+                            <constraint firstItem="xE8-sr-fy0" firstAttribute="top" secondItem="Cox-U9-p8T" secondAttribute="bottom" constant="50" id="vJQ-DQ-mua"/>
+                            <constraint firstItem="lSY-7O-ShW" firstAttribute="trailing" secondItem="Cox-U9-p8T" secondAttribute="trailing" id="vif-i2-DbP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="nIw-n0-MTv">
