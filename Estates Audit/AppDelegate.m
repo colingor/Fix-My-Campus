@@ -14,6 +14,7 @@
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 @interface AppDelegate () <NSURLSessionDownloadDelegate>
 
+@property (copy, nonatomic) void (^jitBitDownloadBackgroundURLSessionCompletionHandler)();
 @property (strong, nonatomic) NSManagedObjectContext *reportDatabaseContext;
 @property (strong, nonatomic) NSURLSession *jitBitDownloadSession;
 @property (strong, nonatomic) NSTimer *jitBitForegroundFetchTimer;
@@ -29,6 +30,8 @@
 
 // Update every 10 mins
 #define FOREGROUND_JITBIT_FETCH_INTERVAL (10*60)
+// how long we'll wait for a JitBit fetch to return when we're in the background
+#define BACKGROUND_JITBIT_FETCH_TIMEOUT (60)
 
 @implementation AppDelegate
 
@@ -70,9 +73,72 @@
     //Fire off a sync when app starts
     [self syncWithJitBit];
     
+    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
     return YES;
 }
+
+
+// this is called occasionally by the system WHEN WE ARE NOT THE FOREGROUND APPLICATION
+// in fact, it will LAUNCH US if necessary to call this method
+// the system has lots of smarts about when to do this, but it is entirely opaque to us
+
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    // in lecture, we relied on our background flickrDownloadSession to do the fetch by calling [self startFlickrFetch]
+    // that was easy to code up, but pretty weak in terms of how much it will actually fetch (maybe almost never)
+    // that's because there's no guarantee that we'll be allowed to start that discretionary fetcher when we're in the background
+    // so let's simply make a non-discretionary, non-background-session fetch here
+    // we don't want it to take too long because the system will start to lose faith in us as a background fetcher and stop calling this as much
+    // so we'll limit the fetch to BACKGROUND_FETCH_TIMEOUT seconds (also we won't use valuable cellular data)
+    
+    if (self.reportDatabaseContext) {
+        NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+        sessionConfig.allowsCellularAccess = NO;
+        sessionConfig.timeoutIntervalForRequest = BACKGROUND_JITBIT_FETCH_TIMEOUT; // want to be a good background citizen!
+        
+        // TODO:  *********NEED TO ADD SOME USER AUTHENTICATION - can't leave this hardcoded here **********
+        [sessionConfig setHTTPAdditionalHeaders:@{@"Authorization": @"Basic Y2dvcm1sZTFAc3RhZmZtYWlsLmVkLmFjLnVrOmVzdGF0ZXNhdWRpdDM="}];
+        
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig
+                                                              delegate:self    // we MUST have a delegate for background configurations
+                                                         delegateQueue:nil];
+        
+        NSString *apiStr = @"https://eaudit.jitbit.com/helpdesk/api/Tickets";
+        
+        NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
+        
+        NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request];
+        task.taskDescription = JITBIT_FETCH;
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        [task resume];
+        
+        // Need to ensure the completion handler is set or we get a warning
+        self.jitBitDownloadBackgroundURLSessionCompletionHandler = completionHandler;
+        
+    } else {
+        completionHandler(UIBackgroundFetchResultNoData); // no app-switcher update if no database!
+    }
+}
+
+// this is called whenever a URL we have requested with a background session returns and we are in the background
+// it is essentially waking us up to handle it
+// if we were in the foreground iOS would just call our delegate method and not bother with this
+
+- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler
+{
+    // this completionHandler, when called, will cause our UI to be re-cached in the app switcher
+    // but we should not call this handler until we're done handling the URL whose results are now available
+    // so we'll stash the completionHandler away in a property until we're ready to call it
+    // (see flickrDownloadTasksMightBeComplete for when we actually call it)
+    self.jitBitDownloadBackgroundURLSessionCompletionHandler = completionHandler;
+}
+
+
 
 
 #pragma mark - Database Context
@@ -153,7 +219,7 @@
 }
 
 
-- (NSURLSession *)jitBitDownloadSession // the NSURLSession we will use to fetch Flickr data in the background
+- (NSURLSession *)jitBitDownloadSession // the NSURLSession we will use to fetch jitBit data in the background
 {
     if (!_jitBitDownloadSession) {
         static dispatch_once_t onceToken; // dispatch_once ensures that the block will only ever get executed once per application launch
@@ -358,7 +424,7 @@
       downloadTask:(NSURLSessionDownloadTask *)downloadTask
 didFinishDownloadingToURL:(NSURL *)localFile
 {
-    
+
     // First task is to get a list of the issues relevant to this user
     if ([downloadTask.taskDescription isEqualToString:JITBIT_FETCH]) {
         
@@ -416,7 +482,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 - (void)ticketListMightBeComplete
 {
     
-    //        if (self.flickrDownloadBackgroundURLSessionCompletionHandler) {
+//    if (self.jitBitDownloadBackgroundURLSessionCompletionHandler) {
     [self.jitBitDownloadSession getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
         
         // we're doing this check for other downloads just to be theoretically "correct"
@@ -426,6 +492,14 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
         //  (another thread might have sent it already in a multiple-tasks-at-once implementation)
         if (![downloadTasks count]) {  // any more ticket downloads left?
             NSLog(@"********* TICKET DOWNLOAD COMPLETE***********");
+            
+            
+            // invoke jitBitDownloadBackgroundURLSessionCompletionHandler (if it's still not nil)
+            void (^completionHandler)() = self.jitBitDownloadBackgroundURLSessionCompletionHandler;
+            self.jitBitDownloadBackgroundURLSessionCompletionHandler = nil;
+            if (completionHandler) {
+                completionHandler();
+            }
             
             
             // We can hide the refresh control on ReportsTable using this callback
@@ -450,7 +524,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
                 
         }}// else other downloads going, so let them call this method when they finish
     }];
-    //        }
+//            }
 }
 
 
