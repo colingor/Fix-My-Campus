@@ -16,10 +16,19 @@
 
 @implementation LocationDetailsViewController
 
+NSString *const IMAGES_DIR = @"EstatesBuildingsImages";
+NSString *const IMAGE_SUFFIX = @".JPG";
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"%@", self.location);
-    
+    NSString *imageStem = [self.location valueForKeyPath:@"properties.image"];
+    NSString *imagePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingFormat:@"/%@/%@%@", IMAGES_DIR, imageStem, IMAGE_SUFFIX];
+    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.imageView.clipsToBounds = YES;
+    UIImage *locationStreetView = [UIImage imageWithContentsOfFile:imagePath];
+    self.imageView.image = locationStreetView;
 }
 
 /*
