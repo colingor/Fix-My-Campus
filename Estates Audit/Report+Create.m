@@ -54,6 +54,13 @@
                 }
             }
             
+            // Check report status
+            NSString *status = [reportDictionary valueForKey:@"status"];
+     
+            if(![report.status isEqualToString:status]){
+                NSLog(@"Status updated");
+                report.status = status;
+            }
         }
     } else {
         report = [Report insertNewObjectFromDict:reportDictionary inManagedContext:context];
