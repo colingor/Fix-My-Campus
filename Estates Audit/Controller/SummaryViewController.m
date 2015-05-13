@@ -38,9 +38,7 @@
     {
         NSLog(@"Can't get image - %@",[myerror localizedDescription]);
     };
-    
-    // Try and load image as soon as possible (asynchronous) so it's there when page loads
-    [self loadImageFromAssets];
+
 }
 
 - (void)viewDidLoad {
@@ -54,6 +52,10 @@
     // Do any additional setup after loading the view.
     self.locationDescription.text = self.report.loc_desc;
     self.problemDescription.text = self.report.desc;
+    
+    self.photoCollectionView.delegate = self;
+    self.photoCollectionView.dataSource = self;
+    self.photos =  [NSArray arrayWithArray:[self.report.photos allObjects]];
 }
 
 -(void)setupMap{
@@ -77,39 +79,7 @@
     [self.mapView addAnnotation:point];
 }
 
--(void)loadImageFromAssets{
-    
-    NSSet *photos = self.report.photos;
-    
-    NSArray *photoArray = [photos allObjects];
-    
-    if ([photoArray count] > 0){
-        Photo *photo = [photoArray objectAtIndex:0];
-        
-        NSURL *assetUrl = [NSURL URLWithString:photo.url];
-        
-        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
-        {
-            ALAssetRepresentation *rep = [myasset defaultRepresentation];
-            CGImageRef iref = [rep fullResolutionImage];
-            if (iref) {
-                UIImage *largeimage = [UIImage imageWithCGImage:iref];
-                
-                [self.imageView setImage:largeimage];
-            }
-        };
 
-        ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
-        [
-         assetslibrary assetForURL:assetUrl
-         resultBlock:resultblock
-         failureBlock: ^(NSError *myerror)
-         {
-             NSLog(@"Can't get image - %@",[myerror localizedDescription]);
-         }];
-    }
-    
-}
 
 -(void)postToJitBit{
     
@@ -366,5 +336,69 @@
 -(void)home:(UIBarButtonItem *)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
+
+#pragma mark - UICOLLECTION view data source
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    
+    return [self.report.photos count];
+}
+
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *identifier = @"Cell";
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
+    
+
+    Photo *photo = self.photos[indexPath.row];
+    NSURL *assetUrl = [NSURL URLWithString:photo.url];
+    
+    ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
+    {
+        CGImageRef iref = [myasset thumbnail];
+        if (iref) {
+            UIImage *thumbImage = [UIImage imageWithCGImage:iref];
+               dispatch_async(dispatch_get_main_queue(), ^{
+        /* This is the main thread again, where we set the tableView's image to
+         be what we just fetched. */
+    
+            UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
+            photoImageView.image = thumbImage;
+            [cell setNeedsLayout];
+            }
+        );
+            
+     
+        }
+    };
+    
+    ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
+    {
+        NSLog(@"Can't get image - %@",[myerror localizedDescription]);
+    };  
+    
+    ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+    [assetslibrary assetForURL:assetUrl
+                   resultBlock:resultblock
+                  failureBlock:failureblock];
+
+   
+    
+    
+    return cell;
+
+
+}
+
+
+
+
+
+
+
+
 
 @end
