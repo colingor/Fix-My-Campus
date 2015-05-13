@@ -13,6 +13,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *buildingAreas;
 @property (strong, nonatomic) NSMutableArray *buildingItems;
+@property (weak, nonatomic) IBOutlet UILabel *headerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subheaderLabel;
 
 @end
 
@@ -26,6 +28,12 @@ NSString *const IMAGE_SUFFIX = @".JPG";
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    self.headerLabel.textColor = [[self view]tintColor];
+    self.subheaderLabel.textColor = [[self view]tintColor];
+    self.headerLabel.text = [self.location valueForKeyPath:@"properties.title"];
+    self.subheaderLabel.text = [self.location valueForKeyPath:@"properties.subtitle"];
+    
     NSString *imageStem = [self.location valueForKeyPath:@"properties.image"];
     NSString *imagePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingFormat:@"/%@/%@%@", IMAGES_DIR, imageStem, IMAGE_SUFFIX];
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
