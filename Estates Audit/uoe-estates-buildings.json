@@ -17,7 +17,8 @@
                 "image":"322_Street View",
                 "information":[  
                     {  
-                        "general":[  
+                        "area":"General",
+                        "items":[
                             {  
                                 "description":"Office view from Street",
                                 "notes":"View from Rosburgh Street",
@@ -63,7 +64,8 @@
                         ]
                     },
                     {  
-                        "basement":[  
+                        "area":"Basement",
+                        "items":[
                             {  
                                 "description":"Edinburgh Research and Innovation Ltd",
                                 "notes":"See Plan",
@@ -97,7 +99,8 @@
                         ]
                     },
                     {  
-                        "ground floor":[  
+                        "area":"Ground Floor",
+                        "items":[
                             {  
                                 "description":"Research Into Results Ltd",
                                 "notes":"See Plan",
@@ -131,7 +134,8 @@
                         ]
                     },
                     {  
-                        "first floor":[  
+                        "area":"First Floor",
+                        "items":[
                             {  
                                 "description":"Edinburgh Research and Innovation Ltd",
                                 "notes":"See Plan",
@@ -159,7 +163,8 @@
                         ]
                     },
                     {  
-                        "second floor":[  
+                        "area":"Second Floor",
+                        "items":[
                             {  
                                 "description":"Edinburgh Research and Innovation Ltd",
                                 "notes":"See Plan",
@@ -205,8 +210,9 @@
                 "image":"311_Street View",
                 "information":[  
                     {  
-                        "general":[  
-                            {  
+                       "area":"General",
+                       "items":[
+                            {
                                 "description":"View from Drummond Street",
                                 "notes":"View from Drummond Street",
                                 "type":"Entrance",
@@ -299,8 +305,9 @@
                         ]
                     },
                     {  
-                        "basement floor":[  
-                            {  
+                       "area":"Basement",
+                       "items":[
+                            {
                                 "description":"Drummond Rooms A&B",
                                 "notes":"See Plan",
                                 "type":"Teaching Room",
@@ -333,8 +340,9 @@
                         ]
                     },
                     {  
-                        "basement floor mezzanine":[  
-                            {  
+                       "area":"Basement Mezzanine",
+                       "items":[
+                            {
                                 "description":"Postgraduate Offices",
                                 "notes":"See Plan",
                                 "type":"Offices",
@@ -349,8 +357,9 @@
                         ]
                     },
                     {  
-                        "ground floor":[  
-                            {  
+                       "area":"Ground Floor",
+                       "items":[
+                            {
                                 "description":"Accessible Toilet",
                                 "notes":"See Plan",
                                 "type":"Toilet",
@@ -389,8 +398,9 @@
                         ]
                     },
                     {  
-                        "ground floor mezzanine":[  
-                            {  
+                       "area":"Ground Floor Mezzanine",
+                       "items":[
+                            {
                                 "description":"Staff Offices",
                                 "notes":"See Plan",
                                 "type":"Offices",
@@ -405,8 +415,9 @@
                         ]
                     },
                     {  
-                        "first floor":[  
-                            {  
+                       "area":"First Floor",
+                       "items":[
+                            {
                                 "description":"Accessible Toilet",
                                 "notes":"See Plan",
                                 "type":"Toilet",
@@ -445,8 +456,9 @@
                         ]
                     },
                     {  
-                        "second floor":[  
-                            {  
+                       "area":"Second Floor",
+                       "items":[
+                            {
                                 "description":"Darwin Room",
                                 "notes":"See Plan",
                                 "type":"Teaching Room",
