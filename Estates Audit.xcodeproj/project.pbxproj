@@ -33,6 +33,7 @@
 		3C7D925C1B00E74200503300 /* uoe-estates-buildings.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D925B1B00E74200503300 /* uoe-estates-buildings.json */; };
 		3C7D92611B00FA6600503300 /* Edinburgh.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D92601B00FA6600503300 /* Edinburgh.gpx */; };
 		7DCB426A1AF777550037C939 /* camera_roll.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DCB42691AF777550037C939 /* camera_roll.png */; };
+		7DD5A15B1B03840700B95138 /* ViewPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD5A15A1B03840700B95138 /* ViewPhotoViewController.m */; };
 		7DD86BD61A2746AA00ED3056 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DD86BD51A2746AA00ED3056 /* MessageUI.framework */; };
 		7DD86BDA1A2747CC00ED3056 /* EmailSupportTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD86BD91A2747CC00ED3056 /* EmailSupportTicket.m */; };
 		7DFD69271AEE4AE6002F608B /* ReportDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFD69261AEE4AE6002F608B /* ReportDetailsViewController.m */; };
@@ -101,6 +102,8 @@
 		6D29987F9508939215D311B6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7D95AF071AE92DA90074D8E5 /* AcceptsManagedContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcceptsManagedContext.h; sourceTree = "<group>"; };
 		7DCB42691AF777550037C939 /* camera_roll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_roll.png; sourceTree = "<group>"; };
+		7DD5A1591B03840700B95138 /* ViewPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewPhotoViewController.h; path = "Estates Audit/Controller/ViewPhotoViewController.h"; sourceTree = "<group>"; };
+		7DD5A15A1B03840700B95138 /* ViewPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewPhotoViewController.m; path = "Estates Audit/Controller/ViewPhotoViewController.m"; sourceTree = "<group>"; };
 		7DD86BD51A2746AA00ED3056 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		7DD86BD81A2747CC00ED3056 /* EmailSupportTicket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailSupportTicket.h; sourceTree = "<group>"; };
 		7DD86BD91A2747CC00ED3056 /* EmailSupportTicket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailSupportTicket.m; sourceTree = "<group>"; };
@@ -162,6 +165,8 @@
 				7DFD69261AEE4AE6002F608B /* ReportDetailsViewController.m */,
 				3B71FF1B1B0210070023516B /* CustomTableViewCell.h */,
 				3B71FF1C1B0210070023516B /* CustomTableViewCell.m */,
+				7DD5A1591B03840700B95138 /* ViewPhotoViewController.h */,
+				7DD5A15A1B03840700B95138 /* ViewPhotoViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -442,6 +447,7 @@
 				7DD86BDA1A2747CC00ED3056 /* EmailSupportTicket.m in Sources */,
 				3BC3AD281A25ED6800F2C6C0 /* PictureViewController.m in Sources */,
 				3BCBBA7E1A2386A200A9A246 /* Report.m in Sources */,
+				7DD5A15B1B03840700B95138 /* ViewPhotoViewController.m in Sources */,
 				3BA1EDFD1ADFC514004D9470 /* DescriptionViewController.m in Sources */,
 				3BCBBA561A237EF500A9A246 /* main.m in Sources */,
 				3B599D191ADBBB27007F4D40 /* AppDelegate+MOC.m in Sources */,

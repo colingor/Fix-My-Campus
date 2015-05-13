@@ -574,6 +574,38 @@
             </objects>
             <point key="canvasLocation" x="1688" y="482"/>
         </scene>
+        <!--View Photo View Controller-->
+        <scene sceneID="bEV-M7-Hfv">
+            <objects>
+                <viewController storyboardIdentifier="viewPhoto" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ti3-Th-3ew" customClass="ViewPhotoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xwt-mb-TFM"/>
+                        <viewControllerLayoutGuide type="bottom" id="kKQ-fw-7kj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PRg-1q-t7d">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ViX-YZ-yZJ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ViX-YZ-yZJ" firstAttribute="leading" secondItem="PRg-1q-t7d" secondAttribute="leading" id="HWb-Tw-YbH"/>
+                            <constraint firstItem="ViX-YZ-yZJ" firstAttribute="bottom" secondItem="kKQ-fw-7kj" secondAttribute="top" id="P8T-d7-5ZQ"/>
+                            <constraint firstItem="ViX-YZ-yZJ" firstAttribute="top" secondItem="PRg-1q-t7d" secondAttribute="top" id="cnA-2w-dkF"/>
+                            <constraint firstAttribute="trailing" secondItem="ViX-YZ-yZJ" secondAttribute="trailing" id="nby-8T-RlT"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="ViX-YZ-yZJ" id="hLt-Ze-FY7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Ie-Oi-2Ao" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2240" y="467"/>
+        </scene>
         <!--Description-->
         <scene sceneID="HmD-PN-aMF">
             <objects>
