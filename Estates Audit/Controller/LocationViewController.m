@@ -65,7 +65,7 @@
     // load estates buildings information from geojson file and draw on map view
     NSURL *URL = [[NSBundle mainBundle] URLForResource:@"uoe-estates-buildings" withExtension:@"json"];
     NSData *data = [NSData dataWithContentsOfURL:URL];
-    NSDictionary * geoJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    NSDictionary *geoJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     self.locations = [geoJSON valueForKeyPath:@"features"];
     
     NSArray *shapes = [GeoJSONSerialization shapesFromGeoJSONFeatureCollection:geoJSON error:nil];
