@@ -9,6 +9,8 @@
 #import "Report+Create.h"
 #import "Photo+Create.h"
 
+#import   <UIKit/UIKit.h>
+
 @implementation Report (Create)
 
 + (Report *)reportFromReportInfo:(NSDictionary *)reportDictionary
@@ -38,8 +40,8 @@
             NSArray *remoteImageUrls = [reportDictionary objectForKey:@"remoteImageUrls"];
             
             if([remoteImageUrls count] > 0){
-                NSLog(@"Check if local photo");
-                
+          
+                // Check if local photo
                 NSArray *photoArray = [report.photos allObjects];
                 if ([photoArray count] > 0){
                     // Check image name?
@@ -60,6 +62,15 @@
             if(![report.status isEqualToString:status]){
                 NSLog(@"Status updated");
                 report.status = status;
+               
+                UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+                localNotification.fireDate = nil;
+                localNotification.alertBody = [NSString stringWithFormat: @"Report ID %@ status changed to %@", ticketId, status];
+                localNotification.timeZone = [NSTimeZone defaultTimeZone];
+                localNotification.soundName = UILocalNotificationDefaultSoundName;
+                localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+                
+                [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
             }
         }
     } else {
