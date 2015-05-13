@@ -158,7 +158,7 @@
                         ]
                     },
                     {  
-                        "second floor":[
+                        "second floor":[  
                             {  
                                 "description":"Edinburgh Research and Innovation Ltd",
                                 "notes":"See Plan",
@@ -200,272 +200,272 @@
             "properties":{  
                 "title":"1 Drummond Street",
                 "subtitle":"Geoscience",
-                "area":"Central Area"
-            },
-            "information":[  
-                {  
-                    "general":[  
-                        {  
-                            "description":"View from Drummond Street",
-                            "notes":"View from Drummond Street",
-                            "type":"Entrance",
-                            "image":"311_Street View"
-                        },
-                        {  
-                            "description":"Showing Street entrances anddisabled parking spots",
-                            "notes":"There is wheelchair access to this building",
-                            "type":"Car Park",
-                            "image":"311_Street Location"
-                        },
-                        {  
-                            "description":"Disabled Parking",
-                            "notes":"There are 3 additional spots off Infirmary Street giviong access to the Wheelchair entrance",
-                            "type":"Car Park",
-                            "image":"311_Disabled Parking"
-                        },
-                        {  
-                            "description":"Carpark entrance from Drummond Street",
-                            "notes":"University Parking requires a permit",
-                            "type":"Car Park",
-                            "image":"311_Main Carpark"
-                        },
-                        {  
-                            "description":"View of Main Entrance",
-                            "notes":"Main Entrance",
-                            "type":"Entrance",
-                            "image":"311_Main Entrance"
-                        },
-                        {  
-                            "description":"View of Secondary Entrance",
-                            "notes":"Wheelchair accessible entrance (Requires University Smartcard to access)",
-                            "type":"Entrance",
-                            "image":"311_Secondary Entrance"
-                        },
-                        {  
-                            "description":"Geography Office Reception",
-                            "notes":"Located to the left of the main entrance, suitable for approach by wheelchair with good lighting levels. No induction loop",
-                            "type":"Reception",
-                            "image":"311_Reception"
-                        },
-                        {  
-                            "description":"View of the Servitors Office",
-                            "notes":"The servitors can provide assistance for wheelchair users and persons with mobility difficulties.",
-                            "type":"Reception",
-                            "image":"311_Servitors Office"
-                        },
-                        {  
-                            "description":"Lift Access",
-                            "notes":"The lift is located within approximately 20 metres of the main and secondary entrances. The lift has handrails, an alarm, braille markings and an audio announcer.The lightinh in the lift is good.",
-                            "type":"Lift",
-                            "image":""
-                        },
-                        {  
-                            "description":"All floors are accessible by stairs",
-                            "notes":"Due to the age of the building some of the stairs do not have colourcontrasting nosings. All stairs have a handrail to one or both sides. The lighting level in the main stairwell is not good and lighting level in all other stairwells is fair.",
-                            "type":"Stairs",
-                            "image":"311_Servitors Office"
-                        },
-                        {  
-                            "description":"Ground Floor Toilet (Accessible)",
-                            "notes":"There is good manoeuvring space in both of the accessible toilet. Both toilets have emergency pull chord alarms, suitably wide doors, dropdown and support rails, high contrast fixtures and good lighting.",
-                            "type":"Toilet",
-                            "image":"311_Ground Floor Toilet"
-                        },
-                        {  
-                            "description":"First Floor Toilet (Accessible)",
-                            "notes":"There is good manoeuvring space in both of the accessible toilet. Both toilets have emergency pull chord alarms, suitably wide doors, dropdown and support rails, high contrast fixtures and good lighting.",
-                            "type":"Toilet",
-                            "image":"311_First Floor Toilet"
-                        },
-                        {  
-                            "description":"Basement standard Female toilet",
-                            "notes":"There is a standard Female toilet in the basement",
-                            "type":"Toilet",
-                            "image":""
-                        },
-                        {  
-                            "description":"Ground floor combined male/female toilet",
-                            "notes":"There is a combimned male/female toilet on the ground floor",
-                            "type":"Toilet",
-                            "image":""
-                        },
-                        {  
-                            "description":"Basement mezzanine standard male toilet",
-                            "notes":"There is a standard male toilet on the basement mezzanine level, this is accessed via a stair.",
-                            "type":"Toilet",
-                            "image":""
-                        }
-                    ]
-                },
-                {  
-                    "basement floor":[  
-                        {  
-                            "description":"Drummond Rooms A&B",
-                            "notes":"See Plan",
-                            "type":"Teaching Room",
-                            "image":"311_Basement Plan"
-                        },
-                        {  
-                            "description":"Female Toilets",
-                            "notes":"See Plan",
-                            "type":"Toilet",
-                            "image":"311_Basement Plan"
-                        },
-                        {  
-                            "description":"Postgraduate Offices",
-                            "notes":"See Plan",
-                            "type":"Offices",
-                            "image":"311_Basement Plan"
-                        },
-                        {  
-                            "description":"Social Room",
-                            "notes":"See Plan",
-                            "type":"Social",
-                            "image":"311_Basement Plan"
-                        },
-                        {  
-                            "description":"Staff Offices",
-                            "notes":"See Plan",
-                            "type":"Offices",
-                            "image":"311_Basement Plan"
-                        }
-                    ]
-                },
-                {  
-                    "basement floor mezzanine":[  
-                        {  
-                            "description":"Postgraduate Offices",
-                            "notes":"See Plan",
-                            "type":"Offices",
-                            "image":"311_Basement Mezzanine Plan"
-                        },
-                        {  
-                            "description":"Male Toilets",
-                            "notes":"See Plan",
-                            "type":"Toilets",
-                            "image":"311_Basement Mezzanine Plan"
-                        }
-                    ]
-                },
-                {  
-                    "ground floor":[  
-                        {  
-                            "description":"Accessible Toilet",
-                            "notes":"See Plan",
-                            "type":"Toilet",
-                            "image":"311_Ground Floor Plan"
-                        },
-                        {  
-                            "description":"Geography Office Reception",
-                            "notes":"See Plan",
-                            "type":"Reception",
-                            "image":"311_Ground Floor Plan"
-                        },
-                        {  
-                            "description":"Library",
-                            "notes":"See Plan",
-                            "type":"Library",
-                            "image":"311_Ground Floor Plan"
-                        },
-                        {  
-                            "description":"Teaching Rooms",
-                            "notes":"See Plan",
-                            "type":"Teaching Room",
-                            "image":"311_Ground Floor Plan"
-                        },
-                        {  
-                            "description":"Social Room",
-                            "notes":"See Plan",
-                            "type":"Social",
-                            "image":"311_Ground Floor Plan"
-                        },
-                        {  
-                            "description":"Staff Offices",
-                            "notes":"See Plan",
-                            "type":"Offices",
-                            "image":"311_Ground Floor Plan"
-                        }
-                    ]
-                },
-                {  
-                    "ground floor mezzanine":[  
-                        {  
-                            "description":"Staff Offices",
-                            "notes":"See Plan",
-                            "type":"Offices",
-                            "image":"311_Ground Floor Mezzanine Plan"
-                        },
-                        {  
-                            "description":"Postgraduate Offices",
-                            "notes":"See Plan",
-                            "type":"Offices",
-                            "image":"311_Ground Floor Mezzanine Plan"
-                        }
-                    ]
-                },
-                {  
-                    "first floor":[  
-                        {  
-                            "description":"Accessible Toilet",
-                            "notes":"See Plan",
-                            "type":"Toilet",
-                            "image":"311_First Floor Plan"
-                        },
-                        {  
-                            "description":"Hutton Room",
-                            "notes":"See Plan",
-                            "type":"Teaching Room",
-                            "image":"311_First Floor Plan"
-                        },
-                        {  
-                            "description":"Laboratories",
-                            "notes":"See Plan",
-                            "type":"Laboratory",
-                            "image":"311_First Floor Plan"
-                        },
-                        {  
-                            "description":"Postgraduate Offices",
-                            "notes":"See Plan",
-                            "type":"Offices",
-                            "image":"311_First Floor Plan"
-                        },
-                        {  
-                            "description":"Staff Offices",
-                            "notes":"See Plan",
-                            "type":"Offices",
-                            "image":"311_First Floor Plan"
-                        },
-                        {  
-                            "description":"Watson Room",
-                            "notes":"See Plan",
-                            "type":"Teaching Room",
-                            "image":"311_First Floor Plan"
-                        }
-                    ]
-                },
-                {  
-                    "second floor":[  
-                        {  
-                            "description":"Darwin Room",
-                            "notes":"See Plan",
-                            "type":"Teaching Room",
-                            "image":"311_Second Floor Plan"
-                        },
-                        {  
-                            "description":"Geddes Room",
-                            "notes":"See Plan",
-                            "type":"Teaching Room",
-                            "image":"311_Second Floor Plan"
-                        },
-                        {  
-                            "description":"Staff Offices",
-                            "notes":"See Plan",
-                            "type":"Offices",
-                            "image":"311_Second Floor Plan"
-                        }
-                    ]
-                }
-            ]
+                "area":"Central Area",
+                "information":[  
+                    {  
+                        "general":[  
+                            {  
+                                "description":"View from Drummond Street",
+                                "notes":"View from Drummond Street",
+                                "type":"Entrance",
+                                "image":"311_Street View"
+                            },
+                            {  
+                                "description":"Showing Street entrances anddisabled parking spots",
+                                "notes":"There is wheelchair access to this building",
+                                "type":"Car Park",
+                                "image":"311_Street Location"
+                            },
+                            {  
+                                "description":"Disabled Parking",
+                                "notes":"There are 3 additional spots off Infirmary Street giviong access to the Wheelchair entrance",
+                                "type":"Car Park",
+                                "image":"311_Disabled Parking"
+                            },
+                            {  
+                                "description":"Carpark entrance from Drummond Street",
+                                "notes":"University Parking requires a permit",
+                                "type":"Car Park",
+                                "image":"311_Main Carpark"
+                            },
+                            {  
+                                "description":"View of Main Entrance",
+                                "notes":"Main Entrance",
+                                "type":"Entrance",
+                                "image":"311_Main Entrance"
+                            },
+                            {  
+                                "description":"View of Secondary Entrance",
+                                "notes":"Wheelchair accessible entrance (Requires University Smartcard to access)",
+                                "type":"Entrance",
+                                "image":"311_Secondary Entrance"
+                            },
+                            {  
+                                "description":"Geography Office Reception",
+                                "notes":"Located to the left of the main entrance, suitable for approach by wheelchair with good lighting levels. No induction loop",
+                                "type":"Reception",
+                                "image":"311_Reception"
+                            },
+                            {  
+                                "description":"View of the Servitors Office",
+                                "notes":"The servitors can provide assistance for wheelchair users and persons with mobility difficulties.",
+                                "type":"Reception",
+                                "image":"311_Servitors Office"
+                            },
+                            {  
+                                "description":"Lift Access",
+                                "notes":"The lift is located within approximately 20 metres of the main and secondary entrances. The lift has handrails, an alarm, braille markings and an audio announcer.The lightinh in the lift is good.",
+                                "type":"Lift",
+                                "image":""
+                            },
+                            {  
+                                "description":"All floors are accessible by stairs",
+                                "notes":"Due to the age of the building some of the stairs do not have colourcontrasting nosings. All stairs have a handrail to one or both sides. The lighting level in the main stairwell is not good and lighting level in all other stairwells is fair.",
+                                "type":"Stairs",
+                                "image":"311_Servitors Office"
+                            },
+                            {  
+                                "description":"Ground Floor Toilet (Accessible)",
+                                "notes":"There is good manoeuvring space in both of the accessible toilet. Both toilets have emergency pull chord alarms, suitably wide doors, dropdown and support rails, high contrast fixtures and good lighting.",
+                                "type":"Toilet",
+                                "image":"311_Ground Floor Toilet"
+                            },
+                            {  
+                                "description":"First Floor Toilet (Accessible)",
+                                "notes":"There is good manoeuvring space in both of the accessible toilet. Both toilets have emergency pull chord alarms, suitably wide doors, dropdown and support rails, high contrast fixtures and good lighting.",
+                                "type":"Toilet",
+                                "image":"311_First Floor Toilet"
+                            },
+                            {  
+                                "description":"Basement standard Female toilet",
+                                "notes":"There is a standard Female toilet in the basement",
+                                "type":"Toilet",
+                                "image":""
+                            },
+                            {  
+                                "description":"Ground floor combined male/female toilet",
+                                "notes":"There is a combimned male/female toilet on the ground floor",
+                                "type":"Toilet",
+                                "image":""
+                            },
+                            {  
+                                "description":"Basement mezzanine standard male toilet",
+                                "notes":"There is a standard male toilet on the basement mezzanine level, this is accessed via a stair.",
+                                "type":"Toilet",
+                                "image":""
+                            }
+                        ]
+                    },
+                    {  
+                        "basement floor":[  
+                            {  
+                                "description":"Drummond Rooms A&B",
+                                "notes":"See Plan",
+                                "type":"Teaching Room",
+                                "image":"311_Basement Plan"
+                            },
+                            {  
+                                "description":"Female Toilets",
+                                "notes":"See Plan",
+                                "type":"Toilet",
+                                "image":"311_Basement Plan"
+                            },
+                            {  
+                                "description":"Postgraduate Offices",
+                                "notes":"See Plan",
+                                "type":"Offices",
+                                "image":"311_Basement Plan"
+                            },
+                            {  
+                                "description":"Social Room",
+                                "notes":"See Plan",
+                                "type":"Social",
+                                "image":"311_Basement Plan"
+                            },
+                            {  
+                                "description":"Staff Offices",
+                                "notes":"See Plan",
+                                "type":"Offices",
+                                "image":"311_Basement Plan"
+                            }
+                        ]
+                    },
+                    {  
+                        "basement floor mezzanine":[  
+                            {  
+                                "description":"Postgraduate Offices",
+                                "notes":"See Plan",
+                                "type":"Offices",
+                                "image":"311_Basement Mezzanine Plan"
+                            },
+                            {  
+                                "description":"Male Toilets",
+                                "notes":"See Plan",
+                                "type":"Toilets",
+                                "image":"311_Basement Mezzanine Plan"
+                            }
+                        ]
+                    },
+                    {  
+                        "ground floor":[  
+                            {  
+                                "description":"Accessible Toilet",
+                                "notes":"See Plan",
+                                "type":"Toilet",
+                                "image":"311_Ground Floor Plan"
+                            },
+                            {  
+                                "description":"Geography Office Reception",
+                                "notes":"See Plan",
+                                "type":"Reception",
+                                "image":"311_Ground Floor Plan"
+                            },
+                            {  
+                                "description":"Library",
+                                "notes":"See Plan",
+                                "type":"Library",
+                                "image":"311_Ground Floor Plan"
+                            },
+                            {  
+                                "description":"Teaching Rooms",
+                                "notes":"See Plan",
+                                "type":"Teaching Room",
+                                "image":"311_Ground Floor Plan"
+                            },
+                            {  
+                                "description":"Social Room",
+                                "notes":"See Plan",
+                                "type":"Social",
+                                "image":"311_Ground Floor Plan"
+                            },
+                            {  
+                                "description":"Staff Offices",
+                                "notes":"See Plan",
+                                "type":"Offices",
+                                "image":"311_Ground Floor Plan"
+                            }
+                        ]
+                    },
+                    {  
+                        "ground floor mezzanine":[  
+                            {  
+                                "description":"Staff Offices",
+                                "notes":"See Plan",
+                                "type":"Offices",
+                                "image":"311_Ground Floor Mezzanine Plan"
+                            },
+                            {  
+                                "description":"Postgraduate Offices",
+                                "notes":"See Plan",
+                                "type":"Offices",
+                                "image":"311_Ground Floor Mezzanine Plan"
+                            }
+                        ]
+                    },
+                    {  
+                        "first floor":[  
+                            {  
+                                "description":"Accessible Toilet",
+                                "notes":"See Plan",
+                                "type":"Toilet",
+                                "image":"311_First Floor Plan"
+                            },
+                            {  
+                                "description":"Hutton Room",
+                                "notes":"See Plan",
+                                "type":"Teaching Room",
+                                "image":"311_First Floor Plan"
+                            },
+                            {  
+                                "description":"Laboratories",
+                                "notes":"See Plan",
+                                "type":"Laboratory",
+                                "image":"311_First Floor Plan"
+                            },
+                            {  
+                                "description":"Postgraduate Offices",
+                                "notes":"See Plan",
+                                "type":"Offices",
+                                "image":"311_First Floor Plan"
+                            },
+                            {  
+                                "description":"Staff Offices",
+                                "notes":"See Plan",
+                                "type":"Offices",
+                                "image":"311_First Floor Plan"
+                            },
+                            {  
+                                "description":"Watson Room",
+                                "notes":"See Plan",
+                                "type":"Teaching Room",
+                                "image":"311_First Floor Plan"
+                            }
+                        ]
+                    },
+                    {  
+                        "second floor":[  
+                            {  
+                                "description":"Darwin Room",
+                                "notes":"See Plan",
+                                "type":"Teaching Room",
+                                "image":"311_Second Floor Plan"
+                            },
+                            {  
+                                "description":"Geddes Room",
+                                "notes":"See Plan",
+                                "type":"Teaching Room",
+                                "image":"311_Second Floor Plan"
+                            },
+                            {  
+                                "description":"Staff Offices",
+                                "notes":"See Plan",
+                                "type":"Offices",
+                                "image":"311_Second Floor Plan"
+                            }
+                        ]
+                    }
+                ]
+            }
         }
     ]
 }
