@@ -8,9 +8,11 @@
 
 #import "LocationDetailsViewController.h"
 
-@interface LocationDetailsViewController ()
+@interface LocationDetailsViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *buildingAreas;
+@property (strong, nonatomic) NSMutableArray *buildingItems;
 
 @end
 
@@ -22,14 +24,65 @@ NSString *const IMAGE_SUFFIX = @".JPG";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"%@", self.location);
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     NSString *imageStem = [self.location valueForKeyPath:@"properties.image"];
     NSString *imagePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingFormat:@"/%@/%@%@", IMAGES_DIR, imageStem, IMAGE_SUFFIX];
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.imageView.clipsToBounds = YES;
     UIImage *locationStreetView = [UIImage imageWithContentsOfFile:imagePath];
     self.imageView.image = locationStreetView;
+    
+    self.buildingAreas = [self.location valueForKeyPath:@"properties.information"];
+    for (NSDictionary *area in self.buildingAreas){
+        NSArray *areaItems = [area valueForKey:@"items"];
+        for (NSDictionary *item in areaItems){
+            [self.buildingItems addObject:item];
+        }
+    }
 }
+
+- (NSMutableArray *)buildingItems
+{
+    if (!_buildingItems){
+        _buildingItems = [[NSMutableArray alloc] init];
+    }
+    
+    return _buildingItems;
+}
+
+
+#pragma mark - Table view data source
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [self.buildingAreas count];
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSDictionary *buildingArea = [self.buildingAreas objectAtIndex:section];
+    NSArray *areaItems = [buildingArea objectForKey:@"items"];
+    return [areaItems count];
+}
+
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSDictionary *buildingArea = [self.buildingAreas objectAtIndex:section];
+    NSString *areaTitle = [buildingArea valueForKey:@"area"];
+    return areaTitle;
+}
+
+    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Building Area Detail" forIndexPath:indexPath];
+    NSDictionary *item = [self.buildingItems objectAtIndex:indexPath.row];
+    if (item) {
+        cell.textLabel.text = [item valueForKeyPath:@"description"];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"Type: %@", [item valueForKey:@"type"]];
+    }
+    return cell;
+}
+
 
 /*
 #pragma mark - Navigation
