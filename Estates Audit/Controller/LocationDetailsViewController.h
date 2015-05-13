@@ -10,4 +10,6 @@
 
 @interface LocationDetailsViewController : UIViewController
 
+@property (strong, nonatomic) NSDictionary *location;
+
 @end

@@ -298,6 +298,10 @@
                     <navigationItem key="navigationItem" id="nIw-n0-MTv">
                         <barButtonItem key="backBarButtonItem" title="Location" id="yPl-Ew-W68"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="3WD-sd-Zpe" id="OKE-p7-WPO"/>
+                        <outlet property="tableView" destination="xE8-sr-fy0" id="WTT-NC-lhT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1C3-EO-Ywt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

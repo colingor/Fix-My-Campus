@@ -7,6 +7,7 @@
 //
 
 #import "LocationViewController.h"
+#import "LocationDetailsViewController.h"
 #import "PictureViewController.h"
 #import "Report+Create.h"
 #import <CoreLocation/CoreLocation.h>
@@ -23,6 +24,7 @@
 @property (strong, nonatomic) NSMutableDictionary *reportDict;
 @property (nonatomic, assign) BOOL userSpecfiedLocation;
 @property (strong, nonatomic) Report *report;
+@property (strong, nonatomic) NSArray *locations;
 
 @end
 
@@ -63,7 +65,9 @@
     // load estates buildings information from geojson file and draw on map view
     NSURL *URL = [[NSBundle mainBundle] URLForResource:@"uoe-estates-buildings" withExtension:@"json"];
     NSData *data = [NSData dataWithContentsOfURL:URL];
-    NSDictionary *geoJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    NSDictionary * geoJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    self.locations = [geoJSON valueForKeyPath:@"features"];
+    
     NSArray *shapes = [GeoJSONSerialization shapesFromGeoJSONFeatureCollection:geoJSON error:nil];
     
     for (MKShape *shape in shapes) {
@@ -165,6 +169,12 @@
 }
 
 
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    [self performSegueWithIdentifier:@"Location Details" sender:view];
+}
+
+
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState {
         if (newState == MKAnnotationViewDragStateEnding)
         {
@@ -224,6 +234,19 @@
             picvc.report = self.report;
 
 
+        }
+    } else if ([[segue identifier] isEqualToString:@"Location Details"]){
+        if ([segue.destinationViewController isKindOfClass:[LocationDetailsViewController class]]) {
+            MKAnnotationView *annotationView = (MKAnnotationView *) sender;
+            
+            for (NSDictionary *location in self.locations) {
+                NSString *title = [location valueForKeyPath:@"properties.title"];
+                if ([title isEqualToString:annotationView.annotation.title]){
+                    LocationDetailsViewController *ldvc = (LocationDetailsViewController *)segue.destinationViewController;
+                    ldvc.location = location;
+                    break;
+                }
+            }
         }
     }
 }
