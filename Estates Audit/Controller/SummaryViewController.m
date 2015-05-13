@@ -12,7 +12,7 @@
 #import "AcceptsManagedContext.h"
 #import "HomePageViewController.h"
 #import "EmailSupportTicket.h"
-
+#import "ViewPhotoViewController.h"
 @import MapKit;
 
 @interface SummaryViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
@@ -394,6 +394,19 @@
 }
 
 
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    //what photo chosen
+    Photo *photo = self.photos[indexPath.row];
+    
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
+                                                     bundle: nil];
+    ViewPhotoViewController* controller = (ViewPhotoViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"viewPhoto"];
+
+    controller.photo = photo;
+
+    [self.navigationController pushViewController:controller animated:YES];
+}
 
 
 
