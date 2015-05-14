@@ -61,6 +61,30 @@ NSString *const DEFAULT_CELL_IMAGE = @"MapPinDefaultLeftCallout";
 }
 
 
+enum AlertButtonIndex : NSInteger
+{
+    AlertButtonNo,
+    AlertButtonYes
+};
+
+
+- (void)useLocationAlert
+{
+    [[[UIAlertView alloc] initWithTitle:@"Location selected" message:@"Use this location for report?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
+}
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)index
+{
+    if (index == AlertButtonYes){
+        NSLog(@"Yes clicked");
+    } else {
+        NSLog(@"No clicked");
+        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+    }
+}
+
+
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [self.buildingAreas count];
@@ -102,6 +126,13 @@ NSString *const DEFAULT_CELL_IMAGE = @"MapPinDefaultLeftCallout";
     }
     return cell;
 }
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self useLocationAlert];
+}
+
 
 - (NSUInteger)offsetForSection:(NSInteger)section{
     NSUInteger offset = 0;
