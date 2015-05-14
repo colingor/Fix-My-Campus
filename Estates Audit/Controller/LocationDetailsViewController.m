@@ -85,10 +85,26 @@ NSString *const IMAGE_SUFFIX = @".JPG";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Building Area Detail" forIndexPath:indexPath];
     NSDictionary *item = [self.buildingItems objectAtIndex:indexPath.row];
     if (item) {
+        cell.imageView.image = nil;
+        NSString *imageStem = [item valueForKeyPath:@"image"];
+        NSString *imagePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingFormat:@"/%@/%@%@", IMAGES_DIR, imageStem, IMAGE_SUFFIX];
+        UIImage *thumbnail = [self thumbnailImageFromImage:[UIImage imageWithContentsOfFile:imagePath]];
+        cell.imageView.image = thumbnail;
         cell.textLabel.text = [item valueForKeyPath:@"description"];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"Type: %@", [item valueForKey:@"type"]];
     }
     return cell;
+}
+
+- (UIImage *)thumbnailImageFromImage:(UIImage *)image {
+    
+    UIImage *originalImage = image;
+    CGSize destinationSize = CGSizeMake(60.0, 60.0);
+    UIGraphicsBeginImageContext(destinationSize);
+    [originalImage drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
+    UIImage *thumbnailImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return thumbnailImage;
 }
 
 
