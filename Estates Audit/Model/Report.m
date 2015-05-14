@@ -18,5 +18,5 @@
 @dynamic status;
 @dynamic photos;
 @dynamic ticket_id;
-
+@dynamic issue_date;
 @end

@@ -72,6 +72,11 @@
                 
                 [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
             }
+            
+            // Save the issueDate
+            NSDate *issueDate = [reportDictionary objectForKey:@"issueDate"];
+            report.issue_date = issueDate;
+            
         }
     } else {
         report = [Report insertNewObjectFromDict:reportDictionary inManagedContext:context];
@@ -88,7 +93,7 @@
     report.lon = (NSNumber *)[reportDictionary valueForKeyPath:@"lon"];
     report.lat = (NSNumber *)[reportDictionary valueForKeyPath:@"lat"];
     report.status = (NSString *)[reportDictionary valueForKeyPath:@"status"];
-    
+
     
     NSNumber *ticketId = [reportDictionary valueForKeyPath:@"ticket_id"];
     if(ticketId > 0){
@@ -117,6 +122,38 @@
 
 
 
++ (NSDate *)extractJitBitDate:(NSString *)issueDate
+{
+    NSString *pattern = @"\\d+";
+    NSRange searchedRange = NSMakeRange(0, [issueDate length]);
+    NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern: pattern options:0 error:nil];
+    NSArray* matches = [regex matchesInString:issueDate options:0 range: searchedRange];
+    
+    for (NSTextCheckingResult* match in matches) {
+        
+        NSString* matchText = [issueDate substringWithRange:[match range]];
+        
+        // Convert to seconds
+        NSTimeInterval seconds = [matchText doubleValue]/1000;
+        NSDate* commentDate = [NSDate dateWithTimeIntervalSince1970:seconds];
+        
+        // Time is 5 hours in front of GMT for some reason
+        NSDate *newDate = [commentDate dateByAddingTimeInterval:-3600*5];
+        
+        /*NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
+        NSString *formatted = [dateFormatter stringFromDate:newDate];
+        NSLog(@"formatted1: %@", formatted);
+        
+        NSString *dstring = [NSDateFormatter localizedStringFromDate:newDate
+                                                           dateStyle:NSDateFormatterLongStyle
+                                                           timeStyle:NSDateFormatterMediumStyle];
+        NSLog(@"formatted2: %@", dstring);*/
+        return newDate;
+    }
+    return nil;
+}
+
 + (void)loadReportsFromJitBitDictionary:(NSDictionary *)ticketsFromJitBit
                       withCustomFields :(NSDictionary *)ticketsCustomFieldsFromJitBit
                intoManagedObjectContext:(NSManagedObjectContext *)context
@@ -139,12 +176,23 @@
                 [remoteImageUrls addObject:remoteUrl];
             }
             
+         
             // Create new report to add to Core Data
             NSMutableDictionary *report = [NSMutableDictionary dictionary];
 
+            NSString *issueDateStr = [ticket valueForKey:@"IssueDate"];
+            
+            NSDate *issueDate;
+            if(issueDateStr) {
+                // Have to use reg expression to extract and then correct timezone
+                issueDate = [self extractJitBitDate:issueDateStr];
+                [report setObject: issueDate forKey:@"issueDate"];
+            }
+            
             [report setValue: status forKey:@"status"];
             [report setValue: ticketId forKey:@"ticket_id"];
             [report setObject: remoteImageUrls forKey:@"remoteImageUrls"];
+            
             
             NSArray *customFields = [ticketsCustomFieldsFromJitBit valueForKey:key];
          

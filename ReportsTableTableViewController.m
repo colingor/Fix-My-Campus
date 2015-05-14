@@ -39,8 +39,8 @@
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Report"];
     //    request.predicate = [NSPredicate predicateWithFormat:@"active = %@", @YES];
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"ticket_id"
-                                                                  ascending:YES
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"issue_date"
+                                                                  ascending:NO
                                                                    selector:@selector(compare:)]];
     
     
