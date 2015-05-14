@@ -75,17 +75,17 @@
     
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
-
+    // Need to ask for notification permission in iOS8
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]){
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+    }
+    
     NSDictionary *notificationOptions = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if ([notificationOptions objectForKey:@"message"]) {
         NSLog(@"%@", [notificationOptions objectForKey:@"message"]);
         application.applicationIconBadgeNumber -= 1;
      
-    } else {
-        NSLog(@"Haven't been launched as a result of my notification");
     }
-    
-    
     
     return YES;
 }
