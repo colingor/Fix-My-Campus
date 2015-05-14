@@ -19,7 +19,10 @@
 
 +(NSArray *) allReportsInManagedObjectContext:(NSManagedObjectContext *)context;
 
++ (NSDate *)extractJitBitDate:(NSString *)jitBitDateStr;
+
 + (void)loadReportsFromJitBitDictionary:(NSDictionary *)ticketsFromJitBit
                       withCustomFields :(NSDictionary *)ticketsCustomFieldsFromJitBit
                intoManagedObjectContext:(NSManagedObjectContext *)context;
 @end
+  

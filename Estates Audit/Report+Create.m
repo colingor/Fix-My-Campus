@@ -122,16 +122,16 @@
 
 
 
-+ (NSDate *)extractJitBitDate:(NSString *)issueDate
++ (NSDate *)extractJitBitDate:(NSString *)jitBitDateStr
 {
     NSString *pattern = @"\\d+";
-    NSRange searchedRange = NSMakeRange(0, [issueDate length]);
+    NSRange searchedRange = NSMakeRange(0, [jitBitDateStr length]);
     NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern: pattern options:0 error:nil];
-    NSArray* matches = [regex matchesInString:issueDate options:0 range: searchedRange];
+    NSArray* matches = [regex matchesInString:jitBitDateStr options:0 range: searchedRange];
     
     for (NSTextCheckingResult* match in matches) {
         
-        NSString* matchText = [issueDate substringWithRange:[match range]];
+        NSString* matchText = [jitBitDateStr substringWithRange:[match range]];
         
         // Convert to seconds
         NSTimeInterval seconds = [matchText doubleValue]/1000;
