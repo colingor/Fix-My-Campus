@@ -89,6 +89,11 @@ enum AlertButtonIndex : NSInteger
 
 
 - (NSDictionary *)locationDetails {
+    NSDictionary *address = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                [self.location valueForKeyPath:@"properties.title"], @"address",
+                                [self.location valueForKeyPath:@"properties.subtitle"], @"department",
+                                nil];
+    
     NSDictionary *area = [[self buildingAreas] objectAtIndex:[[self.tableView indexPathForSelectedRow] section]];
     NSString *areaTitle = [area valueForKey:@"area"];
     NSDictionary *titleDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:areaTitle, @"area", nil];
@@ -101,7 +106,8 @@ enum AlertButtonIndex : NSInteger
                                  [self.location valueForKeyPath:@"geometry.coordinates"][1], @"lat",
                                  nil];
     
-    NSMutableDictionary *locationDetails = [titleDictionary mutableCopy];
+    NSMutableDictionary *locationDetails = [address mutableCopy];
+    [locationDetails addEntriesFromDictionary:titleDictionary];
     [locationDetails addEntriesFromDictionary:item];
     [locationDetails addEntriesFromDictionary:coordinates];
     return locationDetails;
