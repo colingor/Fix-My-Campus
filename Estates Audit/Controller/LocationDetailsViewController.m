@@ -22,6 +22,7 @@
 
 NSString *const IMAGES_DIR = @"EstatesBuildingsImages";
 NSString *const IMAGE_SUFFIX = @".JPG";
+NSString *const DEFAULT_CELL_IMAGE = @"MapPinDefaultLeftCallout";
 
 
 - (void)viewDidLoad {
@@ -88,8 +89,13 @@ NSString *const IMAGE_SUFFIX = @".JPG";
     if (item) {
         cell.imageView.image = nil;
         NSString *imageStem = [item valueForKeyPath:@"image"];
-        NSString *imagePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingFormat:@"/%@/%@%@", IMAGES_DIR, imageStem, IMAGE_SUFFIX];
-        UIImage *thumbnail = [self thumbnailImageFromImage:[UIImage imageWithContentsOfFile:imagePath]];
+        UIImage *thumbnail;
+        if ([imageStem length] != 0) {
+            NSString *imagePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingFormat:@"/%@/%@%@", IMAGES_DIR, imageStem, IMAGE_SUFFIX];
+            thumbnail = [self thumbnailImageFromImage:[UIImage imageWithContentsOfFile:imagePath]];
+        } else {
+            thumbnail = [self thumbnailImageFromImage:[UIImage imageNamed:DEFAULT_CELL_IMAGE]];
+        }
         cell.imageView.image = thumbnail;
         cell.textLabel.text = [item valueForKeyPath:@"description"];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"Type: %@", [item valueForKey:@"type"]];
