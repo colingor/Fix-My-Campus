@@ -93,6 +93,7 @@
     report.lon = (NSNumber *)[reportDictionary valueForKeyPath:@"lon"];
     report.lat = (NSNumber *)[reportDictionary valueForKeyPath:@"lat"];
     report.status = (NSString *)[reportDictionary valueForKeyPath:@"status"];
+    report.issue_date = [NSDate date];
 
     
     NSNumber *ticketId = [reportDictionary valueForKeyPath:@"ticket_id"];
