@@ -352,10 +352,11 @@
                         <outlet property="imageView" destination="3WD-sd-Zpe" id="OKE-p7-WPO"/>
                         <outlet property="subheaderLabel" destination="Cox-U9-p8T" id="IWM-hf-fWA"/>
                         <outlet property="tableView" destination="xE8-sr-fy0" id="WTT-NC-lhT"/>
-                        <segue destination="jvW-dv-7ro" kind="push" identifier="Return To Location" id="s1T-Mz-84d"/>
+                        <segue destination="fjT-mP-txg" kind="unwind" identifier="Return To Location" unwindAction="unwindToMainMenu:" id="2Gb-Qo-pze"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1C3-EO-Ywt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="fjT-mP-txg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="739" y="-177"/>
         </scene>
@@ -823,7 +824,7 @@ as they are resolved</string>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="s1T-Mz-84d"/>
+        <segue reference="VX7-ui-gdz"/>
         <segue reference="bOI-CQ-dk3"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -30,6 +30,11 @@
 
 @implementation LocationViewController
 
+
+-(IBAction) unwindToMainMenu:(UIStoryboardSegue *)segue {
+    NSLog(@"Rewind segue");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
