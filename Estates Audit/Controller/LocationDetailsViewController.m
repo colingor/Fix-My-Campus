@@ -85,6 +85,18 @@ enum AlertButtonIndex : NSInteger
 }
 
 
+- (UIImage *)thumbnailImageFromImage:(UIImage *)image {
+    
+    UIImage *originalImage = image;
+    CGSize destinationSize = CGSizeMake(60.0, 60.0);
+    UIGraphicsBeginImageContext(destinationSize);
+    [originalImage drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
+    UIImage *thumbnailImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return thumbnailImage;
+}
+
+
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [self.buildingAreas count];
@@ -144,17 +156,6 @@ enum AlertButtonIndex : NSInteger
         count++;
     }
     return offset;
-}
-
-- (UIImage *)thumbnailImageFromImage:(UIImage *)image {
-    
-    UIImage *originalImage = image;
-    CGSize destinationSize = CGSizeMake(60.0, 60.0);
-    UIGraphicsBeginImageContext(destinationSize);
-    [originalImage drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
-    UIImage *thumbnailImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return thumbnailImage;
 }
 
 
