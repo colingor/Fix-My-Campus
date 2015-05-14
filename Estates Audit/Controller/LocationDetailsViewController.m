@@ -77,11 +77,32 @@ enum AlertButtonIndex : NSInteger
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)index
 {
     if (index == AlertButtonYes){
-        NSLog(@"Yes clicked");
+        NSDictionary *locationDetails = [self locationDetails];
+         NSLog(@"%@", locationDetails);
     } else {
         NSLog(@"No clicked");
         [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
     }
+}
+
+
+- (NSDictionary *)locationDetails {
+    NSDictionary *area = [[self buildingAreas] objectAtIndex:[[self.tableView indexPathForSelectedRow] section]];
+    NSString *areaTitle = [area valueForKey:@"area"];
+    NSDictionary *titleDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:areaTitle, @"area", nil];
+    
+    NSArray *items = [area valueForKey:@"items"];
+    NSDictionary *item = [items objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
+    
+    NSDictionary *coordinates = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                 [self.location valueForKeyPath:@"geometry.coordinates"][0], @"lon",
+                                 [self.location valueForKeyPath:@"geometry.coordinates"][1], @"lat",
+                                 nil];
+    
+    NSMutableDictionary *locationDetails = [titleDictionary mutableCopy];
+    [locationDetails addEntriesFromDictionary:item];
+    [locationDetails addEntriesFromDictionary:coordinates];
+    return locationDetails;
 }
 
 
