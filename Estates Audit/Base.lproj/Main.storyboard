@@ -280,7 +280,7 @@
                                 <rect key="frame" x="0.0" y="151" width="320" height="437"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Building Area Detail" textLabel="rhQ-TI-ZUn" detailTextLabel="ZbA-cZ-NaI" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="b99-LS-2JQ">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="Building Area Detail" textLabel="rhQ-TI-ZUn" detailTextLabel="ZbA-cZ-NaI" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="b99-LS-2JQ">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b99-LS-2JQ" id="Lwx-Ff-Vjn">
