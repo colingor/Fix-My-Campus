@@ -144,6 +144,15 @@
     return cell;
 }
 
+// This overwrites the version in CoreDataTableViewController - if
+// this wasn't here, we would have a list down the side of the tableview
+// with the first letter of each month.  Comment out this method to
+// see what this looks like.
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return nil;
+}
+
 
 #pragma mark - Navigation
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
