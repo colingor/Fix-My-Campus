@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B0084411B04BFB700EA32A3 /* Report+SectionIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B0084401B04BFB700EA32A3 /* Report+SectionIdentifier.m */; };
 		3B24D3681A238B8100EE43C0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B24D3671A238B8100EE43C0 /* MapKit.framework */; };
 		3B599D191ADBBB27007F4D40 /* AppDelegate+MOC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B599D181ADBBB27007F4D40 /* AppDelegate+MOC.m */; };
 		3B5BB0C71AFCC4FF00B5CDD6 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BB0C61AFCC4FF00B5CDD6 /* CoreDataTableViewController.m */; };
@@ -54,6 +55,8 @@
 
 /* Begin PBXFileReference section */
 		23338EA39FF8F2C6DDE5F906 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3B00843F1B04BFB700EA32A3 /* Report+SectionIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Report+SectionIdentifier.h"; sourceTree = "<group>"; };
+		3B0084401B04BFB700EA32A3 /* Report+SectionIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Report+SectionIdentifier.m"; sourceTree = "<group>"; };
 		3B24D3671A238B8100EE43C0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3B599D171ADBBB27007F4D40 /* AppDelegate+MOC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+MOC.h"; sourceTree = "<group>"; };
 		3B599D181ADBBB27007F4D40 /* AppDelegate+MOC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+MOC.m"; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				3BCBBA7C1A2386A200A9A246 /* Report.h */,
+				3B00843F1B04BFB700EA32A3 /* Report+SectionIdentifier.h */,
+				3B0084401B04BFB700EA32A3 /* Report+SectionIdentifier.m */,
 				3BCBBA7D1A2386A200A9A246 /* Report.m */,
 				3BF6B2721ADBC8BD00CFC50B /* Photo+Create.h */,
 				3BF6B2731ADBC8BD00CFC50B /* Photo+Create.m */,
@@ -445,6 +450,7 @@
 				3B5BB0C71AFCC4FF00B5CDD6 /* CoreDataTableViewController.m in Sources */,
 				3BC3AD2E1A25EE6D00F2C6C0 /* ReportsTableTableViewController.m in Sources */,
 				3BCBBA5C1A237EF500A9A246 /* Estates_Audit.xcdatamodeld in Sources */,
+				3B0084411B04BFB700EA32A3 /* Report+SectionIdentifier.m in Sources */,
 				3BF6B2771ADBC8D000CFC50B /* Report+Create.m in Sources */,
 				3BA1EE001ADFC7EE004D9470 /* SummaryViewController.m in Sources */,
 				7DFD69271AEE4AE6002F608B /* ReportDetailsViewController.m in Sources */,
