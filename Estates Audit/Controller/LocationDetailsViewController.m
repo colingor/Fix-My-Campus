@@ -83,7 +83,8 @@ NSString *const IMAGE_SUFFIX = @".JPG";
     
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Building Area Detail" forIndexPath:indexPath];
-    NSDictionary *item = [self.buildingItems objectAtIndex:indexPath.row];
+    int offset = [self offsetForSection:(int)indexPath.section];
+    NSDictionary *item = [self.buildingItems objectAtIndex:indexPath.row + offset];
     if (item) {
         cell.imageView.image = nil;
         NSString *imageStem = [item valueForKeyPath:@"image"];
@@ -94,6 +95,18 @@ NSString *const IMAGE_SUFFIX = @".JPG";
         cell.detailTextLabel.text = [NSString stringWithFormat:@"Type: %@", [item valueForKey:@"type"]];
     }
     return cell;
+}
+
+- (int)offsetForSection:(NSInteger)section{
+    int offset = 0;
+    int count = 0;
+    while (count < section){
+        NSDictionary *buildingArea = [self.buildingAreas objectAtIndex:count];
+        NSArray *areaItems = [buildingArea objectForKey:@"items"];
+        offset = offset + (int)[areaItems count];
+        count++;
+    }
+    return offset;
 }
 
 - (UIImage *)thumbnailImageFromImage:(UIImage *)image {
