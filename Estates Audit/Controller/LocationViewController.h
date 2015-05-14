@@ -10,5 +10,6 @@
 #import "AcceptsManagedContext.h"
 @interface LocationViewController : UIViewController<AcceptsManagedContext>
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSDictionary *selectedLocationDetails;
 
 @end

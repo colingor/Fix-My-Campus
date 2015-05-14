@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Colin Gormley. All rights reserved.
 //
 
+#import "LocationViewController.h"
 #import "LocationDetailsViewController.h"
 
 @interface LocationDetailsViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -77,8 +78,7 @@ enum AlertButtonIndex : NSInteger
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)index
 {
     if (index == AlertButtonYes){
-        NSDictionary *locationDetails = [self locationDetails];
-         NSLog(@"%@", locationDetails);
+        [self performSegueWithIdentifier:@"Return To Location" sender:self];
     } else {
         NSLog(@"No clicked");
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
@@ -186,14 +186,16 @@ enum AlertButtonIndex : NSInteger
 }
 
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"Return To Location"]){
+        if ([segue.destinationViewController isKindOfClass:[LocationViewController class]]) {
+            LocationViewController *lvc = (LocationViewController *)segue.destinationViewController;
+            lvc.selectedLocationDetails = [self locationDetails];
+        }
+    }
 }
-*/
+
 
 @end
