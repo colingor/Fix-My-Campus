@@ -8,6 +8,8 @@
 
 #import "ReportDetailsViewController.h"
 #import "Photo+Create.h"
+#import "Report+Create.h"
+
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ViewPhotoViewController.h"
@@ -58,8 +60,12 @@
                     for(id comment in comments){
                         NSString *body = [comment valueForKey:@"Body"];
                         NSLog(@"body: %@", body);
-                        NSDate *d = [comment objectForKey:@"CommentDate"];
+                        
+                        NSString *commentDateStr = [comment objectForKey:@"CommentDate"];
+                        NSDate *commentDate =  [Report extractJitBitDate:commentDateStr];
 
+                        NSLog(@"%@", commentDate);
+        
                     }
                 }
             }
