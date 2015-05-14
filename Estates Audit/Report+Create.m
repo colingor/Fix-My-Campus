@@ -104,6 +104,21 @@
         report.ticket_id = [NSNumber numberWithInt: rdmNumber];
         
     }
+    
+    // If the notifcation flag is set, this isn't a new local report in progress - it has come from jitBit so we show a notification
+    NSNumber *notification = [reportDictionary valueForKeyPath:@"notification"];
+    
+    if([notification boolValue]){
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        localNotification.fireDate = nil;
+        localNotification.alertBody = [NSString stringWithFormat: @"New Report with ID %@ added", ticketId];
+        localNotification.timeZone = [NSTimeZone defaultTimeZone];
+        localNotification.soundName = UILocalNotificationDefaultSoundName;
+        localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+        
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+
+    }
     return report;
 }
 
@@ -229,6 +244,8 @@
                 }
             }
             
+            // This ensures a notification will be fired
+            [report setObject:[NSNumber numberWithBool:YES] forKey:@"notification"];
             
             [self reportFromReportInfo:report inManangedObjectContext:context];
         }
