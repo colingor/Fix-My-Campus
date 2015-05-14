@@ -10,4 +10,6 @@
 
 @interface Report (SectionIdentifier)
 
+- (NSString *)sectionIdentifier;
+
 @end

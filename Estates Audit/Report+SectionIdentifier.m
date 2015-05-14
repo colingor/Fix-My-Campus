@@ -10,4 +10,12 @@
 
 @implementation Report (SectionIdentifier)
 
+// Return a readable date for section headers.
+- (NSString *)sectionIdentifier
+{
+    return [NSDateFormatter localizedStringFromDate:self.issue_date
+                                          dateStyle:NSDateFormatterLongStyle
+                                          timeStyle:NSDateFormatterNoStyle];
+}
+
 @end
