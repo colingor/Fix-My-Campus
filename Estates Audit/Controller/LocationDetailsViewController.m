@@ -81,6 +81,8 @@ enum AlertButtonIndex : NSInteger
          NSLog(@"%@", locationDetails);
     } else {
         NSLog(@"No clicked");
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
+        cell.accessoryType = UITableViewCellAccessoryNone;
         [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
     }
 }
@@ -145,6 +147,8 @@ enum AlertButtonIndex : NSInteger
     NSDictionary *item = [self.buildingItems objectAtIndex:indexPath.row + offset];
     if (item) {
         cell.imageView.image = nil;
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        [cell setTintColor:[UIColor darkTextColor]];
         NSString *imageStem = [item valueForKeyPath:@"image"];
         UIImage *thumbnail;
         if ([imageStem length] != 0) {
@@ -163,6 +167,8 @@ enum AlertButtonIndex : NSInteger
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
     [self useLocationAlert];
 }
 
