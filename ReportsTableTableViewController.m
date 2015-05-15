@@ -105,7 +105,7 @@
     cell.detailTextLabel.text = report.status;
 
     if(report.is_updated.boolValue){
-        cell.contentView.backgroundColor  =[UIColor colorWithRed:0.90 green:0.94 blue:0.98 alpha:1.0];
+        cell.contentView.superview.backgroundColor = [UIColor colorWithRed:0.90 green:0.94 blue:0.98 alpha:1.0];
     }
     
     
