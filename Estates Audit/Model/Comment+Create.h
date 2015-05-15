@@ -10,4 +10,9 @@
 
 @interface Comment (Create)
 
++ (Comment *)commentWithBody:(NSString *)body
+                      onDate:(NSDate *)date
+             fromReport:(Report *)report
+ inManagedObjectContext:(NSManagedObjectContext *)context;
+
 @end
