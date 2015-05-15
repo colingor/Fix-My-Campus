@@ -88,9 +88,20 @@
 
     
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reportcell" forIndexPath:indexPath];
+    
+    // Reset all the stuff that could have been changed
     cell.contentView.backgroundColor = nil;
     cell.contentView.superview.backgroundColor = [UIColor whiteColor];
-        
+    
+    UILabel *textLabel = cell.textLabel;
+    UILabel *detailTextLabel = cell.detailTextLabel;
+    
+    textLabel.backgroundColor = [UIColor whiteColor];
+    detailTextLabel.backgroundColor = [UIColor whiteColor];
+    
+    detailTextLabel.font = [UIFont systemFontOfSize:12.0];
+    textLabel.font = [UIFont systemFontOfSize:14.0];
+    
     Report * report = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     NSMutableString *text = [NSMutableString string];
@@ -101,13 +112,22 @@
         [text appendString:[NSString stringWithFormat:@"%@", report.loc_desc]];
     }
     
-    cell.textLabel.text = text;
-    cell.detailTextLabel.text = report.status;
-
+    // Highlight reports marked as updated
     if(report.is_updated.boolValue){
-        cell.contentView.superview.backgroundColor = [UIColor colorWithRed:0.90 green:0.94 blue:0.98 alpha:1.0];
+
+        UIColor *highLightedBackground = [UIColor colorWithRed:0.90 green:0.94 blue:0.98 alpha:1.0];
+        
+        detailTextLabel.backgroundColor = highLightedBackground;
+        detailTextLabel.font = [UIFont boldSystemFontOfSize:12.0];
+        
+        textLabel.backgroundColor=highLightedBackground;
+        textLabel.font = [UIFont boldSystemFontOfSize:14.0];
+        
+        cell.contentView.superview.backgroundColor = highLightedBackground;
     }
     
+    cell.textLabel.text = text;
+    cell.detailTextLabel.text = report.status;
     
     NSSet * photos = report.photos;
     Photo * photo = [photos anyObject];
