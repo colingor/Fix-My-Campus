@@ -88,7 +88,7 @@
 
     
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reportcell" forIndexPath:indexPath];
-
+    cell.contentView.backgroundColor = nil;
     cell.imageView.image = nil;
         
     Report * report = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -103,7 +103,12 @@
     
     cell.textLabel.text = text;
     cell.detailTextLabel.text = report.status;
- 
+
+    if(report.is_updated.boolValue){
+        cell.contentView.backgroundColor  =[UIColor colorWithRed:0.90 green:0.94 blue:0.98 alpha:1.0];
+    }
+    
+    
     NSSet * photos = report.photos;
     Photo * photo = [photos anyObject];
     

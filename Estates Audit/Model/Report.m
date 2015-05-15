@@ -19,4 +19,5 @@
 @dynamic photos;
 @dynamic ticket_id;
 @dynamic issue_date;
+@dynamic is_updated;
 @end

@@ -27,6 +27,10 @@
 
 - (void) setReport:(Report *)report
 {
+    report.is_updated = @NO;
+    // Save just to be sure
+    [report.managedObjectContext save:NULL];
+    
     _report = report;
     NSString *apiStr = [NSString stringWithFormat:@"https://eaudit.jitbit.com/helpdesk/api/comments?id=%@", report.ticket_id];
     

@@ -63,6 +63,8 @@
                 NSLog(@"Status updated");
                 report.status = status;
                
+                report.is_updated = @YES;
+                
                 UILocalNotification *localNotification = [[UILocalNotification alloc] init];
                 localNotification.fireDate = nil;
                 localNotification.alertBody = [NSString stringWithFormat: @"Report ID %@ status changed to %@", ticketId, status];
@@ -94,7 +96,7 @@
     report.lat = (NSNumber *)[reportDictionary valueForKeyPath:@"lat"];
     report.status = (NSString *)[reportDictionary valueForKeyPath:@"status"];
     report.issue_date = [NSDate date];
-
+ 
     
     NSNumber *ticketId = [reportDictionary valueForKeyPath:@"ticket_id"];
     if(ticketId > 0){
@@ -110,6 +112,9 @@
     NSNumber *notification = [reportDictionary valueForKeyPath:@"notification"];
     
     if([notification boolValue]){
+    
+//        report.is_updated = @YES;
+      
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         localNotification.fireDate = nil;
         localNotification.alertBody = [NSString stringWithFormat: @"New Report with ID %@ added", ticketId];

@@ -20,6 +20,8 @@
 @property (nonatomic, retain) NSSet *photos;
 @property (nonatomic, retain) NSNumber * ticket_id;
 @property (nonatomic, retain) NSDate * issue_date;
+@property (nonatomic, retain) NSNumber * is_updated;
+
 @end
 
 @interface Report (CoreDataGeneratedAccessors)
