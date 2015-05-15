@@ -89,7 +89,7 @@
     
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reportcell" forIndexPath:indexPath];
     cell.contentView.backgroundColor = nil;
-    cell.imageView.image = nil;
+    cell.contentView.superview.backgroundColor = [UIColor whiteColor];
         
     Report * report = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
