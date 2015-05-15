@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3B0084411B04BFB700EA32A3 /* Report+SectionIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B0084401B04BFB700EA32A3 /* Report+SectionIdentifier.m */; };
+		3B0084591B06367900EA32A3 /* Report.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B0084581B06367900EA32A3 /* Report.m */; };
+		3B00845C1B06367A00EA32A3 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B00845B1B06367A00EA32A3 /* Comment.m */; };
+		3B00845F1B0636D400EA32A3 /* Comment+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B00845E1B0636D400EA32A3 /* Comment+Create.m */; };
 		3B24D3681A238B8100EE43C0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B24D3671A238B8100EE43C0 /* MapKit.framework */; };
 		3B599D191ADBBB27007F4D40 /* AppDelegate+MOC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B599D181ADBBB27007F4D40 /* AppDelegate+MOC.m */; };
 		3B5BB0C71AFCC4FF00B5CDD6 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BB0C61AFCC4FF00B5CDD6 /* CoreDataTableViewController.m */; };
@@ -26,7 +29,6 @@
 		3BCBBA641A237EF500A9A246 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BCBBA631A237EF500A9A246 /* Images.xcassets */; };
 		3BCBBA671A237EF500A9A246 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BCBBA651A237EF500A9A246 /* LaunchScreen.xib */; };
 		3BCBBA731A237EF500A9A246 /* Estates_AuditTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA721A237EF500A9A246 /* Estates_AuditTests.m */; };
-		3BCBBA7E1A2386A200A9A246 /* Report.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA7D1A2386A200A9A246 /* Report.m */; };
 		3BCBBA811A2386A200A9A246 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA801A2386A200A9A246 /* Photo.m */; };
 		3BF6B2741ADBC8BD00CFC50B /* Photo+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF6B2731ADBC8BD00CFC50B /* Photo+Create.m */; };
 		3BF6B2771ADBC8D000CFC50B /* Report+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF6B2761ADBC8D000CFC50B /* Report+Create.m */; };
@@ -57,6 +59,12 @@
 		23338EA39FF8F2C6DDE5F906 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3B00843F1B04BFB700EA32A3 /* Report+SectionIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Report+SectionIdentifier.h"; sourceTree = "<group>"; };
 		3B0084401B04BFB700EA32A3 /* Report+SectionIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Report+SectionIdentifier.m"; sourceTree = "<group>"; };
+		3B0084571B06367900EA32A3 /* Report.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Report.h; path = Model/Report.h; sourceTree = "<group>"; };
+		3B0084581B06367900EA32A3 /* Report.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Report.m; path = Model/Report.m; sourceTree = "<group>"; };
+		3B00845A1B06367A00EA32A3 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Comment.h; path = Model/Comment.h; sourceTree = "<group>"; };
+		3B00845B1B06367A00EA32A3 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Comment.m; path = Model/Comment.m; sourceTree = "<group>"; };
+		3B00845D1B0636D400EA32A3 /* Comment+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Comment+Create.h"; path = "Model/Comment+Create.h"; sourceTree = "<group>"; };
+		3B00845E1B0636D400EA32A3 /* Comment+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Comment+Create.m"; path = "Model/Comment+Create.m"; sourceTree = "<group>"; };
 		3B24D3671A238B8100EE43C0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3B599D171ADBBB27007F4D40 /* AppDelegate+MOC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+MOC.h"; sourceTree = "<group>"; };
 		3B599D181ADBBB27007F4D40 /* AppDelegate+MOC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+MOC.m"; sourceTree = "<group>"; };
@@ -90,8 +98,6 @@
 		3BCBBA6C1A237EF500A9A246 /* Estates AuditTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Estates AuditTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BCBBA711A237EF500A9A246 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BCBBA721A237EF500A9A246 /* Estates_AuditTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Estates_AuditTests.m; sourceTree = "<group>"; };
-		3BCBBA7C1A2386A200A9A246 /* Report.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Report.h; path = Model/Report.h; sourceTree = "<group>"; };
-		3BCBBA7D1A2386A200A9A246 /* Report.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Report.m; path = Model/Report.m; sourceTree = "<group>"; };
 		3BCBBA7F1A2386A200A9A246 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Photo.h; path = Model/Photo.h; sourceTree = "<group>"; };
 		3BCBBA801A2386A200A9A246 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Photo.m; path = Model/Photo.m; sourceTree = "<group>"; };
 		3BF6B2721ADBC8BD00CFC50B /* Photo+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photo+Create.h"; sourceTree = "<group>"; };
@@ -179,10 +185,14 @@
 		3BC3AD221A25EA8F00F2C6C0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3BCBBA7C1A2386A200A9A246 /* Report.h */,
+				3B00845A1B06367A00EA32A3 /* Comment.h */,
+				3B00845D1B0636D400EA32A3 /* Comment+Create.h */,
+				3B00845E1B0636D400EA32A3 /* Comment+Create.m */,
+				3B00845B1B06367A00EA32A3 /* Comment.m */,
+				3B0084571B06367900EA32A3 /* Report.h */,
+				3B0084581B06367900EA32A3 /* Report.m */,
 				3B00843F1B04BFB700EA32A3 /* Report+SectionIdentifier.h */,
 				3B0084401B04BFB700EA32A3 /* Report+SectionIdentifier.m */,
-				3BCBBA7D1A2386A200A9A246 /* Report.m */,
 				3BF6B2721ADBC8BD00CFC50B /* Photo+Create.h */,
 				3BF6B2731ADBC8BD00CFC50B /* Photo+Create.m */,
 				3BF6B2751ADBC8D000CFC50B /* Report+Create.h */,
@@ -443,11 +453,13 @@
 				3BCBBA811A2386A200A9A246 /* Photo.m in Sources */,
 				3BCBBA591A237EF500A9A246 /* AppDelegate.m in Sources */,
 				3BF6B2741ADBC8BD00CFC50B /* Photo+Create.m in Sources */,
+				3B00845C1B06367A00EA32A3 /* Comment.m in Sources */,
 				3BC3AD251A25EC3100F2C6C0 /* LocationViewController.m in Sources */,
 				3B71FF1D1B0210070023516B /* CustomTableViewCell.m in Sources */,
 				3C2060411B02445700AD71F3 /* LocationDetailsViewController.m in Sources */,
 				3BC3AD201A25EA5900F2C6C0 /* HomePageViewController.m in Sources */,
 				3B5BB0C71AFCC4FF00B5CDD6 /* CoreDataTableViewController.m in Sources */,
+				3B00845F1B0636D400EA32A3 /* Comment+Create.m in Sources */,
 				3BC3AD2E1A25EE6D00F2C6C0 /* ReportsTableTableViewController.m in Sources */,
 				3BCBBA5C1A237EF500A9A246 /* Estates_Audit.xcdatamodeld in Sources */,
 				3B0084411B04BFB700EA32A3 /* Report+SectionIdentifier.m in Sources */,
@@ -455,8 +467,8 @@
 				3BA1EE001ADFC7EE004D9470 /* SummaryViewController.m in Sources */,
 				7DFD69271AEE4AE6002F608B /* ReportDetailsViewController.m in Sources */,
 				7DD86BDA1A2747CC00ED3056 /* EmailSupportTicket.m in Sources */,
+				3B0084591B06367900EA32A3 /* Report.m in Sources */,
 				3BC3AD281A25ED6800F2C6C0 /* PictureViewController.m in Sources */,
-				3BCBBA7E1A2386A200A9A246 /* Report.m in Sources */,
 				7DD5A15B1B03840700B95138 /* ViewPhotoViewController.m in Sources */,
 				3BA1EDFD1ADFC514004D9470 /* DescriptionViewController.m in Sources */,
 				3BCBBA561A237EF500A9A246 /* main.m in Sources */,

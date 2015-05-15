@@ -9,6 +9,7 @@
 #import "ReportDetailsViewController.h"
 #import "Photo+Create.h"
 #import "Report+Create.h"
+#import "Comment+Create.h"
 
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -28,10 +29,15 @@
 - (void) setReport:(Report *)report
 {
     report.is_updated = @NO;
-    // Save just to be sure
+    [self processComments:report]; // don't forget that all NSURLSession tasks start out suspended!
     [report.managedObjectContext save:NULL];
-    
     _report = report;
+}
+
+
+
+- (void)processComments:(Report *)report
+{
     NSString *apiStr = [NSString stringWithFormat:@"https://eaudit.jitbit.com/helpdesk/api/comments?id=%@", report.ticket_id];
     
     NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -58,8 +64,8 @@
             NSData *commentsJSONData = [NSData dataWithContentsOfURL:location];
             if (commentsJSONData) {
                 comments = [NSJSONSerialization JSONObjectWithData:commentsJSONData
-                                                          options:0
-                                                            error:NULL];
+                                                           options:0
+                                                             error:NULL];
                 if(comments){
                     for(id comment in comments){
                         NSString *body = [comment valueForKey:@"Body"];
@@ -67,17 +73,20 @@
                         
                         NSString *commentDateStr = [comment objectForKey:@"CommentDate"];
                         NSDate *commentDate =  [Report extractJitBitDate:commentDateStr];
-
+                        
                         NSLog(@"%@", commentDate);
-        
+                        [Comment commentWithBody:body onDate:commentDate fromReport:report inManagedObjectContext:report.managedObjectContext];
+                        [report.managedObjectContext save:NULL];
                     }
                 }
+               
             }
         }
-      
+        
     }];
-    [task resume]; // don't forget that all NSURLSession tasks start out suspended!
+    [task resume];
 }
+
 
 
 
