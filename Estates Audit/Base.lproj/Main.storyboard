@@ -75,7 +75,7 @@
                         <viewControllerLayoutGuide type="bottom" id="pEh-Sn-8px"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Omb-Im-dA4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cLV-0j-kcA">
@@ -205,7 +205,7 @@
             <objects>
                 <tableViewController title="ReportComments" id="ero-aD-lJB" customClass="ReportCommentsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5cR-1O-ZmT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -857,8 +857,10 @@ as they are resolved</string>
         <scene sceneID="1Wu-XO-JeU">
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="VI2-Wg-5hS" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="w2l-BP-nuu"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="fed-dq-6gh">
                         <autoresizingMask key="autoresizingMask"/>
