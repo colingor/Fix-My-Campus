@@ -20,7 +20,6 @@
 - (void)setReport:(Report *)report
 {
     _report = report;
-    //    self.title = photographer.name;
     [self setupFetchedResultsController];
 }
 

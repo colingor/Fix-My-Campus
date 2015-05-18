@@ -28,12 +28,32 @@
 
 - (void) setReport:(Report *)report
 {
+
+    [self styleTabBar];
     report.is_updated = @NO;
     [self processComments:report]; // don't forget that all NSURLSession tasks start out suspended!
     [report.managedObjectContext save:NULL];
     _report = report;
 }
 
+- (void) styleTabBar{
+    // Get rid of tabbar gradient
+    [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
+    [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
+    
+    [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0f],
+                                                        NSForegroundColorAttributeName : [UIColor whiteColor]
+                                                        } forState:UIControlStateSelected];
+    
+    
+    // doing this results in an easier to read unselected state then the default iOS 7 one
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0f],
+                                                        NSForegroundColorAttributeName : [UIColor colorWithRed:.5 green:.5 blue:.5 alpha:1]
+                                                        } forState:UIControlStateNormal];
+    
+}
 
 
 - (void)processComments:(Report *)report
