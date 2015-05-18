@@ -34,8 +34,8 @@
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Comment"];
         request.predicate = [NSPredicate predicateWithFormat:@"report = %@", self.report];
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date"
-                                                                  ascending:YES
-                                                                   selector:@selector(localizedStandardCompare:)]];
+                                                                  ascending:NO
+                                                                   selector:@selector(compare:)]];
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                                             managedObjectContext:context
