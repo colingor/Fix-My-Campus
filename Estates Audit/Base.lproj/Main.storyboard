@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bFV-OF-uIC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bFV-OF-uIC">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -36,7 +36,7 @@
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <connections>
-                                    <segue destination="dD1-wL-clO" kind="push" identifier="ReportDetails" id="cGO-tE-3aP"/>
+                                    <segue destination="VI2-Wg-5hS" kind="push" identifier="ReportDetails" id="cGO-tE-3aP"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -187,6 +187,7 @@
                             <constraint firstItem="cLV-0j-kcA" firstAttribute="bottom" secondItem="pEh-Sn-8px" secondAttribute="top" id="zUC-3C-Ff8"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Report Details" id="hhG-gg-0iF"/>
                     <navigationItem key="navigationItem" title="Report Details" id="T4e-M0-gFK"/>
                     <connections>
                         <outlet property="fullDescription" destination="sCl-qf-WBW" id="qFj-0B-MaN"/>
@@ -197,7 +198,48 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u14-sD-Kbj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="353" y="1367"/>
+            <point key="canvasLocation" x="885" y="1367"/>
+        </scene>
+        <!--ReportComments-->
+        <scene sceneID="hxd-at-bDc">
+            <objects>
+                <tableViewController title="ReportComments" id="ero-aD-lJB" customClass="ReportCommentsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5cR-1O-ZmT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentCell" textLabel="EeU-gF-zlT" detailTextLabel="Co3-Qx-Ukd" style="IBUITableViewCellStyleSubtitle" id="aFP-nz-40B">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aFP-nz-40B" id="LgN-vH-Ja7">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EeU-gF-zlT">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Co3-Qx-Ukd">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ero-aD-lJB" id="Zq0-XR-TQg"/>
+                            <outlet property="delegate" destination="ero-aD-lJB" id="jg3-qF-SrC"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Report Comments" id="B0v-Rj-yVF"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o6w-9g-FaS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="353" y="2139"/>
         </scene>
         <!--Location-->
         <scene sceneID="7CN-id-3qg">
@@ -810,6 +852,26 @@ as they are resolved</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ojH-44-bkc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-205.59999999999999" y="482.80000000000001"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="1Wu-XO-JeU">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="VI2-Wg-5hS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="w2l-BP-nuu"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="fed-dq-6gh">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="dD1-wL-clO" kind="relationship" relationship="viewControllers" id="kGn-bP-iib"/>
+                        <segue destination="ero-aD-lJB" kind="relationship" relationship="viewControllers" id="o36-xO-mxm"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UB9-EI-B4B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="353" y="1367"/>
         </scene>
     </scenes>
     <resources>

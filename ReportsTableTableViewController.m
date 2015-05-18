@@ -15,6 +15,7 @@
 #import "ReportDatabaseAvailability.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "CustomTableViewCell.h"
+#import "ReportCommentsTableViewController.h"
 
 @interface ReportsTableTableViewController ()
 
@@ -31,6 +32,7 @@
                                                       self.managedObjectContext = note.userInfo[ReportDatabaseAvailabilityContext];
                                                   }];
 }
+
 
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
@@ -194,14 +196,22 @@
     
     if ([[segue identifier] isEqualToString:@"ReportDetails"])
     {
-        ReportDetailsViewController *detailViewController =
-        [segue destinationViewController];
-
-        NSIndexPath *myIndexPath = [self.tableView
-                                    indexPathForSelectedRow];
-
+        
+        NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
+        
         Report *selectedReport = [self.fetchedResultsController objectAtIndexPath:myIndexPath];
-        detailViewController.report = selectedReport;
+        
+        UITabBarController *tabar=segue.destinationViewController;
+        
+        
+        // Set the report for each of the tabViewController tabs
+        ReportDetailsViewController *rdcontroller = [tabar.viewControllers objectAtIndex:0];
+        rdcontroller.report = selectedReport;
+        
+        
+        ReportCommentsTableViewController *rccontroller = [tabar.viewControllers objectAtIndex:1];
+        rccontroller.report = selectedReport;
+
     }
 }
 
