@@ -42,13 +42,13 @@
     [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
 
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0f],
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:15.0f],
                                                         NSForegroundColorAttributeName : [UIColor whiteColor]
                                                         } forState:UIControlStateSelected];
     
     
     // doing this results in an easier to read unselected state then the default iOS 7 one
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0f],
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:15.0f],
                                                         NSForegroundColorAttributeName : [UIColor colorWithRed:.5 green:.5 blue:.5 alpha:1]
                                                         } forState:UIControlStateNormal];
     
@@ -77,7 +77,6 @@
         if (error) {
             NSLog(@"%@",error);
         }else{
-            NSLog(@"Image Uploaded successfully");
             
             NSDictionary *comments;
             NSData *commentsJSONData = [NSData dataWithContentsOfURL:location];
@@ -88,12 +87,10 @@
                 if(comments){
                     for(id comment in comments){
                         NSString *body = [comment valueForKey:@"Body"];
-                        NSLog(@"body: %@", body);
-                        
+                       
                         NSString *commentDateStr = [comment objectForKey:@"CommentDate"];
                         NSDate *commentDate =  [Report extractJitBitDate:commentDateStr];
-                        
-                        NSLog(@"%@", commentDate);
+                 
                         [Comment commentWithBody:body onDate:commentDate fromReport:report inManagedObjectContext:report.managedObjectContext];
                         [report.managedObjectContext save:NULL];
                     }
