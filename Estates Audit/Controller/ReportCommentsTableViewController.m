@@ -74,7 +74,7 @@
                         [Comment commentWithBody:body onDate:commentDate fromReport:report inManagedObjectContext:report.managedObjectContext];
                         [report.managedObjectContext save:NULL];
                     }
-                [self.refreshControl endRefreshing]; 
+                [self.refreshControl endRefreshing];
                 }
                
             }
@@ -96,6 +96,7 @@
 - (void)setReport:(Report *)report
 {
     _report = report;
+    [self processComments:self.report];
     [self fetchResults:report.managedObjectContext];
 }
 
