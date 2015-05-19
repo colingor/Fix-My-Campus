@@ -40,9 +40,8 @@
     // Get rid of tabbar gradient
     [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
     [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
-    
+
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
-    
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0f],
                                                         NSForegroundColorAttributeName : [UIColor whiteColor]
                                                         } forState:UIControlStateSelected];
