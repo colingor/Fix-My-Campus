@@ -95,10 +95,10 @@
 {
 
     application.applicationIconBadgeNumber -= 1;
-    UIAlertView *notificationAlert = [[UIAlertView alloc] initWithTitle:@"Notification"    message: [notification alertBody]
-                                                               delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-    
-    [notificationAlert show];
+//    UIAlertView *notificationAlert = [[UIAlertView alloc] initWithTitle:@"Notification"    message: [notification alertBody]
+//                                                               delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+//    
+//    [notificationAlert show];
 }
 
 
