@@ -31,7 +31,7 @@
 
     [self styleTabBar];
     report.is_updated = @NO;
-    [self processComments:report]; // don't forget that all NSURLSession tasks start out suspended!
+
     [report.managedObjectContext save:NULL];
     _report = report;
 }
@@ -53,58 +53,6 @@
                                                         } forState:UIControlStateNormal];
     
 }
-
-
-- (void)processComments:(Report *)report
-{
-    NSString *apiStr = [NSString stringWithFormat:@"https://eaudit.jitbit.com/helpdesk/api/comments?id=%@", report.ticket_id];
-    
-    NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
-    
-    // TODO: Credentials in code is bad...
-    [request setValue:@"Basic Y2dvcm1sZTFAc3RhZmZtYWlsLmVkLmFjLnVrOmVzdGF0ZXNhdWRpdDM=" forHTTPHeaderField:@"Authorization"];
-    
-    // another configuration option is backgroundSessionConfiguration (multitasking API required though)
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    
-    // create the session without specifying a queue to run completion handler on (thus, not main queue)
-    // we also don't specify a delegate (since completion handler is all we need)
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-    
-    NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-        if (error) {
-            NSLog(@"%@",error);
-        }else{
-            
-            NSDictionary *comments;
-            NSData *commentsJSONData = [NSData dataWithContentsOfURL:location];
-            if (commentsJSONData) {
-                comments = [NSJSONSerialization JSONObjectWithData:commentsJSONData
-                                                           options:0
-                                                             error:NULL];
-                if(comments){
-                    for(id comment in comments){
-                        NSString *body = [comment valueForKey:@"Body"];
-                       
-                        NSString *commentDateStr = [comment objectForKey:@"CommentDate"];
-                        NSDate *commentDate =  [Report extractJitBitDate:commentDateStr];
-                 
-                        [Comment commentWithBody:body onDate:commentDate fromReport:report inManagedObjectContext:report.managedObjectContext];
-                        [report.managedObjectContext save:NULL];
-                    }
-                }
-               
-            }
-        }
-        
-    }];
-    [task resume];
-}
-
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
