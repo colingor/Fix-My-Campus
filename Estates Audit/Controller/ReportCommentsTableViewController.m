@@ -16,19 +16,33 @@
 @implementation ReportCommentsTableViewController
 
 
+- (void)awakeFromNib
+{
+    [[NSNotificationCenter defaultCenter] addObserverForName:ReportDatabaseAvailabilityNotification
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                      self.managedObjectContext = note.userInfo[ReportDatabaseAvailabilityContext];
+                                                  }];
+}
+
+
+- (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+{
+    _managedObjectContext = managedObjectContext;
+    [self fetchResults:managedObjectContext];
+}
+
 
 - (void)setReport:(Report *)report
 {
     _report = report;
-    [self setupFetchedResultsController];
+    [self fetchResults:report.managedObjectContext];
 }
 
 
-
-- (void)setupFetchedResultsController
+- (void)fetchResults:(NSManagedObjectContext *)context
 {
-    NSManagedObjectContext *context = self.report.managedObjectContext;
-    
     if (context) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Comment"];
         request.predicate = [NSPredicate predicateWithFormat:@"report = %@", self.report];
@@ -44,7 +58,6 @@
         self.fetchedResultsController = nil;
     }
 }
-
 
 
 - (void)viewDidLoad {
