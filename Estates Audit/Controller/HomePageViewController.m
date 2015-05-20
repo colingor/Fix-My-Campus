@@ -9,6 +9,7 @@
 #import "HomePageViewController.h"
 #import "LocationViewController.h"
 #import "AcceptsManagedContext.h"
+#import "AppDelegate.h"
 @interface HomePageViewController ()
 
 @end
@@ -30,12 +31,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+ 
     // Check if logged in
-    
-    
-    // If not, pop up login view
-    [self performSegueWithIdentifier:UNWIND_SEGUE_IDENTIFIER sender:self];
-    
+    if(![appDelegate isLoggedIn]){
+        // If not, pop up login view
+        [self performSegueWithIdentifier:UNWIND_SEGUE_IDENTIFIER sender:self];
+    }
+ 
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -14,8 +14,12 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, copy) void (^onCompletion)(void);
 @property (strong, nonatomic) NSURLSession *jitBitDownloadSession;
-- (void)syncWithJitBit;
+
 -(NSString *)encodedCredentials;
+
+-(void)syncWithJitBit;
 -(void)setUserName:(NSString *)username withPassword:(NSString *)password;
+-(BOOL)isLoggedIn;
+
 @end
 

@@ -77,7 +77,7 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
     homevc.managedObjectContext = self.reportDatabaseContext;
     
     //Fire off a sync when app starts if user is logged in
-    if([[self encodedCredentials] length] > 0){
+    if([self isLoggedIn]){
         [self syncWithJitBit];
     }
    
@@ -134,6 +134,15 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
     }
 }
 
+
+-(BOOL)isLoggedIn
+{
+    if([[self encodedCredentials] length] > 0){
+        return TRUE;
+    }
+    return FALSE;
+}
+
 -(NSString *)encodedCredentials
 {
     NSString *authValue;
@@ -152,9 +161,17 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
                 
                 NSString *authStr = [NSString stringWithFormat:@"%@:%@", user, pass];
                 NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
-                authValue = [NSString stringWithFormat: @"Basic %@",[authData base64EncodedStringWithOptions:0]];
+                return authValue = [NSString stringWithFormat: @"Basic %@",[authData base64EncodedStringWithOptions:0]];
             }
         }
+        // Just use the first one?
+        NSDictionary *account = [accounts objectAtIndex:0];
+        NSString *user = [account valueForKey:@"acct"];
+        NSString *pass = [SSKeychain passwordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:user];
+        
+        NSString *authStr = [NSString stringWithFormat:@"%@:%@", user, pass];
+        NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
+        authValue = [NSString stringWithFormat: @"Basic %@",[authData base64EncodedStringWithOptions:0]];
     };
     
     return authValue;
