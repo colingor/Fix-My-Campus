@@ -31,17 +31,9 @@
 
 
 -(IBAction) unwindToMainMenu:(UIStoryboardSegue *)segue {
-    NSString *address = [[self selectedLocationDetails] valueForKey:@"address"];
-    NSString *department = [[self selectedLocationDetails] valueForKey:@"department"];
-    NSString *area = [[self selectedLocationDetails] valueForKey:@"area"];
-    NSString *type = [[self selectedLocationDetails] valueForKey:@"type"];
-    NSString *description = [[self selectedLocationDetails] valueForKey:@"description"];
-    if ([self selectedLocationDetails]){
-        self.descriptionText.text = [NSString stringWithFormat:@"Address: %@\n", address];
-        self.descriptionText.text = [self.descriptionText.text stringByAppendingString:[NSString stringWithFormat:@"Department: %@\n", department]];
-        self.descriptionText.text = [self.descriptionText.text stringByAppendingString:[NSString stringWithFormat:@"Area of Building: %@\n", area]];
-        self.descriptionText.text = [self.descriptionText.text stringByAppendingString:[NSString stringWithFormat:@"Location Type: %@\n", type]];
-        self.descriptionText.text = [self.descriptionText.text stringByAppendingString:[NSString stringWithFormat:@"Description: %@\n", description]];
+    if ([self reportDict]){
+        self.descriptionText.text = [self.reportDict valueForKey:@"loc_desc"];
+        self.userSpecfiedLocation = YES;
     }
 }
 
@@ -235,17 +227,17 @@
             NSLog(@" %@", locationDescription);
             
             if(self.report){
-            
-                self.report.loc_desc =locationDescription;
+                self.report.loc_desc = locationDescription;
+                self.report.lon = [self.reportDict valueForKey:@"lon"];
+                self.report.lat = [self.reportDict valueForKey:@"lat"];
             } else {
-            
-            [self.reportDict setValue:locationDescription forKey:@"loc_desc"];
-            [self.reportDict setValue:@"New" forKey:@"status"];
-            
-            Report *report = [Report reportFromReportInfo:self.reportDict inManangedObjectContext:self.managedObjectContext];
-            self.report = report;
-            // Set report in next controller
+                [self.reportDict setValue:locationDescription forKey:@"loc_desc"];
+                [self.reportDict setValue:@"New" forKey:@"status"];
+                
+                Report *report = [Report reportFromReportInfo:self.reportDict inManangedObjectContext:self.managedObjectContext];
+                self.report = report;
             }
+            // Set report in next controller
             picvc.report = self.report;
 
 

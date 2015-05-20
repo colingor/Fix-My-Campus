@@ -88,29 +88,39 @@ enum AlertButtonIndex : NSInteger
 }
 
 
-- (NSDictionary *)locationDetails {
-    NSDictionary *address = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                [self.location valueForKeyPath:@"properties.title"], @"address",
-                                [self.location valueForKeyPath:@"properties.subtitle"], @"department",
-                                nil];
+- (NSMutableDictionary *)reportDictionary {
+    NSMutableDictionary *reportDictionary = [[NSMutableDictionary alloc] init];
     
-    NSDictionary *area = [[self buildingAreas] objectAtIndex:[[self.tableView indexPathForSelectedRow] section]];
-    NSString *areaTitle = [area valueForKey:@"area"];
-    NSDictionary *titleDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:areaTitle, @"area", nil];
+    NSString *address = [self.location valueForKeyPath:@"properties.title"];
+    NSString *department = [self.location valueForKeyPath:@"properties.subtitle"];
     
-    NSArray *items = [area valueForKey:@"items"];
+    NSDictionary *areaDict = [[self buildingAreas] objectAtIndex:[[self.tableView indexPathForSelectedRow] section]];
+    NSString *area= [areaDict valueForKey:@"area"];
+    
+    NSArray *items = [areaDict valueForKey:@"items"];
     NSDictionary *item = [items objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
+    NSString *type = [item valueForKey:@"type"];
+    NSString *description = [item valueForKey:@"description"];
     
-    NSDictionary *coordinates = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 [self.location valueForKeyPath:@"geometry.coordinates"][0], @"lon",
-                                 [self.location valueForKeyPath:@"geometry.coordinates"][1], @"lat",
-                                 nil];
+    NSString *loc_desc = [NSString stringWithFormat:@"Address: %@\n", address];
+    loc_desc = [loc_desc stringByAppendingString:[NSString stringWithFormat:@"Department: %@\n", department]];
+    loc_desc = [loc_desc stringByAppendingString:[NSString stringWithFormat:@"Area of Building: %@\n", area]];
+    loc_desc = [loc_desc stringByAppendingString:[NSString stringWithFormat:@"Location Type: %@\n", type]];
+    loc_desc = [loc_desc stringByAppendingString:[NSString stringWithFormat:@"Description: %@\n", description]];
     
-    NSMutableDictionary *locationDetails = [address mutableCopy];
-    [locationDetails addEntriesFromDictionary:titleDictionary];
-    [locationDetails addEntriesFromDictionary:item];
-    [locationDetails addEntriesFromDictionary:coordinates];
-    return locationDetails;
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    
+    NSString *lonStr = [NSString stringWithFormat:@"%@", [self.location valueForKeyPath:@"geometry.coordinates"][0]];
+    NSNumber *lon = [f numberFromString:lonStr];
+    
+    NSString *latStr = [NSString stringWithFormat:@"%@", [self.location valueForKeyPath:@"geometry.coordinates"][1]];
+    NSNumber *lat = [f numberFromString:latStr];
+    
+    [reportDictionary setValue:loc_desc forKey:@"loc_desc"];
+    [reportDictionary setValue:lon forKey:@"lon"];
+    [reportDictionary setValue:lat forKey:@"lat"];
+    
+    return reportDictionary;
 }
 
 
@@ -198,7 +208,7 @@ enum AlertButtonIndex : NSInteger
     if ([[segue identifier] isEqualToString:@"Return To Location"]){
         if ([segue.destinationViewController isKindOfClass:[LocationViewController class]]) {
             LocationViewController *lvc = (LocationViewController *)segue.destinationViewController;
-            lvc.selectedLocationDetails = [self locationDetails];
+            lvc.reportDict = [self reportDictionary];
         }
     }
 }
