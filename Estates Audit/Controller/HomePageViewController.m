@@ -20,6 +20,9 @@
 
 -(IBAction) unwindToHome:(UIStoryboardSegue *)segue {
     NSLog(@"Home page");
+    //Maybe a call to syn with jitbit?
+    
+    
 }
 
 

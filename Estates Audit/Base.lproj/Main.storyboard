@@ -786,6 +786,7 @@
                                 </state>
                                 <connections>
                                     <action selector="loginClicked:" destination="bme-IP-L2m" eventType="touchUpInside" id="Bjf-ug-mNv"/>
+                                    <segue destination="JLJ-0P-ZKb" kind="unwind" unwindAction="unwindToHome:" id="Bfd-nZ-SjN"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -808,6 +809,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g4X-yR-ZPN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="JLJ-0P-ZKb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-675" y="1367"/>
         </scene>

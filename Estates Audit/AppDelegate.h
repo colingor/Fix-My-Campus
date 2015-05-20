@@ -16,6 +16,6 @@
 @property (strong, nonatomic) NSURLSession *jitBitDownloadSession;
 - (void)syncWithJitBit;
 -(NSString *)encodedCredentials;
-
+-(void)setUserName:(NSString *)username withPassword:(NSString *)password;
 @end
 

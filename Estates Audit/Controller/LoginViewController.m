@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "AppDelegate.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
@@ -33,6 +34,10 @@
     NSString *password = [self.passwordTextField text];
     
     if([self checkLoginDetailsWithUser:username password:password]){
+        
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate setUserName:(NSString *)username withPassword:(NSString *)password];
+        
         // Dismiss
         [self.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
     }else{

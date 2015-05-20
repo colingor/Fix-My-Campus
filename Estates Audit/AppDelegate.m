@@ -35,6 +35,8 @@
 // how long we'll wait for a JitBit fetch to return when we're in the background
 #define BACKGROUND_JITBIT_FETCH_TIMEOUT (60)
 
+NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
+
 @implementation AppDelegate
 
 
@@ -118,18 +120,25 @@
 }
 
 
+-(void)setUserName:(NSString *)username withPassword:(NSString *)password
+{
+    NSError *error = nil;
+    [SSKeychain setPassword:password forService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:username error:&error];
+    if ([error code] == SSKeychainErrorNotFound) {
+        NSLog(@"Password not set");
+    }
+}
+
 -(NSString *)encodedCredentials
 {
     NSString *authValue;
-    
-    NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
-    
+
     NSError *error = nil;
-    
+//    [SSKeychain deletePasswordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:@"cgormle1@staffmail.ed.ac.uk"];
     NSArray *accounts = [SSKeychain accountsForService:ESTATES_AUDIT_KEYCHAIN_SERVICE];
     
     // Just for now to ensure that password is set
-    [SSKeychain setPassword:@"estatesaudit3" forService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:@"cgormle1@staffmail.ed.ac.uk" error:&error];
+//    [SSKeychain setPassword:@"estatesaudit3" forService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:@"cgormle1@staffmail.ed.ac.uk" error:&error];
 
     if([accounts count] > 0){
         
@@ -143,13 +152,6 @@
         NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
         authValue = [NSString stringWithFormat: @"Basic %@",[authData base64EncodedStringWithOptions:0]];
         
-    }else{
-        BOOL passwordSet = [SSKeychain setPassword:@"estatesaudit3" forService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:@"cgormle1@staffmail.ed.ac.uk" error:&error];
-        
-        if ([error code] == SSKeychainErrorNotFound) {
-            NSLog(@"Password not set");
-        }
-    
     };
     
     return authValue;
