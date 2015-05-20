@@ -23,6 +23,8 @@
 @property (strong, nonatomic) NSMutableDictionary *ticketsFromJitBit;
 @property (strong, nonatomic) NSMutableDictionary *ticketsCustomFieldsFromJitBit;
 
+@property (strong, nonatomic) NSString *username;
+
 @end
 
 // name of the Flickr fetching background download session
@@ -123,9 +125,12 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
 -(void)setUserName:(NSString *)username withPassword:(NSString *)password
 {
     NSError *error = nil;
+    
     [SSKeychain setPassword:password forService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:username error:&error];
     if ([error code] == SSKeychainErrorNotFound) {
         NSLog(@"Password not set");
+    }else{
+        self.username = username;
     }
 }
 
@@ -137,21 +142,19 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
 //    [SSKeychain deletePasswordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:@"cgormle1@staffmail.ed.ac.uk"];
     NSArray *accounts = [SSKeychain accountsForService:ESTATES_AUDIT_KEYCHAIN_SERVICE];
     
-    // Just for now to ensure that password is set
-//    [SSKeychain setPassword:@"estatesaudit3" forService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:@"cgormle1@staffmail.ed.ac.uk" error:&error];
-
+ 
     if([accounts count] > 0){
         
-        NSDictionary *account = [accounts objectAtIndex:0];
-        NSLog(@"account %@", account);
-        
-        NSString *user = [account valueForKey:@"acct"];
-        NSString *pass = [SSKeychain passwordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:user];
-     
-        NSString *authStr = [NSString stringWithFormat:@"%@:%@", user, pass];
-        NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
-        authValue = [NSString stringWithFormat: @"Basic %@",[authData base64EncodedStringWithOptions:0]];
-        
+        for (id account in accounts){
+            NSString *user = [account valueForKey:@"acct"];
+            if([user isEqualToString:self.username]){
+                NSString *pass = [SSKeychain passwordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:user];
+                
+                NSString *authStr = [NSString stringWithFormat:@"%@:%@", user, pass];
+                NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
+                authValue = [NSString stringWithFormat: @"Basic %@",[authData base64EncodedStringWithOptions:0]];
+            }
+        }
     };
     
     return authValue;
