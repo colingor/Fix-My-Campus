@@ -124,7 +124,10 @@
     NSError *error = nil;
     
     NSArray *accounts = [SSKeychain accountsForService:ESTATES_AUDIT_KEYCHAIN_SERVICE];
-   
+    
+    // Just for now to ensure that password is set
+    [SSKeychain setPassword:@"estatesaudit3" forService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:@"cgormle1@staffmail.ed.ac.uk" error:&error];
+
     if([accounts count] > 0){
         
         NSDictionary *account = [accounts objectAtIndex:0];
