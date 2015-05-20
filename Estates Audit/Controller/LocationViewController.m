@@ -21,7 +21,6 @@
 @property (weak, nonatomic) IBOutlet UITextView *descriptionText;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) NSMutableDictionary *reportDict;
 @property (nonatomic, assign) BOOL userSpecfiedLocation;
 @property (strong, nonatomic) Report *report;
 @property (strong, nonatomic) NSArray *locations;
