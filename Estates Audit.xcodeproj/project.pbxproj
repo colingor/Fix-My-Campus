@@ -14,6 +14,8 @@
 		3B24D3681A238B8100EE43C0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B24D3671A238B8100EE43C0 /* MapKit.framework */; };
 		3B581E801B09F1310073C104 /* ReportCommentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B581E7F1B09F1310073C104 /* ReportCommentsTableViewController.m */; };
 		3B599D191ADBBB27007F4D40 /* AppDelegate+MOC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B599D181ADBBB27007F4D40 /* AppDelegate+MOC.m */; };
+		3B59B0921B0C70C5002D4628 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B59B0911B0C70C5002D4628 /* SSKeychain.m */; };
+		3B59B0941B0C70EE002D4628 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B59B0931B0C70EE002D4628 /* Security.framework */; };
 		3B5BB0C71AFCC4FF00B5CDD6 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BB0C61AFCC4FF00B5CDD6 /* CoreDataTableViewController.m */; };
 		3B71FF1D1B0210070023516B /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B71FF1C1B0210070023516B /* CustomTableViewCell.m */; };
 		3BA1EDFD1ADFC514004D9470 /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA1EDFC1ADFC514004D9470 /* DescriptionViewController.m */; };
@@ -71,6 +73,9 @@
 		3B581E7F1B09F1310073C104 /* ReportCommentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReportCommentsTableViewController.m; path = "Estates Audit/Controller/ReportCommentsTableViewController.m"; sourceTree = "<group>"; };
 		3B599D171ADBBB27007F4D40 /* AppDelegate+MOC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+MOC.h"; sourceTree = "<group>"; };
 		3B599D181ADBBB27007F4D40 /* AppDelegate+MOC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+MOC.m"; sourceTree = "<group>"; };
+		3B59B0901B0C70C5002D4628 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
+		3B59B0911B0C70C5002D4628 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
+		3B59B0931B0C70EE002D4628 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3B5BB0C51AFCC4EA00B5CDD6 /* CoreDataTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
 		3B5BB0C61AFCC4FF00B5CDD6 /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 		3B5BB0CA1B00B27200B5CDD6 /* ReportDatabaseAvailability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReportDatabaseAvailability.h; sourceTree = "<group>"; };
@@ -131,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B59B0941B0C70EE002D4628 /* Security.framework in Frameworks */,
 				3BA1EE031AE00219004D9470 /* AssetsLibrary.framework in Frameworks */,
 				7DD86BD61A2746AA00ED3056 /* MessageUI.framework in Frameworks */,
 				3B24D3681A238B8100EE43C0 /* MapKit.framework in Frameworks */,
@@ -256,6 +262,8 @@
 		3BCBBA531A237EF500A9A246 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3B59B0901B0C70C5002D4628 /* SSKeychain.h */,
+				3B59B0911B0C70C5002D4628 /* SSKeychain.m */,
 				3C7D92601B00FA6600503300 /* Edinburgh.gpx */,
 				3C7D925B1B00E74200503300 /* uoe-estates-buildings.json */,
 				3BCBBA631A237EF500A9A246 /* Images.xcassets */,
@@ -304,6 +312,7 @@
 		C31A0DF43AB35DE306863A8E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3B59B0931B0C70EE002D4628 /* Security.framework */,
 				422F1D710949E86B62365152 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -459,6 +468,7 @@
 				3BCBBA591A237EF500A9A246 /* AppDelegate.m in Sources */,
 				3BF6B2741ADBC8BD00CFC50B /* Photo+Create.m in Sources */,
 				3B00845C1B06367A00EA32A3 /* Comment.m in Sources */,
+				3B59B0921B0C70C5002D4628 /* SSKeychain.m in Sources */,
 				3BC3AD251A25EC3100F2C6C0 /* LocationViewController.m in Sources */,
 				3B71FF1D1B0210070023516B /* CustomTableViewCell.m in Sources */,
 				3C2060411B02445700AD71F3 /* LocationDetailsViewController.m in Sources */,

@@ -10,13 +10,15 @@
 #import "HomePageViewController.h"
 #import "Report+Create.h"
 #import "ReportDatabaseAvailability.h"
+#import "SSKeychain.h"
+
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 @interface AppDelegate () <NSURLSessionDownloadDelegate>
 
 @property (copy, nonatomic) void (^jitBitDownloadBackgroundURLSessionCompletionHandler)();
 @property (strong, nonatomic) NSManagedObjectContext *reportDatabaseContext;
-@property (strong, nonatomic) NSURLSession *jitBitDownloadSession;
+
 @property (strong, nonatomic) NSTimer *jitBitForegroundFetchTimer;
 @property (strong, nonatomic) NSMutableDictionary *ticketsFromJitBit;
 @property (strong, nonatomic) NSMutableDictionary *ticketsCustomFieldsFromJitBit;
@@ -87,9 +89,65 @@
      
     }
     
+    
+//    NSString *const KEYCHAIN_SERVICE = @"Estates Audit";
+//    
+//    NSError *error = nil;
+//
+//    NSArray *accounts = [SSKeychain accountsForService:KEYCHAIN_SERVICE];
+//    if([accounts count] > 0){
+//        NSDictionary *account = [accounts objectAtIndex:0];
+//        NSLog(@"account %@", account);
+//        
+//        
+//        NSString *p = [SSKeychain passwordForService:KEYCHAIN_SERVICE account:[account valueForKey:@"acct"]];
+//        
+//        NSLog(@"%@", p);
+//    }else{
+//        BOOL passwordSet = [SSKeychain setPassword:@"cgtest" forService:KEYCHAIN_SERVICE account:@"cgtest" error:&error];
+//        
+//        if ([error code] == SSKeychainErrorNotFound) {
+//            NSLog(@"Password not set");
+//        }
+//    };
+    
     return YES;
 }
 
+
+-(NSString *)encodedCredentials
+{
+    NSString *authValue;
+    
+    NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
+    
+    NSError *error = nil;
+    
+    NSArray *accounts = [SSKeychain accountsForService:ESTATES_AUDIT_KEYCHAIN_SERVICE];
+   
+    if([accounts count] > 0){
+        
+        NSDictionary *account = [accounts objectAtIndex:0];
+        NSLog(@"account %@", account);
+        
+        NSString *user = [account valueForKey:@"acct"];
+        NSString *pass = [SSKeychain passwordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:user];
+     
+        NSString *authStr = [NSString stringWithFormat:@"%@:%@", user, pass];
+        NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
+        authValue = [NSString stringWithFormat: @"Basic %@",[authData base64EncodedStringWithOptions:0]];
+        
+    }else{
+        BOOL passwordSet = [SSKeychain setPassword:@"estatesaudit3" forService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:@"cgormle1@staffmail.ed.ac.uk" error:&error];
+        
+        if ([error code] == SSKeychainErrorNotFound) {
+            NSLog(@"Password not set");
+        }
+    
+    };
+    
+    return authValue;
+}
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
@@ -119,10 +177,10 @@
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration ephemeralSessionConfiguration];
         sessionConfig.allowsCellularAccess = NO;
         sessionConfig.timeoutIntervalForRequest = BACKGROUND_JITBIT_FETCH_TIMEOUT; // want to be a good background citizen!
+
         
-        // TODO:  *********NEED TO ADD SOME USER AUTHENTICATION - can't leave this hardcoded here **********
-        [sessionConfig setHTTPAdditionalHeaders:@{@"Authorization": @"Basic Y2dvcm1sZTFAc3RhZmZtYWlsLmVkLmFjLnVrOmVzdGF0ZXNhdWRpdDM="}];
-        
+        NSString *authValue = [self encodedCredentials];
+        [sessionConfig setHTTPAdditionalHeaders:@{@"Authorization": authValue}];
         
         NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig
                                                               delegate:self    // we MUST have a delegate for background configurations
@@ -262,10 +320,9 @@
             {
                 urlSessionConfig = [NSURLSessionConfiguration backgroundSessionConfiguration:JITBIT_FETCH];
             }
-            
-            
-            // TODO:  *********NEED TO ADD SOME USER AUTHENTICATION - can't leave this hardcoded here **********
-            [urlSessionConfig setHTTPAdditionalHeaders:@{@"Authorization": @"Basic Y2dvcm1sZTFAc3RhZmZtYWlsLmVkLmFjLnVrOmVzdGF0ZXNhdWRpdDM="}];
+ 
+            NSString *authValue = [self encodedCredentials];
+            [urlSessionConfig setHTTPAdditionalHeaders:@{@"Authorization": authValue}];
             
             _jitBitDownloadSession = [NSURLSession sessionWithConfiguration:urlSessionConfig
                                                                    delegate:self    // we MUST have a delegate for background configurations

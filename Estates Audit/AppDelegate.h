@@ -13,8 +13,9 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, copy) void (^onCompletion)(void);
-
+@property (strong, nonatomic) NSURLSession *jitBitDownloadSession;
 - (void)syncWithJitBit;
+-(NSString *)encodedCredentials;
 
 @end
 

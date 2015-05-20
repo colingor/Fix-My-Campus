@@ -11,9 +11,9 @@
 #import "Comment.h"
 #import "Comment+Create.h"
 #import "Report+Create.h"
-
+#import "AppDelegate.h"
 @interface ReportCommentsTableViewController ()
-
+@property (nonatomic, strong) NSString *encodedCredentials;
 @end
 
 @implementation ReportCommentsTableViewController
@@ -21,6 +21,10 @@
 
 - (void)awakeFromNib
 {
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.encodedCredentials  = [appDelegate encodedCredentials];
+    
     [[NSNotificationCenter defaultCenter] addObserverForName:ReportDatabaseAvailabilityNotification
                                                       object:nil
                                                        queue:nil
@@ -42,15 +46,12 @@
     NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
-    
-    // TODO: Credentials in code is bad...
-    [request setValue:@"Basic Y2dvcm1sZTFAc3RhZmZtYWlsLmVkLmFjLnVrOmVzdGF0ZXNhdWRpdDM=" forHTTPHeaderField:@"Authorization"];
+   
     
     // another configuration option is backgroundSessionConfiguration (multitasking API required though)
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    
-    // create the session without specifying a queue to run completion handler on (thus, not main queue)
-    // we also don't specify a delegate (since completion handler is all we need)
+    NSString *authValue = [self encodedCredentials];
+    [configuration setHTTPAdditionalHeaders:@{@"Authorization": authValue}];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
     
     NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {

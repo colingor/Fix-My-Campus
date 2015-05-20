@@ -13,6 +13,7 @@
 #import "HomePageViewController.h"
 #import "EmailSupportTicket.h"
 #import "ViewPhotoViewController.h"
+#import "AppDelegate.h"
 @import MapKit;
 
 @interface SummaryViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
@@ -21,7 +22,11 @@
 @property (weak, nonatomic) IBOutlet UITextView *problemDescription;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
+@property (nonatomic, strong) NSString *encodedCredentials;
 @property (copy, nonatomic) void (^assetsFailureBlock)();
+@property (strong, nonatomic) NSURLSession *jitUploadSession;
+
 -(void) postPhotos:(NSSet *) photos withTicketId:(NSString *) ticketId;
 - (void)postPhoto: (NSData *)imageData ToTicket:(NSString *)ticketId;
 
@@ -34,12 +39,33 @@
 {
     _report = report;
     
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.encodedCredentials  = [appDelegate encodedCredentials];
+    
     self.assetsFailureBlock  = ^(NSError *myerror)
     {
         NSLog(@"Can't get image - %@",[myerror localizedDescription]);
     };
 
 }
+
+
+- (NSURLSession *)jitUploadSession
+{
+    if (!_jitUploadSession) {
+        
+        // another configuration option is backgroundSessionConfiguration (multitasking API required though)
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+        NSString *authValue = [self encodedCredentials];
+        [configuration setHTTPAdditionalHeaders:@{@"Authorization": authValue}];
+        
+        _jitUploadSession = [NSURLSession sessionWithConfiguration:configuration];
+        
+    }
+    return _jitUploadSession;
+}
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -106,19 +132,8 @@
     NSString *postString = [NSString stringWithFormat:@"categoryId=0&body=%@&subject=%@&priorityId=0", body, @"Estates Audit Report"];
     
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    
-    // TODO: Credentials in code is bad...
-    [request setValue:@"Basic Y2dvcm1sZTFAc3RhZmZtYWlsLmVkLmFjLnVrOmVzdGF0ZXNhdWRpdDM=" forHTTPHeaderField:@"Authorization"];
-    
-    // another configuration option is backgroundSessionConfiguration (multitasking API required though)
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    
-    // create the session without specifying a queue to run completion handler on (thus, not main queue)
-    // we also don't specify a delegate (since completion handler is all we need)
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-   
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+
+    NSURLSessionDataTask *task = [self.jitUploadSession dataTaskWithRequest:request
                                             completionHandler:
                                   ^(NSData *data, NSURLResponse *response, NSError *error) {
                                       // this handler is not executing on the main queue, so we can't do UI directly here
@@ -147,14 +162,6 @@
 
 
 -(void)postCustomFieldsToTicket: (NSString *)ticketId{
-   
-    
-    // another configuration option is backgroundSessionConfiguration (multitasking API required though)
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    
-    // create the session without specifying a queue to run completion handler on (thus, not main queue)
-    // we also don't specify a delegate (since completion handler is all we need)
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
     
     NSString *apiStr = [NSString stringWithFormat:@"https://eaudit.jitbit.com/helpdesk/api/SetCustomField"];
     
@@ -162,21 +169,18 @@
 
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
     [request setHTTPMethod:@"POST"];
-   
-    // TODO: Credentials in code is bad...
-    [request setValue:@"Basic Y2dvcm1sZTFAc3RhZmZtYWlsLmVkLmFjLnVrOmVzdGF0ZXNhdWRpdDM=" forHTTPHeaderField:@"Authorization"];
-    
+
     // Description
     NSString *postString = [NSString stringWithFormat:@"ticketId=%@&fieldId=%@&value=%@", ticketId, @"9434", self.report.desc];
-    [self postField:request :postString :session];
+    [self postField:request :postString :self.jitUploadSession];
     
     // Location Description
     postString = [NSString stringWithFormat:@"ticketId=%@&fieldId=%@&value=%@", ticketId, @"9435", self.report.loc_desc];
-    [self postField:request :postString :session];
+    [self postField:request :postString :self.jitUploadSession];
     
     // Lat lon
     postString = [NSString stringWithFormat:@"ticketId=%@&fieldId=%@&value=%@ %@", ticketId, @"9450", self.report.lat, self.report.lon];
-    [self postField:request :postString :session];
+    [self postField:request :postString :self.jitUploadSession];
     
     
 }
@@ -276,17 +280,7 @@
     NSString *postLength = [NSString stringWithFormat:@"%d", [body length]];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     
-    // TODO: Credentials in code is bad...
-    [request setValue:@"Basic Y2dvcm1sZTFAc3RhZmZtYWlsLmVkLmFjLnVrOmVzdGF0ZXNhdWRpdDM=" forHTTPHeaderField:@"Authorization"];
-    
-    // another configuration option is backgroundSessionConfiguration (multitasking API required though)
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    
-    // create the session without specifying a queue to run completion handler on (thus, not main queue)
-    // we also don't specify a delegate (since completion handler is all we need)
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-    
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+    NSURLSessionDataTask *task = [self.jitUploadSession dataTaskWithRequest:request
                                             completionHandler:
                                   ^(NSData *data, NSURLResponse *response, NSError *error) {
                                       // this handler is not executing on the main queue, so we can't do UI directly here
