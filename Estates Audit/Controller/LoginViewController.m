@@ -9,6 +9,8 @@
 #import "LoginViewController.h"
 
 @interface LoginViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
 @end
 
@@ -22,6 +24,35 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)loginClicked:(id)sender {
+    // Do jitBit login stuff
+    
+    NSString *username = [self.usernameTextField text];
+    NSString *password = [self.passwordTextField text];
+    
+    if([self checkLoginDetailsWithUser:username password:password]){
+        // Dismiss
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login problem"
+                                                        message:@"Please supply a username and password"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+    
+}
+
+
+-(BOOL)checkLoginDetailsWithUser:(NSString *) username password:(NSString *)password
+{
+    if([password length] >0 && [username length]> 0){
+        return TRUE;
+    }
+    return FALSE;
 }
 
 /*
