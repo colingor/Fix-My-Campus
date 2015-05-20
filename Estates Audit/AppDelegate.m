@@ -72,8 +72,11 @@
     HomePageViewController *homevc = [[navigationController viewControllers] objectAtIndex:0];
     homevc.managedObjectContext = self.reportDatabaseContext;
     
-    //Fire off a sync when app starts
-    [self syncWithJitBit];
+    //Fire off a sync when app starts if user is logged in
+    if([[self encodedCredentials] length] > 0){
+        [self syncWithJitBit];
+    }
+   
     
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     

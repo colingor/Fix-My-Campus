@@ -217,13 +217,13 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EeU-gF-zlT">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Co3-Qx-Ukd">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -756,6 +756,61 @@
             </objects>
             <point key="canvasLocation" x="-674.39999999999998" y="482.80000000000001"/>
         </scene>
+        <!--Login-->
+        <scene sceneID="jIu-Lv-We6">
+            <objects>
+                <viewController title="Login" id="bme-IP-L2m" customClass="LoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3bC-Ja-awj"/>
+                        <viewControllerLayoutGuide type="bottom" id="RlB-na-eaY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ppH-cO-H0h">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sml-ea-dpg">
+                                <rect key="frame" x="16" y="87" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cbv-E7-Fd1">
+                                <rect key="frame" x="16" y="183" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlI-qr-6D7">
+                                <rect key="frame" x="102" y="269" width="116" height="30"/>
+                                <color key="backgroundColor" red="0.69803921570000005" green="0.50196078430000002" blue="0.027450980390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginClicked:" destination="bme-IP-L2m" eventType="touchUpInside" id="Bjf-ug-mNv"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.1960784314" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="sml-ea-dpg" firstAttribute="top" secondItem="3bC-Ja-awj" secondAttribute="bottom" constant="67" id="0zi-Xo-2cW"/>
+                            <constraint firstItem="cbv-E7-Fd1" firstAttribute="top" secondItem="sml-ea-dpg" secondAttribute="bottom" constant="66" id="1Wu-K2-JDK"/>
+                            <constraint firstItem="cbv-E7-Fd1" firstAttribute="trailing" secondItem="ppH-cO-H0h" secondAttribute="trailingMargin" id="AmJ-Wi-RO1"/>
+                            <constraint firstItem="sml-ea-dpg" firstAttribute="leading" secondItem="cbv-E7-Fd1" secondAttribute="leading" id="DPW-eX-HA1"/>
+                            <constraint firstItem="xlI-qr-6D7" firstAttribute="centerY" secondItem="ppH-cO-H0h" secondAttribute="centerY" id="FDR-vf-ntR"/>
+                            <constraint firstItem="xlI-qr-6D7" firstAttribute="centerX" secondItem="cbv-E7-Fd1" secondAttribute="centerX" id="OBK-nZ-UYk"/>
+                            <constraint firstItem="sml-ea-dpg" firstAttribute="leading" secondItem="ppH-cO-H0h" secondAttribute="leadingMargin" id="VwR-aE-Mqk"/>
+                            <constraint firstItem="xlI-qr-6D7" firstAttribute="leading" secondItem="ppH-cO-H0h" secondAttribute="leadingMargin" constant="86" id="bQq-zF-dML"/>
+                            <constraint firstItem="cbv-E7-Fd1" firstAttribute="trailing" secondItem="sml-ea-dpg" secondAttribute="trailing" id="d05-YK-NF5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="passwordTextField" destination="cbv-E7-Fd1" id="7ug-Bh-wWc"/>
+                        <outlet property="usernameTextField" destination="sml-ea-dpg" id="WRX-hw-q0c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g4X-yR-ZPN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-675" y="1367"/>
+        </scene>
         <!--Home-->
         <scene sceneID="YgG-ew-7g2">
             <objects>
@@ -855,6 +910,9 @@ as they are resolved</string>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DKg-Ae-4Hv"/>
+                    <connections>
+                        <segue destination="bme-IP-L2m" kind="modal" identifier="Login" id="9v5-LN-ywL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ojH-44-bkc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

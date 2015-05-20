@@ -15,9 +15,24 @@
 
 @implementation HomePageViewController
 
+#define UNWIND_SEGUE_IDENTIFIER @"Login"
+
+
+-(IBAction) unwindToHome:(UIStoryboardSegue *)segue {
+    NSLog(@"Home page");
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // Check if logged in
+    
+    
+    // If not, pop up login view
+    [self performSegueWithIdentifier:UNWIND_SEGUE_IDENTIFIER sender:self];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -27,7 +42,11 @@
 }
 
 
+
 #pragma mark - Navigation
+
+
+
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -35,6 +54,11 @@
     // Pass the selected object to the new view controller.
     
    
+    
+    if ([segue.identifier isEqualToString:UNWIND_SEGUE_IDENTIFIER]) {
+        NSLog(@"Calling login");
+    }
+    
     if ([segue.destinationViewController conformsToProtocol:@protocol(AcceptsManagedContext)]) {
             
         // Need to pass managedObjectContext through

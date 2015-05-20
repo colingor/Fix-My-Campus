@@ -16,6 +16,7 @@
 		3B599D191ADBBB27007F4D40 /* AppDelegate+MOC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B599D181ADBBB27007F4D40 /* AppDelegate+MOC.m */; };
 		3B59B0921B0C70C5002D4628 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B59B0911B0C70C5002D4628 /* SSKeychain.m */; };
 		3B59B0941B0C70EE002D4628 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B59B0931B0C70EE002D4628 /* Security.framework */; };
+		3B59B0971B0C9D4D002D4628 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B59B0961B0C9D4D002D4628 /* LoginViewController.m */; };
 		3B5BB0C71AFCC4FF00B5CDD6 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BB0C61AFCC4FF00B5CDD6 /* CoreDataTableViewController.m */; };
 		3B71FF1D1B0210070023516B /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B71FF1C1B0210070023516B /* CustomTableViewCell.m */; };
 		3BA1EDFD1ADFC514004D9470 /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA1EDFC1ADFC514004D9470 /* DescriptionViewController.m */; };
@@ -76,6 +77,8 @@
 		3B59B0901B0C70C5002D4628 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
 		3B59B0911B0C70C5002D4628 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
 		3B59B0931B0C70EE002D4628 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		3B59B0951B0C9D4D002D4628 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = "Estates Audit/Controller/LoginViewController.h"; sourceTree = "<group>"; };
+		3B59B0961B0C9D4D002D4628 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = "Estates Audit/Controller/LoginViewController.m"; sourceTree = "<group>"; };
 		3B5BB0C51AFCC4EA00B5CDD6 /* CoreDataTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
 		3B5BB0C61AFCC4FF00B5CDD6 /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 		3B5BB0CA1B00B27200B5CDD6 /* ReportDatabaseAvailability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReportDatabaseAvailability.h; sourceTree = "<group>"; };
@@ -166,6 +169,8 @@
 		3BC3AD211A25EA6500F2C6C0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3B59B0951B0C9D4D002D4628 /* LoginViewController.h */,
+				3B59B0961B0C9D4D002D4628 /* LoginViewController.m */,
 				3BBF00D61AFCA27D00FA6FC8 /* CoreDataTableViewController */,
 				3B581E7E1B09F1310073C104 /* ReportCommentsTableViewController.h */,
 				3B581E7F1B09F1310073C104 /* ReportCommentsTableViewController.m */,
@@ -466,6 +471,7 @@
 			files = (
 				3BCBBA811A2386A200A9A246 /* Photo.m in Sources */,
 				3BCBBA591A237EF500A9A246 /* AppDelegate.m in Sources */,
+				3B59B0971B0C9D4D002D4628 /* LoginViewController.m in Sources */,
 				3BF6B2741ADBC8BD00CFC50B /* Photo+Create.m in Sources */,
 				3B00845C1B06367A00EA32A3 /* Comment.m in Sources */,
 				3B59B0921B0C70C5002D4628 /* SSKeychain.m in Sources */,
