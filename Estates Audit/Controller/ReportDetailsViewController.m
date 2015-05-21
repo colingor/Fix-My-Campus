@@ -19,6 +19,8 @@
 @interface ReportDetailsViewController ()<MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *locationDescription;
 @property (weak, nonatomic) IBOutlet UIWebView *fullDescription;
+@property (weak, nonatomic) IBOutlet UILabel *photosLabel;
+@property (weak, nonatomic) IBOutlet UILabel *locationDescriptionLabel;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
@@ -66,6 +68,11 @@
         [self.fullDescription loadHTMLString:reportDescription baseURL:nil];
     }else{
         [self.fullDescription loadHTMLString:self.report.body baseURL:nil];
+        [self.photoCollectionView setHidden:YES];
+        [self.locationDescription setHidden:YES];
+        [self.locationDescriptionLabel setHidden:YES];
+        [self.photosLabel setHidden:YES];
+        [self.mapView setHidden:YES];
     }
  
     self.photoCollectionView.delegate = self;

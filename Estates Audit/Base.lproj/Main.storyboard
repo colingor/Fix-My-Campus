@@ -201,8 +201,10 @@
                     <connections>
                         <outlet property="fullDescription" destination="4xJ-Mq-rAR" id="kmn-X1-L1C"/>
                         <outlet property="locationDescription" destination="5ac-RO-hzU" id="RrA-HL-VfP"/>
+                        <outlet property="locationDescriptionLabel" destination="Sqe-HE-v0k" id="eqA-iF-qH6"/>
                         <outlet property="mapView" destination="QZy-k4-9Ch" id="8XC-AL-Bpp"/>
                         <outlet property="photoCollectionView" destination="phd-Hs-EGZ" id="lYJ-BE-iAC"/>
+                        <outlet property="photosLabel" destination="USX-Jz-vAS" id="hr1-hs-omD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u14-sD-Kbj" userLabel="First Responder" sceneMemberID="firstResponder"/>
