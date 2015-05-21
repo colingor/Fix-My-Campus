@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSString *encodedCredentials;
 @property (copy, nonatomic) void (^assetsFailureBlock)();
 @property (strong, nonatomic) NSURLSession *jitUploadSession;
+@property (strong, nonatomic) AppDelegate *appDelegate;
 
 -(void) postPhotos:(NSSet *) photos withTicketId:(NSString *) ticketId;
 - (void)postPhoto: (NSData *)imageData ToTicket:(NSString *)ticketId;
@@ -39,14 +40,21 @@
 {
     _report = report;
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.encodedCredentials  = [appDelegate encodedCredentials];
+    
+    self.encodedCredentials  = [self.appDelegate encodedCredentials];
     
     self.assetsFailureBlock  = ^(NSError *myerror)
     {
         NSLog(@"Can't get image - %@",[myerror localizedDescription]);
     };
 
+}
+
+-(AppDelegate *)appDelegate{
+    if (!_appDelegate) {
+        _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    }
+    return _appDelegate;
 }
 
 
@@ -218,6 +226,9 @@
         }
     
     }
+    
+    // Update - hopefully this will bring down the ticket id
+    [self.appDelegate syncWithJitBit];
     
 }
 
