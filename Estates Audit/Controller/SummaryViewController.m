@@ -189,28 +189,34 @@
     for( Photo * photo in self.report.photos ){
         NSURL *assetUrl = [NSURL URLWithString:photo.url];
         
+        if([[assetUrl scheme] isEqualToString:@"assets-library"]){
         
-        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset){
-            ALAssetRepresentation *rep = [myasset defaultRepresentation];
-            CGImageRef iref = [rep fullResolutionImage];
-            
-            if (iref) {
-                UIImage *fullSize = [UIImage imageWithCGImage:iref];
-                NSData *imageData = UIImageJPEGRepresentation(fullSize, 1.0);
-                [self postPhoto:imageData ToTicket:ticketId];
+            ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset){
+                ALAssetRepresentation *rep = [myasset defaultRepresentation];
+                CGImageRef iref = [rep fullResolutionImage];
                 
-            }
-        };
-        
-        ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
-        [
-         assetslibrary assetForURL:assetUrl
-         resultBlock:resultblock
-         failureBlock: ^(NSError *myerror)
-         {
-             NSLog(@"Can't get image - %@",[myerror localizedDescription]);
-         }];
-        
+                if (iref) {
+                    UIImage *fullSize = [UIImage imageWithCGImage:iref];
+                    NSData *imageData = UIImageJPEGRepresentation(fullSize, 1.0);
+                    [self postPhoto:imageData ToTicket:ticketId];
+                    
+                }
+            };
+            
+            ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+            [
+             assetslibrary assetForURL:assetUrl
+             resultBlock:resultblock
+             failureBlock: ^(NSError *myerror)
+             {
+                 NSLog(@"Can't get image - %@",[myerror localizedDescription]);
+             }];
+        } else {
+            UIImage *image = [UIImage imageWithContentsOfFile:photo.url];
+            NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+            [self postPhoto:imageData ToTicket:ticketId];
+        }
+    
     }
     
 }
@@ -350,41 +356,42 @@
     Photo *photo = self.photos[indexPath.row];
     NSURL *assetUrl = [NSURL URLWithString:photo.url];
     
-    ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
-    {
-        CGImageRef iref = [myasset thumbnail];
-        if (iref) {
-            UIImage *thumbImage = [UIImage imageWithCGImage:iref];
-               dispatch_async(dispatch_get_main_queue(), ^{
-        /* This is the main thread again, where we set the tableView's image to
-         be what we just fetched. */
+    if([[assetUrl scheme] isEqualToString:@"assets-library"]){
     
-            UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
-            photoImageView.image = thumbImage;
-            [cell setNeedsLayout];
+        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
+        {
+            CGImageRef iref = [myasset thumbnail];
+            if (iref) {
+                UIImage *thumbImage = [UIImage imageWithCGImage:iref];
+                   dispatch_async(dispatch_get_main_queue(), ^{
+            /* This is the main thread again, where we set the tableView's image to
+             be what we just fetched. */
+        
+                UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
+                photoImageView.image = thumbImage;
+                [cell setNeedsLayout];
+                }
+            );
+                
+         
             }
-        );
-            
-     
-        }
-    };
-    
-    ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
-    {
-        NSLog(@"Can't get image - %@",[myerror localizedDescription]);
-    };  
-    
-    ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
-    [assetslibrary assetForURL:assetUrl
-                   resultBlock:resultblock
-                  failureBlock:failureblock];
-
-   
-    
+        };
+        
+        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
+        {
+            NSLog(@"Can't get image - %@",[myerror localizedDescription]);
+        };  
+        
+        ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+        [assetslibrary assetForURL:assetUrl
+                       resultBlock:resultblock
+                      failureBlock:failureblock];
+    } else {
+        UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
+        [photoImageView setImage:[UIImage imageWithContentsOfFile:photo.url]];
+    }
     
     return cell;
-
-
 }
 
 

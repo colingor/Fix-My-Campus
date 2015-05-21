@@ -117,7 +117,7 @@
  
     Photo *photo = self.photos[indexPath.row];
     NSURL *assetUrl = [NSURL URLWithString:photo.url];
-    
+    NSLog(@"%@", photo.url);
     if([[assetUrl scheme] isEqualToString:@"assets-library"]){
         
         ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
@@ -146,18 +146,17 @@
         [assetslibrary assetForURL:assetUrl
                        resultBlock:resultblock
                       failureBlock:failureblock];
-    }else{
+    }else if ([photo.url hasPrefix:@"http"]){
         
         UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
         [photoImageView sd_setImageWithURL:assetUrl
                           placeholderImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout"]];
+    } else {
+        UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
+        [photoImageView setImage:[UIImage imageWithContentsOfFile:photo.url]];
     }
     
-
-    
     return cell;
-
-
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

@@ -32,31 +32,80 @@
 -(void) loadImageAsset{
     NSURL *assetUrl = [NSURL URLWithString:self.photo.url];
     
-    
-    ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset){
-        ALAssetRepresentation *rep = [myasset defaultRepresentation];
-        CGImageRef iref = [rep fullResolutionImage];
+    if([[assetUrl scheme] isEqualToString:@"assets-library"]){
+        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset){
+            ALAssetRepresentation *rep = [myasset defaultRepresentation];
+            CGImageRef iref = [rep fullResolutionImage];
+            
+            if (iref) {
+                UIImage *fullSize = [UIImage imageWithCGImage:iref];
+                
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.imageView setImage:fullSize];
+                });
+                
+                
+            }
+        };
         
-        if (iref) {
-            UIImage *fullSize = [UIImage imageWithCGImage:iref];
+        ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+        [
+         assetslibrary assetForURL:assetUrl
+         resultBlock:resultblock
+         failureBlock: ^(NSError *myerror)
+         {
+             NSLog(@"Can't get image - %@",[myerror localizedDescription]);
+         }];
+    } else if ([self.photo.url hasPrefix:@"http"]){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSURL *imageURL = [NSURL URLWithString:self.photo.url];
+            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+            UIImage *image = [UIImage imageWithData:imageData];
+            UIImage *scaledImage = [self imageWithImage:image
+                                       scaledToMaxWidth:[self.imageView bounds].size.width
+                                              maxHeight:[self.imageView bounds].size.height];
             
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.imageView setImage:fullSize];
-            });
-            
-            
-        }
-    };
+            [self imageView].contentMode = UIViewContentModeScaleAspectFit;
+            [self.imageView setImage:scaledImage];
+        });
+    } else {
+        UIImage *fullSize = [UIImage imageWithContentsOfFile:self.photo.url];
+        UIImage *scaledImage = [self imageWithImage:fullSize
+                                   scaledToMaxWidth:[self.imageView bounds].size.width
+                                          maxHeight:[self.imageView bounds].size.height];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self imageView].contentMode = UIViewContentModeScaleAspectFit;
+            [self.imageView setImage:scaledImage];
+        });
+    }
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)size {
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        UIGraphicsBeginImageContextWithOptions(size, NO, [[UIScreen mainScreen] scale]);
+    } else {
+        UIGraphicsBeginImageContext(size);
+    }
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     
-    ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
-    [
-     assetslibrary assetForURL:assetUrl
-     resultBlock:resultblock
-     failureBlock: ^(NSError *myerror)
-     {
-         NSLog(@"Can't get image - %@",[myerror localizedDescription]);
-     }];
+    return newImage;
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToMaxWidth:(CGFloat)width maxHeight:(CGFloat)height {
+    CGFloat oldWidth = image.size.width;
+    CGFloat oldHeight = image.size.height;
+    
+    CGFloat scaleFactor = (oldWidth > oldHeight) ? width / oldWidth : height / oldHeight;
+    
+    CGFloat newHeight = oldHeight * scaleFactor;
+    CGFloat newWidth = oldWidth * scaleFactor;
+    CGSize newSize = CGSizeMake(newWidth, newHeight);
+    
+    return [self imageWithImage:image scaledToSize:newSize];
 }
 
 /*
