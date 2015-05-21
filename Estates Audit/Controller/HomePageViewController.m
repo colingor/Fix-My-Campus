@@ -11,6 +11,7 @@
 #import "AcceptsManagedContext.h"
 #import "AppDelegate.h"
 @interface HomePageViewController ()
+@property (strong, nonatomic) AppDelegate *appDelegate;
 
 @end
 
@@ -19,23 +20,25 @@
 #define UNWIND_SEGUE_IDENTIFIER @"Login"
 
 
--(IBAction) unwindToHome:(UIStoryboardSegue *)segue {
-    NSLog(@"Home page");
-    //Maybe a call to syn with jitbit?
-    
-    
+-(AppDelegate *)appDelegate{
+    if (!_appDelegate) {
+        _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    }
+    return _appDelegate;
 }
 
 
+-(IBAction) unwindToHome:(UIStoryboardSegue *)segue {
+    NSLog(@"Home page");
+    //Do a sync with jitbit
+    [self.appDelegate syncWithJitBit];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
- 
+   
     // Check if logged in
-    if(![appDelegate isLoggedIn]){
+    if(![self.appDelegate isLoggedIn]){
         // If not, pop up login view
         [self performSegueWithIdentifier:UNWIND_SEGUE_IDENTIFIER sender:self];
     }
