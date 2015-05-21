@@ -18,7 +18,8 @@
 
 @interface ReportDetailsViewController ()<MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *locationDescription;
-@property (weak, nonatomic) IBOutlet UITextView *fullDescription;
+@property (weak, nonatomic) IBOutlet UIWebView *fullDescription;
+
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @end
@@ -58,7 +59,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.locationDescription.text =  self.report.loc_desc;
-    self.fullDescription.text = self.report.desc;
+    
+    NSString *reportDescription = self.report.desc;
+  
+    if(reportDescription){
+        [self.fullDescription loadHTMLString:reportDescription baseURL:nil];
+    }else{
+        [self.fullDescription loadHTMLString:self.report.body baseURL:nil];
+    }
+ 
     self.photoCollectionView.delegate = self;
     self.photoCollectionView.dataSource = self;
     self.photos =  [NSArray arrayWithArray:[self.report.photos allObjects]];
