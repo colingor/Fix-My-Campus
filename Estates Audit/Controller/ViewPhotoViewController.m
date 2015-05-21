@@ -28,8 +28,7 @@
 }
 
 
-
--(void) loadImageAsset{
+- (void) loadImageAsset{
     NSURL *assetUrl = [NSURL URLWithString:self.photo.url];
     
     if([[assetUrl scheme] isEqualToString:@"assets-library"]){
@@ -38,49 +37,39 @@
             CGImageRef iref = [rep fullResolutionImage];
             
             if (iref) {
-                UIImage *fullSize = [UIImage imageWithCGImage:iref];
-                
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.imageView setImage:fullSize];
-                });
-                
-                
+                UIImage *image = [UIImage imageWithCGImage:iref];
+                [self scaleThenPopulateImageViewWithImage:image];
             }
         };
         
         ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
-        [
-         assetslibrary assetForURL:assetUrl
-         resultBlock:resultblock
-         failureBlock: ^(NSError *myerror)
-         {
-             NSLog(@"Can't get image - %@",[myerror localizedDescription]);
-         }];
-    } else if ([self.photo.url hasPrefix:@"http"]){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSURL *imageURL = [NSURL URLWithString:self.photo.url];
-            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-            UIImage *image = [UIImage imageWithData:imageData];
-            UIImage *scaledImage = [self imageWithImage:image
-                                       scaledToMaxWidth:[self.imageView bounds].size.width
-                                              maxHeight:[self.imageView bounds].size.height];
-            
-            [self imageView].contentMode = UIViewContentModeScaleAspectFit;
-            [self.imageView setImage:scaledImage];
-        });
+        [assetslibrary assetForURL:assetUrl
+                       resultBlock:resultblock
+                      failureBlock: ^(NSError *myerror){
+                          NSLog(@"Can't get image - %@",[myerror localizedDescription]);
+                      }];
+    } else if (([[assetUrl scheme] isEqualToString:@"http"]) || ([[assetUrl scheme] isEqualToString:@"https"])){
+        NSData *imageData = [NSData dataWithContentsOfURL:assetUrl];
+        UIImage *image = [UIImage imageWithData:imageData];
+        [self scaleThenPopulateImageViewWithImage:image];
     } else {
-        UIImage *fullSize = [UIImage imageWithContentsOfFile:self.photo.url];
-        UIImage *scaledImage = [self imageWithImage:fullSize
-                                   scaledToMaxWidth:[self.imageView bounds].size.width
-                                          maxHeight:[self.imageView bounds].size.height];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self imageView].contentMode = UIViewContentModeScaleAspectFit;
-            [self.imageView setImage:scaledImage];
-        });
+        UIImage *image = [UIImage imageWithContentsOfFile:self.photo.url];
+        [self scaleThenPopulateImageViewWithImage:image];
     }
 }
+
+
+- (void) scaleThenPopulateImageViewWithImage:(UIImage *)image {
+    UIImage *scaledImage = [self imageWithImage:image
+                               scaledToMaxWidth:[self.imageView bounds].size.width
+                                      maxHeight:[self.imageView bounds].size.height];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self imageView].contentMode = UIViewContentModeScaleAspectFit;
+        [self.imageView setImage:scaledImage];
+    });
+}
+
 
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)size {
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
@@ -95,6 +84,7 @@
     return newImage;
 }
 
+
 - (UIImage *)imageWithImage:(UIImage *)image scaledToMaxWidth:(CGFloat)width maxHeight:(CGFloat)height {
     CGFloat oldWidth = image.size.width;
     CGFloat oldHeight = image.size.height;
@@ -107,6 +97,7 @@
     
     return [self imageWithImage:image scaledToSize:newSize];
 }
+
 
 /*
  #pragma mark - Navigation
