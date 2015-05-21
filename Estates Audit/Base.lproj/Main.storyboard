@@ -768,13 +768,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sml-ea-dpg">
-                                <rect key="frame" x="16" y="87" width="288" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sml-ea-dpg">
+                                <rect key="frame" x="16" y="131" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cbv-E7-Fd1">
-                                <rect key="frame" x="16" y="183" width="288" height="30"/>
+                                <rect key="frame" x="16" y="227" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
@@ -786,7 +786,6 @@
                                 </state>
                                 <connections>
                                     <action selector="loginClicked:" destination="bme-IP-L2m" eventType="touchUpInside" id="Bjf-ug-mNv"/>
-                                    <segue destination="JLJ-0P-ZKb" kind="unwind" unwindAction="unwindToHome:" id="Bfd-nZ-SjN"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -803,9 +802,13 @@
                             <constraint firstItem="cbv-E7-Fd1" firstAttribute="trailing" secondItem="sml-ea-dpg" secondAttribute="trailing" id="d05-YK-NF5"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Login" id="2PE-oy-Zy3">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="E0a-UX-rJ5"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="passwordTextField" destination="cbv-E7-Fd1" id="7ug-Bh-wWc"/>
                         <outlet property="usernameTextField" destination="sml-ea-dpg" id="WRX-hw-q0c"/>
+                        <segue destination="JLJ-0P-ZKb" kind="unwind" identifier="goHome" unwindAction="unwindToHome:" id="HwY-kn-SxQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g4X-yR-ZPN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -913,7 +916,7 @@ as they are resolved</string>
                     </view>
                     <navigationItem key="navigationItem" id="DKg-Ae-4Hv"/>
                     <connections>
-                        <segue destination="bme-IP-L2m" kind="modal" identifier="Login" id="9v5-LN-ywL"/>
+                        <segue destination="bme-IP-L2m" kind="push" identifier="Login" id="9v5-LN-ywL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ojH-44-bkc" userLabel="First Responder" sceneMemberID="firstResponder"/>
