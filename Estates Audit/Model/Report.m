@@ -20,6 +20,7 @@
 @dynamic lon;
 @dynamic status;
 @dynamic ticket_id;
+@dynamic body;
 @dynamic is_updated;
 @dynamic photos;
 @dynamic comments;

@@ -10,6 +10,7 @@
         <relationship name="report" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Report" inverseName="photos" inverseEntity="Report" syncable="YES"/>
     </entity>
     <entity name="Report" representedClassName="Report" syncable="YES">
+        <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="is_updated" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="issue_date" optional="YES" attributeType="Date" syncable="YES"/>
@@ -22,8 +23,8 @@
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Photo" inverseName="report" inverseEntity="Photo" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Photo" positionX="2484" positionY="2568" width="128" height="75"/>
-        <element name="Report" positionX="2106" positionY="2556" width="128" height="193"/>
         <element name="Comment" positionX="1879" positionY="2556" width="128" height="88"/>
+        <element name="Photo" positionX="2484" positionY="2568" width="128" height="75"/>
+        <element name="Report" positionX="2106" positionY="2556" width="128" height="208"/>
     </elements>
 </model>

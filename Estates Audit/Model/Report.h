@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSString * loc_desc;
 @property (nonatomic, retain) NSNumber * lon;
 @property (nonatomic, retain) NSString * status;
+@property (nonatomic, retain) NSString * body;
 @property (nonatomic, retain) NSNumber * ticket_id;
 @property (nonatomic, retain) NSNumber * is_updated; 
 @property (nonatomic, retain) NSSet *photos;

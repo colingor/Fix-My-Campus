@@ -96,6 +96,7 @@
     report.lat = (NSNumber *)[reportDictionary valueForKeyPath:@"lat"];
     report.status = (NSString *)[reportDictionary valueForKeyPath:@"status"];
     report.issue_date = [NSDate date];
+    report.body = (NSString *)[reportDictionary valueForKeyPath:@"body"];
  
     
     NSNumber *ticketId = [reportDictionary valueForKeyPath:@"ticket_id"];
@@ -189,6 +190,8 @@
             
             NSString *status = [ticket valueForKey:@"Status"];
             NSString *ticketId = [ticket valueForKey:@"TicketID"];
+            NSString *body = [ticket valueForKeyPath:@"Body"];
+            
             NSArray *remoteImages = [ticket valueForKeyPath:@"Attachments"];
             
             NSMutableArray *remoteImageUrls = [[NSMutableArray alloc] init];
@@ -212,6 +215,7 @@
             
             [report setValue: status forKey:@"status"];
             [report setValue: ticketId forKey:@"ticket_id"];
+            [report setValue: body forKey:@"body"];
             [report setObject: remoteImageUrls forKey:@"remoteImageUrls"];
             
             
