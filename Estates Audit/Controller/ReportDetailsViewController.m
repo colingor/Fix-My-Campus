@@ -17,7 +17,7 @@
 @import MapKit;
 
 @interface ReportDetailsViewController ()<MKMapViewDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *locationDescription;
+@property (weak, nonatomic) IBOutlet UITextView *locationDescription;
 @property (weak, nonatomic) IBOutlet UITextView *fullDescription;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
