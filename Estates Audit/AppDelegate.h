@@ -20,6 +20,7 @@
 -(void)syncWithJitBit;
 -(void)setUserName:(NSString *)username withPassword:(NSString *)password;
 -(BOOL)isLoggedIn;
+-(void)deleteCredentialsForUser:(NSString *)username;
 
 @end
 

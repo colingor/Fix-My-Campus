@@ -134,6 +134,11 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
     }
 }
 
+-(void)deleteCredentialsForUser:(NSString *)username
+{
+    [SSKeychain deletePasswordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:username];
+    self.username = nil;
+}
 
 -(BOOL)isLoggedIn
 {
@@ -147,10 +152,7 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
 {
     NSString *authValue;
 
-    NSError *error = nil;
-//    [SSKeychain deletePasswordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:@"cgormle1@staffmail.ed.ac.uk"];
-    NSArray *accounts = [SSKeychain accountsForService:ESTATES_AUDIT_KEYCHAIN_SERVICE];
-    
+    NSArray *accounts = [SSKeychain accountsForService:ESTATES_AUDIT_KEYCHAIN_SERVICE];    
  
     if([accounts count] > 0){
         
@@ -171,7 +173,7 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
         
         NSString *authStr = [NSString stringWithFormat:@"%@:%@", user, pass];
         NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
-        authValue = [NSString stringWithFormat: @"Basic %@",[authData base64EncodedStringWithOptions:0]];
+        return authValue = [NSString stringWithFormat: @"Basic %@",[authData base64EncodedStringWithOptions:0]];
     };
     
     return authValue;

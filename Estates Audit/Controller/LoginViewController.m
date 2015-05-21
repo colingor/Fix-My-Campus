@@ -64,12 +64,16 @@
                 // Ensure we're on the main thread
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
+                    // Delete username and pass from keychain
+                    [appDelegate deleteCredentialsForUser: username];
+                    
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login problem"
                                                                     message:@"Please supply a valid username and password"
                                                                    delegate:nil
                                                           cancelButtonTitle:@"OK"
                                                           otherButtonTitles:nil];
                     [alert show];
+                 
                 });
             }else{
                 // Don't care about results - just the fact there wasn't an error means the credentials are ok. Dismiss login modal.
