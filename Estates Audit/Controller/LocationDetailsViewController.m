@@ -116,9 +116,13 @@ enum AlertButtonIndex : NSInteger
     NSString *latStr = [NSString stringWithFormat:@"%@", [self.location valueForKeyPath:@"geometry.coordinates"][1]];
     NSNumber *lat = [f numberFromString:latStr];
     
+    NSString *imageStem = [item valueForKeyPath:@"image"];
+    NSString *imagePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingFormat:@"/%@/%@%@", IMAGES_DIR, imageStem, IMAGE_SUFFIX];
+    
     [reportDictionary setValue:loc_desc forKey:@"loc_desc"];
     [reportDictionary setValue:lon forKey:@"lon"];
     [reportDictionary setValue:lat forKey:@"lat"];
+    [reportDictionary setValue:imagePath forKey:@"photo_url"];
     
     return reportDictionary;
 }
