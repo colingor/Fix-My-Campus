@@ -12,6 +12,8 @@
 #import "Report+Create.h"
 #import <CoreLocation/CoreLocation.h>
 #import "GeoJSONSerialization.h"
+#import "Photo+Create.h"
+
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
@@ -32,6 +34,12 @@
 
 -(IBAction) unwindToMainMenu:(UIStoryboardSegue *)segue {
     if ([self reportDict]){
+        if ([self report]){
+            // delete existing photo if there is one
+            for (Photo *photo in [self.report.photos allObjects]) {
+                [[self managedObjectContext] deleteObject:photo];
+            }
+        }
         self.descriptionText.text = [self.reportDict valueForKey:@"loc_desc"];
         self.userSpecfiedLocation = YES;
     }
@@ -237,6 +245,9 @@
                 Report *report = [Report reportFromReportInfo:self.reportDict inManangedObjectContext:self.managedObjectContext];
                 self.report = report;
             }
+            // Associate any photo in reportDict to the report
+            [Photo photoWithUrl:[self.reportDict valueForKey:@"photo_url"] fromReport:self.report inManagedObjectContext:self.report.managedObjectContext];
+            
             // Set report in next controller
             picvc.report = self.report;
 
