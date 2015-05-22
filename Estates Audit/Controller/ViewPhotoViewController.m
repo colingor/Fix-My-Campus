@@ -30,6 +30,7 @@
 
 - (void) loadImageAsset{
     NSURL *assetUrl = [NSURL URLWithString:self.photo.url];
+    __block UIImage *image;
     
     if([[assetUrl scheme] isEqualToString:@"assets-library"]){
         ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset){
@@ -37,7 +38,7 @@
             CGImageRef iref = [rep fullResolutionImage];
             
             if (iref) {
-                UIImage *image = [UIImage imageWithCGImage:iref];
+                image = [UIImage imageWithCGImage:iref];
                 [self scaleThenPopulateImageViewWithImage:image];
             }
         };
@@ -49,11 +50,13 @@
                           NSLog(@"Can't get image - %@",[myerror localizedDescription]);
                       }];
     } else if (([[assetUrl scheme] isEqualToString:@"http"]) || ([[assetUrl scheme] isEqualToString:@"https"])){
-        NSData *imageData = [NSData dataWithContentsOfURL:assetUrl];
-        UIImage *image = [UIImage imageWithData:imageData];
-        [self scaleThenPopulateImageViewWithImage:image];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:assetUrl];
+            image = [UIImage imageWithData:imageData];
+            [self scaleThenPopulateImageViewWithImage:image];
+        });
     } else {
-        UIImage *image = [UIImage imageWithContentsOfFile:self.photo.url];
+        image = [UIImage imageWithContentsOfFile:self.photo.url];
         [self scaleThenPopulateImageViewWithImage:image];
     }
 }
@@ -63,11 +66,8 @@
     UIImage *scaledImage = [self imageWithImage:image
                                scaledToMaxWidth:[self.imageView bounds].size.width
                                       maxHeight:[self.imageView bounds].size.height];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self imageView].contentMode = UIViewContentModeScaleAspectFit;
-        [self.imageView setImage:scaledImage];
-    });
+    [self imageView].contentMode = UIViewContentModeScaleAspectFit;
+    [self.imageView setImage:scaledImage];
 }
 
 
