@@ -31,7 +31,8 @@
 
 - (void) setReport:(Report *)report
 {
-
+    self.tabBarController.navigationItem.title = @"Report Details";
+    
     [self styleTabBar];
     report.is_updated = @NO;
 

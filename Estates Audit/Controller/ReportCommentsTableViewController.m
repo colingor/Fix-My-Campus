@@ -39,6 +39,28 @@
     [self processComments:self.report];
 }
 
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    self.tabBarController.navigationItem.title = @"Report Comments";
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(buttonAction:)];
+
+    self.tabBarController.navigationItem.rightBarButtonItem = rightButton;
+}
+
+-(void)buttonAction:(id)sender
+{
+    [self performSegueWithIdentifier:@"Reply" sender:sender];
+}
+
+
+-(IBAction) unwindToComments:(UIStoryboardSegue *)segue {
+    NSLog(@"Comments page");
+    //Do a sync with jitbit
+    [self processComments:self.report];
+}
+
 - (void)processComments:(Report *)report
 {
     NSString *apiStr = [NSString stringWithFormat:@"https://eaudit.jitbit.com/helpdesk/api/comments?id=%@", report.ticket_id];
@@ -163,7 +185,13 @@
 #pragma mark - Navigation
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
+    if ([[segue identifier] isEqualToString:@"Reply"])
+    {
+        NSLog(@"Go to reply view");
+//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//        NSDate *object = _objects[indexPath.row];
+//        [[segue destinationViewController] setDetailItem:object];
+    }
 }
 
 
