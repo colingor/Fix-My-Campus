@@ -812,28 +812,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYD-le-pmc">
-                                <rect key="frame" x="16" y="128" width="288" height="438"/>
+                                <rect key="frame" x="0.0" y="120" width="320" height="448"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="438" id="MQH-A8-dNx"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provide a description of the problem:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FD5-fQ-hxh">
-                                <rect key="frame" x="16" y="99" width="284" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please provide a description of the problem you would like to report" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FD5-fQ-hxh">
+                                <rect key="frame" x="16" y="72" width="288" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="eWD-bC-oLM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="UYD-le-pmc" firstAttribute="leading" secondItem="sa8-gd-DYD" secondAttribute="leadingMargin" id="AjB-RL-c7x"/>
-                            <constraint firstItem="UYD-le-pmc" firstAttribute="top" secondItem="FD5-fQ-hxh" secondAttribute="bottom" constant="8" id="DMe-hJ-W0A"/>
-                            <constraint firstItem="FD5-fQ-hxh" firstAttribute="top" secondItem="XSU-lf-IE9" secondAttribute="bottom" constant="35" id="Rkv-e8-sjL"/>
-                            <constraint firstItem="FD5-fQ-hxh" firstAttribute="leading" secondItem="sa8-gd-DYD" secondAttribute="leadingMargin" id="sk9-GA-rmm"/>
-                            <constraint firstItem="UYD-le-pmc" firstAttribute="trailing" secondItem="sa8-gd-DYD" secondAttribute="trailingMargin" id="ymY-yc-V3B"/>
+                            <constraint firstItem="UYD-le-pmc" firstAttribute="bottom" secondItem="TAr-yp-rK5" secondAttribute="top" id="8eq-Mv-ONP"/>
+                            <constraint firstItem="FD5-fQ-hxh" firstAttribute="centerX" secondItem="UYD-le-pmc" secondAttribute="centerX" id="T0d-6Q-KHw"/>
+                            <constraint firstItem="FD5-fQ-hxh" firstAttribute="leading" secondItem="sa8-gd-DYD" secondAttribute="leadingMargin" id="TlQ-aR-cYO"/>
+                            <constraint firstItem="UYD-le-pmc" firstAttribute="leading" secondItem="sa8-gd-DYD" secondAttribute="leading" id="ZKs-8Y-tLv"/>
+                            <constraint firstItem="FD5-fQ-hxh" firstAttribute="top" secondItem="XSU-lf-IE9" secondAttribute="bottom" constant="8" symbolic="YES" id="fWt-jz-vYy"/>
+                            <constraint firstItem="UYD-le-pmc" firstAttribute="top" secondItem="FD5-fQ-hxh" secondAttribute="bottom" constant="8" symbolic="YES" id="ntF-tr-qde"/>
+                            <constraint firstAttribute="trailing" secondItem="UYD-le-pmc" secondAttribute="trailing" id="zfP-uJ-EGK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Description" id="UKY-FZ-PL7">
@@ -849,7 +851,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btz-zI-ALP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1212" y="482.80000000000001"/>
+            <point key="canvasLocation" x="1212" y="482"/>
         </scene>
         <!--Main Navigation-->
         <scene sceneID="8wW-Ms-uZC">
