@@ -49,18 +49,13 @@
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(buttonAction:)];
 
     self.tabBarController.navigationItem.rightBarButtonItem = rightButton;
+    
+    [self refresh:nil];
 }
 
 -(void)buttonAction:(id)sender
 {
     [self performSegueWithIdentifier:@"Reply" sender:sender];
-}
-
-
--(IBAction) unwindToComments:(UIStoryboardSegue *)segue {
-    NSLog(@"Comments page");
-    //Do a sync with jitbit
-    [self processComments:self.report];
 }
 
 - (void)processComments:(Report *)report
