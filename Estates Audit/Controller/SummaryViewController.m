@@ -137,7 +137,21 @@
         [body appendString:[NSString stringWithFormat:@"\n[b]Problem Description[/b]\n\n %@ \n\n", self.report.desc]];
     }
 
-    NSString *postString = [NSString stringWithFormat:@"categoryId=0&body=%@&subject=%@&priorityId=0", body, @"Estates Audit Report"];
+    
+    NSMutableString *subject = [NSMutableString string];
+    
+    NSString *description = self.report.desc;
+    const int clipLength = 50;
+    if([description length]>clipLength)
+    {
+        description = [NSString stringWithFormat:@"%@…",[description substringToIndex:clipLength]];
+    }
+    
+    
+    [subject appendString:[NSString stringWithFormat:@"Esatates Audit Report: %@", description]];
+
+    
+    NSString *postString = [NSString stringWithFormat:@"categoryId=0&body=%@&subject=%@&priorityId=0", body, subject];
     
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
 
