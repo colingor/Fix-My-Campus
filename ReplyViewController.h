@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Report.h"
 
 @interface ReplyViewController : UIViewController
+@property (nonatomic, strong)Report * report;
 
 @end

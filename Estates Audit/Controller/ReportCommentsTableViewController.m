@@ -12,6 +12,8 @@
 #import "Comment+Create.h"
 #import "Report+Create.h"
 #import "AppDelegate.h"
+#import "ReplyViewController.h"
+
 @interface ReportCommentsTableViewController ()
 @property (nonatomic, strong) NSString *encodedCredentials;
 @end
@@ -185,12 +187,11 @@
 #pragma mark - Navigation
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"Reply"])
-    {
-        NSLog(@"Go to reply view");
-//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//        NSDate *object = _objects[indexPath.row];
-//        [[segue destinationViewController] setDetailItem:object];
+     if ([segue.destinationViewController isKindOfClass:[ReplyViewController class]]) {
+        ReplyViewController *rpmvc = (ReplyViewController *)segue.destinationViewController;
+        
+        // Set report in next controller
+        rpmvc.report = self.report;
     }
 }
 
