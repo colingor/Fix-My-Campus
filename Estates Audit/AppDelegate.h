@@ -21,6 +21,7 @@
 -(void)setUserName:(NSString *)username withPassword:(NSString *)password;
 -(BOOL)isLoggedIn;
 -(void)deleteCredentialsForUser:(NSString *)username;
+-(void)deleteCredentials;
 
 @end
 

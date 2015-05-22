@@ -44,6 +44,12 @@
     }
  
 }
+- (IBAction)logout:(id)sender {
+    
+    [self.appDelegate deleteCredentials];
+    [self performSegueWithIdentifier:UNWIND_SEGUE_IDENTIFIER sender:self];
+    
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:NO];

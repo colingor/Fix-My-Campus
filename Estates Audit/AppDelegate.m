@@ -140,6 +140,15 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
     self.username = nil;
 }
 
+-(void)deleteCredentials{
+    
+    NSArray *accounts = [SSKeychain accountsForService:ESTATES_AUDIT_KEYCHAIN_SERVICE];
+    for (id account in accounts){
+        NSString *user = [account valueForKey:@"acct"];
+           [SSKeychain deletePasswordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:user];
+    }
+}
+
 -(BOOL)isLoggedIn
 {
     if([[self encodedCredentials] length] > 0){

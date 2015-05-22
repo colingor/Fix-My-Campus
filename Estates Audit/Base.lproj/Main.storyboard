@@ -963,9 +963,20 @@ as they are resolved</string>
                                             <segue destination="xrO-8q-dMj" kind="push" id="VL8-5R-2Wf"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2SV-GY-SBi">
+                                        <rect key="frame" x="57" y="341" width="116" height="30"/>
+                                        <color key="backgroundColor" red="0.69803921570000005" green="0.50196078430000002" blue="0.027450980390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Logout">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="logout:" destination="PoE-6g-yc7" eventType="touchUpInside" id="wnS-Nf-fAE"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.19607843137254902" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="2SV-GY-SBi" firstAttribute="leading" secondItem="xnG-rz-SbG" secondAttribute="leading" id="0Dk-Ig-Zo1"/>
                                     <constraint firstAttribute="trailing" secondItem="fPK-Lw-FZl" secondAttribute="trailing" constant="7" id="4t7-Gh-DxV"/>
                                     <constraint firstItem="fPK-Lw-FZl" firstAttribute="centerX" secondItem="DtW-8A-otZ" secondAttribute="centerX" id="7mg-tO-Tmj"/>
                                     <constraint firstItem="2Pp-pd-IQG" firstAttribute="top" secondItem="ZuG-IX-nao" secondAttribute="topMargin" id="7pa-yS-E86"/>
@@ -978,9 +989,11 @@ as they are resolved</string>
                                     <constraint firstItem="xnG-rz-SbG" firstAttribute="leading" secondItem="DtW-8A-otZ" secondAttribute="leading" id="ele-DU-wCx"/>
                                     <constraint firstItem="2Pp-pd-IQG" firstAttribute="centerX" secondItem="GTf-vs-hk1" secondAttribute="centerX" id="ggX-Vw-sjD"/>
                                     <constraint firstItem="fPK-Lw-FZl" firstAttribute="leading" secondItem="ZuG-IX-nao" secondAttribute="leading" constant="9" id="kTg-lY-hgY"/>
+                                    <constraint firstItem="2SV-GY-SBi" firstAttribute="top" secondItem="xnG-rz-SbG" secondAttribute="bottom" constant="8" symbolic="YES" id="nEX-sU-a9B"/>
                                     <constraint firstItem="fPK-Lw-FZl" firstAttribute="centerX" secondItem="GTf-vs-hk1" secondAttribute="centerX" id="pHf-lj-bV8"/>
                                     <constraint firstItem="GTf-vs-hk1" firstAttribute="leading" secondItem="ZuG-IX-nao" secondAttribute="leading" constant="49" id="umH-Le-OzN"/>
                                     <constraint firstItem="GTf-vs-hk1" firstAttribute="top" secondItem="2Pp-pd-IQG" secondAttribute="bottom" constant="8" symbolic="YES" id="whF-4t-kKf"/>
+                                    <constraint firstItem="2SV-GY-SBi" firstAttribute="trailing" secondItem="xnG-rz-SbG" secondAttribute="trailing" id="ymf-g7-hY0"/>
                                 </constraints>
                             </view>
                         </subviews>
