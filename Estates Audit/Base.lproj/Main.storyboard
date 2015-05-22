@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bFV-OF-uIC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bFV-OF-uIC">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -332,36 +332,51 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Baz-XX-yze">
-                                <rect key="frame" x="16" y="101" width="288" height="113"/>
+                                <rect key="frame" x="0.0" y="101" width="320" height="113"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="113" id="zmE-32-eaZ"/>
+                                    <constraint firstAttribute="height" constant="113" id="MN0-x8-NeM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5L-0m-I8F">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESCRIPTION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5L-0m-I8F">
                                 <rect key="frame" x="16" y="72" width="288" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="vIF-9c-ujx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bOS-W0-eF6">
-                                <rect key="frame" x="16" y="222" width="288" height="326"/>
+                                <rect key="frame" x="-5" y="251" width="325" height="317"/>
                             </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zD-wg-1On">
+                                <rect key="frame" x="16" y="222" width="288" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="iv3-5k-mZm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="bOS-W0-eF6" firstAttribute="trailing" secondItem="Baz-XX-yze" secondAttribute="trailing" id="B1l-nE-gJe"/>
-                            <constraint firstItem="Baz-XX-yze" firstAttribute="trailing" secondItem="0RP-Be-XrB" secondAttribute="trailingMargin" id="QcS-cs-w0t"/>
-                            <constraint firstItem="Baz-XX-yze" firstAttribute="leading" secondItem="0RP-Be-XrB" secondAttribute="leadingMargin" id="RMU-LF-fV1"/>
-                            <constraint firstItem="J5L-0m-I8F" firstAttribute="top" secondItem="O5V-Yb-UVi" secondAttribute="bottom" constant="8" symbolic="YES" id="Wf9-2T-DVq"/>
-                            <constraint firstItem="J5L-0m-I8F" firstAttribute="leading" secondItem="Baz-XX-yze" secondAttribute="leading" id="Z74-kT-jez"/>
-                            <constraint firstItem="J5L-0m-I8F" firstAttribute="trailing" secondItem="Baz-XX-yze" secondAttribute="trailing" id="fR2-dc-rkG"/>
-                            <constraint firstItem="bOS-W0-eF6" firstAttribute="top" secondItem="Baz-XX-yze" secondAttribute="bottom" constant="8" symbolic="YES" id="fuR-h8-gWt"/>
-                            <constraint firstItem="Baz-XX-yze" firstAttribute="top" secondItem="J5L-0m-I8F" secondAttribute="bottom" constant="8" symbolic="YES" id="gdC-ww-SrN"/>
-                            <constraint firstItem="bOS-W0-eF6" firstAttribute="leading" secondItem="Baz-XX-yze" secondAttribute="leading" id="iBs-sN-Ux1"/>
-                            <constraint firstAttribute="bottom" secondItem="bOS-W0-eF6" secondAttribute="bottom" constant="20" symbolic="YES" id="jwJ-UW-259"/>
+                            <constraint firstItem="J5L-0m-I8F" firstAttribute="leading" secondItem="0RP-Be-XrB" secondAttribute="leadingMargin" id="BCb-iz-wGJ"/>
+                            <constraint firstItem="J5L-0m-I8F" firstAttribute="top" secondItem="O5V-Yb-UVi" secondAttribute="bottom" constant="8" symbolic="YES" id="BGb-Fd-es0"/>
+                            <constraint firstItem="Baz-XX-yze" firstAttribute="leading" secondItem="0RP-Be-XrB" secondAttribute="leading" id="Cd1-ZS-VDK"/>
+                            <constraint firstAttribute="trailing" secondItem="Baz-XX-yze" secondAttribute="trailing" id="Fbb-LQ-uQ0"/>
+                            <constraint firstItem="bOS-W0-eF6" firstAttribute="leading" secondItem="0RP-Be-XrB" secondAttribute="leadingMargin" constant="-21" id="Mrl-tn-Tai"/>
+                            <constraint firstItem="J5L-0m-I8F" firstAttribute="trailing" secondItem="8zD-wg-1On" secondAttribute="trailing" id="O23-ng-hVs"/>
+                            <constraint firstItem="Baz-XX-yze" firstAttribute="top" secondItem="J5L-0m-I8F" secondAttribute="bottom" constant="8" symbolic="YES" id="QVN-Hi-djT"/>
+                            <constraint firstItem="8zD-wg-1On" firstAttribute="top" secondItem="Baz-XX-yze" secondAttribute="bottom" constant="8" symbolic="YES" id="Tg1-ph-taK"/>
+                            <constraint firstItem="8zD-wg-1On" firstAttribute="leading" secondItem="J5L-0m-I8F" secondAttribute="leading" id="Xdv-Ls-40V"/>
+                            <constraint firstItem="bOS-W0-eF6" firstAttribute="trailing" secondItem="Baz-XX-yze" secondAttribute="trailing" id="d2o-j5-Dnl"/>
+                            <constraint firstItem="bOS-W0-eF6" firstAttribute="top" secondItem="8zD-wg-1On" secondAttribute="bottom" constant="8" symbolic="YES" id="eiX-6N-q74"/>
+                            <constraint firstItem="bOS-W0-eF6" firstAttribute="bottom" secondItem="hwr-Ng-tiy" secondAttribute="top" id="l4z-uk-FHr"/>
+                            <constraint firstItem="Baz-XX-yze" firstAttribute="centerX" secondItem="J5L-0m-I8F" secondAttribute="centerX" id="obR-pc-ufE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Location" id="rth-c9-j34">
@@ -379,7 +394,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pGf-Dp-G9O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="264" y="482.80000000000001"/>
+            <point key="canvasLocation" x="264" y="482"/>
         </scene>
         <!--Location Details View Controller-->
         <scene sceneID="VhX-Lk-EhU">
