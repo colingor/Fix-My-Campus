@@ -286,16 +286,26 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADD COMMENT TO REPORT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pCp-2w-cuw">
+                                <rect key="frame" x="16" y="20" width="288" height="21"/>
+                                <accessibility key="accessibilityConfiguration" label="Add a new comment to the report"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="h0z-8i-E9K"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="maJ-3c-GNL">
-                                <rect key="frame" x="16" y="28" width="288" height="188"/>
+                                <rect key="frame" x="0.0" y="49" width="320" height="188"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEh-Fb-5yK">
-                                <rect key="frame" x="137" y="224" width="46" height="30"/>
+                                <rect key="frame" x="137" y="245" width="46" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="7Zu-m3-sZy"/>
+                                    <constraint firstAttribute="width" constant="46" id="zWf-xw-owy"/>
                                 </constraints>
                                 <state key="normal" title="Send">
                                     <color key="titleColor" red="0.0" green="0.1960784314" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -307,12 +317,15 @@
                         </subviews>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="maJ-3c-GNL" firstAttribute="top" secondItem="zr3-0V-Trb" secondAttribute="bottom" constant="8" symbolic="YES" id="0nP-14-S3L"/>
-                            <constraint firstItem="GEh-Fb-5yK" firstAttribute="top" secondItem="maJ-3c-GNL" secondAttribute="bottom" constant="8" symbolic="YES" id="7Gz-Ms-5o1"/>
-                            <constraint firstItem="maJ-3c-GNL" firstAttribute="leading" secondItem="Qer-Kg-Zp1" secondAttribute="leadingMargin" id="Ddj-mA-9XA"/>
-                            <constraint firstItem="maJ-3c-GNL" firstAttribute="trailing" secondItem="Qer-Kg-Zp1" secondAttribute="trailingMargin" id="DgY-3i-dLD"/>
-                            <constraint firstItem="ZRw-Nr-mzt" firstAttribute="top" secondItem="GEh-Fb-5yK" secondAttribute="bottom" constant="314" id="ucS-nC-rXz"/>
-                            <constraint firstItem="maJ-3c-GNL" firstAttribute="centerX" secondItem="GEh-Fb-5yK" secondAttribute="centerX" id="xtT-ub-Wpo"/>
+                            <constraint firstItem="maJ-3c-GNL" firstAttribute="top" secondItem="pCp-2w-cuw" secondAttribute="bottom" constant="8" symbolic="YES" id="28A-m8-iWf"/>
+                            <constraint firstAttribute="trailing" secondItem="maJ-3c-GNL" secondAttribute="trailing" id="5Hu-1R-xz5"/>
+                            <constraint firstItem="pCp-2w-cuw" firstAttribute="centerX" secondItem="maJ-3c-GNL" secondAttribute="centerX" id="9ef-Ww-P3q"/>
+                            <constraint firstItem="pCp-2w-cuw" firstAttribute="top" secondItem="zr3-0V-Trb" secondAttribute="bottom" id="O9p-nX-ae7"/>
+                            <constraint firstItem="ZRw-Nr-mzt" firstAttribute="top" secondItem="GEh-Fb-5yK" secondAttribute="bottom" constant="293" id="Zlo-jW-RfR"/>
+                            <constraint firstItem="GEh-Fb-5yK" firstAttribute="top" secondItem="maJ-3c-GNL" secondAttribute="bottom" constant="8" symbolic="YES" id="nX3-yK-cgd"/>
+                            <constraint firstItem="maJ-3c-GNL" firstAttribute="leading" secondItem="Qer-Kg-Zp1" secondAttribute="leading" id="wXc-me-YkM"/>
+                            <constraint firstItem="pCp-2w-cuw" firstAttribute="leading" secondItem="Qer-Kg-Zp1" secondAttribute="leadingMargin" id="x07-Jd-yd9"/>
+                            <constraint firstItem="GEh-Fb-5yK" firstAttribute="centerX" secondItem="maJ-3c-GNL" secondAttribute="centerX" id="xKJ-PD-mR0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Send Response" id="FYk-ee-YUH">
@@ -328,7 +341,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qh-Rm-7Ou" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="799" y="2370"/>
+            <point key="canvasLocation" x="885" y="2220"/>
         </scene>
         <!--Location-->
         <scene sceneID="7CN-id-3qg">
