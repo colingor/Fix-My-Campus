@@ -42,6 +42,10 @@
     return _appDelegate;
 }
 
+- (IBAction)cancel:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)send:(id)sender {
     
     NSLog(@"Send response to jitbit and return to comments page");

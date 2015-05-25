@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bFV-OF-uIC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bFV-OF-uIC">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -290,7 +290,7 @@
                                 <rect key="frame" x="16" y="20" width="288" height="21"/>
                                 <accessibility key="accessibilityConfiguration" label="Add a new comment to the report"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="h0z-8i-E9K"/>
+                                    <constraint firstAttribute="height" constant="21" id="85Q-bk-Mw5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -303,9 +303,9 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEh-Fb-5yK">
-                                <rect key="frame" x="137" y="245" width="46" height="30"/>
+                                <rect key="frame" x="274" y="245" width="46" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="zWf-xw-owy"/>
+                                    <constraint firstAttribute="width" constant="46" id="2FS-f8-bDC"/>
                                 </constraints>
                                 <state key="normal" title="Send">
                                     <color key="titleColor" red="0.0" green="0.1960784314" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -314,18 +314,33 @@
                                     <action selector="send:" destination="zyH-6f-O41" eventType="touchUpInside" id="SLl-Fa-wVR"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UD-V3-P9G">
+                                <rect key="frame" x="0.0" y="245" width="63" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="63" id="W31-Rf-fFr"/>
+                                </constraints>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.0" green="0.1960784314" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancel:" destination="zyH-6f-O41" eventType="touchUpInside" id="2CE-PV-KnQ"/>
+                                    <action selector="send:" destination="zyH-6f-O41" eventType="touchUpInside" id="BqI-eK-uUA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="maJ-3c-GNL" firstAttribute="top" secondItem="pCp-2w-cuw" secondAttribute="bottom" constant="8" symbolic="YES" id="28A-m8-iWf"/>
-                            <constraint firstAttribute="trailing" secondItem="maJ-3c-GNL" secondAttribute="trailing" id="5Hu-1R-xz5"/>
-                            <constraint firstItem="pCp-2w-cuw" firstAttribute="centerX" secondItem="maJ-3c-GNL" secondAttribute="centerX" id="9ef-Ww-P3q"/>
-                            <constraint firstItem="pCp-2w-cuw" firstAttribute="top" secondItem="zr3-0V-Trb" secondAttribute="bottom" id="O9p-nX-ae7"/>
-                            <constraint firstItem="ZRw-Nr-mzt" firstAttribute="top" secondItem="GEh-Fb-5yK" secondAttribute="bottom" constant="293" id="Zlo-jW-RfR"/>
-                            <constraint firstItem="GEh-Fb-5yK" firstAttribute="top" secondItem="maJ-3c-GNL" secondAttribute="bottom" constant="8" symbolic="YES" id="nX3-yK-cgd"/>
-                            <constraint firstItem="maJ-3c-GNL" firstAttribute="leading" secondItem="Qer-Kg-Zp1" secondAttribute="leading" id="wXc-me-YkM"/>
-                            <constraint firstItem="pCp-2w-cuw" firstAttribute="leading" secondItem="Qer-Kg-Zp1" secondAttribute="leadingMargin" id="x07-Jd-yd9"/>
-                            <constraint firstItem="GEh-Fb-5yK" firstAttribute="centerX" secondItem="maJ-3c-GNL" secondAttribute="centerX" id="xKJ-PD-mR0"/>
+                            <constraint firstItem="maJ-3c-GNL" firstAttribute="leading" secondItem="Qer-Kg-Zp1" secondAttribute="leading" id="BsY-uq-9wT"/>
+                            <constraint firstItem="GEh-Fb-5yK" firstAttribute="baseline" secondItem="5UD-V3-P9G" secondAttribute="baseline" id="EpG-eL-WYS"/>
+                            <constraint firstItem="maJ-3c-GNL" firstAttribute="centerX" secondItem="pCp-2w-cuw" secondAttribute="centerX" id="K38-YR-u4Y"/>
+                            <constraint firstItem="maJ-3c-GNL" firstAttribute="trailing" secondItem="GEh-Fb-5yK" secondAttribute="trailing" id="LwF-Cj-6t2"/>
+                            <constraint firstItem="5UD-V3-P9G" firstAttribute="top" secondItem="maJ-3c-GNL" secondAttribute="bottom" constant="8" symbolic="YES" id="VGW-rY-AtS"/>
+                            <constraint firstItem="maJ-3c-GNL" firstAttribute="leading" secondItem="5UD-V3-P9G" secondAttribute="leading" id="Yf6-Go-57n"/>
+                            <constraint firstAttribute="trailing" secondItem="maJ-3c-GNL" secondAttribute="trailing" id="iGv-Qf-aMJ"/>
+                            <constraint firstItem="maJ-3c-GNL" firstAttribute="top" secondItem="pCp-2w-cuw" secondAttribute="bottom" constant="8" symbolic="YES" id="ng5-hf-8qs"/>
+                            <constraint firstItem="ZRw-Nr-mzt" firstAttribute="top" secondItem="5UD-V3-P9G" secondAttribute="bottom" constant="293" id="p1F-U4-VrW"/>
+                            <constraint firstItem="pCp-2w-cuw" firstAttribute="top" secondItem="zr3-0V-Trb" secondAttribute="bottom" id="rCo-bW-89L"/>
+                            <constraint firstItem="pCp-2w-cuw" firstAttribute="leading" secondItem="Qer-Kg-Zp1" secondAttribute="leadingMargin" id="xZC-Nj-cmf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Send Response" id="FYk-ee-YUH">
