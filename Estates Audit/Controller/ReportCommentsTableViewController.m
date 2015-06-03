@@ -44,9 +44,9 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     
-    self.tabBarController.navigationItem.title = @"Report Comments";
+    self.tabBarController.navigationItem.title = @"Updates";
     
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(buttonAction:)];
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(buttonAction:)];
 
     self.tabBarController.navigationItem.rightBarButtonItem = rightButton;
     

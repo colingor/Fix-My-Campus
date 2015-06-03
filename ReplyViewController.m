@@ -53,43 +53,46 @@
     // Post comment to jitBit
     NSString *text = self.commentsTextView.text;
     
-    //TODO: Check length of text
-    
-    NSString *apiStr = @"https://eaudit.jitbit.com/helpdesk/api/comment";
-    
-    NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
-    [request setHTTPMethod:@"POST"];
-    
-    NSString *postString = [NSString stringWithFormat:@"id=%@&body=%@", self.report.ticket_id, text];
-    
-    [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    // another configuration option is backgroundSessionConfiguration (multitasking API required though)
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
    
-    NSString *authValue = [self.appDelegate encodedCredentials];
-    [configuration setHTTPAdditionalHeaders:@{@"Authorization": authValue}];
-    
-    NSURLSession *session  = [NSURLSession sessionWithConfiguration:configuration];
-
-    
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
-                                            completionHandler:
-                                  ^(NSData *data, NSURLResponse *response, NSError *error) {
-                                      // this handler is not executing on the main queue, so we can't do UI directly here
-                                      if (error) {
-                                          NSLog(@"%@",error);
-                                      }else{
-                                          NSLog(@"Comment posted successfully");
-                                      }
-                                      
-                                  }];
-    [task resume]; // don't forget that all NSURLSession tasks start out suspended!
-    
+    if([text length]> 0){
+        
+        NSString *apiStr = @"https://eaudit.jitbit.com/helpdesk/api/comment";
+        
+        NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
+        [request setHTTPMethod:@"POST"];
+        
+        NSString *postString = [NSString stringWithFormat:@"id=%@&body=%@", self.report.ticket_id, text];
+        
+        [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        // another configuration option is backgroundSessionConfiguration (multitasking API required though)
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+        
+        NSString *authValue = [self.appDelegate encodedCredentials];
+        [configuration setHTTPAdditionalHeaders:@{@"Authorization": authValue}];
+        
+        NSURLSession *session  = [NSURLSession sessionWithConfiguration:configuration];
+        
+        
+        NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                                completionHandler:
+                                      ^(NSData *data, NSURLResponse *response, NSError *error) {
+                                          // this handler is not executing on the main queue, so we can't do UI directly here
+                                          if (error) {
+                                              NSLog(@"%@",error);
+                                          }else{
+                                              NSLog(@"Comment posted successfully");
+                                          }
+                                          
+                                      }];
+        [task resume]; // don't forget that all NSURLSession tasks start out suspended!
+        
+    }
     
     [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 

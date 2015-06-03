@@ -258,7 +258,7 @@
                             <outlet property="delegate" destination="ero-aD-lJB" id="jg3-qF-SrC"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Comments" image="CommentsButton" id="B0v-Rj-yVF"/>
+                    <tabBarItem key="tabBarItem" title="Updates" image="CommentsButton" id="B0v-Rj-yVF"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="zyp-GN-OsI">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.0" green="0.1960784314" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -324,7 +324,6 @@
                                 </state>
                                 <connections>
                                     <action selector="cancel:" destination="zyH-6f-O41" eventType="touchUpInside" id="2CE-PV-KnQ"/>
-                                    <action selector="send:" destination="zyH-6f-O41" eventType="touchUpInside" id="BqI-eK-uUA"/>
                                 </connections>
                             </button>
                         </subviews>
