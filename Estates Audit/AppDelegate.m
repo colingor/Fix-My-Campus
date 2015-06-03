@@ -225,7 +225,7 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
                                                               delegate:self    // we MUST have a delegate for background configurations
                                                          delegateQueue:nil];
         
-        NSString *apiStr = @"https://eaudit.jitbit.com/helpdesk/api/Tickets";
+        NSString *apiStr = @"https://eaudit.jitbit.com/helpdesk/api/Tickets?count=5";
         
         NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
@@ -318,7 +318,7 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
             _ticketsCustomFieldsFromJitBit = [NSMutableDictionary dictionary];
             
             
-            NSString *apiStr = @"https://eaudit.jitbit.com/helpdesk/api/Tickets";
+            NSString *apiStr = @"https://eaudit.jitbit.com/helpdesk/api/Tickets?count=5";
             
             NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
             
