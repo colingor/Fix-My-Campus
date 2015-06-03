@@ -117,16 +117,38 @@
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-    //add the annotation
-    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+    
+    NSString *const LOCATION_PIN_TITLE = @"Report Location";
     
     CLLocationCoordinate2D coord = [userLocation coordinate];
     
-    point.coordinate = coord;
-    point.title = @"Report Location";
-    point.subtitle = @"(Drag if location incorrect)";
+    // Check if location annotation has been added previously
+    NSArray *annotations =  [self.mapView annotations];
     
-    [self.mapView addAnnotation:point];
+    BOOL locationAlreadyOnMap = NO;
+    
+    for (id annotation in annotations){
+        
+        if ([annotation isKindOfClass:[MKPointAnnotation class]]){
+            NSString *title = [annotation title];
+            if ([title isEqualToString:LOCATION_PIN_TITLE]) {
+                // Pin is already on the map so we don't need to create a new one
+                locationAlreadyOnMap = YES;
+                break;
+            }
+        }
+    }
+    
+    //otherwise create new annotation
+    if (!locationAlreadyOnMap) {
+        //add the annotation
+        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+        
+        point.coordinate = coord;
+        point.title = LOCATION_PIN_TITLE;
+        point.subtitle = @"(Drag if location incorrect)";
+        [self.mapView addAnnotation:point];
+    }
     
     // Only update value to be stored if user hasn't specified a location manually
     if (!self.userSpecfiedLocation) {
@@ -145,7 +167,7 @@
             zoomRect = MKMapRectUnion(zoomRect, pointRect);
         }
     }
-    //[mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(110, 50, 50, 50) animated:YES];
+    
     [mapView showAnnotations:mapView.annotations animated:true];
     
 }
@@ -168,6 +190,7 @@
         
         if ([annotation.title isEqualToString:@"Report Location"]){
             pav.draggable = YES;
+            pav.pinColor = MKPinAnnotationColorGreen;
         } else {
             UIButton *rightIconView = [UIButton buttonWithType:UIButtonTypeInfoDark];
             rightIconView.tintColor = [UIColor darkTextColor];
