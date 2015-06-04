@@ -116,6 +116,7 @@
     
 }
 
+
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
     
     NSString *const LOCATION_PIN_TITLE = @"Report Location";
@@ -133,6 +134,8 @@
             NSString *title = [annotation title];
             if ([title isEqualToString:LOCATION_PIN_TITLE]) {
                 // Pin is already on the map so we don't need to create a new one
+                // Just update it's position
+                [annotation setCoordinate:coord];
                 locationAlreadyOnMap = YES;
                 break;
             }
@@ -143,10 +146,9 @@
     if (!locationAlreadyOnMap) {
         //add the annotation
         MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-        
         point.coordinate = coord;
         point.title = LOCATION_PIN_TITLE;
-        point.subtitle = @"(Drag if location incorrect)";
+        point.subtitle = @"(Drag pin if location is incorrect)";
         [self.mapView addAnnotation:point];
     }
     
