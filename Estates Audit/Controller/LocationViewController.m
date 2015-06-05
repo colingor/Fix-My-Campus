@@ -209,7 +209,7 @@
 }
 
 
-- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKPinAnnotationView *)view{
     
     MKPointAnnotation *annotation =  view.annotation;
     if ([annotation isKindOfClass:[CustomMKPointAnnotation class]]){
@@ -217,9 +217,15 @@
         [text appendString:[NSString stringWithFormat:@"%@ \n", annotation.title]];
         [text appendString:annotation.subtitle];
         self.descriptionText.text = text;
+        view.pinColor = MKPinAnnotationColorGreen;
     }
 }
 
+
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKPinAnnotationView *)view{
+    // Reset pin colour
+    view.pinColor = MKPinAnnotationColorRed;
+}
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
