@@ -35,6 +35,7 @@
 		3BCBBA671A237EF500A9A246 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BCBBA651A237EF500A9A246 /* LaunchScreen.xib */; };
 		3BCBBA731A237EF500A9A246 /* Estates_AuditTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA721A237EF500A9A246 /* Estates_AuditTests.m */; };
 		3BCBBA811A2386A200A9A246 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA801A2386A200A9A246 /* Photo.m */; };
+		3BE607431B219AAD00B68507 /* estates.json in Resources */ = {isa = PBXBuildFile; fileRef = 3BE607421B219AAD00B68507 /* estates.json */; };
 		3BF6B2741ADBC8BD00CFC50B /* Photo+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF6B2731ADBC8BD00CFC50B /* Photo+Create.m */; };
 		3BF6B2771ADBC8D000CFC50B /* Report+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF6B2761ADBC8D000CFC50B /* Report+Create.m */; };
 		3C2060411B02445700AD71F3 /* LocationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2060401B02445700AD71F3 /* LocationDetailsViewController.m */; };
@@ -114,6 +115,7 @@
 		3BCBBA721A237EF500A9A246 /* Estates_AuditTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Estates_AuditTests.m; sourceTree = "<group>"; };
 		3BCBBA7F1A2386A200A9A246 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Photo.h; path = Model/Photo.h; sourceTree = "<group>"; };
 		3BCBBA801A2386A200A9A246 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Photo.m; path = Model/Photo.m; sourceTree = "<group>"; };
+		3BE607421B219AAD00B68507 /* estates.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = estates.json; sourceTree = "<group>"; };
 		3BF6B2721ADBC8BD00CFC50B /* Photo+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photo+Create.h"; sourceTree = "<group>"; };
 		3BF6B2731ADBC8BD00CFC50B /* Photo+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Photo+Create.m"; sourceTree = "<group>"; };
 		3BF6B2751ADBC8D000CFC50B /* Report+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Report+Create.h"; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 		3BCBBA531A237EF500A9A246 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3BE607421B219AAD00B68507 /* estates.json */,
 				3B59B0901B0C70C5002D4628 /* SSKeychain.h */,
 				3B59B0911B0C70C5002D4628 /* SSKeychain.m */,
 				3C7D92601B00FA6600503300 /* Edinburgh.gpx */,
@@ -416,6 +419,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BE607431B219AAD00B68507 /* estates.json in Resources */,
 				7DFD69291AEE840B002F608B /* photo-frame.png in Resources */,
 				7DCB426A1AF777550037C939 /* camera_roll.png in Resources */,
 				3BCBBA621A237EF500A9A246 /* Main.storyboard in Resources */,

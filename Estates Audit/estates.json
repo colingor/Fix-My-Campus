@@ -1,0 +1,2594 @@
+{
+    "locations": [
+        {
+            "abbreviation": "0401", 
+            "address": "1 Mound Place  Edinburgh EH1 2LU", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9496683956151100", 
+            "longitude": "-3.1952404975891113", 
+            "name": "New College"
+        }, 
+        {
+            "abbreviation": "0008", 
+            "address": "20-22 Chambers Street Edinburgh EH1 1JZ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9477940726016200", 
+            "longitude": "-3.1889104843139650", 
+            "name": "Minto House"
+        }, 
+        {
+            "abbreviation": "0005", 
+            "address": "Chambers Street Edinburgh EH1 1HT", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9480253641625750", 
+            "longitude": "-3.1873387098312380", 
+            "name": "Adam House"
+        }, 
+        {
+            "abbreviation": "0301", 
+            "address": "Niddry Street Cowgate Edinburgh EH1 1NQ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9488904424293240", 
+            "longitude": "-3.1864374876022340", 
+            "name": "St Cecilia's Hall"
+        }, 
+        {
+            "abbreviation": "0551", 
+            "address": "Holyrood Road  Edinburgh EH8 8AQ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9501219441207600", 
+            "longitude": "-3.1797266006469727", 
+            "name": "Paterson's Land"
+        }, 
+        {
+            "address": "2 Hope Park Square  Edinburgh EH8 9NW", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9421564768384060", 
+            "longitude": "-3.1862405911101632", 
+            "name": "Institute for Advanced Studies in the Humanities"
+        }, 
+        {
+            "address": "48 - 60 Pleasance  Edinburgh EH8 9TJ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [], 
+            "latitude": "55.9478586541505150", 
+            "longitude": "-3.1819045543670654", 
+            "name": "Pleasance"
+        }, 
+        {
+            "abbreviation": "0001", 
+            "address": "South Bridge  Edinburgh EH8 9YL", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9474035772206400", 
+            "longitude": "-3.1872797012329100", 
+            "name": "Old College"
+        }, 
+        {
+            "address": "Main University Library 30 George Square Edinburgh EH8 9LJ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9427473673666640", 
+            "longitude": "-3.1888836622238160", 
+            "name": "Student Disability Service"
+        }, 
+        {
+            "abbreviation": "0110", 
+            "address": "12 Nicolson Square Edinburgh EH8 9DF", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9461119105979900", 
+            "longitude": "-3.1863999366760254", 
+            "name": "Alison House"
+        }, 
+        {
+            "abbreviation": "0108", 
+            "address": "5/2 Bristo Square Edinburgh EH8 9AL", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9461719890707060", 
+            "longitude": "-3.1879234313964844", 
+            "name": "Potterow"
+        }, 
+        {
+            "address": "University of Edinburgh Business School 29 Buccleuch Place Edinburgh EH8 9JS", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9431078681228900", 
+            "longitude": "-3.1873118877410890", 
+            "name": "Business School"
+        }, 
+        {
+            "abbreviation": "0104", 
+            "address": "11b Bristo Place Edinburgh EH1 1EZ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9463762551806900", 
+            "longitude": "-3.1908202171325684", 
+            "name": "Bedlam Theatre"
+        }, 
+        {
+            "abbreviation": "0113", 
+            "address": "Teviot Place Edinburgh EH8 9AG", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9452347542822000", 
+            "longitude": "-3.1905627250671387", 
+            "name": "Medical School (Old Medical School)"
+        }, 
+        {
+            "abbreviation": "0114", 
+            "address": "Teviot Place Edinburgh EH8 9AG", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9453789457260800", 
+            "longitude": "-3.1896400451660156", 
+            "name": "McEwan Hall"
+        }, 
+        {
+            "address": "Bristo Square Edinburgh EH8 9AL", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9448983054919800", 
+            "longitude": "-3.1894040107727050", 
+            "name": "Reid Concert Hall"
+        }, 
+        {
+            "abbreviation": "0116", 
+            "address": "Bristo Square Edinburgh EH8 9AL", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9449583858474800", 
+            "longitude": "-3.1889533996582030", 
+            "name": "Teviot Row House"
+        }, 
+        {
+            "abbreviation": "0210", 
+            "address": "George Square Edinburgh EH8 9XD", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9442794724061900", 
+            "longitude": "-3.1899189949035645", 
+            "name": "Hugh Robson Building"
+        }, 
+        {
+            "address": "33 Buccluech Place Edinburgh EH8 9JT", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9431904824069100", 
+            "longitude": "-3.1854477524757385", 
+            "name": "International Office"
+        }, 
+        {
+            "abbreviation": "0201", 
+            "address": "11 Crichton Street Edinburgh EH8 9LE", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9444416917442200", 
+            "longitude": "-3.1870651245117188", 
+            "name": "Appleton Tower"
+        }, 
+        {
+            "address": "55-56 George Square Edinburgh EH8 9JU", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9439970889746000", 
+            "longitude": "-3.1872582435607910", 
+            "name": "College of Humanities and Social Sciences Office"
+        }, 
+        {
+            "abbreviation": "0227", 
+            "address": "50 George Square Edinburgh EH8 9JY", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9438408759789600", 
+            "longitude": "-3.1871938705444336", 
+            "name": "George Square (50)"
+        }, 
+        {
+            "abbreviation": "0229", 
+            "address": "George Square Edinburgh EH8 9LX", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9435644975969700", 
+            "longitude": "-3.1862711906433105", 
+            "name": "David Hume Tower Lecture Theatres"
+        }, 
+        {
+            "abbreviation": "0228", 
+            "address": "George Square Edinburgh EH8 9JX", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9432040010911400", 
+            "longitude": "-3.1866574287414550", 
+            "name": "David Hume Tower"
+        }, 
+        {
+            "address": "Main University Library 30 George Square Edinburgh EH8 9LJ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9427804134090100", 
+            "longitude": "-3.1886690855026245", 
+            "name": "Student Counselling Service"
+        }, 
+        {
+            "address": "Main University Library 30 George Square Edinburgh EH8 9LJ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9426602458471200", 
+            "longitude": "-3.1894576549530030", 
+            "name": "Careers Service (Central Area)"
+        }, 
+        {
+            "address": "Paterson's Land Holyrood Road Edinburgh EH8 8AQ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9501339585784900", 
+            "longitude": "-3.1795978546142580", 
+            "name": "Office of Lifelong Learning"
+        }, 
+        {
+            "address": "  Edinburgh ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [], 
+            "latitude": "55.9424709811810700", 
+            "longitude": "-3.1877517700195312", 
+            "name": "International Students Centre"
+        }, 
+        {
+            "address": "30 George Square Edinburgh EH8 9LJ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9427113171064800", 
+            "longitude": "-3.1891465187072754", 
+            "name": "Main University Library"
+        }, 
+        {
+            "abbreviation": "0225", 
+            "address": "George Square Edinburgh EH8 9LH", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9428795513669100", 
+            "longitude": "-3.1882023811340330", 
+            "name": "George Square Lecture Theatre"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9476258596895300", 
+            "longitude": "-3.1814968585968018", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9480403830473400", 
+            "longitude": "-3.1815397739410400", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9484248645138750", 
+            "longitude": "-3.1809175014495850", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9481365037718850", 
+            "longitude": "-3.1834065914154053", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9486426355260000", 
+            "longitude": "-3.1835433840751650", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9484579057117840", 
+            "longitude": "-3.1842970848083496", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9486141000838100", 
+            "longitude": "-3.1856220960617065", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9469845412586900", 
+            "longitude": "-3.1840369105339050", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9482506468223660", 
+            "longitude": "-3.1892564892768860", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9459797376299760", 
+            "longitude": "-3.1876552104949950", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9451686663576600", 
+            "longitude": "-3.1904876232147217", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9445933962510300", 
+            "longitude": "-3.1900584697723390", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9442614479933500", 
+            "longitude": "-3.1862604618072510", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9440451543849600", 
+            "longitude": "-3.1866574287414550", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9435104233350300", 
+            "longitude": "-3.1857562065124510", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9424349306636160", 
+            "longitude": "-3.1886422634124756", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9427413589922860", 
+            "longitude": "-3.1879019737243652", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9423072514778000", 
+            "longitude": "-3.1877490878105164", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9425701199310000", 
+            "longitude": "-3.1850534677505493", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Public Parking"
+            ], 
+            "latitude": "55.9476919434207200", 
+            "longitude": "-3.1885671615600586", 
+            "name": "Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Student Unions"
+            ], 
+            "latitude": "55.9449944340160300", 
+            "longitude": "-3.1886208057403564", 
+            "name": "Teviot Row House"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Student Unions"
+            ], 
+            "latitude": "55.9460097769805000", 
+            "longitude": "-3.1882989406585693", 
+            "name": "The Potterow"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Student Unions"
+            ], 
+            "latitude": "55.9477400042452760", 
+            "longitude": "-3.1815505027770996", 
+            "name": "Pleasance"
+        }, 
+        {
+            "address": "Murchison House West Mains Road Edinburgh EH9 3LA", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9242852441090000", 
+            "longitude": "-3.1791687011718750", 
+            "name": "British Geological Survey"
+        }, 
+        {
+            "abbreviation": "0622", 
+            "address": "King's Buildings Max Born Crescent Edinburgh EH9 3BF", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9231491035277340", 
+            "longitude": "-3.1792438030242920", 
+            "name": "Weir Building"
+        }, 
+        {
+            "abbreviation": "0621", 
+            "address": "King's Buildings Alexander Crum Brown Road Edinburgh EH9 3FF", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9230950007645600", 
+            "longitude": "-3.1776666641235350", 
+            "name": "Crew Building"
+        }, 
+        {
+            "abbreviation": "0632", 
+            "address": "David Brewster Road King's Buildings Edinburgh EH9 3FJ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9236600703440500", 
+            "longitude": "-3.1762075424194336", 
+            "name": "Joseph Black Building"
+        }, 
+        {
+            "abbreviation": "0648", 
+            "address": "Alexander Crum Brown Road King's Buildings Edinburgh EH9 3FF", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9223014848946700", 
+            "longitude": "-3.1764221191406250", 
+            "name": "Roger Land Building"
+        }, 
+        {
+            "address": "Nicholas Kemmer Road King's Buildings Edinburgh EH9 3FH", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9216221743117100", 
+            "longitude": "-3.1765186786651610", 
+            "name": "Peter Wilson Building"
+        }, 
+        {
+            "address": "James Hutton Road King's Buildings Edinburgh EH9 3FE", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9238464212712600", 
+            "longitude": "-3.1746411323547363", 
+            "name": "Grant Institute"
+        }, 
+        {
+            "abbreviation": "0637", 
+            "address": "KB Square King's Buildings Edinburgh EH9 3DL", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9235759115671200", 
+            "longitude": "-3.1748771667480470", 
+            "name": "King's Buildings House"
+        }, 
+        {
+            "abbreviation": "0639", 
+            "address": "Thomas Bayes Road King's Buildings Edinburgh EH9 3FG", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9229447149150500", 
+            "longitude": "-3.1746411323547363", 
+            "name": "King's Buildings Centre"
+        }, 
+        {
+            "abbreviation": "0613", 
+            "address": "Peter Guthrie Tait Road King's Buildings Edinburgh EH9 3FD", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9216702674879260", 
+            "longitude": "-3.1740939617156982", 
+            "name": "James Clerk Maxwell Building"
+        }, 
+        {
+            "abbreviation": "0640-0644", 
+            "address": "Charlotte Auerbach Road King's Buildings Edinburgh EH9 3FL", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9239606359128100", 
+            "longitude": "-3.1727099418640137", 
+            "name": "Ashworth Laboratories"
+        }, 
+        {
+            "address": "Robert Stevenson Road King's Buildings Edinburgh EH9 3FB", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9231010121864360", 
+            "longitude": "-3.1717228889465330", 
+            "name": "Sanderson Building"
+        }, 
+        {
+            "abbreviation": "0605", 
+            "address": "Colin Maclaurin Road  King's Buildings Edinburgh EH9 3DW", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9227328108771200", 
+            "longitude": "-3.1732544302940370", 
+            "name": "John Muir Building"
+        }, 
+        {
+            "abbreviation": "0602", 
+            "address": "Colin Maclaurin Road King's Buildings Edinburgh EH9 3DW", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9225239114362440", 
+            "longitude": "-3.1713366508483887", 
+            "name": "Hudson Beare Building"
+        }, 
+        {
+            "abbreviation": "0616", 
+            "address": "Max Born Crescent King's Buildings Edinburgh EH9 3BF", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9221632191038440", 
+            "longitude": "-3.1714224815368652", 
+            "name": "Alrick Building"
+        }, 
+        {
+            "abbreviation": "0608", 
+            "address": "Max Born Crescent King's Buildings Edinburgh EH9 3BF", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9219287672878450", 
+            "longitude": "-3.1706821918487550", 
+            "name": "Daniel Rutherford Building"
+        }, 
+        {
+            "abbreviation": "0610", 
+            "address": "Max Born Crescent King's Buildings Edinburgh EH9 3BF", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9214177776469500", 
+            "longitude": "-3.1710684299468994", 
+            "name": "Darwin Building"
+        }, 
+        {
+            "address": "Max Born Crescent King's Buildings Edinburgh EH9 3BF", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9216101510083200", 
+            "longitude": "-3.1719267368316650", 
+            "name": "Michael Swann Building"
+        }, 
+        {
+            "address": "James Hutton Road King's Buildings Edinburgh EH9 3FE", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9234316389528840", 
+            "longitude": "-3.1734287738800050", 
+            "name": "John Murray Building"
+        }, 
+        {
+            "abbreviation": "0647", 
+            "address": "James Hutton Road King's Buildings Edinburgh EH9 3FE", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9234436616912500", 
+            "longitude": "-3.1728494167327880", 
+            "name": "March Building"
+        }, 
+        {
+            "abbreviation": "0652", 
+            "address": "Thomas Bayes Road King's Buildings Edinburgh EH9 3FG", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9231070236073500", 
+            "longitude": "-3.1738901138305664", 
+            "name": "Ann Walker Building"
+        }, 
+        {
+            "address": "Colin Maclaurin Road King's Buildings Edinburgh EH9 3DW", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9229086462244400", 
+            "longitude": "-3.1726777553558350", 
+            "name": "Structures Lab"
+        }, 
+        {
+            "abbreviation": "0615", 
+            "address": "Colin Maclaurin Road King's Buildings Edinburgh EH9 3DW", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9224096925608100", 
+            "longitude": "-3.1723880767822266", 
+            "name": "Fleeming Jenkin Building"
+        }, 
+        {
+            "address": "King's Buildings Thomas Bayes Road Edinburgh EH9 3FG", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9222684213808400", 
+            "longitude": "-3.1727340817451477", 
+            "name": "Alexander Graham Bell Building"
+        }, 
+        {
+            "abbreviation": "0617", 
+            "address": "King's Buildings Alexander Crum Brown Road Edinburgh EH9 3FF", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9222173231676800", 
+            "longitude": "-3.1778705120086670", 
+            "name": "Scottish Micro Electronic Centre"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9239906923415000", 
+            "longitude": "-3.1778919696807860", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9232543031288400", 
+            "longitude": "-3.1778034567832947", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9228785889566300", 
+            "longitude": "-3.1787717342376710", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9222473809483000", 
+            "longitude": "-3.1787717342376710", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9216822907726600", 
+            "longitude": "-3.1783533096313477", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9233835479621400", 
+            "longitude": "-3.1754243373870850", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9223796349060650", 
+            "longitude": "-3.1759715080261230", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9221271496860060", 
+            "longitude": "-3.1752204895019530", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9212915321097200", 
+            "longitude": "-3.1752982735633850", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9242070979398600", 
+            "longitude": "-3.1744909286499023", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9223976695017100", 
+            "longitude": "-3.1734126806259155", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9240688389469500", 
+            "longitude": "-3.1730532646179200", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9238464212712600", 
+            "longitude": "-3.1722700595855713", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9230228636295200", 
+            "longitude": "-3.1713151931762695", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9226621759403700", 
+            "longitude": "-3.1722700595855713", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9213020525868460", 
+            "longitude": "-3.1717818975448610", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9214237893289550", 
+            "longitude": "-3.1723666191101074", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Permit Parking"
+            ], 
+            "latitude": "55.9218566279822160", 
+            "longitude": "-3.1710791587829590", 
+            "name": "KB Parking"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Student Unions"
+            ], 
+            "latitude": "55.9235699002189000", 
+            "longitude": "-3.1749415397644043", 
+            "name": "King's House Building"
+        }, 
+        {
+            "address": "18 Holyrood Park Road Edinburgh EH16 5AY", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9403791945471550", 
+            "longitude": "-3.1718409061431885", 
+            "name": "Pollock Halls of Residence"
+        }, 
+        {
+            "address": "160 Causewayside Edinburgh EH9 1PR", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [], 
+            "latitude": "55.9366964622319640", 
+            "longitude": "-3.1805607676506042", 
+            "name": "Causewayside House"
+        }, 
+        {
+            "abbreviation": "0905", 
+            "address": "1 Marchhall Crescent Edinburgh EH16 5HP", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9374401075255800", 
+            "longitude": "-3.1692230701446533", 
+            "name": "Abden House"
+        }, 
+        {
+            "address": "South College Street Edinburgh EH8 9AA", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9469785335416740", 
+            "longitude": "-3.1870731711387634", 
+            "name": "South College Street"
+        }, 
+        {
+            "address": "George Square Edinburgh EH8 9JZ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9435284480973960", 
+            "longitude": "-3.1886315345764160", 
+            "name": "George Square"
+        }, 
+        {
+            "address": "10 Crichton Street Edinburgh EH8 9AB", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9446652929679200", 
+            "longitude": "-3.1875371932983400", 
+            "name": "Informatics Forum"
+        }, 
+        {
+            "address": "3 Charles Street Edinburgh EH8 9AD", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9451506423586760", 
+            "longitude": "-3.1878590583801270", 
+            "name": "Dugald Stewart Building"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Information"
+            ], 
+            "latitude": "55.9449283456813800", 
+            "longitude": "-3.1877517700195312"
+        }, 
+        {
+            "abbreviation": "0603", 
+            "address": "Colin Maclaurin Road King's Buildings Edinburgh EH9 3DW", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9223360512652800", 
+            "longitude": "-3.1716692447662354", 
+            "name": "Faraday Building"
+        }, 
+        {
+            "address": "49 Little France Crescent Edinburgh EH16 4SB", 
+            "campuses": [
+                "Little France"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9220181396980500", 
+            "longitude": "-3.1368756294250490", 
+            "name": "Chancellor's Building"
+        }, 
+        {
+            "address": "47 Little France Crescent Edinburgh EH16 4TJ", 
+            "campuses": [
+                "Little France"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9222413693940400", 
+            "longitude": "-3.1388711929321290", 
+            "name": "Queen's Medical Research Institute"
+        }, 
+        {
+            "address": "15a George Square Edinburgh EH8 9LD", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9441765328811300", 
+            "longitude": "-3.1908416748046875", 
+            "name": "Chrystal Macmillan Building"
+        }, 
+        {
+            "address": "2 Charles Street Edinburgh EH8 9AD", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9449575847889100", 
+            "longitude": "-3.1877624988555910", 
+            "name": "Visitor Centre"
+        }, 
+        {
+            "address": "Old College South Bridge Edinburgh EH8 9YL", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9471933088459540", 
+            "longitude": "-3.1878644227981567", 
+            "name": "Talbot Rice Gallery"
+        }, 
+        {
+            "abbreviation": "0009", 
+            "address": "9-16 Chambers Street Edinburgh EH1 1HT", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9479614837865200", 
+            "longitude": "-3.1879770755767822", 
+            "name": "Charles Stewart House"
+        }, 
+        {
+            "abbreviation": "0701", 
+            "address": "Easter Bush Midlothian Edinburgh EH25 9RG", 
+            "campuses": [
+                "Easter Bush"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.8658360390777300", 
+            "longitude": "-3.2010340690612793", 
+            "name": "Royal (Dick) School of Veterinary Studies"
+        }, 
+        {
+            "address": "Buccleuch Place Edinburgh ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9428735430130360", 
+            "longitude": "-3.1865286827087402", 
+            "name": "Buccleuch Place"
+        }, 
+        {
+            "abbreviation": "0658", 
+            "address": "Peter Guthrie Tait Road King's Buildings Edinburgh EH9 3FD", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9213997425953900", 
+            "longitude": "-3.1745553016662598", 
+            "name": "Erskine Williamson Building"
+        }, 
+        {
+            "abbreviation": "0109", 
+            "address": "6 Bristo Square Edinburgh EH8 9AL", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9458580780220500", 
+            "longitude": "-3.1881996989250183", 
+            "name": "Health Centre"
+        }, 
+        {
+            "address": "Thomas Bayes Road King's Buildings Edinburgh EH9 3FG", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9225299229466700", 
+            "longitude": "-3.1731122732162476", 
+            "name": "William Rankine Building"
+        }, 
+        {
+            "abbreviation": "0560", 
+            "address": "Holyrood Road Edinburgh EH8 8AQ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9496439659261800", 
+            "longitude": "-3.1819206476211550", 
+            "name": "St Mary's Land"
+        }, 
+        {
+            "abbreviation": "0559", 
+            "address": "Holyrood Road Edinburgh EH8 8AQ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9501515797825100", 
+            "longitude": "-3.1817919015884400", 
+            "name": "Chessel's Land"
+        }, 
+        {
+            "address": "Holyrood Road Edinburgh EH8 8AQ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9496877190955150", 
+            "longitude": "-3.1813278794288635", 
+            "name": "Weir's Land"
+        }, 
+        {
+            "abbreviation": "0558", 
+            "address": "Holyrood Road Edinburgh EH8 8AQ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9501515797825100", 
+            "longitude": "-3.1809121370315550", 
+            "name": "Charteris Land"
+        }, 
+        {
+            "abbreviation": "0561", 
+            "address": "186 -198 Canongate Edinburgh EH8 8AQ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9509011741071300", 
+            "longitude": "-3.1815370917320250", 
+            "name": "Simon Laurie House"
+        }, 
+        {
+            "abbreviation": "0553", 
+            "address": "Holyrood Edinburgh EH8 8AQ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9508486118686200", 
+            "longitude": "-3.1810247898101807", 
+            "name": "St John's Land"
+        }, 
+        {
+            "abbreviation": "0552", 
+            "address": "Holyrood Edinburgh EH8 8AQ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9506295517108000", 
+            "longitude": "-3.1807351112365723", 
+            "name": "Dalhousie Land"
+        }, 
+        {
+            "abbreviation": "0556", 
+            "address": "Holyrood Edinburgh EH8 8AQ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9504253080368300", 
+            "longitude": "-3.1806653738021850", 
+            "name": "Old Nursery School Building"
+        }, 
+        {
+            "abbreviation": "0555", 
+            "address": "Holyrood Edinburgh EH8 8AQ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9507765263969360", 
+            "longitude": "-3.1800457835197450", 
+            "name": "Thomson's Land"
+        }, 
+        {
+            "address": "Holyrood Edinburgh EH8 8AQ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9510920995776900", 
+            "longitude": "-3.1804883480072020", 
+            "name": "Moray House Reception / Old Moray House"
+        }, 
+        {
+            "address": "Easter Bush Midlothian Edinburgh EH25 9RG", 
+            "campuses": [
+                "Easter Bush"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.8654627786743400", 
+            "longitude": "-3.1981158256530760", 
+            "name": "Roslin Institute"
+        }, 
+        {
+            "address": "13 Infirmary Street Edinburgh EH1 1LT", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9483617857850800", 
+            "longitude": "-3.1851929426193237", 
+            "name": "Procurement Office incorporating Printing Services"
+        }, 
+        {
+            "address": "Levinson House 20 West Richmond Street Edinburgh EH8 9DX", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9455922279190640", 
+            "longitude": "-3.1835299730300903", 
+            "name": "MacKenzie Medical Centre"
+        }, 
+        {
+            "abbreviation": "0322", 
+            "address": "1 Roxburgh Street Edinburgh EH8 9TA", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9478807820734050", 
+            "longitude": "-3.1833046674728394", 
+            "name": "Roxburgh Street (1)"
+        }, 
+        {
+            "address": "Crewe Road South  Edinburgh EH4 2XU", 
+            "campuses": [
+                "Western General"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9620294457321560", 
+            "longitude": "-3.2348728179931640", 
+            "name": "Western General Hospital"
+        }, 
+        {
+            "abbreviation": "0271-0272", 
+            "address": "Hope Park Square  Edinburgh EH8 9NW", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [], 
+            "latitude": "55.9420752097637600", 
+            "longitude": "-3.1860485672950745", 
+            "name": "Hope Park Square"
+        }, 
+        {
+            "address": "Weir Building Max Born Crescent Edinburgh EH9 3BF", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9232092176204700", 
+            "longitude": "-3.1792491674423218", 
+            "name": "Careers Service (King's Buildings)"
+        }, 
+        {
+            "address": "Max Born Crescent King's Buildings Edinburgh EH9 3BF", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9216402092597900", 
+            "longitude": "-3.1700813770294190", 
+            "name": "C.H. Waddington Building"
+        }, 
+        {
+            "address": "George Square Edinburgh EH8 9JZ.", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9438284590276300", 
+            "longitude": "-3.1895273923873900", 
+            "name": "Labyrinth"
+        }, 
+        {
+            "address": "7 George Square Edinburgh EH8 9JZ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9444785414622100", 
+            "longitude": "-3.1886368989944460", 
+            "name": "Psychology Building"
+        }, 
+        {
+            "address": "Easter Bush Midlothian Edinburgh EH25 9RG", 
+            "campuses": [
+                "Easter Bush"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.8650834942677400", 
+            "longitude": "-3.2022893428802490", 
+            "name": "Hospital for Small Animals"
+        }, 
+        {
+            "address": "Max Born Crescent  King's Buildings Edinburgh EH9 3BF", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9235578775196900", 
+            "longitude": "-3.1785035133361816", 
+            "name": "Old Faculty Office"
+        }, 
+        {
+            "address": "9-11 Infirmary Street EH1 1NP  ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9483347520127000", 
+            "longitude": "-3.1853377819061280", 
+            "name": "Infirmary Street (9-11)"
+        }, 
+        {
+            "address": "7 Bristo Square Edinburgh EH8 9AL", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9456913586793300", 
+            "longitude": "-3.1881058216094970", 
+            "name": "Bristo Square (7)"
+        }, 
+        {
+            "address": "18 Holyrood Park Road Edinburgh EH16 5AY", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9400090542789300", 
+            "longitude": "-3.1700706481933594", 
+            "name": "John McIntyre Conference Centre"
+        }, 
+        {
+            "address": "Surgeons Square High School Yards Edinburgh EH1 1LZ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9484864412690800", 
+            "longitude": "-3.1831464171409607", 
+            "name": "Old Surgeons' Hall"
+        }, 
+        {
+            "address": "1 Drummond Street Edinburgh EH8 9XP", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9482334252486500", 
+            "longitude": "-3.1837606430053710", 
+            "name": "Old Infirmary (Geography)"
+        }, 
+        {
+            "address": "High School Yards Edinburgh EH1 1LZ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9486869905629200", 
+            "longitude": "-3.1829774379730225", 
+            "name": "Drummond Library (GeoSciences)"
+        }, 
+        {
+            "address": "1 Surgeons Square High School Yards Edinburgh EH1 1LZ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9488491914385600", 
+            "longitude": "-3.1830418109893800", 
+            "name": "Chisholm House"
+        }, 
+        {
+            "address": "1 Drummond Street Edinburgh EH1 1LZ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9482574553323400", 
+            "longitude": "-3.1829130649566650", 
+            "name": "Drummond Street Annex"
+        }, 
+        {
+            "address": "78 Westport Edinburgh EH1 2LE", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9460736605762700", 
+            "longitude": "-3.2005995512008667", 
+            "name": "Evolution House"
+        }, 
+        {
+            "address": "Lauriston Place Edinburgh EH3 9DF", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9451282124570850", 
+            "longitude": "-3.1980729103088380", 
+            "name": "Hunter Building"
+        }, 
+        {
+            "address": "Lauriston Place Edinburgh EH3 9DF", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9458551741833600", 
+            "longitude": "-3.1990599632263184", 
+            "name": "ECA Main Building"
+        }, 
+        {
+            "address": "Lauriston Place Edinburgh EH3 9DF", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9459633160840540", 
+            "longitude": "-3.1978046894073486", 
+            "name": "ECA Architecture Building"
+        }, 
+        {
+            "address": "Doorway 4 Teviot Place Edinburgh EH8 9AG", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9450080521798600", 
+            "longitude": "-3.1907665729522705", 
+            "name": "William Robertson Wing"
+        }, 
+        {
+            "address": "30-31 Buccleuch Place Edinburgh EH8 9JT", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9431288972300800", 
+            "longitude": "-3.1860029697418213", 
+            "name": "Economics, School of"
+        }, 
+        {
+            "address": "Edinburgh bioQuarter 5 Little France Drive Edinburgh EH16 4UU", 
+            "campuses": [
+                "Little France"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9213756958468900", 
+            "longitude": "-3.1307816505432130", 
+            "name": "Scottish Centre for Regenerative Medicine"
+        }, 
+        {
+            "address": "47 Little France Crescent Edinburgh EH16 4TJ", 
+            "campuses": [
+                "Little France"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9218746628211960", 
+            "longitude": "-3.1395041942596436", 
+            "name": "Clinical Research Imaging Centre"
+        }, 
+        {
+            "address": "Easter Bush Roslin Edinburgh EH25 9RG", 
+            "campuses": [
+                "Easter Bush"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.8647884927243440", 
+            "longitude": "-3.2020211219787598", 
+            "name": "Riddell-Swan Veterinary Cancer Centre"
+        }, 
+        {
+            "address": "Easter Bush Campus Edinburgh EH25 9RG", 
+            "campuses": [
+                "Easter Bush"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.8642948116602700", 
+            "longitude": "-3.1992530822753906", 
+            "name": "Equine Hospital"
+        }, 
+        {
+            "address": "Easter Bush Roslin Edinburgh EH25 9RG", 
+            "campuses": [
+                "Easter Bush"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.8665524481898640", 
+            "longitude": "-3.1989848613739014", 
+            "name": "Easter Bush Campus Service Centre"
+        }, 
+        {
+            "address": "Easter Bush Roslin Edinburgh EH25 9RG", 
+            "campuses": [
+                "Easter Bush"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.8648005336474900", 
+            "longitude": "-3.1983304023742676", 
+            "name": "Sir Alexander Robertson Building"
+        }, 
+        {
+            "address": "Easter Bush Roslin Edinburgh EH25 9RG", 
+            "campuses": [
+                "Easter Bush"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.8648607382074200", 
+            "longitude": "-3.1991994380950928", 
+            "name": "Farm Animal Practice and Equine Clinical Unit"
+        }, 
+        {
+            "address": "Easter Bush Roslin Edinburgh EH25 9RG", 
+            "campuses": [
+                "Easter Bush"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.8641382773298200", 
+            "longitude": "-3.1998538970947266", 
+            "name": "Farm Animal Hospital"
+        }, 
+        {
+            "address": "Easter Bush Roslin Edinburgh EH25 9RG", 
+            "campuses": [
+                "Easter Bush"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.8637529593674600", 
+            "longitude": "-3.1989204883575440", 
+            "name": "Scintigraphy and Exotic Animal Unit"
+        }, 
+        {
+            "address": "Western General Hospital Edinburgh EH4 2XU", 
+            "campuses": [
+                "Western General"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9628822006132100", 
+            "longitude": "-3.2382416725158690", 
+            "name": "Biomedical Research Facility"
+        }, 
+        {
+            "address": "Western General Hospital Edinburgh EH4 2XU", 
+            "campuses": [
+                "Western General"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9621555585534200", 
+            "longitude": "-3.2370507717132570", 
+            "name": "CJD Surveillance Unit"
+        }, 
+        {
+            "address": "Western General Hospital  Edinburgh EH4 2XU", 
+            "campuses": [
+                "Western General"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9622036014248400", 
+            "longitude": "-3.2354736328125000", 
+            "name": "Wellcome Trust Clinical Research Facility"
+        }, 
+        {
+            "address": "Western General Hospital Edinburgh EH4 2XU", 
+            "campuses": [
+                "Western General"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9618192567835000", 
+            "longitude": "-3.2371473312377930", 
+            "name": "Clinical Neurosciences"
+        }, 
+        {
+            "address": "Western General Hospital Edinburgh EH4 2XU", 
+            "campuses": [
+                "Western General"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9613568370782500", 
+            "longitude": "-3.2368093729019165", 
+            "name": "Bramwell Dott Building"
+        }, 
+        {
+            "address": "Western General Hospital  Edinburgh EH4 2XU", 
+            "campuses": [
+                "Western General"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9620714833849000", 
+            "longitude": "-3.2339179515838623", 
+            "name": "Division of Pathology Laboratories"
+        }, 
+        {
+            "address": "Western General Hospital Edinburgh EH4 2XU", 
+            "campuses": [
+                "Western General"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9622936816480400", 
+            "longitude": "-3.2323193550109863", 
+            "name": "IGMM Complex"
+        }, 
+        {
+            "address": "King's Buildings Thomas Bayes Road Edinburgh EH9 3FG", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9229507263602100", 
+            "longitude": "-3.1750380992889404", 
+            "name": "Noreen and Kenneth Murray Library"
+        }, 
+        {
+            "address": "Doorway 3, Medical School Teviot Place Edinburgh EH8 9AG", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9450908404547600", 
+            "longitude": "-3.1900537014010410", 
+            "name": "Anatomical Museum"
+        }, 
+        {
+            "address": "Reid Concert Hall Bristo Square Edinburgh EH8 9AL", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9449286238358500", 
+            "longitude": "-3.1891578435900670", 
+            "name": "Reid Museum of Musical Instruments"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Libraries"
+            ], 
+            "latitude": "55.9476619053750600", 
+            "longitude": "-3.1871294975280760", 
+            "name": "Law and Europa Library"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Libraries"
+            ], 
+            "latitude": "55.9506025195216950", 
+            "longitude": "-3.1807780265808105", 
+            "name": "Moray House Library"
+        }, 
+        {
+            "address": "   ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Libraries"
+            ], 
+            "latitude": "55.9495242201428600", 
+            "longitude": "-3.1952404975891113", 
+            "name": "New College Library"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Libraries"
+            ], 
+            "latitude": "55.9426872835810500", 
+            "longitude": "-3.1888461112976074", 
+            "name": "Main Library"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Libraries"
+            ], 
+            "latitude": "55.9228966233201300", 
+            "longitude": "-3.1750273704528810", 
+            "name": "Noreen and Kenneth Murray Library"
+        }, 
+        {
+            "address": "Max Born Crescent King's Buildings Edinburgh EH9 3BF", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9217424071404140", 
+            "longitude": "-3.1713849306106567", 
+            "name": "Darwin Learning & Teaching Cluster"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Cafeterias"
+            ], 
+            "latitude": "55.9215921160462400", 
+            "longitude": "-3.1720983982086180"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Cafeterias"
+            ], 
+            "latitude": "55.9216762791307640", 
+            "longitude": "-3.1745982170104980"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Cafeterias"
+            ], 
+            "latitude": "55.9229387034689500", 
+            "longitude": "-3.1749308109283447"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Cafeterias"
+            ], 
+            "latitude": "55.9235518661687000", 
+            "longitude": "-3.1749415397644043", 
+            "name": "King's House Building"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Cafeterias"
+            ], 
+            "latitude": "55.9427834175932800", 
+            "longitude": "-3.1892108917236330"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Cafeterias"
+            ], 
+            "latitude": "55.9436486129654800", 
+            "longitude": "-3.1864213943481445"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Cafeterias"
+            ], 
+            "latitude": "55.9493800441337540", 
+            "longitude": "-3.1952190399169920"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Cafeterias"
+            ], 
+            "latitude": "55.9476979510270500", 
+            "longitude": "-3.1816363334655760"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Cafeterias"
+            ], 
+            "latitude": "55.9450184661097500", 
+            "longitude": "-3.1886315345764160"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Cafeterias"
+            ], 
+            "latitude": "55.9462320674501900", 
+            "longitude": "-3.1881594657897950"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Cafeterias"
+            ], 
+            "latitude": "55.9429636682230500", 
+            "longitude": "-3.1869363784790040"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Shuttle Buses"
+            ], 
+            "latitude": "55.9222053000489200", 
+            "longitude": "-3.1770122051239014"
+        }, 
+        {
+            "address": "   ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Shuttle Buses"
+            ], 
+            "latitude": "55.9458145207855700", 
+            "longitude": "-3.1870597600936890"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Public Buses"
+            ], 
+            "latitude": "55.9247781624674100", 
+            "longitude": "-3.1725382804870605", 
+            "name": "Mayfield, after Rankin Drive"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Public Buses"
+            ], 
+            "latitude": "55.9246789781796000", 
+            "longitude": "-3.1726455688476562", 
+            "name": "Mayfield, before Rankin Drive"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Public Buses"
+            ], 
+            "latitude": "55.9243829265988400", 
+            "longitude": "-3.1740376353263855", 
+            "name": "Mayfield, after Mayfield Road"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [
+                "Public Buses"
+            ], 
+            "latitude": "55.9245843020317250", 
+            "longitude": "-3.1798875331878660", 
+            "name": "Mayfield, before Observatory Road"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Public Buses"
+            ], 
+            "latitude": "55.9406984576726500", 
+            "longitude": "-3.1806921958923340", 
+            "name": "Newington, at Kings Hall"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Public Buses"
+            ], 
+            "latitude": "55.9431679512560000", 
+            "longitude": "-3.1845009326934814", 
+            "name": "South Side, opp Meadow Lane"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Public Buses"
+            ], 
+            "latitude": "55.9458475642108300", 
+            "longitude": "-3.1853377819061280", 
+            "name": "South Side, before Marshall Street"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Public Buses"
+            ], 
+            "latitude": "55.9444176592925600", 
+            "longitude": "-3.1861424446105957", 
+            "name": "South Side, Potterow (NW-bound)"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Public Buses"
+            ], 
+            "latitude": "55.9456072477475400", 
+            "longitude": "-3.1867969036102295", 
+            "name": "South Side, Potterrow (SE-bound)"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Public Buses"
+            ], 
+            "latitude": "55.9459151529474400", 
+            "longitude": "-3.1889748573303223", 
+            "name": "South Side, opp Bristo Place"
+        }, 
+        {
+            "address": " ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Public Buses"
+            ], 
+            "latitude": "55.9494806670300300", 
+            "longitude": "-3.1811615824699400", 
+            "name": "Canongate, after Gullan's Close"
+        }, 
+        {
+            "address": "33 Buccleuch Place Edinburgh EH8 9JT", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9431919844831500", 
+            "longitude": "-3.1854933500289917", 
+            "name": "Student Recruitment and Admissions"
+        }, 
+        {
+            "address": "16-27 George Square Edinbrugh EH8 9LD", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9434923985642300", 
+            "longitude": "-3.1905305385589600", 
+            "name": "George Square (16-27)"
+        }, 
+        {
+            "address": "1-15 George Square Edinburgh EH8 9JZ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9444476998548050", 
+            "longitude": "-3.1889963150024414", 
+            "name": "George Square (2-15)"
+        }, 
+        {
+            "address": "55-60 George Square Edinburgh EH8 9JU", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9441773339558350", 
+            "longitude": "-3.1872904300689697", 
+            "name": "George Square (55-60)"
+        }, 
+        {
+            "address": "1 George Square Edinburgh EH8 9JZ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9445678618707000", 
+            "longitude": "-3.1880736351013184", 
+            "name": "George Square (1)"
+        }, 
+        {
+            "address": "Building 29, King's Buildings Max Born Crescent Edinburgh EH9 3BF", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9221391728290200", 
+            "longitude": "-3.1787583231925964", 
+            "name": "FloWave Ocean Energy Research Facility"
+        }, 
+        {
+            "address": "4th Floor, Lauriston Building Lauriston Place Edinburgh EH3 9HA", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9447469776835400", 
+            "longitude": "-3.1966437846449480", 
+            "name": "Edinburgh Dental Institute"
+        }, 
+        {
+            "address": "Western General Hospital  Edinburgh EH4 2XU", 
+            "campuses": [
+                "Western General"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9623867643250750", 
+            "longitude": "-3.2344329357147217", 
+            "name": "Medical Education Centre"
+        }, 
+        {
+            "address": "   ", 
+            "campuses": [
+                "Western General"
+            ], 
+            "categories": [
+                "Libraries"
+            ], 
+            "latitude": "55.9615092792800440", 
+            "longitude": "-3.2351732254028320"
+        }, 
+        {
+            "address": "   ", 
+            "campuses": [
+                "Little France"
+            ], 
+            "categories": [
+                "Libraries"
+            ], 
+            "latitude": "55.9220994567561860", 
+            "longitude": "-3.1371599435806274"
+        }, 
+        {
+            "address": "   ", 
+            "campuses": [
+                "Easter Bush"
+            ], 
+            "categories": [
+                "Libraries"
+            ], 
+            "latitude": "55.8659383840456200", 
+            "longitude": "-3.2009696960449220"
+        }, 
+        {
+            "address": "   ", 
+            "campuses": [
+                "General"
+            ], 
+            "categories": [
+                "Libraries"
+            ], 
+            "latitude": "55.9461449537695200", 
+            "longitude": "-3.2006961107254030", 
+            "name": "Edinburgh College of Art Library"
+        }, 
+        {
+            "address": "   ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Shuttle Buses"
+            ], 
+            "latitude": "55.9414517900753700", 
+            "longitude": "-3.1833221018314360"
+        }, 
+        {
+            "address": "Max Born Crescent  Edinburgh EH9 3BF", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9243168030941800", 
+            "longitude": "-3.1770189106464386", 
+            "name": "Arcadia Nursery"
+        }, 
+        {
+            "address": "KB Square King's Buildings Edinburgh EH9 3DL", 
+            "campuses": [
+                "King's Buildings"
+            ], 
+            "categories": [], 
+            "latitude": "55.9228830975483100", 
+            "longitude": "-3.1762893497943880", 
+            "name": "Christina Miller Building"
+        }, 
+        {
+            "address": "Holyrood Road  Edinburgh EH8 8AQ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [], 
+            "latitude": "55.9494235973597600", 
+            "longitude": "-3.1796447932720184", 
+            "name": "St Leonard's Land"
+        }, 
+        {
+            "address": "5 Forrest Hill  Edinburgh EH1 2QL", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [], 
+            "latitude": "55.9460157848478160", 
+            "longitude": "-3.1919199228286743", 
+            "name": "Forrest Hill Building"
+        }, 
+        {
+            "address": "46 Pleasance  Edinburgh EH8 9TJ", 
+            "campuses": [
+                "Central area"
+            ], 
+            "categories": [
+                "Buildings"
+            ], 
+            "latitude": "55.9482471864297600", 
+            "longitude": "-3.1814534553996054", 
+            "name": "Sport and Exercise, Centre for"
+        }
+    ]
+}

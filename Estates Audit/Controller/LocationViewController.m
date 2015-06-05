@@ -92,6 +92,38 @@
             [self.mapView addOverlay:(id <MKOverlay>)shape];
         }
     }
+    
+    
+    //Load buildings from estates json
+    NSData *estatesData = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"estates" withExtension:@"json"]];
+    NSDictionary *estatesGeoJSON = [NSJSONSerialization JSONObjectWithData:estatesData options:0 error:nil];
+    NSArray *locs = [estatesGeoJSON valueForKeyPath:@"locations"];
+    
+    NSMutableArray *locationAnnotations = [NSMutableArray array];
+    
+    for(id location in locs){
+
+        NSString * name = [location valueForKey:@"name"];
+        NSString * lat = [location valueForKey:@"latitude"];
+        NSString * lon = [location valueForKey:@"longitude"];
+        NSString * address = [location valueForKey:@"address"];
+        
+        //add the annotation
+        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+                
+        CLLocationCoordinate2D coord;
+        coord.latitude = [lat floatValue];
+        coord.longitude = [lon floatValue];
+        
+        point.coordinate = coord;
+        point.title = name;
+        point.subtitle = address;
+        
+        [locationAnnotations addObject:point];
+    }
+    
+    [self.mapView addAnnotations:locationAnnotations];
+    
 }
 
 
@@ -185,7 +217,7 @@
     if (pav == nil)
     {
         pav = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
-        pav.animatesDrop = YES;
+        pav.animatesDrop = NO;
         UIImageView *leftIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout" ]];
         leftIconView.frame = CGRectMake(0,0,53,53);
         pav.leftCalloutAccessoryView = leftIconView;
