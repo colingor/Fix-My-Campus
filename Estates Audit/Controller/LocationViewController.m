@@ -13,6 +13,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "GeoJSONSerialization.h"
 #import "Photo+Create.h"
+#import "CustomMKPointAnnotation.h"
 
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
@@ -109,8 +110,8 @@
         NSString * address = [location valueForKey:@"address"];
         
         //add the annotation
-        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-                
+        CustomMKPointAnnotation *point = [[CustomMKPointAnnotation alloc] init];
+       
         CLLocationCoordinate2D coord;
         coord.latitude = [lat floatValue];
         coord.longitude = [lon floatValue];
@@ -118,6 +119,7 @@
         point.coordinate = coord;
         point.title = name;
         point.subtitle = address;
+        point.hierarchical = YES;
         
         [locationAnnotations addObject:point];
     }
@@ -206,9 +208,22 @@
     
 }
 
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
+    
+    MKPointAnnotation *annotation =  view.annotation;
+    if ([annotation isKindOfClass:[CustomMKPointAnnotation class]]){
+        NSMutableString *text = [NSMutableString string];
+        [text appendString:[NSString stringWithFormat:@"%@ \n", annotation.title]];
+        [text appendString:annotation.subtitle];
+        self.descriptionText.text = text;
+    }
+}
+
+
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
- 
+    
     if ([annotation isKindOfClass:[MKUserLocation class]])
         return nil;
     
@@ -224,12 +239,15 @@
         
         if ([annotation.title isEqualToString:@"Report Location"]){
             pav.draggable = YES;
+            pav.animatesDrop = YES;
             pav.pinColor = MKPinAnnotationColorGreen;
-        } else {
+        }else if (![annotation isKindOfClass:[CustomMKPointAnnotation class]]){
             UIButton *rightIconView = [UIButton buttonWithType:UIButtonTypeInfoDark];
             rightIconView.tintColor = [UIColor darkTextColor];
             pav.rightCalloutAccessoryView = rightIconView;
+            pav.pinColor = MKPinAnnotationColorPurple;
         }
+        
         pav.canShowCallout = YES;
     }
     else
