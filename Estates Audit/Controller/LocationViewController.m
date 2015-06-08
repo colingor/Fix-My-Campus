@@ -27,10 +27,17 @@
 @property (nonatomic, assign) BOOL userSpecfiedLocation;
 @property (strong, nonatomic) Report *report;
 @property (strong, nonatomic) NSArray *locations;
-
+@property (strong, nonatomic) MKPointAnnotation *locationPin;
 @end
 
 @implementation LocationViewController
+
+- (void)setLocationPin:(MKPointAnnotation *)locationPin
+{
+    if (!_locationPin) {
+        _locationPin = locationPin;
+    }
+}
 
 
 -(IBAction) unwindToMainMenu:(UIStoryboardSegue *)segue {
@@ -126,8 +133,27 @@
     
     [self.mapView addAnnotations:locationAnnotations];
     
+    // Set up listener to move location pin on long press
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
+                                          initWithTarget:self action:@selector(handleLongPress:)];
+    lpgr.minimumPressDuration = 1.0; //user needs to press for 1 second
+    [self.mapView addGestureRecognizer:lpgr];
+   
+    
 }
 
+- (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer.state != UIGestureRecognizerStateBegan)
+        return;
+    
+    CGPoint touchPoint = [gestureRecognizer locationInView:self.mapView];
+    CLLocationCoordinate2D touchMapCoordinate =
+    [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+    
+    // Maybe move original location pin rather than create a new pin
+    self.locationPin.coordinate = touchMapCoordinate;
+}
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
@@ -178,11 +204,16 @@
     
     //otherwise create new annotation
     if (!locationAlreadyOnMap) {
+  
         //add the annotation
         MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
         point.coordinate = coord;
         point.title = LOCATION_PIN_TITLE;
         point.subtitle = @"(Drag pin if location is incorrect)";
+        
+        // Keep track of the location pin so we can move it as necessary
+        self.locationPin = point;
+        
         [self.mapView addAnnotation:point];
     }
     
@@ -218,13 +249,20 @@
         [text appendString:annotation.subtitle];
         self.descriptionText.text = text;
         view.pinColor = MKPinAnnotationColorGreen;
+        
+        // Move location pin
+        self.locationPin.coordinate = annotation.coordinate;
     }
 }
 
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKPinAnnotationView *)view{
-    // Reset pin colour
-    view.pinColor = MKPinAnnotationColorRed;
+    
+    MKPointAnnotation *annotation =  view.annotation;
+    if (![annotation.title isEqualToString:@"Report Location"]){
+        // Reset pin colour
+        view.pinColor = MKPinAnnotationColorRed;
+    }
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
