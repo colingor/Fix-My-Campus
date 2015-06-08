@@ -111,6 +111,9 @@
     point.title = @"Report Location";
     
     [self.mapView addAnnotation:point];
+    
+    // Disable map interaction
+    self.mapView.userInteractionEnabled = NO;
 }
 
 
