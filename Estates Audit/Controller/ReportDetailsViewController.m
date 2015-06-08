@@ -65,20 +65,26 @@
     
     NSString *reportDescription = self.report.desc;
   
+    self.photos =  [NSArray arrayWithArray:[self.report.photos allObjects]];
+    
     if(reportDescription){
         [self.fullDescription loadHTMLString:reportDescription baseURL:nil];
     }else{
         [self.fullDescription loadHTMLString:self.report.body baseURL:nil];
-        [self.photoCollectionView setHidden:YES];
         [self.locationDescription setHidden:YES];
         [self.locationDescriptionLabel setHidden:YES];
         [self.photosLabel setHidden:YES];
         [self.mapView setHidden:YES];
     }
  
+    // If there are no photos, hide the photoCollectionView
+    if([self.photos count] == 0){
+        [self.photoCollectionView setHidden:YES];
+    }
+    
     self.photoCollectionView.delegate = self;
     self.photoCollectionView.dataSource = self;
-    self.photos =  [NSArray arrayWithArray:[self.report.photos allObjects]];
+    
     // Zoom map to region and add pin
     [self setupMap];
     

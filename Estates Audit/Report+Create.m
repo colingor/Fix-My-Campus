@@ -196,8 +196,12 @@
             
             NSMutableArray *remoteImageUrls = [[NSMutableArray alloc] init];
             for (id attachment in remoteImages) {
-                NSString *remoteUrl = [attachment valueForKeyPath:@"Url"];
-                [remoteImageUrls addObject:remoteUrl];
+                NSString *fileName = [[attachment valueForKeyPath:@"FileName"] lowercaseString];
+                // Ensure we are adding an image
+                if([fileName hasSuffix:@"jpg"] || [fileName hasSuffix:@"jpeg"] ){
+                    NSString *remoteUrl = [attachment valueForKeyPath:@"Url"];
+                    [remoteImageUrls addObject:remoteUrl];
+                }
             }
             
          
