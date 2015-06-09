@@ -359,7 +359,7 @@
                 self.report.lat = [self.reportDict valueForKey:@"lat"];
             } else {
                 [self.reportDict setValue:locationDescription forKey:@"loc_desc"];
-                [self.reportDict setValue:@"New" forKey:@"status"];
+                [self.reportDict setValue:@"unsubmitted" forKey:@"status"];
                 
                 Report *report = [Report reportFromReportInfo:self.reportDict inManangedObjectContext:self.managedObjectContext];
                 self.report = report;

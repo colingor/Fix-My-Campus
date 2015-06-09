@@ -170,6 +170,9 @@
                                               // Set ticketId in report
                                               self.report.ticket_id = @([ticketId floatValue]);
                                               
+                                              // Change status so it will now display in reports list
+                                              self.report.status=@"New";
+                                              
                                               // Save just to be sure
                                               [self.report.managedObjectContext save:NULL];
                                               

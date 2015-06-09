@@ -40,7 +40,7 @@
     
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Report"];
-    //    request.predicate = [NSPredicate predicateWithFormat:@"active = %@", @YES];
+        request.predicate = [NSPredicate predicateWithFormat:@"status != %@", @"unsubmitted"];
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"issue_date"
                                                                   ascending:NO
                                                                    selector:@selector(compare:)]];
