@@ -167,17 +167,22 @@
 
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    [self updateVisibleRegion];
+}
+
+-(void)updateVisibleRegion {
     MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
     region.center.latitude = self.locationManager.location.coordinate.latitude;
     region.center.longitude = self.locationManager.location.coordinate.longitude;
     region.span.latitudeDelta = 0.0187f;
     region.span.longitudeDelta = 0.0137f;
     [self.mapView setRegion:region animated:YES];
-    
 }
 
-
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+
+    // Ensure we're not zoomed out to the extent of all annotations
+   [self updateVisibleRegion];
     
     NSString *const LOCATION_PIN_TITLE = @"Report Location";
     
@@ -224,6 +229,9 @@
     }
     
     // zoom map to bounding box containing all annotations including user location
+    /*
+    Comment out while we're not doing bounding box searches so that we're not zoomed out 
+     to the extent of all annotations
     MKMapRect zoomRect = MKMapRectNull;
     for (id <MKAnnotation> annotation in mapView.annotations) {
         MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
@@ -235,7 +243,7 @@
         }
     }
     
-    [mapView showAnnotations:mapView.annotations animated:true];
+    [mapView showAnnotations:mapView.annotations animated:true];*/
     
 }
 
