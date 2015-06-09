@@ -250,8 +250,10 @@
         self.descriptionText.text = text;
         view.pinColor = MKPinAnnotationColorGreen;
         
-        // Move location pin
+        // Move location pin and update reportDict
         self.locationPin.coordinate = annotation.coordinate;
+        [self.reportDict setValue:[NSNumber numberWithDouble:annotation.coordinate.latitude] forKey:@"lat"];
+        [self.reportDict setValue:[NSNumber numberWithDouble:annotation.coordinate.longitude] forKey:@"lon"];
     }
 }
 
