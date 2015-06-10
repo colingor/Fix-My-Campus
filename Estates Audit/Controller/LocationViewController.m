@@ -179,8 +179,8 @@
     MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
     region.center.latitude = self.locationManager.location.coordinate.latitude;
     region.center.longitude = self.locationManager.location.coordinate.longitude;
-    region.span.latitudeDelta = 0.0187f;
-    region.span.longitudeDelta = 0.0137f;
+    region.span.latitudeDelta = 0.0003;
+    region.span.longitudeDelta = 0.0003;
     [self.mapView setRegion:region animated:YES];
 }
 
@@ -233,23 +233,6 @@
         [self.reportDict setValue:[NSNumber numberWithDouble:coord.longitude] forKey:@"lon"];
     }
     
-    // zoom map to bounding box containing all annotations including user location
-    /*
-    Comment out while we're not doing bounding box searches so that we're not zoomed out 
-     to the extent of all annotations
-    MKMapRect zoomRect = MKMapRectNull;
-    for (id <MKAnnotation> annotation in mapView.annotations) {
-        MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
-        MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0, 0);
-        if (MKMapRectIsNull(zoomRect)) {
-            zoomRect = pointRect;
-        } else {
-            zoomRect = MKMapRectUnion(zoomRect, pointRect);
-        }
-    }
-    
-    [mapView showAnnotations:mapView.annotations animated:true];*/
-    
 }
 
 
@@ -268,16 +251,26 @@
         [self.reportDict setValue:[NSNumber numberWithDouble:annotation.coordinate.latitude] forKey:@"lat"];
         [self.reportDict setValue:[NSNumber numberWithDouble:annotation.coordinate.longitude] forKey:@"lon"];
     }
+    else if (![annotation.title isEqualToString:@"Report Location"]){
+        
+        view.pinColor = MKPinAnnotationColorGreen;
+    }
 }
 
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKPinAnnotationView *)view{
     
     MKPointAnnotation *annotation =  view.annotation;
-    if (![annotation.title isEqualToString:@"Report Location"]){
-        // Reset pin colour
+     // Reset pin colour
+    if (![annotation isKindOfClass:[CustomMKPointAnnotation class]]){
+        
+        view.pinColor = MKPinAnnotationColorPurple;
+    }
+    else if (![annotation.title isEqualToString:@"Report Location"]){
+
         view.pinColor = MKPinAnnotationColorRed;
     }
+ 
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
@@ -287,26 +280,64 @@
         return nil;
     
     static NSString *reuseId = @"pin";
+    static NSString *purpleReuseId = @"purplePin";
+    static NSString *greenReuseId = @"greenPin";
+    
     MKPinAnnotationView *pav = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
-    if (pav == nil)
-    {
+    MKPinAnnotationView *pavPurple = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:purpleReuseId];
+    MKPinAnnotationView *pavGreen = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:greenReuseId];
+    
+    
+    if (![annotation isKindOfClass:[CustomMKPointAnnotation class]] && ![annotation.title isEqualToString:@"Report Location" ]){
+        if (pavPurple == nil){
+            
+            pavPurple = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:purpleReuseId];
+            pavPurple.animatesDrop = NO;
+            UIImageView *leftIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout" ]];
+            leftIconView.frame = CGRectMake(0,0,53,53);
+            pavPurple.leftCalloutAccessoryView = leftIconView;
+            
+            UIButton *rightIconView = [UIButton buttonWithType:UIButtonTypeInfoDark];
+            rightIconView.tintColor = [UIColor darkTextColor];
+            pavPurple.rightCalloutAccessoryView = rightIconView;
+            pavPurple.pinColor = MKPinAnnotationColorPurple;
+            pavPurple.canShowCallout = YES;
+            return pavPurple;
+            
+        }
+        else
+        {
+            pavPurple.annotation = annotation;
+            return pavPurple;
+        }
+    }
+    
+    if([annotation.title isEqualToString:@"Report Location"]){
+        
+        if(pavGreen == nil){
+            pavGreen = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:greenReuseId];
+            UIImageView *leftIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout" ]];
+            leftIconView.frame = CGRectMake(0,0,53,53);
+            pavGreen.leftCalloutAccessoryView = leftIconView;
+            pavGreen.draggable = YES;
+            pavGreen.animatesDrop = YES;
+            pavGreen.pinColor = MKPinAnnotationColorGreen;
+            return pavGreen;
+        }
+        else
+        {
+            pavGreen.annotation = annotation;
+            return pavGreen;
+        }
+    }
+    
+    if (pav == nil){
+        
         pav = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
         pav.animatesDrop = NO;
         UIImageView *leftIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout" ]];
         leftIconView.frame = CGRectMake(0,0,53,53);
         pav.leftCalloutAccessoryView = leftIconView;
-        
-        if ([annotation.title isEqualToString:@"Report Location"]){
-            pav.draggable = YES;
-            pav.animatesDrop = YES;
-            pav.pinColor = MKPinAnnotationColorGreen;
-        }else if (![annotation isKindOfClass:[CustomMKPointAnnotation class]]){
-            UIButton *rightIconView = [UIButton buttonWithType:UIButtonTypeInfoDark];
-            rightIconView.tintColor = [UIColor darkTextColor];
-            pav.rightCalloutAccessoryView = rightIconView;
-            pav.pinColor = MKPinAnnotationColorPurple;
-        }
-        
         pav.canShowCallout = YES;
     }
     else
