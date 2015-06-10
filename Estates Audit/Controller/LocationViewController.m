@@ -262,7 +262,7 @@
     
     MKPointAnnotation *annotation =  view.annotation;
      // Reset pin colour
-    if (![annotation isKindOfClass:[CustomMKPointAnnotation class]]){
+    if (![annotation isKindOfClass:[CustomMKPointAnnotation class]]  && ![annotation.title isEqualToString:@"Report Location"]){
         
         view.pinColor = MKPinAnnotationColorPurple;
     }
