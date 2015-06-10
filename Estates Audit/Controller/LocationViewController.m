@@ -153,7 +153,7 @@
     
     // Maybe move original location pin rather than create a new pin
     self.locationPin.coordinate = touchMapCoordinate;
-   
+
     // Update location
     [self.reportDict setValue:[NSNumber numberWithDouble:touchMapCoordinate.latitude] forKey:@"lat"];
     [self.reportDict setValue:[NSNumber numberWithDouble:touchMapCoordinate.longitude] forKey:@"lon"];
@@ -214,7 +214,7 @@
     
     //otherwise create new annotation
     if (!locationAlreadyOnMap) {
-  
+
         //add the annotation
         MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
         point.coordinate = coord;
@@ -238,22 +238,27 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKPinAnnotationView *)view{
     
-    MKPointAnnotation *annotation =  view.annotation;
-    if ([annotation isKindOfClass:[CustomMKPointAnnotation class]]){
-        NSMutableString *text = [NSMutableString string];
-        [text appendString:[NSString stringWithFormat:@"%@ \n", annotation.title]];
-        [text appendString:annotation.subtitle];
-        self.descriptionText.text = text;
-        view.pinColor = MKPinAnnotationColorGreen;
+    MKPointAnnotation *annotation = view.annotation;
+    
+    if (![annotation isKindOfClass:[MKUserLocation class]]){
+        if ([annotation isKindOfClass:[CustomMKPointAnnotation class]]){
+            NSMutableString *text = [NSMutableString string];
+            [text appendString:[NSString stringWithFormat:@"%@ \n", annotation.title]];
+            [text appendString:annotation.subtitle];
+            self.descriptionText.text = text;
+            view.pinColor = MKPinAnnotationColorGreen;
+            
+            // Move location pin and update reportDict
+            self.locationPin.coordinate = annotation.coordinate;
+            
+            [self.reportDict setValue:[NSNumber numberWithDouble:annotation.coordinate.latitude] forKey:@"lat"];
+            [self.reportDict setValue:[NSNumber numberWithDouble:annotation.coordinate.longitude] forKey:@"lon"];
+        }
+        else if (![annotation.title isEqualToString:@"Report Location"]){
+            
+            view.pinColor = MKPinAnnotationColorGreen;
+        }
         
-        // Move location pin and update reportDict
-        self.locationPin.coordinate = annotation.coordinate;
-        [self.reportDict setValue:[NSNumber numberWithDouble:annotation.coordinate.latitude] forKey:@"lat"];
-        [self.reportDict setValue:[NSNumber numberWithDouble:annotation.coordinate.longitude] forKey:@"lon"];
-    }
-    else if (![annotation.title isEqualToString:@"Report Location"]){
-        
-        view.pinColor = MKPinAnnotationColorGreen;
     }
 }
 
@@ -261,16 +266,18 @@
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKPinAnnotationView *)view{
     
     MKPointAnnotation *annotation =  view.annotation;
-     // Reset pin colour
-    if (![annotation isKindOfClass:[CustomMKPointAnnotation class]]  && ![annotation.title isEqualToString:@"Report Location"]){
-        
-        view.pinColor = MKPinAnnotationColorPurple;
+    
+    if (![annotation isKindOfClass:[MKUserLocation class]]){
+        // Reset pin colour
+        if (![annotation isKindOfClass:[CustomMKPointAnnotation class]]  && ![annotation.title isEqualToString:@"Report Location"]){
+            
+            view.pinColor = MKPinAnnotationColorPurple;
+        }
+        else if (![annotation.title isEqualToString:@"Report Location"]){
+            
+            view.pinColor = MKPinAnnotationColorRed;
+        }
     }
-    else if (![annotation.title isEqualToString:@"Report Location"]){
-
-        view.pinColor = MKPinAnnotationColorRed;
-    }
- 
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
