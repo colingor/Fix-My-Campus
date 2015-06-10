@@ -257,6 +257,8 @@
         else if (![annotation.title isEqualToString:@"Report Location"]){
             
             view.pinColor = MKPinAnnotationColorGreen;
+            // Move location pin and update reportDict
+            self.locationPin.coordinate = annotation.coordinate;
         }
         
     }
