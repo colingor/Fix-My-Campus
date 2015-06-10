@@ -322,6 +322,8 @@
             pavGreen.draggable = YES;
             pavGreen.animatesDrop = YES;
             pavGreen.pinColor = MKPinAnnotationColorGreen;
+            pavGreen.canShowCallout = YES;
+            pavGreen.annotation = annotation;
             return pavGreen;
         }
         else
