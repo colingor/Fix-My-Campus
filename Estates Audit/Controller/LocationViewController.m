@@ -153,6 +153,11 @@
     
     // Maybe move original location pin rather than create a new pin
     self.locationPin.coordinate = touchMapCoordinate;
+   
+    // Update location
+    [self.reportDict setValue:[NSNumber numberWithDouble:touchMapCoordinate.latitude] forKey:@"lat"];
+    [self.reportDict setValue:[NSNumber numberWithDouble:touchMapCoordinate.longitude] forKey:@"lon"];
+
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
