@@ -23,6 +23,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *descriptionText;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedController;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (nonatomic, assign) BOOL userSpecfiedLocation;
 @property (strong, nonatomic) Report *report;
@@ -141,6 +142,29 @@
    
     
 }
+
+- (IBAction)toggleBuildingsView:(id)sender {
+      
+    switch ([sender selectedSegmentIndex]) {
+        case 0:
+        {
+            self.mapView.hidden = NO;
+            
+            break;
+        }
+        case 1:
+        {
+            self.mapView.hidden = YES;
+            break;
+        }
+        default:
+            break;
+    }
+
+    
+}
+
+
 
 - (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer
 {
