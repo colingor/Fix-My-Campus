@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *descriptionText;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedController;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (nonatomic, assign) BOOL userSpecfiedLocation;
 @property (strong, nonatomic) Report *report;
@@ -140,21 +141,23 @@
     lpgr.minimumPressDuration = 1.0; //user needs to press for 1 second
     [self.mapView addGestureRecognizer:lpgr];
    
+    self.tableView.hidden = YES;
     
 }
 
 - (IBAction)toggleBuildingsView:(id)sender {
-      
+    
     switch ([sender selectedSegmentIndex]) {
         case 0:
         {
             self.mapView.hidden = NO;
-            
+            self.tableView.hidden = YES;
             break;
         }
         case 1:
         {
             self.mapView.hidden = YES;
+            self.tableView.hidden = NO;
             break;
         }
         default:
