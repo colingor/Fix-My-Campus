@@ -19,7 +19,7 @@
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
 @import MapKit;
-@interface LocationViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITextViewDelegate>
+@interface LocationViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITextView *descriptionText;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -30,9 +30,23 @@
 @property (strong, nonatomic) Report *report;
 @property (strong, nonatomic) NSArray *locations;
 @property (strong, nonatomic) MKPointAnnotation *locationPin;
+@property (strong, nonatomic) NSMutableArray *locationAnnotations;
+
 @end
 
 @implementation LocationViewController
+
+
+
+- (NSMutableArray *)locationAnnotations
+{
+    if (!_locationAnnotations){
+        _locationAnnotations = [[NSMutableArray alloc] init];
+    }
+    
+    return _locationAnnotations;
+}
+
 
 - (void)setLocationPin:(MKPointAnnotation *)locationPin
 {
@@ -109,7 +123,7 @@
     NSDictionary *estatesGeoJSON = [NSJSONSerialization JSONObjectWithData:estatesData options:0 error:nil];
     NSArray *locs = [estatesGeoJSON valueForKeyPath:@"locations"];
     
-    NSMutableArray *locationAnnotations = [NSMutableArray array];
+    NSMutableArray *locationAnnotations = [[NSMutableArray alloc] init];
     
     for(id location in locs){
 
@@ -131,6 +145,7 @@
         point.hierarchical = YES;
         
         [locationAnnotations addObject:point];
+        [self.locationAnnotations addObject:point];
     }
     
     [self.mapView addAnnotations:locationAnnotations];
@@ -143,6 +158,42 @@
    
     self.tableView.hidden = YES;
     
+    // Populate table here?
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+}
+
+#pragma mark - Table view data source
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.locationAnnotations count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *simpleTableIdentifier = @"BuildingCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:simpleTableIdentifier];
+    }
+    
+    CustomMKPointAnnotation *point = [self.locationAnnotations objectAtIndex:indexPath.row];
+    cell.textLabel.text = point.title;
+    cell.detailTextLabel.text  = point.subtitle;
+    return cell;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CustomMKPointAnnotation *point = [self.locationAnnotations objectAtIndex:indexPath.row];
+    
+    NSMutableString *text;
+    text = [self generateDescriptionFromAnnotation:point];
+    self.descriptionText.text = text;
 }
 
 - (IBAction)toggleBuildingsView:(id)sender {
@@ -163,11 +214,7 @@
         default:
             break;
     }
-
-    
 }
-
-
 
 - (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer
 {
@@ -187,17 +234,8 @@
 
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    
-    if([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
-    }
-    
-    return YES;
-}
 
-
+#pragma mark - MapView
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     [self updateVisibleRegion];
 }
@@ -269,10 +307,9 @@
     
     if (![annotation isKindOfClass:[MKUserLocation class]]){
         if ([annotation isKindOfClass:[CustomMKPointAnnotation class]]){
-            NSMutableString *text = [NSMutableString string];
-            [text appendString:[NSString stringWithFormat:@"%@ \n", annotation.title]];
-            [text appendString:annotation.subtitle];
-            self.descriptionText.text = text;
+           
+            self.descriptionText.text = [self generateDescriptionFromAnnotation:annotation];
+            
             view.pinColor = MKPinAnnotationColorGreen;
             
             // Move location pin and update reportDict
@@ -420,6 +457,24 @@
     }
 }
 
+
+- (NSMutableString *)generateDescriptionFromAnnotation:(MKPointAnnotation *)point
+{
+    NSMutableString *text = [NSMutableString string];
+    [text appendString:[NSString stringWithFormat:@"%@ \n", point.title]];
+    [text appendString:point.subtitle];
+    return text;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
+}
 
 #pragma mark - Navigation
 

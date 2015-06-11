@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "AcceptsManagedContext.h"
-@interface LocationViewController : UIViewController<AcceptsManagedContext>
+@interface LocationViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, AcceptsManagedContext>
+
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSMutableDictionary *reportDict;
 

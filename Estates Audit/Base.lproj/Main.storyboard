@@ -397,6 +397,7 @@
                                     <segment title="MAP"/>
                                     <segment title="BUILDING LIST"/>
                                 </segments>
+                                <color key="tintColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="toggleBuildingsView:" destination="jvW-dv-7ro" eventType="valueChanged" id="juP-Pd-fVR"/>
                                 </connections>
@@ -405,7 +406,7 @@
                                 <rect key="frame" x="0.0" y="243" width="320" height="325"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Ban-oK-u3m" detailTextLabel="Ov6-sZ-Okp" style="IBUITableViewCellStyleSubtitle" id="OsN-vO-IxD">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Ban-oK-u3m" style="IBUITableViewCellStyleDefault" id="OsN-vO-IxD">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OsN-vO-IxD" id="S2c-yU-ryi">
@@ -414,12 +415,6 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ban-oK-u3m">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ov6-sZ-Okp">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1176,7 +1171,7 @@ as they are resolved</string>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="VL8-5R-2Wf"/>
-        <segue reference="R6w-vE-Bht"/>
+        <segue reference="VX7-ui-gdz"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
