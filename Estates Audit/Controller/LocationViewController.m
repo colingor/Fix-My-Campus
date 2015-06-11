@@ -158,10 +158,16 @@
    
     self.tableView.hidden = YES;
     
-    // Populate table here?
+    // Set up tableView delegates
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    // If voiceover is on, display the list rather than the map
+    if(UIAccessibilityIsVoiceOverRunning()){
+        [self.segmentedController setSelectedSegmentIndex:1];
+        self.mapView.hidden = YES;
+        self.tableView.hidden = NO;
+    }   
 }
 
 #pragma mark - Table view data source
