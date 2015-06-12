@@ -228,7 +228,7 @@
 }
 
 -(void) postPhotos:(NSSet *) photos withTicketId:(NSString *) ticketId{
-    for( Photo * photo in self.report.photos ){
+    for( Photo * photo in photos){
         NSURL *assetUrl = [NSURL URLWithString:photo.url];
         
         if([[assetUrl scheme] isEqualToString:@"assets-library"]){
