@@ -92,6 +92,20 @@
     self.photos =  [NSArray arrayWithArray:[self.report.photos allObjects]];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    // Check in case we have to reload the data
+    [self finishAndUpdate];
+}
+
+
+- (void)finishAndUpdate
+{
+    self.photos =  [NSArray arrayWithArray:[self.report.photos allObjects]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.photoCollectionView reloadData];
+    });
+}
+
 -(void)setupMap{
     [self.mapView setDelegate:self];
     

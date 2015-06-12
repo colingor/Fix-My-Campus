@@ -8,7 +8,7 @@
 
 #import "ViewPhotoViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-
+#import "Report.h"
 @interface ViewPhotoViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 -(void) loadImageAsset;
@@ -18,10 +18,47 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSString *status = self.photo.report.status;
+    
+    // Only allow option to delete unsubmitted reports at present
+    if([status isEqualToString:@"unsubmitted"]){
+        self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(deleteAction:)];
+    }
+    
     // Do any additional setup after loading the view.
     [self loadImageAsset];
 }
 
+enum AlertButtonIndex : NSInteger
+{
+    AlertButtonNo,
+    AlertButtonYes
+};
+
+
+-(void)deleteAction:(UIBarButtonItem *)sender{
+    
+    [[[UIAlertView alloc] initWithTitle:@"Delete Photo" message:@"Are you sure you want to delete this photo?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)index
+{
+    if (index == AlertButtonYes){
+        
+        NSManagedObjectContext *managedObjectContext = self.photo.managedObjectContext;
+
+        [managedObjectContext deleteObject:self.photo];
+        [managedObjectContext save:NULL];
+   
+        // Return to previous controller
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+
+                                            
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

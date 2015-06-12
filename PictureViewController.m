@@ -43,6 +43,11 @@
 
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    // Check in case we have to reload the data
+    [self finishAndUpdate];
+}
+
 - (void)setReport:(Report *)report
 {
     _report = report;
