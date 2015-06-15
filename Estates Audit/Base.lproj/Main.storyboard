@@ -76,11 +76,11 @@
                         <viewControllerLayoutGuide type="bottom" id="pEh-Sn-8px"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Omb-Im-dA4">
-                        <rect key="frame" x="0.0" y="64" width="320" height="847"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cLV-0j-kcA">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="798"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION DESCRIPTION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sqe-HE-v0k">
                                         <rect key="frame" x="8" y="154" width="304" height="21"/>
@@ -208,8 +208,6 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Report Details" image="InfoButton" id="hhG-gg-0iF"/>
                     <navigationItem key="navigationItem" title="Report Details" id="T4e-M0-gFK"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="911"/>
                     <connections>
                         <outlet property="fullDescription" destination="4xJ-Mq-rAR" id="kmn-X1-L1C"/>
                         <outlet property="locationDescription" destination="5ac-RO-hzU" id="RrA-HL-VfP"/>
@@ -366,11 +364,11 @@
                         <viewControllerLayoutGuide type="bottom" id="hwr-Ng-tiy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0RP-Be-XrB">
-                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Baz-XX-yze">
-                                <rect key="frame" x="0.0" y="101" width="320" height="117"/>
+                                <rect key="frame" x="0.0" y="57" width="320" height="117"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration" hint="Select from map, building list or input your own" label="Description of location">
@@ -383,7 +381,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESCRIPTION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5L-0m-I8F">
-                                <rect key="frame" x="16" y="72" width="288" height="21"/>
+                                <rect key="frame" x="16" y="28" width="288" height="21"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
@@ -395,10 +393,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bOS-W0-eF6">
-                                <rect key="frame" x="-5" y="243" width="325" height="325"/>
+                                <rect key="frame" x="-5" y="199" width="325" height="369"/>
                             </mapView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8x4-LR-UYo">
-                                <rect key="frame" x="-5" y="215" width="332" height="29"/>
+                                <rect key="frame" x="-5" y="171" width="332" height="29"/>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <segments>
                                     <segment title="MAP"/>
@@ -410,10 +408,10 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="uUd-Ut-auH">
-                                <rect key="frame" x="0.0" y="243" width="320" height="325"/>
+                                <rect key="frame" x="0.0" y="199" width="320" height="369"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Ban-oK-u3m" style="IBUITableViewCellStyleDefault" id="OsN-vO-IxD">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BuildingCell" textLabel="Ban-oK-u3m" style="IBUITableViewCellStyleDefault" id="OsN-vO-IxD">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OsN-vO-IxD" id="S2c-yU-ryi">
@@ -583,7 +581,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="atK-fW-2pS">
-                                <rect key="frame" x="0.0" y="140" width="320" height="96"/>
+                                <rect key="frame" x="0.0" y="96" width="320" height="96"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Camera" translatesAutoresizingMaskIntoConstraints="NO" id="KCB-cM-P0I">
                                         <rect key="frame" x="40" y="0.0" width="100" height="96"/>
@@ -610,7 +608,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SELECTED TO INCLUDE IN REPORT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2L-Ez-XM6">
-                                <rect key="frame" x="16" y="244" width="288" height="21"/>
+                                <rect key="frame" x="16" y="200" width="288" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="EEL-hg-okI"/>
                                 </constraints>
@@ -619,7 +617,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose to share a picture of the problem with us so we can better understand it and fix it promptly. " lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kEt-v0-0gz">
-                                <rect key="frame" x="16" y="72" width="288" height="60"/>
+                                <rect key="frame" x="16" y="28" width="288" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Jfh-NJ-xfX"/>
                                 </constraints>
@@ -628,7 +626,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dio-mh-WqW">
-                                <rect key="frame" x="0.0" y="273" width="320" height="295"/>
+                                <rect key="frame" x="0.0" y="229" width="320" height="339"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="4" minimumInteritemSpacing="4" id="QPI-Gp-iBO">
                                     <size key="itemSize" width="90" height="90"/>
@@ -703,11 +701,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Ajz-dI-LWG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="d67-9h-jdw">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="868"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SIc-SU-ARE">
-                                <rect key="frame" x="0.0" y="64" width="320" height="804"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
                                     <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zHm-sD-6VD">
                                         <rect key="frame" x="0.0" y="355" width="320" height="100"/>
@@ -747,6 +745,7 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rub-ol-8MG">
                                         <rect key="frame" x="0.0" y="35" width="320" height="128"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="lhN-UD-T6R"/>
                                         </constraints>
@@ -765,6 +764,7 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WpO-ia-1t2">
                                         <rect key="frame" x="0.0" y="200" width="202" height="118"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="118" id="0BU-Tn-55h"/>
                                         </constraints>
@@ -839,8 +839,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="868"/>
                     <connections>
                         <outlet property="locationDescription" destination="WpO-ia-1t2" id="AQe-Rh-xQR"/>
                         <outlet property="mapView" destination="w3j-qI-J0v" id="zzP-aI-dIZ"/>
@@ -897,14 +895,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYD-le-pmc">
-                                <rect key="frame" x="0.0" y="120" width="320" height="448"/>
+                                <rect key="frame" x="0.0" y="76" width="320" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please provide a description of the problem you would like to report" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FD5-fQ-hxh">
-                                <rect key="frame" x="16" y="72" width="288" height="40"/>
+                                <rect key="frame" x="16" y="28" width="288" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="eWD-bC-oLM"/>
                                 </constraints>
@@ -1178,7 +1176,7 @@ as they are resolved</string>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="VL8-5R-2Wf"/>
+        <segue reference="bOI-CQ-dk3"/>
         <segue reference="VX7-ui-gdz"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
