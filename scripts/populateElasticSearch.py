@@ -16,7 +16,7 @@ class PopulateElasticSearch:
    INDEX_NAME = 'estates'
    BUILDING_JSON = 'estates.json'
 
-   ES_HOST = 'localhost'
+   ES_HOST = 'dlib-goatfell.ucs.ed.ac.uk'
    ES_PORT = '9200'
 
    def __init__(self):
