@@ -35,8 +35,6 @@ class PopulateElasticSearch:
                   longitude = loc['longitude'];
                   location = ('%s, %s' % (latitude, longitude))
                   loc['location'] = location;
-                  loc.pop('latitude')
-                  loc.pop('longitude')
 
                   # Add to index
                   self.es.index(index=self.INDEX_NAME, doc_type='location', id=i, body=loc)

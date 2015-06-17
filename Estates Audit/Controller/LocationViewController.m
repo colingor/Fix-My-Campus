@@ -14,7 +14,7 @@
 #import "GeoJSONSerialization.h"
 #import "Photo+Create.h"
 #import "CustomMKPointAnnotation.h"
-
+#import "AppDelegate.h"
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
@@ -31,6 +31,9 @@
 @property (strong, nonatomic) NSArray *locations;
 @property (strong, nonatomic) MKPointAnnotation *locationPin;
 @property (strong, nonatomic) NSMutableArray *locationAnnotations;
+@property (strong, nonatomic) NSURLSession *elasticSearchSession;
+@property (strong, nonatomic) AppDelegate *appDelegate;
+@property (nonatomic, strong) NSString *encodedCredentials;
 
 @end
 
@@ -55,6 +58,32 @@
     }
 }
 
+-(AppDelegate *)appDelegate{
+    if (!_appDelegate) {
+        _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    }
+    self.encodedCredentials  = [_appDelegate encodedCredentials];
+
+    return _appDelegate;
+}
+
+
+- (NSURLSession *)elasticSearchSession
+{
+    if (!_elasticSearchSession) {
+        
+        // another configuration option is backgroundSessionConfiguration (multitasking API required though)
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+        NSString *authValue = [self encodedCredentials];
+        [configuration setHTTPAdditionalHeaders:@{@"Authorization": authValue}];
+        
+        _elasticSearchSession = [NSURLSession sessionWithConfiguration:configuration];
+        
+    }
+    return _elasticSearchSession;
+}
+
+
 
 -(IBAction) unwindToMainMenu:(UIStoryboardSegue *)segue {
     if ([self reportDict]){
@@ -71,6 +100,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.encodedCredentials = [self.appDelegate encodedCredentials];
+    
     // Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = NO;
     
@@ -167,8 +199,111 @@
         [self.segmentedController setSelectedSegmentIndex:1];
         self.mapView.hidden = YES;
         self.tableView.hidden = NO;
-    }   
+    }
+    
 }
+
+- (BOOL)mapViewRegionDidChangeFromUserInteraction
+{
+    UIView *view = self.mapView.subviews.firstObject;
+    //  Look through gesture recognizers to determine whether this region change is from user interaction
+    for(UIGestureRecognizer *recognizer in view.gestureRecognizers) {
+        if(recognizer.state == UIGestureRecognizerStateBegan || recognizer.state == UIGestureRecognizerStateEnded) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+static BOOL mapChangedFromUserInteraction = NO;
+
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
+{
+    mapChangedFromUserInteraction = [self mapViewRegionDidChangeFromUserInteraction];
+    
+    if (mapChangedFromUserInteraction) {
+        // user changed map region
+        NSLog(@"About to change");
+        MKMapRect mRect = self.mapView.visibleMapRect;
+        NSMutableDictionary *bb = [self getBoundingBox:mRect];
+        NSLog(@"about to change to bb = %@",bb);
+        // Send call to ElasticSearch to update annotations
+        [self getBuildingsInBoundingBox:bb];
+        
+    }
+}
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    if (mapChangedFromUserInteraction) {
+        // user changed map region
+        NSLog(@"Did change");
+    }
+}
+
+
+
+-(void)getBuildingsInBoundingBox:(NSMutableDictionary *)bb {
+    
+    NSString *apiStr = @"http://dlib-goatfell.ucs.ed.ac.uk:9200/estates/_search?size=500";
+    
+    NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
+    [request setHTTPMethod:@"POST"];
+
+
+    NSDictionary *queryDict = @{ @"query" : @{ @"match_all": @{}} };
+    NSDictionary *filterDict = @{@"filter" : @{ @"geo_bounding_box": @{@"location":bb }} };
+    
+    NSMutableDictionary *jsonPayload =  [[NSMutableDictionary alloc] init];
+   
+    [jsonPayload addEntriesFromDictionary:queryDict];
+    [jsonPayload addEntriesFromDictionary:filterDict];
+    
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonPayload
+                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+                                                         error:&error];
+
+    NSString *jsonString = [[NSString alloc] init];
+    if (!jsonData) {
+        NSLog(@"Got an error: %@", error);
+    } else {
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        NSLog(@"jsonString %@", jsonString);
+    }
+    
+    [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSURLSessionDataTask *task = [self.elasticSearchSession dataTaskWithRequest:request
+                                                          completionHandler:
+                                  ^(NSData *data, NSURLResponse *response, NSError *error) {
+                                      // this handler is not executing on the main queue, so we can't do UI directly here
+                                      if (!error) {
+                                          NSLog(@"data");
+                                          
+                                          NSDictionary *locations = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                    options:0
+                                                                                                      error:NULL];
+                                          NSLog(@"%@", locations);
+                                          NSArray *hits = [[locations valueForKey:@"hits"] valueForKey:@"hits"];
+                                          NSLog(@"%@", hits);
+                                          
+                                          for (id hit in hits){
+                                              NSDictionary * source = [hit valueForKey:@"_source"];
+                                              NSLog(@"%@", source);
+                                          }
+
+                                      }
+                                  }];
+    [task resume];
+    
+}
+
+
+
 
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -272,6 +407,44 @@
     region.span.latitudeDelta = 0.0003;
     region.span.longitudeDelta = 0.0003;
     [self.mapView setRegion:region animated:YES];
+}
+
+
+-(CLLocationCoordinate2D)getNECoordinate:(MKMapRect)mRect{
+    return [self getCoordinateFromMapRectanglePoint:MKMapRectGetMaxX(mRect) y:mRect.origin.y];
+}
+-(CLLocationCoordinate2D)getNWCoordinate:(MKMapRect)mRect{
+    return [self getCoordinateFromMapRectanglePoint:MKMapRectGetMinX(mRect) y:mRect.origin.y];
+}
+-(CLLocationCoordinate2D)getSECoordinate:(MKMapRect)mRect{
+    return [self getCoordinateFromMapRectanglePoint:MKMapRectGetMaxX(mRect) y:MKMapRectGetMaxY(mRect)];
+}
+-(CLLocationCoordinate2D)getSWCoordinate:(MKMapRect)mRect{
+    return [self getCoordinateFromMapRectanglePoint:mRect.origin.x y:MKMapRectGetMaxY(mRect)];
+}
+
+
+-(CLLocationCoordinate2D)getCoordinateFromMapRectanglePoint:(double)x y:(double)y{
+    MKMapPoint swMapPoint = MKMapPointMake(x, y);
+    return MKCoordinateForMapPoint(swMapPoint);
+}
+
+
+-(NSMutableDictionary *)getBoundingBox:(MKMapRect)mRect{
+    CLLocationCoordinate2D topLeft = [self getNWCoordinate:mRect];
+    CLLocationCoordinate2D bottomRight = [self getSECoordinate:mRect];
+    
+    
+    NSDictionary *topLeftDict = @{ @"top_left" : @{ @"lat": [NSNumber numberWithDouble:topLeft.latitude] , @"lon":[NSNumber numberWithDouble:topLeft.longitude]}};
+    NSDictionary *bottomRightDict = @{ @"bottom_right" : @{ @"lat": [NSNumber numberWithDouble:bottomRight.latitude], @"lon":[NSNumber numberWithDouble:bottomRight.longitude]}};
+    
+    
+    NSMutableDictionary *bb =  [[NSMutableDictionary alloc] init];
+    
+    [bb addEntriesFromDictionary:topLeftDict];
+    [bb addEntriesFromDictionary:bottomRightDict];
+    
+    return bb;
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
