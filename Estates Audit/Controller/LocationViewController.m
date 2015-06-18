@@ -224,12 +224,8 @@ static BOOL mapChangedFromUserInteraction = NO;
     
     if (mapChangedFromUserInteraction) {
         // user changed map region
-        NSLog(@"About to change");
-        MKMapRect mRect = self.mapView.visibleMapRect;
-        NSMutableDictionary *bb = [self getBoundingBox:mRect];
-//        NSLog(@"about to change to bb = %@",bb);
         // Send call to ElasticSearch to update annotations
-        [self getBuildingsInBoundingBox:bb];
+        [self displayBuildingsInBoundingBox];
         
     }
 }
@@ -238,13 +234,15 @@ static BOOL mapChangedFromUserInteraction = NO;
 {
     if (mapChangedFromUserInteraction) {
         // user changed map region
-        NSLog(@"Did change");
     }
 }
 
 
 
--(void)getBuildingsInBoundingBox:(NSMutableDictionary *)bb {
+-(void)displayBuildingsInBoundingBox{
+    
+    MKMapRect mRect = self.mapView.visibleMapRect;
+    NSMutableDictionary *bb = [self getBoundingBox:mRect];
     
     NSString *apiStr = @"http://dlib-goatfell.ucs.ed.ac.uk:9200/estates/_search?size=500";
     
@@ -380,27 +378,68 @@ static BOOL mapChangedFromUserInteraction = NO;
 {
     CustomMKPointAnnotation *point = [self.locationAnnotations objectAtIndex:indexPath.row];
     
-    NSMutableString *text;
-    text = [self generateDescriptionFromAnnotation:point];
-    self.descriptionText.text = text;
+    // Find the corresponding annotation on the map as point won't be the same instance
+    for(MKPointAnnotation *existing in self.mapView.annotations){
+        
+        NSString *existingTitle = existing.title;
+        
+        NSNumber *existinglatNumber = [NSNumber numberWithDouble:existing.coordinate.latitude];
+        NSNumber *newlatNumber = [NSNumber numberWithDouble:point.coordinate.latitude];
+        
+        NSNumber *existinglonNumber = [NSNumber numberWithDouble:existing.coordinate.longitude];
+        NSNumber *newlonNumber = [NSNumber numberWithDouble:point.coordinate.longitude];
+        
+        if([existingTitle isEqualToString:point.title] &&
+           ([existinglatNumber isEqualToNumber:newlatNumber]) &&
+           ([existinglonNumber isEqualToNumber:newlonNumber])){
+            
+            NSMutableString *text;
+            text = [self generateDescriptionFromAnnotation:point];
+            self.descriptionText.text = text;
+            
+            self.locationPin.coordinate = existing.coordinate;
+            
+            CLLocationDegrees lat = existing.coordinate.latitude;
+            CLLocationDegrees lon = existing.coordinate.longitude;
+            
+            [self.reportDict setValue:[NSNumber numberWithDouble:lat] forKey:@"lat"];
+            [self.reportDict setValue:[NSNumber numberWithDouble:lon] forKey:@"lon"];
+            
+            // Centre map on point
+            MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
+            region.center.latitude = lat;
+            region.center.longitude = lon;
+            region.span.latitudeDelta = 0.0003;
+            region.span.longitudeDelta = 0.0003;
+            [self.mapView setRegion:region animated:YES];
+            
+            [self.mapView selectAnnotation:existing animated:YES];
+
+            break;
+        }
+    }
     
-    self.locationPin.coordinate = point.coordinate;
-    
-    CLLocationDegrees lat = point.coordinate.latitude;
-    CLLocationDegrees lon = point.coordinate.longitude;
-    
-    [self.reportDict setValue:[NSNumber numberWithDouble:lat] forKey:@"lat"];
-    [self.reportDict setValue:[NSNumber numberWithDouble:lon] forKey:@"lon"];
-    
-    // Centre map on point
-    MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
-    region.center.latitude = lat;
-    region.center.longitude = lon;
-    region.span.latitudeDelta = 0.0003;
-    region.span.longitudeDelta = 0.0003;
-    [self.mapView setRegion:region animated:YES];
-    
-    [self.mapView selectAnnotation:point animated:YES];
+//    NSMutableString *text;
+//    text = [self generateDescriptionFromAnnotation:point];
+//    self.descriptionText.text = text;
+//    
+//    self.locationPin.coordinate = point.coordinate;
+//    
+//    CLLocationDegrees lat = point.coordinate.latitude;
+//    CLLocationDegrees lon = point.coordinate.longitude;
+//    
+//    [self.reportDict setValue:[NSNumber numberWithDouble:lat] forKey:@"lat"];
+//    [self.reportDict setValue:[NSNumber numberWithDouble:lon] forKey:@"lon"];
+//    
+//    // Centre map on point
+//    MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
+//    region.center.latitude = lat;
+//    region.center.longitude = lon;
+//    region.span.latitudeDelta = 0.0003;
+//    region.span.longitudeDelta = 0.0003;
+//    [self.mapView setRegion:region animated:YES];
+//    
+//    [self.mapView selectAnnotation:point animated:YES];
     
 }
 
