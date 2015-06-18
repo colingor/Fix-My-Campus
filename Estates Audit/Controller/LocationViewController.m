@@ -155,7 +155,7 @@
     NSDictionary *estatesGeoJSON = [NSJSONSerialization JSONObjectWithData:estatesData options:0 error:nil];
     NSArray *locs = [estatesGeoJSON valueForKeyPath:@"locations"];
     
-    NSMutableArray *locationAnnotations = [[NSMutableArray alloc] init];
+    /*NSMutableArray *locationAnnotations = [[NSMutableArray alloc] init];
     
     for(id location in locs){
 
@@ -180,7 +180,7 @@
         [self.locationAnnotations addObject:point];
     }
     
-    [self.mapView addAnnotations:locationAnnotations];
+    [self.mapView addAnnotations:locationAnnotations];*/
     
     // Set up listener to move location pin on long press
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
@@ -227,7 +227,7 @@ static BOOL mapChangedFromUserInteraction = NO;
         NSLog(@"About to change");
         MKMapRect mRect = self.mapView.visibleMapRect;
         NSMutableDictionary *bb = [self getBoundingBox:mRect];
-        NSLog(@"about to change to bb = %@",bb);
+//        NSLog(@"about to change to bb = %@",bb);
         // Send call to ElasticSearch to update annotations
         [self getBuildingsInBoundingBox:bb];
         
@@ -264,7 +264,7 @@ static BOOL mapChangedFromUserInteraction = NO;
     
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonPayload
-                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+                                                       options:NSJSONWritingPrettyPrinted 
                                                          error:&error];
 
     NSString *jsonString = [[NSString alloc] init];
@@ -272,30 +272,72 @@ static BOOL mapChangedFromUserInteraction = NO;
         NSLog(@"Got an error: %@", error);
     } else {
         jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        NSLog(@"jsonString %@", jsonString);
+//        NSLog(@"jsonString %@", jsonString);
     }
     
     [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
     
     NSURLSessionDataTask *task = [self.elasticSearchSession dataTaskWithRequest:request
-                                                          completionHandler:
+                                                              completionHandler:
                                   ^(NSData *data, NSURLResponse *response, NSError *error) {
                                       // this handler is not executing on the main queue, so we can't do UI directly here
                                       if (!error) {
-                                          NSLog(@"data");
-                                          
                                           NSDictionary *locations = [NSJSONSerialization JSONObjectWithData:data
                                                                                                     options:0
                                                                                                       error:NULL];
-                                          NSLog(@"%@", locations);
-                                          NSArray *hits = [[locations valueForKey:@"hits"] valueForKey:@"hits"];
-                                          NSLog(@"%@", hits);
                                           
+                                          NSArray *hits = [[locations valueForKey:@"hits"] valueForKey:@"hits"];
+                                     
+                                         // localAnnotations used to populate building list table
+                                          [self.locationAnnotations removeAllObjects];
+                 
                                           for (id hit in hits){
-                                              NSDictionary * source = [hit valueForKey:@"_source"];
-                                              NSLog(@"%@", source);
+                                              NSDictionary * location = [hit valueForKey:@"_source"];
+                                              
+                                              NSString * name = [location valueForKey:@"name"];
+                                              NSString * lat = [location valueForKey:@"latitude"];
+                                              NSString * lon = [location valueForKey:@"longitude"];
+                                              NSString * address = [location valueForKey:@"address"];
+                                              
+                                              // Check if annotation already exists on map
+                                              NSArray *existingAnnotations = self.mapView.annotations;
+                                              
+                                              BOOL found = NO;
+                                              
+                                              for(MKPointAnnotation *existing in existingAnnotations){
+                                                  
+                                                  NSString *existingTitle = existing.title;
+                                                  CLLocationDegrees existingLat = existing.coordinate.latitude;
+                                                  CLLocationDegrees existingLon = existing.coordinate.longitude;
+                                                  
+                                                  if([existingTitle isEqualToString:name]){
+                                                      found = YES;
+                                                      break;
+                                                  }
+                                              }
+                                              
+                                              CustomMKPointAnnotation *point = [[CustomMKPointAnnotation alloc] init];
+                                              
+                                              CLLocationCoordinate2D coord;
+                                              coord.latitude = [lat floatValue];
+                                              coord.longitude = [lon floatValue];
+                                              
+                                              point.coordinate = coord;
+                                              point.title = name;
+                                              point.subtitle = address;
+                                              point.hierarchical = YES;
+                                              
+                                              // Add to the building list
+                                              [self.locationAnnotations addObject:point];
+                                              
+                                              if(!found){
+                                                  [self.mapView addAnnotation:point];
+                                              }
                                           }
-
+                                          
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              [self.tableView reloadData];
+                                          });
                                       }
                                   }];
     [task resume];
