@@ -418,29 +418,6 @@ static BOOL mapChangedFromUserInteraction = NO;
             break;
         }
     }
-    
-//    NSMutableString *text;
-//    text = [self generateDescriptionFromAnnotation:point];
-//    self.descriptionText.text = text;
-//    
-//    self.locationPin.coordinate = point.coordinate;
-//    
-//    CLLocationDegrees lat = point.coordinate.latitude;
-//    CLLocationDegrees lon = point.coordinate.longitude;
-//    
-//    [self.reportDict setValue:[NSNumber numberWithDouble:lat] forKey:@"lat"];
-//    [self.reportDict setValue:[NSNumber numberWithDouble:lon] forKey:@"lon"];
-//    
-//    // Centre map on point
-//    MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
-//    region.center.latitude = lat;
-//    region.center.longitude = lon;
-//    region.span.latitudeDelta = 0.0003;
-//    region.span.longitudeDelta = 0.0003;
-//    [self.mapView setRegion:region animated:YES];
-//    
-//    [self.mapView selectAnnotation:point animated:YES];
-    
 }
 
 - (IBAction)toggleBuildingsView:(id)sender {
