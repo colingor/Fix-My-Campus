@@ -307,10 +307,16 @@ static BOOL mapChangedFromUserInteraction = NO;
                                               for(MKPointAnnotation *existing in existingAnnotations){
                                                   
                                                   NSString *existingTitle = existing.title;
-                                                  CLLocationDegrees existingLat = existing.coordinate.latitude;
-                                                  CLLocationDegrees existingLon = existing.coordinate.longitude;
+                                              
+                                                  NSNumber *existinglatNumber = [NSNumber numberWithDouble:existing.coordinate.latitude];
+                                                  NSNumber *newlatNumber = @([lat floatValue]);
                                                   
-                                                  if([existingTitle isEqualToString:name]){
+                                                  NSNumber *existinglonNumber = [NSNumber numberWithDouble:existing.coordinate.longitude];
+                                                  NSNumber *newlonNumber = @([lon floatValue]);
+                                                  
+                                                  if([existingTitle isEqualToString:name] &&
+                                                     ([existinglatNumber isEqualToNumber:newlatNumber]) &&
+                                                     ([existinglonNumber isEqualToNumber:newlonNumber])){
                                                       found = YES;
                                                       break;
                                                   }
