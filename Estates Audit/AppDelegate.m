@@ -480,8 +480,14 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
                                                         error:NULL];
         }
         
-        // We now have a note of all ticket ids - need to do a get on each one to get further ticket details
-        [self ticketDetailsFromJitBit:tickets];
+        // If there are no tickets on the server, we have to stop the update, otherwise it will hang forever
+        if ([tickets count] == 0){
+            [self ticketListMightBeComplete];
+        }else{
+            // We now have a note of all ticket ids - need to do a get on each one to get further ticket details
+            [self ticketDetailsFromJitBit:tickets];
+        }
+
     }
     
 }
