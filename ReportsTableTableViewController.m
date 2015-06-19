@@ -183,6 +183,40 @@
 }
 
 
+- (NSInteger)numberOfSectionsInTableView: (UITableView *) tableView{
+   
+    NSArray *obs = self.fetchedResultsController.fetchedObjects;
+    
+    // Add message if no reports
+    if ([obs count] == 0) {
+        //create a lable size to fit the Table View
+        UILabel *messageLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,
+                                                                        self.tableView.bounds.size.width,
+                                                                        self.tableView.bounds.size.height)];
+        //set the message
+        messageLbl.text = @"No Reports";
+        //center the text
+        messageLbl.textAlignment = NSTextAlignmentCenter;
+        //auto size the text
+        [messageLbl sizeToFit];
+        
+        //set back to label view
+        self.tableView.backgroundView = messageLbl;
+        //no separator
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        return 0;
+    }
+    
+    self.tableView.backgroundView = nil;
+    //no separator
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    
+    //number of sections in this table
+    return 1;
+}
+
+
 #pragma mark - Navigation
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
