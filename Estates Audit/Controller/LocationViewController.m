@@ -471,6 +471,7 @@ static BOOL mapChangedFromUserInteraction = NO;
     region.span.latitudeDelta = 0.0003;
     region.span.longitudeDelta = 0.0003;
     [self.mapView setRegion:region animated:YES];
+    [self displayBuildingsInBoundingBox];
 }
 
 
