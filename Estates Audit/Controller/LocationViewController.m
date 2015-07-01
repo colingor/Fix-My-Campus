@@ -244,7 +244,7 @@ static BOOL mapChangedFromUserInteraction = NO;
     MKMapRect mRect = self.mapView.visibleMapRect;
     NSMutableDictionary *bb = [self getBoundingBox:mRect];
     
-    NSString *apiStr = @"http://dlib-goatfell.ucs.ed.ac.uk:9200/estates/_search?size=500";
+    NSString *apiStr = @"http://dlib-brown.edina.ac.uk/estates/_search?size=500";
     
     NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
