@@ -98,14 +98,15 @@
     }
 }
 
+
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.encodedCredentials = [self.appDelegate encodedCredentials];
-    
-    // Do any additional setup after loading the view.
-    self.navigationController.navigationBarHidden = NO;
-    
     
     [self.mapView setDelegate:self];
     self.descriptionText.delegate = self;
