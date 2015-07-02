@@ -248,12 +248,18 @@
                 // Location coords
                 else if ([fieldId isEqualToNumber: @9450]){
                     if(![value isKindOfClass:[NSNull class]]){
-                        NSArray* coords = [value componentsSeparatedByString:@" "];
-                        NSNumber *lat = @([coords[0] floatValue]);
-                        NSNumber *lon = @([coords[1] floatValue]);
-                        [report setValue: lat forKey:@"lat"];
-                        [report setValue: lon forKey:@"lon"];
                         
+                        @try {
+                            NSArray* coords = [value componentsSeparatedByString:@" "];
+                            
+                            NSNumber *lat = @([coords[0] floatValue]);
+                            NSNumber *lon = @([coords[1] floatValue]);
+                            [report setValue: lat forKey:@"lat"];
+                            [report setValue: lon forKey:@"lon"];
+                        }
+                        @catch (NSException *exception) {
+                            NSLog(@"Ignoring the following: %@", exception.reason);
+                        }
                     }
                 }
             }
