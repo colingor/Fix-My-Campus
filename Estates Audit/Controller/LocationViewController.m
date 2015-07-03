@@ -367,7 +367,16 @@ static BOOL mapChangedFromUserInteraction = NO;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:simpleTableIdentifier];
     }
-    
+   
+    @try {
+        CustomMKPointAnnotation *point = [self.locationAnnotations objectAtIndex:indexPath.row];
+        cell.textLabel.text = point.title;
+        cell.detailTextLabel.text  = point.subtitle;
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Problem creating custom point: %@", exception.reason);
+    }
+
     CustomMKPointAnnotation *point = [self.locationAnnotations objectAtIndex:indexPath.row];
     cell.textLabel.text = point.title;
     cell.detailTextLabel.text  = point.subtitle;
