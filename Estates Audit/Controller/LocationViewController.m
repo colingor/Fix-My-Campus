@@ -126,7 +126,7 @@
         [self.locationManager startUpdatingLocation];
     }
     [self.mapView setShowsUserLocation:YES];
-    //[self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+//    [self.mapView setUserTrackingMode:MKUserTrackingModeNone animated:YES];
    
     // Declare empty dict we can add report info to
     _reportDict = [NSMutableDictionary dictionary];
@@ -456,7 +456,16 @@ static BOOL mapChangedFromUserInteraction = NO;
     // Update location
     [self.reportDict setValue:[NSNumber numberWithDouble:touchMapCoordinate.latitude] forKey:@"lat"];
     [self.reportDict setValue:[NSNumber numberWithDouble:touchMapCoordinate.longitude] forKey:@"lon"];
-
+    
+    
+    // Close any selected annotations
+    NSArray *selectedAnnotations = self.mapView.selectedAnnotations;
+    for(id annotation in selectedAnnotations) {
+        [self.mapView deselectAnnotation:annotation animated:NO];
+    }
+    self.userSpecfiedLocation = YES;
+    
+    
 }
 
 
@@ -516,7 +525,7 @@ static BOOL mapChangedFromUserInteraction = NO;
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
 
     // Ensure we're not zoomed out to the extent of all annotations
-   [self updateVisibleRegion];
+//   [self updateVisibleRegion];
     
     NSString *const LOCATION_PIN_TITLE = @"Report Location";
     
@@ -533,8 +542,11 @@ static BOOL mapChangedFromUserInteraction = NO;
             NSString *title = [annotation title];
             if ([title isEqualToString:LOCATION_PIN_TITLE]) {
                 // Pin is already on the map so we don't need to create a new one
-                // Just update it's position
-                [annotation setCoordinate:coord];
+                // Just update it's position if the user hasn't specified a location manually
+                if(!self.userSpecfiedLocation){
+                    [annotation setCoordinate:coord];
+                }
+                
                 locationAlreadyOnMap = YES;
                 break;
             }
@@ -567,6 +579,8 @@ static BOOL mapChangedFromUserInteraction = NO;
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKPinAnnotationView *)view{
     
+    self.userSpecfiedLocation = YES;
+    
     MKPointAnnotation *annotation = view.annotation;
     
     if (![annotation isKindOfClass:[MKUserLocation class]]){
@@ -595,6 +609,8 @@ static BOOL mapChangedFromUserInteraction = NO;
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKPinAnnotationView *)view{
     
+    self.userSpecfiedLocation = NO;
+    
     MKPointAnnotation *annotation =  view.annotation;
     
     if (![annotation isKindOfClass:[MKUserLocation class]]){
@@ -607,6 +623,11 @@ static BOOL mapChangedFromUserInteraction = NO;
             
             view.pinColor = MKPinAnnotationColorRed;
         }
+        else if ([annotation.title isEqualToString:@"Report Location"]){
+            // If the report location annotation has been deselected, we don't want to reset to the default location
+            self.userSpecfiedLocation = YES;
+        }
+
     }
 }
 
