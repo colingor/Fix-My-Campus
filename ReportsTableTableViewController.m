@@ -182,9 +182,9 @@
     return nil;
 }
 
-
-- (NSInteger)numberOfSectionsInTableView: (UITableView *) tableView{
-   
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    
     NSArray *obs = self.fetchedResultsController.fetchedObjects;
     
     // Add message if no reports
@@ -207,13 +207,10 @@
         
         return 0;
     }
+
     
-    self.tableView.backgroundView = nil;
-    //no separator
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    
-    //number of sections in this table
-    return 1;
+    NSInteger sections = [[self.fetchedResultsController sections] count];
+    return sections;
 }
 
 
