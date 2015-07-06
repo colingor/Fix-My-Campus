@@ -162,12 +162,10 @@
         [assetslibrary assetForURL:assetUrl
                        resultBlock:resultblock
                       failureBlock:failureblock];
-    } else if ([photo.url hasPrefix:@"http"]){
+    } else{
         // TODO: Placeholder
         [cell.imageView sd_setImageWithURL:assetUrl
                           placeholderImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout"]];
-    } else {
-        [cell.imageView setImage:[UIImage imageWithContentsOfFile:photo.url]];
     }
     
     return cell;

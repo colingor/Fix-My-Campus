@@ -172,14 +172,11 @@
         [assetslibrary assetForURL:assetUrl
                        resultBlock:resultblock
                       failureBlock:failureblock];
-    }else if ([photo.url hasPrefix:@"http"]){
+    }else{
         
         UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
         [photoImageView sd_setImageWithURL:assetUrl
                           placeholderImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout"]];
-    } else {
-        UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
-        [photoImageView setImage:[UIImage imageWithContentsOfFile:photo.url]];
     }
     
     return cell;
