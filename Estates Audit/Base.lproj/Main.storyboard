@@ -862,16 +862,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9e8-KJ-2IY">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9e8-KJ-2IY">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ViX-YZ-yZJ">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ViX-YZ-yZJ">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     </imageView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="ViX-YZ-yZJ" firstAttribute="leading" secondItem="9e8-KJ-2IY" secondAttribute="leading" id="061-xt-DKV"/>
+                                    <constraint firstAttribute="trailing" secondItem="ViX-YZ-yZJ" secondAttribute="trailing" id="0qv-1s-TGo"/>
+                                    <constraint firstAttribute="bottom" secondItem="ViX-YZ-yZJ" secondAttribute="bottom" id="9g3-wH-VHO"/>
+                                    <constraint firstItem="ViX-YZ-yZJ" firstAttribute="centerY" secondItem="9e8-KJ-2IY" secondAttribute="centerY" id="Qsz-nZ-H6O"/>
+                                    <constraint firstItem="ViX-YZ-yZJ" firstAttribute="centerX" secondItem="9e8-KJ-2IY" secondAttribute="centerX" id="cA7-C1-s5e"/>
+                                    <constraint firstItem="ViX-YZ-yZJ" firstAttribute="top" secondItem="9e8-KJ-2IY" secondAttribute="top" id="flc-OR-ZH3"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9e8-KJ-2IY" firstAttribute="bottom" secondItem="kKQ-fw-7kj" secondAttribute="top" id="75l-uD-bwx"/>
+                            <constraint firstItem="9e8-KJ-2IY" firstAttribute="leading" secondItem="PRg-1q-t7d" secondAttribute="leading" id="AYm-n0-Dq4"/>
+                            <constraint firstItem="9e8-KJ-2IY" firstAttribute="top" secondItem="PRg-1q-t7d" secondAttribute="top" id="GfU-vD-S6m"/>
+                            <constraint firstAttribute="trailing" secondItem="9e8-KJ-2IY" secondAttribute="trailing" id="rYm-LO-HMk"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="ViX-YZ-yZJ" id="hLt-Ze-FY7"/>
