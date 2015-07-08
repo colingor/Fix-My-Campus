@@ -288,9 +288,13 @@
         // handle error
     }else if ([matches count]) {
         // Delete these objects
-        NSLog(@"Deleting orphaned reports");
-        for(id orphanedReport in matches){
-            [context deleteObject:orphanedReport];
+        for(Report *orphanedReport in matches){
+            
+            // We check that the issue_date of the report is not today as this could be a submission in progress
+            if(![[NSCalendar currentCalendar] isDateInToday:orphanedReport.issue_date]){
+                NSLog(@"Deleting orphaned report");
+                [context deleteObject:orphanedReport];
+            }
         }
     }
     
