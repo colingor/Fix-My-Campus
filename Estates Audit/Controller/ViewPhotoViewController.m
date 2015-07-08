@@ -12,6 +12,7 @@
 @interface ViewPhotoViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 -(void) loadImageAsset;
 @end
 
@@ -38,6 +39,7 @@
     
     self.scrollView.contentSize=CGSizeMake(1280, 960);
     
+    self.spinner.hidesWhenStopped = YES;
 
 }
 
@@ -86,6 +88,9 @@ enum AlertButtonIndex : NSInteger
 
 
 - (void) loadImageAsset{
+    
+    [self.spinner startAnimating];
+    
     NSURL *assetUrl = [NSURL URLWithString:self.photo.url];
     __block UIImage *image;
     
@@ -116,6 +121,7 @@ enum AlertButtonIndex : NSInteger
         image = [UIImage imageWithContentsOfFile:self.photo.url];
         [self scaleThenPopulateImageViewWithImage:image];
     }
+    
 }
 
 
@@ -125,6 +131,9 @@ enum AlertButtonIndex : NSInteger
                                       maxHeight:[self.imageView bounds].size.height];
     [self imageView].contentMode = UIViewContentModeScaleAspectFit;
     [self.imageView setImage:scaledImage];
+
+    [self.spinner stopAnimating];
+
 }
 
 

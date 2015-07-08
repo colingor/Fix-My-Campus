@@ -868,28 +868,35 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ViX-YZ-yZJ">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     </imageView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="UP9-7X-S8u">
+                                        <rect key="frame" x="142" y="265" width="37" height="37"/>
+                                        <color key="color" red="0.0" green="0.1960784314" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="ViX-YZ-yZJ" firstAttribute="leading" secondItem="9e8-KJ-2IY" secondAttribute="leading" id="061-xt-DKV"/>
-                                    <constraint firstAttribute="trailing" secondItem="ViX-YZ-yZJ" secondAttribute="trailing" id="0qv-1s-TGo"/>
-                                    <constraint firstAttribute="bottom" secondItem="ViX-YZ-yZJ" secondAttribute="bottom" id="9g3-wH-VHO"/>
-                                    <constraint firstItem="ViX-YZ-yZJ" firstAttribute="centerY" secondItem="9e8-KJ-2IY" secondAttribute="centerY" id="Qsz-nZ-H6O"/>
-                                    <constraint firstItem="ViX-YZ-yZJ" firstAttribute="centerX" secondItem="9e8-KJ-2IY" secondAttribute="centerX" id="cA7-C1-s5e"/>
-                                    <constraint firstItem="ViX-YZ-yZJ" firstAttribute="top" secondItem="9e8-KJ-2IY" secondAttribute="top" id="flc-OR-ZH3"/>
+                                    <constraint firstAttribute="trailing" secondItem="ViX-YZ-yZJ" secondAttribute="trailing" id="4gC-nk-xXM"/>
+                                    <constraint firstItem="ViX-YZ-yZJ" firstAttribute="top" secondItem="9e8-KJ-2IY" secondAttribute="top" id="ErQ-8Y-i8r"/>
+                                    <constraint firstItem="UP9-7X-S8u" firstAttribute="top" secondItem="9e8-KJ-2IY" secondAttribute="top" constant="265" id="Otc-Od-0b7"/>
+                                    <constraint firstItem="ViX-YZ-yZJ" firstAttribute="centerY" secondItem="9e8-KJ-2IY" secondAttribute="centerY" id="QQz-MY-Ijt"/>
+                                    <constraint firstItem="ViX-YZ-yZJ" firstAttribute="leading" secondItem="9e8-KJ-2IY" secondAttribute="leading" id="YQV-AH-eNu"/>
+                                    <constraint firstItem="ViX-YZ-yZJ" firstAttribute="centerX" secondItem="UP9-7X-S8u" secondAttribute="centerX" id="cEl-Pf-t43"/>
+                                    <constraint firstAttribute="bottom" secondItem="ViX-YZ-yZJ" secondAttribute="bottom" id="jA2-tU-UJP"/>
+                                    <constraint firstItem="ViX-YZ-yZJ" firstAttribute="centerX" secondItem="9e8-KJ-2IY" secondAttribute="centerX" id="tmh-4u-Hx9"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="9e8-KJ-2IY" firstAttribute="bottom" secondItem="kKQ-fw-7kj" secondAttribute="top" id="75l-uD-bwx"/>
-                            <constraint firstItem="9e8-KJ-2IY" firstAttribute="leading" secondItem="PRg-1q-t7d" secondAttribute="leading" id="AYm-n0-Dq4"/>
-                            <constraint firstItem="9e8-KJ-2IY" firstAttribute="top" secondItem="PRg-1q-t7d" secondAttribute="top" id="GfU-vD-S6m"/>
-                            <constraint firstAttribute="trailing" secondItem="9e8-KJ-2IY" secondAttribute="trailing" id="rYm-LO-HMk"/>
+                            <constraint firstItem="9e8-KJ-2IY" firstAttribute="top" secondItem="PRg-1q-t7d" secondAttribute="top" id="K2U-tX-FoK"/>
+                            <constraint firstItem="9e8-KJ-2IY" firstAttribute="leading" secondItem="PRg-1q-t7d" secondAttribute="leading" id="R3N-hY-qHZ"/>
+                            <constraint firstItem="9e8-KJ-2IY" firstAttribute="bottom" secondItem="kKQ-fw-7kj" secondAttribute="top" id="RiZ-rr-QpI"/>
+                            <constraint firstAttribute="trailing" secondItem="9e8-KJ-2IY" secondAttribute="trailing" id="W93-N1-rIS"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="ViX-YZ-yZJ" id="hLt-Ze-FY7"/>
                         <outlet property="scrollView" destination="9e8-KJ-2IY" id="W0M-Rm-0HS"/>
+                        <outlet property="spinner" destination="UP9-7X-S8u" id="ZkR-WV-juL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ie-Oi-2Ao" userLabel="First Responder" sceneMemberID="firstResponder"/>
