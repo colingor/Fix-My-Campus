@@ -10,6 +10,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "Report.h"
 @interface ViewPhotoViewController ()
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 -(void) loadImageAsset;
 @end
@@ -28,6 +29,16 @@
     
     // Do any additional setup after loading the view.
     [self loadImageAsset];
+    
+    self.scrollView.delegate=self;
+    
+    self.scrollView.minimumZoomScale=1.0;
+    
+    self.scrollView.maximumZoomScale=6.0;
+    
+    self.scrollView.contentSize=CGSizeMake(1280, 960);
+    
+
 }
 
 enum AlertButtonIndex : NSInteger
@@ -35,6 +46,15 @@ enum AlertButtonIndex : NSInteger
     AlertButtonNo,
     AlertButtonYes
 };
+
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+
+{
+    
+    return self.imageView;
+    
+}
 
 
 -(void)deleteAction:(UIBarButtonItem *)sender{

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Photo+Create.h"
-@interface ViewPhotoViewController : UIViewController
+@interface ViewPhotoViewController : UIViewController<UIScrollViewDelegate>
 @property(nonatomic, strong) Photo *photo ;
 @end
