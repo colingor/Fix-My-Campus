@@ -181,6 +181,8 @@
                intoManagedObjectContext:(NSManagedObjectContext *)context
 {
     
+    NSMutableArray *idsFromJitBit = [[NSMutableArray alloc] init];
+    
     // For each ticket, add a report to Core Data
     for(id key in ticketsFromJitBit){
         
@@ -190,6 +192,9 @@
             
             NSString *status = [ticket valueForKey:@"Status"];
             NSString *ticketId = [ticket valueForKey:@"TicketID"];
+            
+           [idsFromJitBit addObject:ticketId];
+            
             NSString *body = [ticket valueForKeyPath:@"Body"];
             
             NSArray *remoteImages = [ticket valueForKeyPath:@"Attachments"];
@@ -270,6 +275,25 @@
             [self reportFromReportInfo:report inManangedObjectContext:context];
         }
     }
+    
+    
+    //Check if there are reports on the device that aren't in jitbit - they should be deleted in this case
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Report"];
+    request.predicate = [NSPredicate predicateWithFormat:@"!(ticket_id IN %@)", idsFromJitBit];
+    
+    NSError *error;
+    NSArray *matches = [context executeFetchRequest:request error:&error];
+    
+    if (!matches || error) {
+        // handle error
+    }else if ([matches count]) {
+        // Delete these objects
+        NSLog(@"Deleting orphaned reports");
+        for(id orphanedReport in matches){
+            [context deleteObject:orphanedReport];
+        }
+    }
+    
     
     // Save just to be sure
     [context save:NULL];
