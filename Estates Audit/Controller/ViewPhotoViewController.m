@@ -9,6 +9,8 @@
 #import "ViewPhotoViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "Report.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
 @interface ViewPhotoViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -112,11 +114,15 @@ enum AlertButtonIndex : NSInteger
                           NSLog(@"Can't get image - %@",[myerror localizedDescription]);
                       }];
     } else if (([[assetUrl scheme] isEqualToString:@"http"]) || ([[assetUrl scheme] isEqualToString:@"https"])){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSData *imageData = [NSData dataWithContentsOfURL:assetUrl];
-            image = [UIImage imageWithData:imageData];
-            [self scaleThenPopulateImageViewWithImage:image];
-        });
+        
+        // Load image from JitBit with SDWebImage so it handles caching
+        [self.imageView sd_setImageWithURL:assetUrl
+                          placeholderImage:nil
+                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                     NSLog(@"Image loading completed");
+                                     [self scaleThenPopulateImageViewWithImage:image];
+                                 }];
+        
     } else {
         image = [UIImage imageWithContentsOfFile:self.photo.url];
         [self scaleThenPopulateImageViewWithImage:image];
