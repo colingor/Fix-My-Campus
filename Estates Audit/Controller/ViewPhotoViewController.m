@@ -35,7 +35,7 @@
     
     self.scrollView.delegate=self;
     
-    self.scrollView.minimumZoomScale=1.0;
+    self.scrollView.minimumZoomScale=0.5;
     
     self.scrollView.maximumZoomScale=6.0;
     
@@ -97,22 +97,45 @@ enum AlertButtonIndex : NSInteger
     __block UIImage *image;
     
     if([[assetUrl scheme] isEqualToString:@"assets-library"]){
-        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset){
-            ALAssetRepresentation *rep = [myasset defaultRepresentation];
-            CGImageRef iref = [rep fullResolutionImage];
-            
-            if (iref) {
-                image = [UIImage imageWithCGImage:iref];
-                [self scaleThenPopulateImageViewWithImage:image];
-            }
-        };
         
-        ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
-        [assetslibrary assetForURL:assetUrl
-                       resultBlock:resultblock
-                      failureBlock: ^(NSError *myerror){
-                          NSLog(@"Can't get image - %@",[myerror localizedDescription]);
-                      }];
+        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+        [library assetForURL:assetUrl
+                 resultBlock:^(ALAsset *asset)  {
+                     NSDictionary *metadata = asset.defaultRepresentation.metadata;
+                     
+                     // Have to check orientation from exif as using image.imageOrientation always returns UIImageOrientationUp
+                     // which isn't necessarily the case
+                     NSDictionary *imageMetadata = [[NSMutableDictionary alloc] initWithDictionary:metadata];
+                     NSNumber *orientation = [imageMetadata valueForKey:@"Orientation"];
+                     
+                     NSLog(@"Orientation : %@", orientation);
+                     
+                     ALAssetRepresentation *rep = [asset defaultRepresentation];
+                     CGImageRef iref = [rep fullResolutionImage];
+                     
+                     if (iref) {
+                         UIImage *image = [UIImage imageWithCGImage:iref];
+                         
+                         CGImageRef cgRef = image.CGImage;
+                         
+                         // recreate image with adjusted orientation if appropriate
+                         if([orientation isEqualToNumber:[NSNumber numberWithLong:6]]){
+                             image = [[UIImage alloc] initWithCGImage:cgRef scale:1.0 orientation:UIImageOrientationRight];
+                         }else if([orientation isEqualToNumber:[NSNumber numberWithLong:3]]){
+                             image = [[UIImage alloc] initWithCGImage:cgRef scale:1.0 orientation:UIImageOrientationDown];
+                         }else if([orientation isEqualToNumber:[NSNumber numberWithLong:8]]){
+                             image = [[UIImage alloc] initWithCGImage:cgRef scale:1.0 orientation:UIImageOrientationLeft];
+                         }
+                         
+                         [self scaleThenPopulateImageViewWithImage:image];
+                         
+                     }
+                 }
+                failureBlock:^(NSError *error) {
+                    NSLog(@"Error attempting to load image from assets: %@", error);
+                }];
+        
+        
     } else if (([[assetUrl scheme] isEqualToString:@"http"]) || ([[assetUrl scheme] isEqualToString:@"https"])){
         
         // Load image from JitBit with SDWebImage so it handles caching

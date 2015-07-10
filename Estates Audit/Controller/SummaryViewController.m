@@ -238,8 +238,30 @@
                 CGImageRef iref = [rep fullResolutionImage];
                 
                 if (iref) {
-                    UIImage *fullSize = [UIImage imageWithCGImage:iref];
-                    NSData *imageData = UIImageJPEGRepresentation(fullSize, 1.0);
+                    
+                    UIImage *image = [UIImage imageWithCGImage:iref];
+                    
+                    CGImageRef cgRef = image.CGImage;
+                    
+                    // Have to get the orientation directly from the exif data as the orientation
+                    // from image.imageOrientation is always UIImageOrientationUp for some reason.
+                    NSDictionary *metadata = myasset.defaultRepresentation.metadata;
+                    NSDictionary *imageMetadata = [[NSMutableDictionary alloc] initWithDictionary:metadata];
+                    NSNumber *orientation = [imageMetadata valueForKey:@"Orientation"];
+                    
+                    NSLog(@"Orientation : %@", orientation);
+                    
+                    // We have to adjust the orientation in certain cases by creating a new image that has
+                    // been rotated properly.
+                    if([orientation isEqualToNumber:[NSNumber numberWithLong:6]]){
+                        image = [[UIImage alloc] initWithCGImage:cgRef scale:1.0 orientation:UIImageOrientationRight];
+                    }else if([orientation isEqualToNumber:[NSNumber numberWithLong:3]]){
+                        image = [[UIImage alloc] initWithCGImage:cgRef scale:1.0 orientation:UIImageOrientationDown];
+                    }else if([orientation isEqualToNumber:[NSNumber numberWithLong:8]]){
+                        image = [[UIImage alloc] initWithCGImage:cgRef scale:1.0 orientation:UIImageOrientationLeft];
+                    }
+                    
+                    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
                     [self postPhoto:imageData ToTicket:ticketId];
                     
                 }
