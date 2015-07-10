@@ -377,9 +377,6 @@ static BOOL mapChangedFromUserInteraction = NO;
         NSLog(@"Problem creating custom point: %@", exception.reason);
     }
 
-    CustomMKPointAnnotation *point = [self.locationAnnotations objectAtIndex:indexPath.row];
-    cell.textLabel.text = point.title;
-    cell.detailTextLabel.text  = point.subtitle;
     return cell;
 }
 
