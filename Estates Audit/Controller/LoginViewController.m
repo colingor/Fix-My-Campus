@@ -23,6 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = NO;
+    [[UITextField appearance] setTintColor:[UIColor blackColor]];
+    [self.usernameTextField becomeFirstResponder];
     // Do any additional setup after loading the view.
 }
 
