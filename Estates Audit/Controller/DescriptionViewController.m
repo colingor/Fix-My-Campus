@@ -26,6 +26,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Ensure the UITextView is selected automatically
+    [self.problemDescription becomeFirstResponder];
+    
     // Hook up UITextViewDelegate so we can hide keyboard on return
     self.problemDescription.delegate = self;
     self.problemDescription.text = self.report.desc;
