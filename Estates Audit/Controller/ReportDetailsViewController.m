@@ -58,6 +58,13 @@
     
 }
 
+
+- (void)viewWillAppear:(BOOL)animated{
+    // Need to reset navbar as it gets changed in ReportCommentsTableViewController
+    self.tabBarController.navigationItem.title = @"Report Details";
+    self.tabBarController.navigationItem.rightBarButtonItem = nil;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
