@@ -104,9 +104,7 @@
         report.ticket_id = ticketId;
     }else{
         // TODO - needs a more robust solution - remote chance that a ticket id could have the same id
-        NSInteger rdmNumber = arc4random()%500;
-        report.ticket_id = [NSNumber numberWithInt: rdmNumber];
-        
+        report.ticket_id = [NSNumber numberWithFloat: arc4random()%500];
     }
     
     // If the notifcation flag is set, this isn't a new local report in progress - it has come from jitBit so we show a notification
