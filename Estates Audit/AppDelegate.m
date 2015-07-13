@@ -49,21 +49,20 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
     // Change navbar colour
     UIColor *navBarColour = [UIColor colorWithRed:(0.0/ 255.0f) green:(39.0/ 255.0f) blue:(76.0/ 255.0f) alpha:(1.0f)];
     
-    /*if ([bar respondsToSelector:@selector(setBarTintColor:)]) { // iOS 7+
-     bar.barTintColor = navBarColour;
-     } else { // what year is this? 2012?
-     bar.tintColor = navBarColour;
-     }*/
-    
     bar.barTintColor = navBarColour;
     bar.tintColor = [UIColor whiteColor];
     
     // Change status bar text to white
     bar.barStyle = UIStatusBarStyleLightContent;
     
-    // Change navbar text colour
-    NSDictionary *textTitleOptions = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor whiteColor], UITextAttributeTextShadowColor, nil];
-    [[UINavigationBar appearance] setTitleTextAttributes:textTitleOptions];
+    NSShadow *shadow = [NSShadow.alloc init];
+    shadow.shadowColor = [UIColor clearColor];
+    
+    NSDictionary *attributes = @{
+                                 NSForegroundColorAttributeName: [UIColor whiteColor],
+                                 NSShadowAttributeName: shadow
+                                 };
+    [[UINavigationBar appearance] setTitleTextAttributes:attributes];
     
     if (IS_OS_8_OR_LATER) {
         bar.translucent = NO;
