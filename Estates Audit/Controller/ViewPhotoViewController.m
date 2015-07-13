@@ -39,7 +39,7 @@
     
     self.scrollView.maximumZoomScale=6.0;
     
-    self.scrollView.contentSize=CGSizeMake(1280, 960);
+    self.scrollView.contentSize=self.imageView.frame.size;
     
     self.spinner.hidesWhenStopped = YES;
 
