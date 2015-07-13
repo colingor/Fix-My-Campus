@@ -152,11 +152,11 @@
     
     
     //Load buildings from estates json
-    NSData *estatesData = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"estates" withExtension:@"json"]];
+   /* NSData *estatesData = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"estates" withExtension:@"json"]];
     NSDictionary *estatesGeoJSON = [NSJSONSerialization JSONObjectWithData:estatesData options:0 error:nil];
     NSArray *locs = [estatesGeoJSON valueForKeyPath:@"locations"];
     
-    /*NSMutableArray *locationAnnotations = [[NSMutableArray alloc] init];
+    NSMutableArray *locationAnnotations = [[NSMutableArray alloc] init];
     
     for(id location in locs){
 
