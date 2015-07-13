@@ -873,6 +873,7 @@
                                         <color key="color" red="0.0" green="0.1960784314" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </activityIndicatorView>
                                 </subviews>
+                                <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="ViX-YZ-yZJ" secondAttribute="trailing" id="4gC-nk-xXM"/>
                                     <constraint firstItem="ViX-YZ-yZJ" firstAttribute="top" secondItem="9e8-KJ-2IY" secondAttribute="top" id="ErQ-8Y-i8r"/>
