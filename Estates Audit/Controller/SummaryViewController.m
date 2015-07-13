@@ -350,7 +350,7 @@
     [request setHTTPBody:body];
     
     // set the content-length
-    NSString *postLength = [NSString stringWithFormat:@"%d", [body length]];
+    NSString *postLength = [NSString stringWithFormat:@"%zd", [body length]];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     
     NSURLSessionDataTask *task = [self.jitUploadSession dataTaskWithRequest:request
