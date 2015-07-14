@@ -96,7 +96,13 @@
     report.lon = (NSNumber *)[reportDictionary valueForKeyPath:@"lon"];
     report.lat = (NSNumber *)[reportDictionary valueForKeyPath:@"lat"];
     report.status = (NSString *)[reportDictionary valueForKeyPath:@"status"];
-    report.issue_date = [NSDate date];
+    
+    NSDate * issueDate = [reportDictionary valueForKeyPath:@"issueDate"];
+    if(issueDate){
+        report.issue_date = issueDate;
+    }else{
+        report.issue_date = [NSDate date];
+    }
     report.body = (NSString *)[reportDictionary valueForKeyPath:@"body"];
  
     
