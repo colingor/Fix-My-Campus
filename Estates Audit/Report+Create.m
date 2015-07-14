@@ -40,23 +40,6 @@
 
             NSArray *remoteImageUrls = [reportDictionary objectForKey:@"remoteImageUrls"];
             
-            if([remoteImageUrls count] > 0){
-          
-                // Check if local photo
-                NSArray *photoArray = [report.photos allObjects];
-                if ([photoArray count] > 0){
-                    // Check image name?
-                    
-                }else{
-                    // No local photo
-                    for(id imageUrl in remoteImageUrls){
-                        NSLog(@"Storing remote image url: %@?", imageUrl);
-                        // Store url
-                        [Photo photoWithUrl:imageUrl fromReport:report inManagedObjectContext:report.managedObjectContext];
-                    }
-                }
-            }
-            
             // Check report status
             NSString *status = [reportDictionary valueForKey:@"status"];
      
