@@ -37,8 +37,6 @@
             
         } else {
             report = [matches lastObject];
-
-            NSArray *remoteImageUrls = [reportDictionary objectForKey:@"remoteImageUrls"];
             
             // Check report status
             NSString *status = [reportDictionary valueForKey:@"status"];
