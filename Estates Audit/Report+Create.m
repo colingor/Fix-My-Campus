@@ -10,6 +10,7 @@
 #import "Photo+Create.h"
 
 #import   <UIKit/UIKit.h>
+#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
 @implementation Report (Create)
 
@@ -287,12 +288,29 @@
     }else if ([matches count]) {
         // Delete these objects
         for(Report *orphanedReport in matches){
-            
-            // We check that the issue_date of the report is not today as this could be a submission in progress
-            if(![[NSCalendar currentCalendar] isDateInToday:orphanedReport.issue_date]){
-                NSLog(@"Deleting orphaned report");
-                [context deleteObject:orphanedReport];
+            NSDate * d = orphanedReport.issue_date;
+         
+            if(IS_OS_8_OR_LATER){
+                // We check that the issue_date of the report is not today as this could be a submission in progress
+                if(![[NSCalendar currentCalendar] isDateInToday:d]){
+                    NSLog(@"Deleting orphaned report");
+                    [context deleteObject:orphanedReport];
+                }
+            }else{
+                NSCalendar *calendar = [NSCalendar currentCalendar];
+                NSCalendarUnit calendarUnits = NSCalendarUnitTimeZone | NSCalendarUnitYear | NSCalendarUnitMonth
+                | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+                NSDateComponents *components = [calendar components:calendarUnits
+                                                           fromDate:[NSDate date]];
+                components.day -= 1;
+                NSDate *yesterday = [calendar dateFromComponents:components];
+                
+                if(d > yesterday){
+                    NSLog(@"Deleting orphaned report");
+                    [context deleteObject:orphanedReport];
+                }
             }
+           
         }
     }
     
