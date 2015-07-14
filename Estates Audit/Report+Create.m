@@ -114,6 +114,30 @@
         report.ticket_id = [NSNumber numberWithFloat: arc4random()%500];
     }
     
+    
+    // Add JitBit image urls
+    NSArray *remoteImageUrls = [reportDictionary objectForKey:@"remoteImageUrls"];
+    
+    if([remoteImageUrls count] > 0){
+        
+        // Check if local photo
+        NSArray *photoArray = [report.photos allObjects];
+        if ([photoArray count] > 0){
+            // Check image name?
+            
+        }else{
+            // No local photo
+            for(id imageUrl in remoteImageUrls){
+                NSLog(@"Storing remote image url: %@?", imageUrl);
+                // Store url
+                [Photo photoWithUrl:imageUrl fromReport:report inManagedObjectContext:report.managedObjectContext];
+            }
+        }
+    }
+
+    
+    
+    
     // If the notifcation flag is set, this isn't a new local report in progress - it has come from jitBit so we show a notification
     NSNumber *notification = [reportDictionary valueForKeyPath:@"notification"];
     
