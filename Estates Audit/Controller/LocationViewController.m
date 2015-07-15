@@ -33,7 +33,6 @@
 @property (strong, nonatomic) NSMutableArray *locationAnnotations;
 @property (strong, nonatomic) NSURLSession *elasticSearchSession;
 @property (strong, nonatomic) AppDelegate *appDelegate;
-@property (nonatomic, strong) NSString *encodedCredentials;
 
 @end
 
@@ -62,7 +61,6 @@
     if (!_appDelegate) {
         _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     }
-    self.encodedCredentials  = [_appDelegate encodedCredentials];
 
     return _appDelegate;
 }
@@ -74,8 +72,6 @@
         
         // another configuration option is backgroundSessionConfiguration (multitasking API required though)
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-        NSString *authValue = [self encodedCredentials];
-        [configuration setHTTPAdditionalHeaders:@{@"Authorization": authValue}];
         
         _elasticSearchSession = [NSURLSession sessionWithConfiguration:configuration];
         
@@ -105,8 +101,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.encodedCredentials = [self.appDelegate encodedCredentials];
     
     [self.mapView setDelegate:self];
     self.descriptionText.delegate = self;
