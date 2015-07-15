@@ -43,6 +43,7 @@
     
     self.spinner.hidesWhenStopped = YES;
 
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 enum AlertButtonIndex : NSInteger
@@ -127,7 +128,7 @@ enum AlertButtonIndex : NSInteger
                              image = [[UIImage alloc] initWithCGImage:cgRef scale:1.0 orientation:UIImageOrientationLeft];
                          }
                          
-                         [self scaleThenPopulateImageViewWithImage:image];
+                         [self setImageAndStopSpinner:image];
                          
                      }
                  }
@@ -143,54 +144,21 @@ enum AlertButtonIndex : NSInteger
                           placeholderImage:nil
                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                      NSLog(@"Image loading completed");
-                                     [self scaleThenPopulateImageViewWithImage:image];
+                                     [self setImageAndStopSpinner:image];
                                  }];
         
     } else {
         image = [UIImage imageWithContentsOfFile:self.photo.url];
-        [self scaleThenPopulateImageViewWithImage:image];
+        [self setImageAndStopSpinner:image];
     }
     
 }
 
 
-- (void) scaleThenPopulateImageViewWithImage:(UIImage *)image {
-    UIImage *scaledImage = [self imageWithImage:image
-                               scaledToMaxWidth:[self.imageView bounds].size.width
-                                      maxHeight:[self.imageView bounds].size.height];
-    [self imageView].contentMode = UIViewContentModeScaleAspectFit;
-    [self.imageView setImage:scaledImage];
+- (void) setImageAndStopSpinner:(UIImage *)image {
 
+    [self.imageView setImage:image];
     [self.spinner stopAnimating];
-
-}
-
-
-- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)size {
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
-        UIGraphicsBeginImageContextWithOptions(size, NO, [[UIScreen mainScreen] scale]);
-    } else {
-        UIGraphicsBeginImageContext(size);
-    }
-    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-}
-
-
-- (UIImage *)imageWithImage:(UIImage *)image scaledToMaxWidth:(CGFloat)width maxHeight:(CGFloat)height {
-    CGFloat oldWidth = image.size.width;
-    CGFloat oldHeight = image.size.height;
-    
-    CGFloat scaleFactor = (oldWidth > oldHeight) ? width / oldWidth : height / oldHeight;
-    
-    CGFloat newHeight = oldHeight * scaleFactor;
-    CGFloat newWidth = oldWidth * scaleFactor;
-    CGSize newSize = CGSizeMake(newWidth, newHeight);
-    
-    return [self imageWithImage:image scaledToSize:newSize];
 }
 
 
