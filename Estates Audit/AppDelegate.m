@@ -11,7 +11,7 @@
 #import "Report+Create.h"
 #import "ReportDatabaseAvailability.h"
 #import "SSKeychain.h"
-
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 @interface AppDelegate () <NSURLSessionDownloadDelegate>
@@ -116,6 +116,11 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
 //            NSLog(@"Password not set");
 //        }
 //    };
+    
+    // This should help with memory - see https://github.com/rs/SDWebImage/issues/538#issuecomment-67892084
+    [[SDImageCache sharedImageCache] setShouldDecompressImages:NO];
+    [[SDWebImageDownloader sharedDownloader] setShouldDecompressImages:NO];
+    
     
     return YES;
 }

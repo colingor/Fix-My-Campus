@@ -11,6 +11,8 @@
 
 #import   <UIKit/UIKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <SDWebImage/SDWebImagePrefetcher.h>
+
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
 @implementation Report (Create)
@@ -108,21 +110,13 @@
             // Check image name?
             
         }else{
-            
-            SDWebImageManager *manager = [SDWebImageManager sharedManager];
+         
+            [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:remoteImageUrls progress:nil completed:^(NSUInteger completedNo, NSUInteger skippedNo) {
+                NSLog(@"Image stored in cache");
+            }];
             
             // No local photo
             for(id imageUrl in remoteImageUrls){
-                
-                NSURL *remoteImageUrl = [NSURL URLWithString:[imageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-                
-                // Pre-cache image so that we don't have to wait until we get to the reports table view before fetching
-                [manager downloadImageWithURL:remoteImageUrl
-                                      options:0
-                                     progress:nil
-                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                                        NSLog(@"Image stored in cache");
-                                    }];
                 
                 NSLog(@"Storing remote image url: %@?", imageUrl);
                 
