@@ -110,13 +110,20 @@
             // Check image name?
             
         }else{
-         
-            [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:remoteImageUrls progress:nil completed:^(NSUInteger completedNo, NSUInteger skippedNo) {
-                NSLog(@"Image stored in cache");
-            }];
             
             // No local photo
             for(id imageUrl in remoteImageUrls){
+                
+                
+                NSURL *remoteImageUrl = [NSURL URLWithString:[imageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                
+                [[SDWebImageManager sharedManager] downloadImageWithURL:remoteImageUrl
+                                                                options:0
+                                                               progress:nil
+                                                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                                                  NSLog(@"Image stored in cache");
+                                                              }];
+                
                 
                 NSLog(@"Storing remote image url: %@?", imageUrl);
                 
