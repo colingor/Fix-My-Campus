@@ -393,7 +393,7 @@
     if ([[segue identifier] isEqualToString:@"Send"])
     {
         HomePageViewController *homevc = (HomePageViewController *)segue.destinationViewController;
-        UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStyleBordered target:self action:@selector(home:)];
+        UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:self action:@selector(home:)];
         homevc.navigationItem.leftBarButtonItem=newBackButton;
     }
     

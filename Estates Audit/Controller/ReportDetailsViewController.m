@@ -45,7 +45,7 @@
     [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
     [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
 
-    [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]];
+    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:15.0f],
                                                         NSForegroundColorAttributeName : [UIColor whiteColor]
                                                         } forState:UIControlStateSelected];
