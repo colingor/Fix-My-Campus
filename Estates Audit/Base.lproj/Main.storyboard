@@ -596,6 +596,10 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Camera" translatesAutoresizingMaskIntoConstraints="NO" id="KCB-cM-P0I">
                                         <rect key="frame" x="40" y="0.0" width="100" height="96"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Take a photograph using the camera" label="Camera">
+                                            <accessibilityTraits key="traits" none="YES" button="YES"/>
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="Dy6-Pc-UCx"/>
                                             <constraint firstAttribute="height" constant="96" id="e4g-Wu-BlR"/>
@@ -603,6 +607,10 @@
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_roll.png" translatesAutoresizingMaskIntoConstraints="NO" id="tJD-bv-AH5">
                                         <rect key="frame" x="180" y="0.0" width="100" height="96"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Select a photograph from the camera roll" label="Choose photograph">
+                                            <accessibilityTraits key="traits" none="YES" button="YES"/>
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="96" id="RVh-VS-Lhn"/>
                                             <constraint firstAttribute="width" constant="100" id="jV4-ag-5nG"/>
@@ -620,6 +628,7 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SELECTED TO INCLUDE IN REPORT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2L-Ez-XM6">
                                 <rect key="frame" x="16" y="200" width="288" height="21"/>
+                                <accessibility key="accessibilityConfiguration" hint="Pictures to be included in Report" label="Selected pictures"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="EEL-hg-okI"/>
                                 </constraints>
@@ -655,6 +664,9 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="ufX-Zf-h8d">
                                                     <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                    <accessibility key="accessibilityConfiguration" hint="Picture to be included in report" label="Picture">
+                                                        <bool key="isElement" value="YES"/>
+                                                    </accessibility>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
