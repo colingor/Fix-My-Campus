@@ -48,6 +48,8 @@
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(buttonAction:)];
 
+    [rightButton setAccessibilityLabel:@"Add a comment to this report"];
+    
     self.tabBarController.navigationItem.rightBarButtonItem = rightButton;
     
     [self refresh:nil];
