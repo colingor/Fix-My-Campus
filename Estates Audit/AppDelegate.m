@@ -220,7 +220,12 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration ephemeralSessionConfiguration];
         sessionConfig.allowsCellularAccess = NO;
         sessionConfig.timeoutIntervalForRequest = BACKGROUND_JITBIT_FETCH_TIMEOUT; // want to be a good background citizen!
-
+        
+        // Don't cache - might help with memory problems on iOS7?
+        sessionConfig.URLCache = [[NSURLCache alloc] initWithMemoryCapacity:0
+                                                               diskCapacity:0
+                                                                   diskPath:nil];
+        
         
         NSString *authValue = [self encodedCredentials];
         [sessionConfig setHTTPAdditionalHeaders:@{@"Authorization": authValue}];
@@ -364,6 +369,11 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
                 urlSessionConfig = [NSURLSessionConfiguration backgroundSessionConfiguration:JITBIT_FETCH];
             }
  
+            // Keep pressure off memory
+            urlSessionConfig.URLCache = [[NSURLCache alloc] initWithMemoryCapacity:0
+                                                                   diskCapacity:0
+                                                                       diskPath:nil];
+            
             NSString *authValue = [self encodedCredentials];
             [urlSessionConfig setHTTPAdditionalHeaders:@{@"Authorization": authValue}];
             
@@ -376,7 +386,10 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
 }
 
 
-
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application{
+    NSLog(@"Memory warning");
+    [self.jitBitDownloadSession invalidateAndCancel];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
