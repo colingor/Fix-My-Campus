@@ -84,6 +84,9 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION DESCRIPTION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sqe-HE-v0k">
                                         <rect key="frame" x="8" y="154" width="304" height="21"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="NO"/>
+                                        </accessibility>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="5Cr-Gw-fpH"/>
                                         </constraints>
@@ -93,6 +96,9 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PICTURES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USX-Jz-vAS">
                                         <rect key="frame" x="8" y="309" width="299" height="21"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="NO"/>
+                                        </accessibility>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="y5w-D6-H4X"/>
                                         </constraints>
@@ -102,6 +108,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROBLEM DESCRIPTION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gr4-Af-CKm">
                                         <rect key="frame" x="8" y="8" width="304" height="21"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Description of reported problem" label="Problem Description"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="XwJ-rw-2cP"/>
                                         </constraints>
@@ -146,6 +153,9 @@
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ERF-Xt-817">
                                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                            <accessibility key="accessibilityConfiguration" hint="Picture of reported issue" label="Picture">
+                                                                <bool key="isElement" value="YES"/>
+                                                            </accessibility>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -162,6 +172,7 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ac-RO-hzU">
                                         <rect key="frame" x="0.0" y="183" width="202" height="118"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Description of Report location" label="Location Description"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="118" id="7j4-74-ifh"/>
                                         </constraints>
