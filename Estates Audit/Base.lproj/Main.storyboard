@@ -901,6 +901,9 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ViX-YZ-yZJ">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Full screen preview of report picture" label="Image preview">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                     </imageView>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="UP9-7X-S8u">
                                         <rect key="frame" x="142" y="265" width="37" height="37"/>
