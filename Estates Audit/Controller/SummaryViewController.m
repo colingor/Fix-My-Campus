@@ -80,8 +80,13 @@
     
     [self.mapView setDelegate:self];
     
-    // Zoom map to region and add pin
-    [self setupMap];
+    // Hide map if voiceover is running when page loads as it's confusing
+    if(!UIAccessibilityIsVoiceOverRunning()){
+        // Zoom map to region and add pin
+        [self setupMap];
+    }else{
+        [self.mapView setHidden:YES];
+    }
     
     // Do any additional setup after loading the view.
     self.locationDescription.text = self.report.loc_desc;
