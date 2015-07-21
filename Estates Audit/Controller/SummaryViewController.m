@@ -203,6 +203,7 @@
                                           }
                                       }
                                   }];
+    
     [task resume]; // don't forget that all NSURLSession tasks start out suspended!
     
 }
@@ -408,8 +409,6 @@
         UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:self action:@selector(home:)];
         homevc.navigationItem.leftBarButtonItem=newBackButton;
     }
-    
-    [self.appDelegate displayNetworkNotification];
     
 }
 
