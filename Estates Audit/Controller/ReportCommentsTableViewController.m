@@ -113,8 +113,9 @@
                         [Comment commentWithBody:body onDate:commentDate fromReport:report inManagedObjectContext:report.managedObjectContext];
                         [report.managedObjectContext save:NULL];
                     }
-                [self.refreshControl endRefreshing];
-                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                    [self.refreshControl endRefreshing];
+                    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                    [self.tableView reloadData];
                 }
                
             }
