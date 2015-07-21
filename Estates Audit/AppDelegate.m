@@ -12,6 +12,9 @@
 #import "ReportDatabaseAvailability.h"
 #import "SSKeychain.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#include<unistd.h>
+#include<netdb.h>
+
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 @interface AppDelegate () <NSURLSessionDownloadDelegate>
@@ -24,7 +27,7 @@
 @property (strong, nonatomic) NSMutableDictionary *ticketsCustomFieldsFromJitBit;
 
 @property (strong, nonatomic) NSString *username;
-
+@property (nonatomic, assign) BOOL alertShown;
 @end
 
 // name of the Flickr fetching background download session
@@ -41,6 +44,7 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
 
 @implementation AppDelegate
 
+#pragma mark - Application
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
@@ -75,11 +79,14 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
     HomePageViewController *homevc = [[navigationController viewControllers] objectAtIndex:0];
     homevc.managedObjectContext = self.reportDatabaseContext;
     
+    
+    self.alertShown = NO;
+    
     //Fire off a sync when app starts if user is logged in
     if([self isLoggedIn]){
         [self syncWithJitBit];
     }
-   
+    
     
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
@@ -92,30 +99,30 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
     if ([notificationOptions objectForKey:@"message"]) {
         NSLog(@"%@", [notificationOptions objectForKey:@"message"]);
         application.applicationIconBadgeNumber -= 1;
-     
+        
     }
     
     
-//    NSString *const KEYCHAIN_SERVICE = @"Estates Audit";
-//    
-//    NSError *error = nil;
-//
-//    NSArray *accounts = [SSKeychain accountsForService:KEYCHAIN_SERVICE];
-//    if([accounts count] > 0){
-//        NSDictionary *account = [accounts objectAtIndex:0];
-//        NSLog(@"account %@", account);
-//        
-//        
-//        NSString *p = [SSKeychain passwordForService:KEYCHAIN_SERVICE account:[account valueForKey:@"acct"]];
-//        
-//        NSLog(@"%@", p);
-//    }else{
-//        BOOL passwordSet = [SSKeychain setPassword:@"cgtest" forService:KEYCHAIN_SERVICE account:@"cgtest" error:&error];
-//        
-//        if ([error code] == SSKeychainErrorNotFound) {
-//            NSLog(@"Password not set");
-//        }
-//    };
+    //    NSString *const KEYCHAIN_SERVICE = @"Estates Audit";
+    //
+    //    NSError *error = nil;
+    //
+    //    NSArray *accounts = [SSKeychain accountsForService:KEYCHAIN_SERVICE];
+    //    if([accounts count] > 0){
+    //        NSDictionary *account = [accounts objectAtIndex:0];
+    //        NSLog(@"account %@", account);
+    //
+    //
+    //        NSString *p = [SSKeychain passwordForService:KEYCHAIN_SERVICE account:[account valueForKey:@"acct"]];
+    //
+    //        NSLog(@"%@", p);
+    //    }else{
+    //        BOOL passwordSet = [SSKeychain setPassword:@"cgtest" forService:KEYCHAIN_SERVICE account:@"cgtest" error:&error];
+    //
+    //        if ([error code] == SSKeychainErrorNotFound) {
+    //            NSLog(@"Password not set");
+    //        }
+    //    };
     
     // This should help with memory - see https://github.com/rs/SDWebImage/issues/538#issuecomment-67892084
     [[SDImageCache sharedImageCache] setShouldDecompressImages:NO];
@@ -123,83 +130,6 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
     
     
     return YES;
-}
-
-
--(void)setUserName:(NSString *)username withPassword:(NSString *)password
-{
-    NSError *error = nil;
-    
-    [SSKeychain setPassword:password forService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:username error:&error];
-    if ([error code] == SSKeychainErrorNotFound) {
-        NSLog(@"Password not set");
-    }else{
-        self.username = username;
-    }
-}
-
--(void)deleteCredentialsForUser:(NSString *)username
-{
-    [SSKeychain deletePasswordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:username];
-    self.username = nil;
-}
-
--(void)deleteCredentials{
-    
-    NSArray *accounts = [SSKeychain accountsForService:ESTATES_AUDIT_KEYCHAIN_SERVICE];
-    for (id account in accounts){
-        NSString *user = [account valueForKey:@"acct"];
-           [SSKeychain deletePasswordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:user];
-    }
-}
-
--(BOOL)isLoggedIn
-{
-    if([[self encodedCredentials] length] > 0){
-        return TRUE;
-    }
-    return FALSE;
-}
-
--(NSString *)encodedCredentials
-{
-    NSString *authValue;
-
-    NSArray *accounts = [SSKeychain accountsForService:ESTATES_AUDIT_KEYCHAIN_SERVICE];    
- 
-    if([accounts count] > 0){
-        
-        for (id account in accounts){
-            NSString *user = [account valueForKey:@"acct"];
-            if([user isEqualToString:self.username]){
-                NSString *pass = [SSKeychain passwordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:user];
-                
-                NSString *authStr = [NSString stringWithFormat:@"%@:%@", user, pass];
-                NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
-                return authValue = [NSString stringWithFormat: @"Basic %@",[authData base64EncodedStringWithOptions:0]];
-            }
-        }
-        // Just use the first one?
-        NSDictionary *account = [accounts objectAtIndex:0];
-        NSString *user = [account valueForKey:@"acct"];
-        NSString *pass = [SSKeychain passwordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:user];
-        
-        NSString *authStr = [NSString stringWithFormat:@"%@:%@", user, pass];
-        NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
-        return authValue = [NSString stringWithFormat: @"Basic %@",[authData base64EncodedStringWithOptions:0]];
-    };
-    
-    return authValue;
-}
-
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
-{
-
-    application.applicationIconBadgeNumber -= 1;
-//    UIAlertView *notificationAlert = [[UIAlertView alloc] initWithTitle:@"Notification"    message: [notification alertBody]
-//                                                               delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-//    
-//    [notificationAlert show];
 }
 
 
@@ -267,6 +197,139 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
     self.jitBitDownloadBackgroundURLSessionCompletionHandler = completionHandler;
 }
 
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application{
+    NSLog(@"Memory warning");
+    [self.jitBitDownloadSession invalidateAndCancel];
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application {
+    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    // Saves changes in the application's managed object context before the application terminates.
+    // [self saveContext];
+}
+
+
+
+#pragma mark - SSKeychain
+-(void)setUserName:(NSString *)username withPassword:(NSString *)password
+{
+    NSError *error = nil;
+    
+    [SSKeychain setPassword:password forService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:username error:&error];
+    if ([error code] == SSKeychainErrorNotFound) {
+        NSLog(@"Password not set");
+    }else{
+        self.username = username;
+    }
+}
+
+-(void)deleteCredentialsForUser:(NSString *)username
+{
+    [SSKeychain deletePasswordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:username];
+    self.username = nil;
+}
+
+-(void)deleteCredentials{
+    
+    NSArray *accounts = [SSKeychain accountsForService:ESTATES_AUDIT_KEYCHAIN_SERVICE];
+    for (id account in accounts){
+        NSString *user = [account valueForKey:@"acct"];
+        [SSKeychain deletePasswordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:user];
+    }
+}
+
+-(BOOL)isLoggedIn
+{
+    if([[self encodedCredentials] length] > 0){
+        return TRUE;
+    }
+    return FALSE;
+}
+
+-(NSString *)encodedCredentials
+{
+    NSString *authValue;
+    
+    NSArray *accounts = [SSKeychain accountsForService:ESTATES_AUDIT_KEYCHAIN_SERVICE];
+    
+    if([accounts count] > 0){
+        
+        for (id account in accounts){
+            NSString *user = [account valueForKey:@"acct"];
+            if([user isEqualToString:self.username]){
+                NSString *pass = [SSKeychain passwordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:user];
+                
+                NSString *authStr = [NSString stringWithFormat:@"%@:%@", user, pass];
+                NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
+                return authValue = [NSString stringWithFormat: @"Basic %@",[authData base64EncodedStringWithOptions:0]];
+            }
+        }
+        // Just use the first one?
+        NSDictionary *account = [accounts objectAtIndex:0];
+        NSString *user = [account valueForKey:@"acct"];
+        NSString *pass = [SSKeychain passwordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:user];
+        
+        NSString *authStr = [NSString stringWithFormat:@"%@:%@", user, pass];
+        NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
+        return authValue = [NSString stringWithFormat: @"Basic %@",[authData base64EncodedStringWithOptions:0]];
+    };
+    
+    return authValue;
+}
+
+#pragma mark - Network Availability
+-(BOOL)isNetworkAvailable
+{
+    char *hostname;
+    struct hostent *hostinfo;
+    hostname = "google.co.uk";
+    hostinfo = gethostbyname (hostname);
+    if (hostinfo == NULL){
+        NSLog(@"-> no connection!\n");
+        return NO;
+    }
+    else{
+        NSLog(@"-> connection established!\n");
+        return YES;
+    }
+}
+
+
+#pragma mark - Notification
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    
+    application.applicationIconBadgeNumber -= 1;
+    //    UIAlertView *notificationAlert = [[UIAlertView alloc] initWithTitle:@"Notification"    message: [notification alertBody]
+    //                                                               delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    //
+    //    [notificationAlert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    self.alertShown = NO;
+}
+
+
 
 
 
@@ -306,7 +369,7 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
                                                       userInfo:userInfo];
 }
 
-
+#pragma mark - JitBit
 - (void)syncWithJitBit:(NSTimer *)timer // NSTimer target/action always takes an NSTimer as an argument
 {
     [self syncWithJitBit];
@@ -315,37 +378,63 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
 
 - (void)syncWithJitBit
 {
-    // getTasksWithCompletionHandler: is ASYNCHRONOUS
-    // but that's okay because we're not expecting startFlickrFetch to do anything synchronously anyway
-    [self.jitBitDownloadSession getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
-        // let's see if we're already working on a fetch ...
-        if (![downloadTasks count]) {
-            // ... not working on a fetch, let's start one up
+    
+    if([self isNetworkAvailable]){
+        // but that's okay because we're not expecting startFlickrFetch to do anything synchronously anyway
+        [self.jitBitDownloadSession getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+            // let's see if we're already working on a fetch ...
+            if (![downloadTasks count]) {
+                // ... not working on a fetch, let's start one up
+                
+                // Create new dict to store ticket results
+                _ticketsFromJitBit = [NSMutableDictionary dictionary];
+                _ticketsCustomFieldsFromJitBit = [NSMutableDictionary dictionary];
+                
+                
+                NSString *apiStr = @"https://eaudit.jitbit.com/helpdesk/api/Tickets?count=5";
+                
+                NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                
+                NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
+                [request setHTTPMethod:@"GET"];
+                
+                NSURLSessionDownloadTask *task = [self.jitBitDownloadSession downloadTaskWithRequest:request];
+                task.taskDescription = JITBIT_FETCH;
+                
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+                [task resume];
+                
+            } else {
+                // ... we are working on a fetch (let's make sure it (they) is (are) running while we're here)
+                for (NSURLSessionDownloadTask *task in downloadTasks) [task resume];
+            }
+        }];
+        
+    }else{
+        
+        if (!self.alertShown) {
             
-            // Create new dict to store ticket results
-            _ticketsFromJitBit = [NSMutableDictionary dictionary];
-            _ticketsCustomFieldsFromJitBit = [NSMutableDictionary dictionary];
+            [[[UIAlertView alloc] initWithTitle:@"No Network connection available"
+                                        message:@"An active network connection is required for the Estates Audit application to load and submit reports."
+                                       delegate:self
+                              cancelButtonTitle:nil
+                              otherButtonTitles:@"OK",
+              nil] show];
             
-            
-            NSString *apiStr = @"https://eaudit.jitbit.com/helpdesk/api/Tickets?count=5";
-            
-            NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
-            [request setHTTPMethod:@"GET"];
-            
-            NSURLSessionDownloadTask *task = [self.jitBitDownloadSession downloadTaskWithRequest:request];
-            task.taskDescription = JITBIT_FETCH;
-            
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-            [task resume];
-            
-        } else {
-            // ... we are working on a fetch (let's make sure it (they) is (are) running while we're here)
-            for (NSURLSessionDownloadTask *task in downloadTasks) [task resume];
+            self.alertShown = YES;
         }
-    }];
+        
+        // Hide loading spinner on reports list
+        if (self.onCompletion) {
+            self.onCompletion();
+        }
+    }
+    
+    
+    // getTasksWithCompletionHandler: is ASYNCHRONOUS
+    
 }
+
 
 
 - (NSURLSession *)jitBitDownloadSession // the NSURLSession we will use to fetch jitBit data in the background
@@ -368,11 +457,11 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
             {
                 urlSessionConfig = [NSURLSessionConfiguration backgroundSessionConfiguration:JITBIT_FETCH];
             }
- 
+            
             // Keep pressure off memory
             urlSessionConfig.URLCache = [[NSURLCache alloc] initWithMemoryCapacity:0
-                                                                   diskCapacity:0
-                                                                       diskPath:nil];
+                                                                      diskCapacity:0
+                                                                          diskPath:nil];
             
             NSString *authValue = [self encodedCredentials];
             [urlSessionConfig setHTTPAdditionalHeaders:@{@"Authorization": authValue}];
@@ -386,34 +475,6 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
 }
 
 
-- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application{
-    NSLog(@"Memory warning");
-    [self.jitBitDownloadSession invalidateAndCancel];
-}
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    // Saves changes in the application's managed object context before the application terminates.
-    // [self saveContext];
-}
 
 // Creates a task performing a GET for each ticket id tickets dict
 - (void)ticketDetailsFromJitBit:(NSDictionary *)tickets{
@@ -456,30 +517,29 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
 
 // Get additional ticket fields
 - (void)fetchAdditionalTicketDetails:(NSString *)issueID{
-
-            // Need to do a GET on this ticket
-            NSString *apiStr = [NSString stringWithFormat:@"https://eaudit.jitbit.com/helpdesk/api/TicketCustomFields?id=%@", issueID];
-            
-            NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
-            [request setHTTPMethod:@"GET"];
-            
-            // Query on a particular ticket id
-            NSURLSessionDownloadTask *task = [self.jitBitDownloadSession downloadTaskWithRequest:request];
     
-            task.taskDescription = JITBIT_FETCH_ADDITIONAL_FIELDS;
-            
-            // Set the ticket Id so we can reference it when we get a result
-            [task setAccessibilityLabel:issueID];
-            
-            [task resume]; // don't forget that all NSURLSession tasks start out suspended!
+    // Need to do a GET on this ticket
+    NSString *apiStr = [NSString stringWithFormat:@"https://eaudit.jitbit.com/helpdesk/api/TicketCustomFields?id=%@", issueID];
+    
+    NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
+    [request setHTTPMethod:@"GET"];
+    
+    // Query on a particular ticket id
+    NSURLSessionDownloadTask *task = [self.jitBitDownloadSession downloadTaskWithRequest:request];
+    
+    task.taskDescription = JITBIT_FETCH_ADDITIONAL_FIELDS;
+    
+    // Set the ticket Id so we can reference it when we get a result
+    [task setAccessibilityLabel:issueID];
+    
+    [task resume]; // don't forget that all NSURLSession tasks start out suspended!
 }
 
 
 
 
-#pragma mark - NSURLSessionDownloadDelegate
 
 
 - (void)loadTicketsFromLocalURL:(NSURL *)localFile
@@ -504,14 +564,14 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
             // We now have a note of all ticket ids - need to do a get on each one to get further ticket details
             [self ticketDetailsFromJitBit:tickets];
         }
-
+        
     }
     
 }
 
 
 - (void)loadIndividualTicketFromLocalURL:(NSURL *)localFile
-                                downloadTask:(NSURLSessionDownloadTask *)downloadTask
+                            downloadTask:(NSURLSessionDownloadTask *)downloadTask
 {
     
     if(![downloadTask error]){
@@ -538,7 +598,7 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
 
 
 - (void)loadAdditionalTicketDetailsFromLocalURL:(NSURL *)localFile
-                                downloadTask:(NSURLSessionDownloadTask *)downloadTask
+                                   downloadTask:(NSURLSessionDownloadTask *)downloadTask
 {
     
     if(![downloadTask error]){
@@ -548,8 +608,8 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
         
         if (jitbitTicketsJSONData) {
             additonalTicketDetails = [NSJSONSerialization JSONObjectWithData:jitbitTicketsJSONData
-                                                     options:0
-                                                       error:NULL];
+                                                                     options:0
+                                                                       error:NULL];
             NSLog(@"Additional ticket details found for %@", ticketID);
             
             [self.ticketsCustomFieldsFromJitBit setObject:additonalTicketDetails forKey:ticketID];
@@ -560,13 +620,62 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
     }
 }
 
+- (void)ticketListMightBeComplete
+{
+    
+    //    if (self.jitBitDownloadBackgroundURLSessionCompletionHandler) {
+    [self.jitBitDownloadSession getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+        
+        // we're doing this check for other downloads just to be theoretically "correct"
+        //  but we don't actually need it (since we only ever fire off one download task at a time)
+        // in addition, note that getTasksWithCompletionHandler: is ASYNCHRONOUS
+        //  so we must check again when the block executes if the handler is still not nil
+        //  (another thread might have sent it already in a multiple-tasks-at-once implementation)
+        if (![downloadTasks count]) {  // any more ticket downloads left?
+            NSLog(@"********* TICKET DOWNLOAD COMPLETE***********");
+            
+            
+            // invoke jitBitDownloadBackgroundURLSessionCompletionHandler (if it's still not nil)
+            void (^completionHandler)() = self.jitBitDownloadBackgroundURLSessionCompletionHandler;
+            self.jitBitDownloadBackgroundURLSessionCompletionHandler = nil;
+            if (completionHandler) {
+                completionHandler();
+            }
+            
+            
+            // We can hide the refresh control on ReportsTable using this callback
+            if (self.onCompletion) {
+                self.onCompletion();
+            }
+            
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            
+            // Load Reports into Core Data
+            [Report loadReportsFromJitBitDictionary:self.ticketsFromJitBit
+                                   withCustomFields:self.ticketsCustomFieldsFromJitBit
+                           intoManagedObjectContext:self.reportDatabaseContext];
+            
+        }else{
+            NSLog(@"%lu Tasks remaining", (unsigned long)[downloadTasks count]);
+            
+            // Nasty hack to get last task oterhwise we might never complete
+            if([downloadTasks count] == 1){
+                [NSThread sleepForTimeInterval:1];
+                [self ticketListMightBeComplete];
+                
+            }}// else other downloads going, so let them call this method when they finish
+    }];
+    //            }
+}
 
+
+#pragma mark - NSURLSessionDownloadDelegate
 // required by the protocol
 - (void)URLSession:(NSURLSession *)session
       downloadTask:(NSURLSessionDownloadTask *)downloadTask
 didFinishDownloadingToURL:(NSURL *)localFile
 {
-
+    
     // First task is to get a list of the issues relevant to this user
     if ([downloadTask.taskDescription isEqualToString:JITBIT_FETCH]) {
         
@@ -621,53 +730,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 
 
 
-- (void)ticketListMightBeComplete
-{
-    
-//    if (self.jitBitDownloadBackgroundURLSessionCompletionHandler) {
-    [self.jitBitDownloadSession getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
-        
-        // we're doing this check for other downloads just to be theoretically "correct"
-        //  but we don't actually need it (since we only ever fire off one download task at a time)
-        // in addition, note that getTasksWithCompletionHandler: is ASYNCHRONOUS
-        //  so we must check again when the block executes if the handler is still not nil
-        //  (another thread might have sent it already in a multiple-tasks-at-once implementation)
-        if (![downloadTasks count]) {  // any more ticket downloads left?
-            NSLog(@"********* TICKET DOWNLOAD COMPLETE***********");
-            
-            
-            // invoke jitBitDownloadBackgroundURLSessionCompletionHandler (if it's still not nil)
-            void (^completionHandler)() = self.jitBitDownloadBackgroundURLSessionCompletionHandler;
-            self.jitBitDownloadBackgroundURLSessionCompletionHandler = nil;
-            if (completionHandler) {
-                completionHandler();
-            }
-            
-            
-            // We can hide the refresh control on ReportsTable using this callback
-            if (self.onCompletion) {
-                self.onCompletion();
-            }
-            
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-            
-            // Load Reports into Core Data
-            [Report loadReportsFromJitBitDictionary:self.ticketsFromJitBit
-                                   withCustomFields:self.ticketsCustomFieldsFromJitBit
-                           intoManagedObjectContext:self.reportDatabaseContext];
-        
-        }else{
-            NSLog(@"%lu Tasks remaining", (unsigned long)[downloadTasks count]);
-            
-            // Nasty hack to get last task oterhwise we might never complete
-            if([downloadTasks count] == 1){
-                [NSThread sleepForTimeInterval:1];
-                [self ticketListMightBeComplete];
-                
-        }}// else other downloads going, so let them call this method when they finish
-    }];
-//            }
-}
+
 
 
 @end

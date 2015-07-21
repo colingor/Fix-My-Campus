@@ -73,12 +73,16 @@
     
     // Trigger calls to jitBit
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate syncWithJitBit];
  
+    // Set up completion handler first - have to do this in case no network is available otherwise we
+    // won't be able to turn off the spinner
     appDelegate.onCompletion = ^{
         [self.refreshControl endRefreshing];
         NSLog(@"End refreshing");
     };
+    
+    // Perform sync
+    [appDelegate syncWithJitBit];
 }
 
 
