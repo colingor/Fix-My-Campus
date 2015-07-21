@@ -233,113 +233,118 @@ static BOOL mapChangedFromUserInteraction = NO;
 }
 
 
-
 -(void)displayBuildingsInBoundingBox{
     
-    MKMapRect mRect = self.mapView.visibleMapRect;
-    NSMutableDictionary *bb = [self getBoundingBox:mRect];
-    
-    NSString *apiStr = @"http://dlib-brown.edina.ac.uk/estates/_search?size=500";
-    
-    NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
-    [request setHTTPMethod:@"POST"];
-
-
-    NSDictionary *queryDict = @{ @"query" : @{ @"match_all": @{}} };
-    NSDictionary *filterDict = @{@"filter" : @{ @"geo_bounding_box": @{@"location":bb }} };
-    
-    NSMutableDictionary *jsonPayload =  [[NSMutableDictionary alloc] init];
-   
-    [jsonPayload addEntriesFromDictionary:queryDict];
-    [jsonPayload addEntriesFromDictionary:filterDict];
-    
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonPayload
-                                                       options:NSJSONWritingPrettyPrinted 
-                                                         error:&error];
-
-    NSString *jsonString = [[NSString alloc] init];
-    if (!jsonData) {
-        NSLog(@"Got an error: %@", error);
-    } else {
-        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//        NSLog(@"jsonString %@", jsonString);
-    }
-    
-    [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSURLSessionDataTask *task = [self.elasticSearchSession dataTaskWithRequest:request
-                                                              completionHandler:
-                                  ^(NSData *data, NSURLResponse *response, NSError *error) {
-                                      // this handler is not executing on the main queue, so we can't do UI directly here
-                                      if (!error) {
-                                          NSDictionary *locations = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                    options:0
-                                                                                                      error:NULL];
-                                          
-                                          NSArray *hits = [[locations valueForKey:@"hits"] valueForKey:@"hits"];
-                                     
-                                         // localAnnotations used to populate building list table
-                                          [self.locationAnnotations removeAllObjects];
-                 
-                                          for (id hit in hits){
-                                              NSDictionary * location = [hit valueForKey:@"_source"];
+    if([self.appDelegate isNetworkAvailable]){
+        
+        MKMapRect mRect = self.mapView.visibleMapRect;
+        NSMutableDictionary *bb = [self getBoundingBox:mRect];
+        
+        NSString *apiStr = @"http://dlib-brown.edina.ac.uk/estates/_search?size=500";
+        
+        NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
+        [request setHTTPMethod:@"POST"];
+        
+        
+        NSDictionary *queryDict = @{ @"query" : @{ @"match_all": @{}} };
+        NSDictionary *filterDict = @{@"filter" : @{ @"geo_bounding_box": @{@"location":bb }} };
+        
+        NSMutableDictionary *jsonPayload =  [[NSMutableDictionary alloc] init];
+        
+        [jsonPayload addEntriesFromDictionary:queryDict];
+        [jsonPayload addEntriesFromDictionary:filterDict];
+        
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonPayload
+                                                           options:NSJSONWritingPrettyPrinted
+                                                             error:&error];
+        
+        NSString *jsonString = [[NSString alloc] init];
+        if (!jsonData) {
+            NSLog(@"Got an error: %@", error);
+        } else {
+            jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            //        NSLog(@"jsonString %@", jsonString);
+        }
+        
+        [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSURLSessionDataTask *task = [self.elasticSearchSession dataTaskWithRequest:request
+                                                                  completionHandler:
+                                      ^(NSData *data, NSURLResponse *response, NSError *error) {
+                                          // this handler is not executing on the main queue, so we can't do UI directly here
+                                          if (!error) {
+                                              NSDictionary *locations = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                        options:0
+                                                                                                          error:NULL];
                                               
-                                              NSString * name = [location valueForKey:@"name"];
-                                              NSString * lat = [location valueForKey:@"latitude"];
-                                              NSString * lon = [location valueForKey:@"longitude"];
-                                              NSString * address = [location valueForKey:@"address"];
+                                              NSArray *hits = [[locations valueForKey:@"hits"] valueForKey:@"hits"];
                                               
-                                              // Check if annotation already exists on map
-                                              NSArray *existingAnnotations = self.mapView.annotations;
+                                              // localAnnotations used to populate building list table
+                                              [self.locationAnnotations removeAllObjects];
                                               
-                                              BOOL found = NO;
-                                              
-                                              for(MKPointAnnotation *existing in existingAnnotations){
+                                              for (id hit in hits){
+                                                  NSDictionary * location = [hit valueForKey:@"_source"];
                                                   
-                                                  NSString *existingTitle = existing.title;
-                                              
-                                                  NSNumber *existinglatNumber = [NSNumber numberWithDouble:existing.coordinate.latitude];
-                                                  NSNumber *newlatNumber = @([lat floatValue]);
+                                                  NSString * name = [location valueForKey:@"name"];
+                                                  NSString * lat = [location valueForKey:@"latitude"];
+                                                  NSString * lon = [location valueForKey:@"longitude"];
+                                                  NSString * address = [location valueForKey:@"address"];
                                                   
-                                                  NSNumber *existinglonNumber = [NSNumber numberWithDouble:existing.coordinate.longitude];
-                                                  NSNumber *newlonNumber = @([lon floatValue]);
+                                                  // Check if annotation already exists on map
+                                                  NSArray *existingAnnotations = self.mapView.annotations;
                                                   
-                                                  if([existingTitle isEqualToString:name] &&
-                                                     ([existinglatNumber isEqualToNumber:newlatNumber]) &&
-                                                     ([existinglonNumber isEqualToNumber:newlonNumber])){
-                                                      found = YES;
-                                                      break;
+                                                  BOOL found = NO;
+                                                  
+                                                  for(MKPointAnnotation *existing in existingAnnotations){
+                                                      
+                                                      NSString *existingTitle = existing.title;
+                                                      
+                                                      NSNumber *existinglatNumber = [NSNumber numberWithDouble:existing.coordinate.latitude];
+                                                      NSNumber *newlatNumber = @([lat floatValue]);
+                                                      
+                                                      NSNumber *existinglonNumber = [NSNumber numberWithDouble:existing.coordinate.longitude];
+                                                      NSNumber *newlonNumber = @([lon floatValue]);
+                                                      
+                                                      if([existingTitle isEqualToString:name] &&
+                                                         ([existinglatNumber isEqualToNumber:newlatNumber]) &&
+                                                         ([existinglonNumber isEqualToNumber:newlonNumber])){
+                                                          found = YES;
+                                                          break;
+                                                      }
+                                                  }
+                                                  
+                                                  CustomMKPointAnnotation *point = [[CustomMKPointAnnotation alloc] init];
+                                                  
+                                                  CLLocationCoordinate2D coord;
+                                                  coord.latitude = [lat floatValue];
+                                                  coord.longitude = [lon floatValue];
+                                                  
+                                                  point.coordinate = coord;
+                                                  point.title = name;
+                                                  point.subtitle = address;
+                                                  point.hierarchical = YES;
+                                                  
+                                                  // Add to the building list
+                                                  [self.locationAnnotations addObject:point];
+                                                  
+                                                  if(!found){
+                                                      [self.mapView addAnnotation:point];
                                                   }
                                               }
                                               
-                                              CustomMKPointAnnotation *point = [[CustomMKPointAnnotation alloc] init];
-                                              
-                                              CLLocationCoordinate2D coord;
-                                              coord.latitude = [lat floatValue];
-                                              coord.longitude = [lon floatValue];
-                                              
-                                              point.coordinate = coord;
-                                              point.title = name;
-                                              point.subtitle = address;
-                                              point.hierarchical = YES;
-                                              
-                                              // Add to the building list
-                                              [self.locationAnnotations addObject:point];
-                                              
-                                              if(!found){
-                                                  [self.mapView addAnnotation:point];
-                                              }
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  [self.tableView reloadData];
+                                              });
                                           }
-                                          
-                                          dispatch_async(dispatch_get_main_queue(), ^{
-                                              [self.tableView reloadData];
-                                          });
-                                      }
-                                  }];
-    [task resume];
+                                      }];
+        [task resume];
+    }else{
+        // Display notification
+        [self.appDelegate displayNetworkNotification];
+    }
     
 }
 

@@ -18,6 +18,8 @@
 -(NSString *)encodedCredentials;
 
 -(void)syncWithJitBit;
+-(BOOL)isNetworkAvailable;
+-(void)displayNetworkNotification;
 -(void)setUserName:(NSString *)username withPassword:(NSString *)password;
 -(BOOL)isLoggedIn;
 -(void)deleteCredentialsForUser:(NSString *)username;

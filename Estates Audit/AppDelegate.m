@@ -329,7 +329,20 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
     self.alertShown = NO;
 }
 
-
+-(void)displayNetworkNotification{
+    
+    if (!self.alertShown) {
+        
+        [[[UIAlertView alloc] initWithTitle:@"No Network connection available"
+                                    message:@"An active network connection is required for the Estates Audit application to load and submit reports."
+                                   delegate:self
+                          cancelButtonTitle:nil
+                          otherButtonTitles:@"OK",
+          nil] show];
+        
+        self.alertShown = YES;
+    }
+}
 
 
 
@@ -412,17 +425,7 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
         
     }else{
         
-        if (!self.alertShown) {
-            
-            [[[UIAlertView alloc] initWithTitle:@"No Network connection available"
-                                        message:@"An active network connection is required for the Estates Audit application to load and submit reports."
-                                       delegate:self
-                              cancelButtonTitle:nil
-                              otherButtonTitles:@"OK",
-              nil] show];
-            
-            self.alertShown = YES;
-        }
+        [self displayNetworkNotification];
         
         // Hide loading spinner on reports list
         if (self.onCompletion) {

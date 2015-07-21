@@ -376,13 +376,21 @@
 }
 
 
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if([self.appDelegate isNetworkAvailable]){
+        return YES;
+    }
+    [self.appDelegate displayNetworkNotification];
+    return NO;
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     // POST to JitBit API and store ticketId
     [self postToJitBit];
-    
     // Ensure context is saved
     [self.report.managedObjectContext save:NULL];
     
@@ -392,8 +400,7 @@
         // Need to pass managedObjectContext through
         id<AcceptsManagedContext> controller = segue.destinationViewController;
         controller.managedObjectContext  = self.report.managedObjectContext;
-        
-        
+      
     }
     if ([[segue identifier] isEqualToString:@"Send"])
     {
@@ -401,6 +408,8 @@
         UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:self action:@selector(home:)];
         homevc.navigationItem.leftBarButtonItem=newBackButton;
     }
+    
+    [self.appDelegate displayNetworkNotification];
     
 }
 
