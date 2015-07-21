@@ -16,6 +16,8 @@
 
 @interface ReportCommentsTableViewController ()
 @property (nonatomic, strong) NSString *encodedCredentials;
+@property (strong, nonatomic) AppDelegate *appDelegate;
+
 @end
 
 @implementation ReportCommentsTableViewController
@@ -24,8 +26,7 @@
 - (void)awakeFromNib
 {
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.encodedCredentials  = [appDelegate encodedCredentials];
+    self.encodedCredentials  = [self.appDelegate encodedCredentials];
     
     [[NSNotificationCenter defaultCenter] addObserverForName:ReportDatabaseAvailabilityNotification
                                                       object:nil
@@ -35,10 +36,26 @@
                                                   }];
 }
 
+
+-(AppDelegate *)appDelegate{
+    if (!_appDelegate) {
+        _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    }
+    return _appDelegate;
+}
+
+
 - (IBAction)refresh:(id)sender {
     
-    [self.refreshControl beginRefreshing];
-    [self processComments:self.report];
+    if(![self.appDelegate isNetworkAvailable]){
+        [self.appDelegate displayNetworkNotification];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        [self.refreshControl endRefreshing];
+    }else{
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        [self.refreshControl beginRefreshing];
+        [self processComments:self.report];
+    }
 }
 
 
@@ -97,6 +114,7 @@
                         [report.managedObjectContext save:NULL];
                     }
                 [self.refreshControl endRefreshing];
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                 }
                
             }
