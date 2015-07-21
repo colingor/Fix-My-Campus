@@ -49,10 +49,16 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Reports" id="vyP-MU-cvH">
                         <barButtonItem key="rightBarButtonItem" title="New" id="RLT-bR-d81">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Create a new report"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <segue destination="jvW-dv-7ro" kind="push" id="VX7-ui-gdz"/>
                             </connections>
                         </barButtonItem>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="List of your reports"/>
+                        </userDefinedRuntimeAttributes>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="dGC-Fz-1kP">
                         <autoresizingMask key="autoresizingMask"/>
