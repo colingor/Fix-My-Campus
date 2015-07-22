@@ -196,6 +196,9 @@
         self.tableView.hidden = NO;
     }
     
+    // Get buildings within 500m of current location
+    [self listBuildingsNearCurrentLocation];
+    
 }
 
 - (BOOL)mapViewRegionDidChangeFromUserInteraction
@@ -232,9 +235,8 @@ static BOOL mapChangedFromUserInteraction = NO;
     }
 }
 
-
--(void)displayBuildingsInBoundingBox{
-    
+-(void)performSearchWithDictionary: (NSDictionary *) dictionaryToBePosted
+{
     if([self.appDelegate isNetworkAvailable]){
         
         MKMapRect mRect = self.mapView.visibleMapRect;
@@ -247,7 +249,6 @@ static BOOL mapChangedFromUserInteraction = NO;
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
         [request setHTTPMethod:@"POST"];
         
-        
         NSDictionary *queryDict = @{ @"query" : @{ @"match_all": @{}} };
         NSDictionary *filterDict = @{@"filter" : @{ @"geo_bounding_box": @{@"location":bb }} };
         
@@ -257,7 +258,7 @@ static BOOL mapChangedFromUserInteraction = NO;
         [jsonPayload addEntriesFromDictionary:filterDict];
         
         NSError *error;
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonPayload
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionaryToBePosted
                                                            options:NSJSONWritingPrettyPrinted
                                                              error:&error];
         
@@ -345,6 +346,46 @@ static BOOL mapChangedFromUserInteraction = NO;
         // Display notification
         [self.appDelegate displayNetworkNotification];
     }
+}
+
+
+-(void)displayBuildingsInBoundingBox{
+    
+    MKMapRect mRect = self.mapView.visibleMapRect;
+    NSMutableDictionary *bb = [self getBoundingBox:mRect];
+    
+    NSDictionary *queryDict = @{ @"query" : @{ @"match_all": @{}} };
+    NSDictionary *filterDict = @{@"filter" : @{ @"geo_bounding_box": @{@"location":bb }} };
+    
+    NSMutableDictionary *jsonPayload =  [[NSMutableDictionary alloc] init];
+    
+    [jsonPayload addEntriesFromDictionary:queryDict];
+    [jsonPayload addEntriesFromDictionary:filterDict];
+    
+    [self performSearchWithDictionary: jsonPayload];
+    
+}
+
+-(void)listBuildingsNearCurrentLocation{
+    
+    NSDictionary *queryDict = @{ @"query" : @{ @"match_all": @{}}};
+    
+    NSDictionary *locationDict =  @{ @"lat": [NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude],
+                                     @"lon":[NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude]};
+    
+    NSMutableDictionary *locationInfo =  [[NSMutableDictionary alloc] init];
+    
+    [locationInfo addEntriesFromDictionary:@{@"distance":@"0.5km"}];
+    [locationInfo addEntriesFromDictionary:@{@"location":locationDict}];
+    
+    NSDictionary *filterDict = @{@"filter" : @{ @"geo_distance":  locationInfo} };
+    
+    NSMutableDictionary *jsonPayload =  [[NSMutableDictionary alloc] init];
+    
+    [jsonPayload addEntriesFromDictionary:queryDict];
+    [jsonPayload addEntriesFromDictionary:filterDict];
+    
+    [self performSearchWithDictionary:jsonPayload];
     
 }
 

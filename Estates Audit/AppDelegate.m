@@ -307,7 +307,6 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
         return NO;
     }
     else{
-        NSLog(@"-> connection established!\n");
         return YES;
     }
 }
