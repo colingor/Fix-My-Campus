@@ -11,6 +11,7 @@
 #import "Report+Create.h"
 #import "ReportDatabaseAvailability.h"
 #import "SSKeychain.h"
+#import "SSKeychainQuery.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #include<unistd.h>
 #include<netdb.h>
@@ -102,28 +103,6 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
         
     }
     
-    
-    //    NSString *const KEYCHAIN_SERVICE = @"Estates Audit";
-    //
-    //    NSError *error = nil;
-    //
-    //    NSArray *accounts = [SSKeychain accountsForService:KEYCHAIN_SERVICE];
-    //    if([accounts count] > 0){
-    //        NSDictionary *account = [accounts objectAtIndex:0];
-    //        NSLog(@"account %@", account);
-    //
-    //
-    //        NSString *p = [SSKeychain passwordForService:KEYCHAIN_SERVICE account:[account valueForKey:@"acct"]];
-    //
-    //        NSLog(@"%@", p);
-    //    }else{
-    //        BOOL passwordSet = [SSKeychain setPassword:@"cgtest" forService:KEYCHAIN_SERVICE account:@"cgtest" error:&error];
-    //
-    //        if ([error code] == SSKeychainErrorNotFound) {
-    //            NSLog(@"Password not set");
-    //        }
-    //    };
-    
     // This should help with memory - see https://github.com/rs/SDWebImage/issues/538#issuecomment-67892084
     [[SDImageCache sharedImageCache] setShouldDecompressImages:NO];
     [[SDWebImageDownloader sharedDownloader] setShouldDecompressImages:NO];
@@ -157,9 +136,6 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
                                                                    diskPath:nil];
         
         
-        NSString *authValue = [self encodedCredentials];
-        [sessionConfig setHTTPAdditionalHeaders:@{@"Authorization": authValue}];
-        
         NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig
                                                               delegate:self    // we MUST have a delegate for background configurations
                                                          delegateQueue:nil];
@@ -169,6 +145,8 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
         NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
+ 
+        [self addAuthenticationParametersToRequestHeader: request];
         
         NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request];
         task.taskDescription = JITBIT_FETCH;
@@ -241,20 +219,52 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
     }
 }
 
--(void)deleteCredentialsForUser:(NSString *)username
-{
-    [SSKeychain deletePasswordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:username];
-    self.username = nil;
-}
-
--(void)deleteCredentials{
+-(void)removeAllUsersFromKeychain{
     
     NSArray *accounts = [SSKeychain accountsForService:ESTATES_AUDIT_KEYCHAIN_SERVICE];
+    
     for (id account in accounts){
         NSString *user = [account valueForKey:@"acct"];
-        [SSKeychain deletePasswordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:user];
+        
+        SSKeychainQuery *query = [[SSKeychainQuery alloc] init];
+        query.service = ESTATES_AUDIT_KEYCHAIN_SERVICE;
+        query.account = user;
+        
+        [query deleteItem:nil];
     }
 }
+
+-(void)deleteKeyChainCredentialsAndCoreDataRecords{
+    
+    [self removeAllUsersFromKeychain];
+    
+    // Need to reset session
+    [self.jitBitDownloadSession invalidateAndCancel];
+    self.jitBitDownloadSession = nil;
+    
+    // Delete core data
+    [self deleteAllObjects:@"Report"];
+}
+
+- (void) deleteAllObjects: (NSString *) entityDescription  {
+  
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityDescription inManagedObjectContext:self.reportDatabaseContext];
+    [fetchRequest setEntity:entity];
+    
+    NSError *error;
+    NSArray *items = [self.reportDatabaseContext executeFetchRequest:fetchRequest error:&error];
+    
+    for (NSManagedObject *managedObject in items) {
+        [self.reportDatabaseContext deleteObject:managedObject];
+        NSLog(@"%@ object deleted",entityDescription);
+    }
+    if (![self.reportDatabaseContext save:&error]) {
+        NSLog(@"Error deleting %@ - error:%@",entityDescription,error);
+    }
+    
+}
+
 
 -(BOOL)isLoggedIn
 {
@@ -293,6 +303,10 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
     };
     
     return authValue;
+}
+
+-(void)addAuthenticationParametersToRequestHeader: (NSMutableURLRequest *)request{
+    [request addValue:[self encodedCredentials] forHTTPHeaderField:@"Authorization"];
 }
 
 #pragma mark - Network Availability
@@ -410,6 +424,8 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
                 NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
                 [request setHTTPMethod:@"GET"];
                 
+                [self addAuthenticationParametersToRequestHeader: request];
+                
                 NSURLSessionDownloadTask *task = [self.jitBitDownloadSession downloadTaskWithRequest:request];
                 task.taskDescription = JITBIT_FETCH;
                 
@@ -442,8 +458,8 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
 - (NSURLSession *)jitBitDownloadSession // the NSURLSession we will use to fetch jitBit data in the background
 {
     if (!_jitBitDownloadSession) {
-        static dispatch_once_t onceToken; // dispatch_once ensures that the block will only ever get executed once per application launch
-        dispatch_once(&onceToken, ^{
+//        static dispatch_once_t onceToken; // dispatch_once ensures that the block will only ever get executed once per application launch
+//        dispatch_once(&onceToken, ^{
             // notice the configuration here is "backgroundSessionConfiguration:"
             // that means that we will (eventually) get the results even if we are not the foreground application
             // even if our application crashed, it would get relaunched (eventually) to handle this URL's results!
@@ -471,7 +487,7 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
             _jitBitDownloadSession = [NSURLSession sessionWithConfiguration:urlSessionConfig
                                                                    delegate:self    // we MUST have a delegate for background configurations
                                                               delegateQueue:nil];   // nil means "a random, non-main-queue queue"
-        });
+//        });
     }
     return _jitBitDownloadSession;
 }
@@ -497,6 +513,8 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
             
             NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
             [request setHTTPMethod:@"GET"];
+            
+            [self addAuthenticationParametersToRequestHeader: request];
             
             // Query on a particular ticket id
             NSURLSessionDownloadTask *task = [self.jitBitDownloadSession downloadTaskWithRequest:request];
@@ -527,6 +545,8 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
     [request setHTTPMethod:@"GET"];
+
+    [self addAuthenticationParametersToRequestHeader: request];
     
     // Query on a particular ticket id
     NSURLSessionDownloadTask *task = [self.jitBitDownloadSession downloadTaskWithRequest:request];

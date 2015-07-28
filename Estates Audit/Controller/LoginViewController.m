@@ -68,13 +68,18 @@
         NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
         
         NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-            if (error) {
-                
+            
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+        
+            int responseStatusCode = [httpResponse statusCode];
+            
+            // Check if invalid
+            if(responseStatusCode == 403){
                 // Ensure we're on the main thread
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
                     // Delete username and pass from keychain
-                    [appDelegate deleteCredentialsForUser: username];
+                    [appDelegate removeAllUsersFromKeychain];
                     
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login problem"
                                                                     message:@"Please supply a valid username and password"
@@ -82,16 +87,17 @@
                                                           cancelButtonTitle:@"OK"
                                                           otherButtonTitles:nil];
                     [alert show];
-                 
-                });
-            }else{
-                // Don't care about results - just the fact there wasn't an error means the credentials are ok. Dismiss login modal.
+                    
+                });                 
                 
+            }else{
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // Have to perform segue on main thread
                     [self performSegueWithIdentifier:UNWIND_SEGUE_IDENTIFIER sender:self];
                 });
             }
+            
+           
             
         }];
         [task resume];

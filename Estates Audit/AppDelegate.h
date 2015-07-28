@@ -22,8 +22,8 @@
 -(void)displayNetworkNotification;
 -(void)setUserName:(NSString *)username withPassword:(NSString *)password;
 -(BOOL)isLoggedIn;
--(void)deleteCredentialsForUser:(NSString *)username;
--(void)deleteCredentials;
+-(void)removeAllUsersFromKeychain;
+-(void)deleteKeyChainCredentialsAndCoreDataRecords;
 
 @end
 

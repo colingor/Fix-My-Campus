@@ -19,6 +19,7 @@
 		3B59B0971B0C9D4D002D4628 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B59B0961B0C9D4D002D4628 /* LoginViewController.m */; };
 		3B5BB0C71AFCC4FF00B5CDD6 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BB0C61AFCC4FF00B5CDD6 /* CoreDataTableViewController.m */; };
 		3B71FF1D1B0210070023516B /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B71FF1C1B0210070023516B /* CustomTableViewCell.m */; };
+		3B7DFAE41B664632000164FE /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7DFAE31B664632000164FE /* SSKeychainQuery.m */; };
 		3B9418851B0F16F2007859D8 /* ReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9418841B0F16F2007859D8 /* ReplyViewController.m */; };
 		3BA1EDFD1ADFC514004D9470 /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA1EDFC1ADFC514004D9470 /* DescriptionViewController.m */; };
 		3BA1EE001ADFC7EE004D9470 /* SummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA1EDFF1ADFC7EE004D9470 /* SummaryViewController.m */; };
@@ -87,6 +88,8 @@
 		3B5BB0CA1B00B27200B5CDD6 /* ReportDatabaseAvailability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReportDatabaseAvailability.h; sourceTree = "<group>"; };
 		3B71FF1B1B0210070023516B /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		3B71FF1C1B0210070023516B /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
+		3B7DFAE21B664632000164FE /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychainQuery.h; sourceTree = "<group>"; };
+		3B7DFAE31B664632000164FE /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
 		3B9418831B0F16F2007859D8 /* ReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyViewController.h; sourceTree = "<group>"; };
 		3B9418841B0F16F2007859D8 /* ReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyViewController.m; sourceTree = "<group>"; };
 		3BA1EDFB1ADFC514004D9470 /* DescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DescriptionViewController.h; path = "Estates Audit/Controller/DescriptionViewController.h"; sourceTree = "<group>"; };
@@ -279,6 +282,8 @@
 		3BCBBA531A237EF500A9A246 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3B7DFAE21B664632000164FE /* SSKeychainQuery.h */,
+				3B7DFAE31B664632000164FE /* SSKeychainQuery.m */,
 				3BE607421B219AAD00B68507 /* estates.json */,
 				3B59B0901B0C70C5002D4628 /* SSKeychain.h */,
 				3B59B0911B0C70C5002D4628 /* SSKeychain.m */,
@@ -508,6 +513,7 @@
 				3BC3AD281A25ED6800F2C6C0 /* PictureViewController.m in Sources */,
 				7DD5A15B1B03840700B95138 /* ViewPhotoViewController.m in Sources */,
 				3BE607461B21C77D00B68507 /* CustomMKPointAnnotation.m in Sources */,
+				3B7DFAE41B664632000164FE /* SSKeychainQuery.m in Sources */,
 				3BA1EDFD1ADFC514004D9470 /* DescriptionViewController.m in Sources */,
 				3BCBBA561A237EF500A9A246 /* main.m in Sources */,
 				3B599D191ADBBB27007F4D40 /* AppDelegate+MOC.m in Sources */,

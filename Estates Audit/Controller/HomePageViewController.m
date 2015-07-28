@@ -46,7 +46,7 @@
 }
 - (IBAction)logout:(id)sender {
     
-    [self.appDelegate deleteCredentials];
+    [self.appDelegate deleteKeyChainCredentialsAndCoreDataRecords];
     [self performSegueWithIdentifier:UNWIND_SEGUE_IDENTIFIER sender:self];
     
 }
