@@ -86,35 +86,7 @@ class PopulateElasticSearch:
          # Ignore exception caused when no index to delete
          pass
 
-      # have to specify mapping so geo_points are indexed correctly
-#      mapping = {
-#              "mappings": {
-#                  "location": {
-#                      "properties": {
-#                          "abbreviation": {
-#                              "type": "string"
-#                              },
-#                          "address": {
-#                              "type": "string"
-#                              },
-#                          "campuses": {
-#                              "type": "string"
-#                              },
-#                          "categories": {
-#                              "type": "string"
-#                              },
-#                          "location": {
-#                              "type": "geo_point"
-#                              },
-#                          "name": {
-#                              "type": "string"
-#                              }
-#                          }
-#                      }
-#                  }
-#              }
-
-
+     # have to specify mapping so geo_points are indexed correctly
      mapping = {
              "mappings": {
                  "building": {
