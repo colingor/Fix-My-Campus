@@ -34,10 +34,10 @@ NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/image
     
     self.headerLabel.textColor = [[self view]tintColor];
     self.subheaderLabel.textColor = [[self view]tintColor];
-    self.headerLabel.text = [self.location valueForKeyPath:@"title"];
-    self.subheaderLabel.text = [self.location valueForKeyPath:@"subtitle"];
+    self.headerLabel.text = [self.location valueForKeyPath:@"properties.title"];
+    self.subheaderLabel.text = [self.location valueForKeyPath:@"properties.subtitle"];
     
-    NSString *imageStem = [self.location valueForKeyPath:@"image"];
+    NSString *imageStem = [self.location valueForKeyPath:@"properties.image"];
     NSString *imagePath = [NSString stringWithFormat:@"%@%@%@", BASE_IMAGE_URL, imageStem, IMAGE_SUFFIX];
 
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -46,7 +46,7 @@ NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/image
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:[imagePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
                       placeholderImage:[UIImage imageNamed:DEFAULT_CELL_IMAGE]];
     
-    self.buildingAreas = [self.location valueForKeyPath:@"information"];
+    self.buildingAreas = [self.location valueForKeyPath:@"properties.information"];
     for (NSDictionary *area in self.buildingAreas){
         NSArray *areaItems = [area valueForKey:@"items"];
         for (NSDictionary *item in areaItems){
@@ -94,8 +94,8 @@ enum AlertButtonIndex : NSInteger
 - (NSMutableDictionary *)reportDictionary {
     NSMutableDictionary *reportDictionary = [[NSMutableDictionary alloc] init];
     
-    NSString *address = [self.location valueForKeyPath:@"title"];
-    NSString *department = [self.location valueForKeyPath:@"subtitle"];
+    NSString *address = [self.location valueForKeyPath:@"properties.title"];
+    NSString *department = [self.location valueForKeyPath:@"properties.subtitle"];
     
     NSDictionary *areaDict = [[self buildingAreas] objectAtIndex:[[self.tableView indexPathForSelectedRow] section]];
     NSString *area= [areaDict valueForKey:@"area"];
@@ -113,10 +113,10 @@ enum AlertButtonIndex : NSInteger
     
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     
-    NSString *lonStr = [NSString stringWithFormat:@"%@", [self.location valueForKeyPath:@"geometry.coordinates"][0]];
+    NSString *lonStr = [NSString stringWithFormat:@"%@", [self.location valueForKeyPath:@"geometry.location"][0]];
     NSNumber *lon = [f numberFromString:lonStr];
     
-    NSString *latStr = [NSString stringWithFormat:@"%@", [self.location valueForKeyPath:@"geometry.coordinates"][1]];
+    NSString *latStr = [NSString stringWithFormat:@"%@", [self.location valueForKeyPath:@"geometry.location"][1]];
     NSNumber *lat = [f numberFromString:latStr];
     
     NSString *imageStem = [item valueForKeyPath:@"image"];

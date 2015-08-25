@@ -287,13 +287,14 @@ static BOOL mapChangedFromUserInteraction = NO;
                                               
                                               for (id hit in hits){
                                                   
-                                                  NSDictionary * location = [hit valueForKey:@"_source"];
+                                                  NSDictionary * source = [hit valueForKey:@"_source"];
                                                   NSString *buildingId = hit[@"_id"];
-                                                  NSArray *loc = location[@"geometry"][@"location"];
+                                                 
+                                                  NSArray *loc = source[@"geometry"][@"location"];
                                                   NSString * lat = loc[1];
                                                   NSString * lon = loc[0];
                                                   
-                                                  NSDictionary *properties = location[@"properties"];
+                                                  NSDictionary *properties = source[@"properties"];
                                                   NSString * name = properties[@"title"];
                                                   NSString * address = properties[@"subtitle"];
                                                   
@@ -323,11 +324,13 @@ static BOOL mapChangedFromUserInteraction = NO;
                                                   point.buildingId = buildingId;
                                                   point.title = name;
                                                   point.subtitle = address;
-                                                  
+                                              
+                                                  point.properties = source;
                                                   // If there are nested elements, store them
-                                                  if([information count] > 0){
-                                                      point.properties = properties;
-                                                  }
+//                                                  if([information count] > 0){
+//                                                      point.properties = properties;
+//                                                  }
+                                             
                                                   
                                                   // Add to the building list
                                                   [self.locationAnnotations addObject:point];
@@ -700,7 +703,9 @@ static BOOL mapChangedFromUserInteraction = NO;
         CustomMKAnnotation *customMKAnnotation = (CustomMKAnnotation *)annotation;
       
         // Check is annotation has nested details - use purple pin for this
-        if (customMKAnnotation.properties){
+       
+        if([[customMKAnnotation.properties valueForKeyPath:@"properties.information"] count] > 0){
+//        if (customMKAnnotation.properties){
             if (pavPurple == nil){
                 
                 pavPurple = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:purpleReuseId];
