@@ -236,7 +236,8 @@
 
 -(void) postPhotos:(NSSet *) photos withTicketId:(NSString *) ticketId{
     for( Photo * photo in photos){
-        NSURL *assetUrl = [NSURL URLWithString:photo.url];
+
+        NSURL *assetUrl = [NSURL URLWithString:[photo.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
         if([[assetUrl scheme] isEqualToString:@"assets-library"]){
         
@@ -282,10 +283,16 @@
              {
                  NSLog(@"Can't get image - %@",[myerror localizedDescription]);
              }];
+
         } else {
-            UIImage *image = [UIImage imageWithContentsOfFile:photo.url];
-            NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
-            [self postPhoto:imageData ToTicket:ticketId];
+          
+            dispatch_async(dispatch_get_global_queue(0,0), ^{
+                NSData * data = [[NSData alloc] initWithContentsOfURL: assetUrl];
+                if ( data == nil )
+                    return;
+                [self postPhoto:data ToTicket:ticketId];
+            });
+            
         }
     
     }
