@@ -12,7 +12,7 @@
 
 @synthesize coordinate = _coordinate;
 @synthesize buildingId = _buildingId;
-@synthesize properties = _properties;
+@synthesize source = _source;
 @synthesize title = _title;
 @synthesize subtitle = _subtitle;
 
@@ -39,6 +39,14 @@
     return _coordinate;
 }
 
+- (BOOL)hasNestedBuildingInformation 
+{
+    if([[self.source valueForKeyPath:@"properties.information"] count] > 0){
+        return YES;
+    }
+    return NO;
+}
+
 - (void)setBuildingId:(NSString *)buildingId
 {
     [self willChangeValueForKey:@"buildingId"];
@@ -51,16 +59,16 @@
     return _buildingId;
 }
 
-- (void)setProperties:(NSDictionary *)properties
+- (void)setSource:(NSDictionary *)source
 {
-    [self willChangeValueForKey:@"properties"];
-    _properties = properties;
-    [self didChangeValueForKey:@"properties"];
+    [self willChangeValueForKey:@"source"];
+    _source = source;
+    [self didChangeValueForKey:@"source"];
 }
 
-- (NSDictionary *)properties
+- (NSDictionary *)source
 {
-    return _properties;
+    return _source;
 }
 
 - (void)setTitle:(NSString *)title

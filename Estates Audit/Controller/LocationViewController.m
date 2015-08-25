@@ -297,9 +297,7 @@ static BOOL mapChangedFromUserInteraction = NO;
                                                   NSDictionary *properties = source[@"properties"];
                                                   NSString * name = properties[@"title"];
                                                   NSString * address = properties[@"subtitle"];
-                                                  
-                                                  NSArray *information = properties[@"information"];
-                                              
+                                                                                              
                                                   // Check if annotation already exists on map
                                                   NSArray *existingAnnotations = self.mapView.annotations;
                                                   
@@ -324,13 +322,7 @@ static BOOL mapChangedFromUserInteraction = NO;
                                                   point.buildingId = buildingId;
                                                   point.title = name;
                                                   point.subtitle = address;
-                                              
-                                                  point.properties = source;
-                                                  // If there are nested elements, store them
-//                                                  if([information count] > 0){
-//                                                      point.properties = properties;
-//                                                  }
-                                             
+                                                  point.source = source;
                                                   
                                                   // Add to the building list
                                                   [self.locationAnnotations addObject:point];
@@ -669,7 +661,7 @@ static BOOL mapChangedFromUserInteraction = NO;
             CustomMKAnnotation *customMKAnnotation = (CustomMKAnnotation *)annotation;
             
             // Purple annotations have nested properties
-            if(customMKAnnotation.properties){
+            if(customMKAnnotation.source){
                 view.pinColor = MKPinAnnotationColorPurple;
             }else{
                 view.pinColor = MKPinAnnotationColorRed;
@@ -703,9 +695,7 @@ static BOOL mapChangedFromUserInteraction = NO;
         CustomMKAnnotation *customMKAnnotation = (CustomMKAnnotation *)annotation;
       
         // Check is annotation has nested details - use purple pin for this
-       
-        if([[customMKAnnotation.properties valueForKeyPath:@"properties.information"] count] > 0){
-//        if (customMKAnnotation.properties){
+        if(customMKAnnotation.hasNestedBuildingInformation){
             if (pavPurple == nil){
                 
                 pavPurple = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:purpleReuseId];
@@ -864,7 +854,7 @@ static BOOL mapChangedFromUserInteraction = NO;
 
             CustomMKAnnotation *customMKAnnotation = (CustomMKAnnotation *)annotationView.annotation;
             LocationDetailsViewController *ldvc = (LocationDetailsViewController *)segue.destinationViewController;
-            ldvc.location = customMKAnnotation.properties;
+            ldvc.location = customMKAnnotation.source;
 
         }
     }
