@@ -14,6 +14,7 @@
 #import "EmailSupportTicket.h"
 #import "ViewPhotoViewController.h"
 #import "AppDelegate.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 @import MapKit;
 
 @interface SummaryViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
@@ -468,7 +469,8 @@
                       failureBlock:failureblock];
     } else {
         UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
-        [photoImageView setImage:[UIImage imageWithContentsOfFile:photo.url]];
+        [photoImageView sd_setImageWithURL:[NSURL URLWithString:[photo.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
+                          placeholderImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout"]];
     }
     
     return cell;

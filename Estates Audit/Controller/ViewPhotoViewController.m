@@ -94,7 +94,7 @@ enum AlertButtonIndex : NSInteger
     
     [self.spinner startAnimating];
     
-    NSURL *assetUrl = [NSURL URLWithString:self.photo.url];
+    NSURL *assetUrl = [NSURL URLWithString:[self.photo.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     __block UIImage *image;
     
     if([[assetUrl scheme] isEqualToString:@"assets-library"]){

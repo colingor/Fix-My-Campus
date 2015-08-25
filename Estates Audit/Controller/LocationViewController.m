@@ -13,7 +13,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "GeoJSONSerialization.h"
 #import "Photo+Create.h"
-#import "CustomMKPointAnnotation.h"
+#import "CustomMKAnnotation.h"
 #import "AppDelegate.h"
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
@@ -120,7 +120,6 @@
         [self.locationManager startUpdatingLocation];
     }
     [self.mapView setShowsUserLocation:YES];
-//    [self.mapView setUserTrackingMode:MKUserTrackingModeNone animated:YES];
    
     // Declare empty dict we can add report info to
     _reportDict = [NSMutableDictionary dictionary];
@@ -129,7 +128,7 @@
     _userSpecfiedLocation = NO;
     
     // load estates buildings information from geojson file and draw on map view
-    NSURL *URL = [[NSBundle mainBundle] URLForResource:@"uoe-estates-buildings" withExtension:@"json"];
+   /* NSURL *URL = [[NSBundle mainBundle] URLForResource:@"uoe-estates-buildings" withExtension:@"json"];
     NSData *data = [NSData dataWithContentsOfURL:URL];
     NSDictionary *geoJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     self.locations = [geoJSON valueForKeyPath:@"features"];
@@ -142,7 +141,7 @@
         } else if ([shape conformsToProtocol:@protocol(MKOverlay)]) {
             [self.mapView addOverlay:(id <MKOverlay>)shape];
         }
-    }
+    }*/
     
     
     //Load buildings from estates json
@@ -242,7 +241,7 @@ static BOOL mapChangedFromUserInteraction = NO;
         MKMapRect mRect = self.mapView.visibleMapRect;
         NSMutableDictionary *bb = [self getBoundingBox:mRect];
         
-        NSString *apiStr = @"http://dlib-brown.edina.ac.uk/estates/_search?size=500";
+        NSString *apiStr = @"http://dlib-brown.edina.ac.uk/buildings/_search?size=500";
         
         NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
@@ -287,46 +286,48 @@ static BOOL mapChangedFromUserInteraction = NO;
                                               [self.locationAnnotations removeAllObjects];
                                               
                                               for (id hit in hits){
+                                                  
                                                   NSDictionary * location = [hit valueForKey:@"_source"];
+                                                  NSString *buildingId = hit[@"_id"];
+                                                  NSArray *loc = location[@"geometry"][@"location"];
+                                                  NSString * lat = loc[1];
+                                                  NSString * lon = loc[0];
                                                   
-                                                  NSString * name = [location valueForKey:@"name"];
-                                                  NSString * lat = [location valueForKey:@"latitude"];
-                                                  NSString * lon = [location valueForKey:@"longitude"];
-                                                  NSString * address = [location valueForKey:@"address"];
+                                                  NSDictionary *properties = location[@"properties"];
+                                                  NSString * name = properties[@"title"];
+                                                  NSString * address = properties[@"subtitle"];
                                                   
+                                                  NSArray *information = properties[@"information"];
+                                              
                                                   // Check if annotation already exists on map
                                                   NSArray *existingAnnotations = self.mapView.annotations;
                                                   
                                                   BOOL found = NO;
                                                   
-                                                  for(MKPointAnnotation *existing in existingAnnotations){
-                                                      
-                                                      NSString *existingTitle = existing.title;
-                                                      
-                                                      NSNumber *existinglatNumber = [NSNumber numberWithDouble:existing.coordinate.latitude];
-                                                      NSNumber *newlatNumber = @([lat floatValue]);
-                                                      
-                                                      NSNumber *existinglonNumber = [NSNumber numberWithDouble:existing.coordinate.longitude];
-                                                      NSNumber *newlonNumber = @([lon floatValue]);
-                                                      
-                                                      if([existingTitle isEqualToString:name] &&
-                                                         ([existinglatNumber isEqualToNumber:newlatNumber]) &&
-                                                         ([existinglonNumber isEqualToNumber:newlonNumber])){
-                                                          found = YES;
-                                                          break;
+                                                  for(CustomMKAnnotation *existing in existingAnnotations){
+                                                      if ([existing isKindOfClass:[CustomMKAnnotation class]]){
+                                                          
+                                                          if([existing.buildingId isEqualToString:buildingId]){
+                                                              found = YES;
+                                                              break;
+                                                          }
                                                       }
                                                   }
-                                                  
-                                                  CustomMKPointAnnotation *point = [[CustomMKPointAnnotation alloc] init];
                                                   
                                                   CLLocationCoordinate2D coord;
                                                   coord.latitude = [lat floatValue];
                                                   coord.longitude = [lon floatValue];
+
+                                                  CustomMKAnnotation *point = [[CustomMKAnnotation alloc] initWithLocation:coord];
                                                   
-                                                  point.coordinate = coord;
+                                                  point.buildingId = buildingId;
                                                   point.title = name;
                                                   point.subtitle = address;
-                                                  point.hierarchical = YES;
+                                                  
+                                                  // If there are nested elements, store them
+                                                  if([information count] > 0){
+                                                      point.properties = properties;
+                                                  }
                                                   
                                                   // Add to the building list
                                                   [self.locationAnnotations addObject:point];
@@ -409,7 +410,7 @@ static BOOL mapChangedFromUserInteraction = NO;
     }
    
     @try {
-        CustomMKPointAnnotation *point = [self.locationAnnotations objectAtIndex:indexPath.row];
+        CustomMKAnnotation *point = [self.locationAnnotations objectAtIndex:indexPath.row];
         cell.textLabel.text = point.title;
         cell.detailTextLabel.text  = point.subtitle;
     }
@@ -423,7 +424,7 @@ static BOOL mapChangedFromUserInteraction = NO;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CustomMKPointAnnotation *point = [self.locationAnnotations objectAtIndex:indexPath.row];
+    CustomMKAnnotation *point = [self.locationAnnotations objectAtIndex:indexPath.row];
     
     // Find the corresponding annotation on the map as point won't be the same instance
     for(MKPointAnnotation *existing in self.mapView.annotations){
@@ -630,9 +631,9 @@ static BOOL mapChangedFromUserInteraction = NO;
     MKPointAnnotation *annotation = view.annotation;
     
     if (![annotation isKindOfClass:[MKUserLocation class]]){
-        if ([annotation isKindOfClass:[CustomMKPointAnnotation class]]){
+        if ([annotation isKindOfClass:[CustomMKAnnotation class]]){
            
-            self.descriptionText.text = [self generateDescriptionFromAnnotation:annotation];
+            self.descriptionText.text = [self generateDescriptionFromAnnotation:(CustomMKAnnotation *)annotation];
             
             view.pinColor = MKPinAnnotationColorGreen;
             
@@ -661,13 +662,16 @@ static BOOL mapChangedFromUserInteraction = NO;
     
     if (![annotation isKindOfClass:[MKUserLocation class]]){
         // Reset pin colour
-        if (![annotation isKindOfClass:[CustomMKPointAnnotation class]]  && ![annotation.title isEqualToString:@"Report Location"]){
+        if ([annotation isKindOfClass:[CustomMKAnnotation class]]  && ![annotation.title isEqualToString:@"Report Location"]){
+            CustomMKAnnotation *customMKAnnotation = (CustomMKAnnotation *)annotation;
             
-            view.pinColor = MKPinAnnotationColorPurple;
-        }
-        else if (![annotation.title isEqualToString:@"Report Location"]){
-            
-            view.pinColor = MKPinAnnotationColorRed;
+            // Purple annotations have nested properties
+            if(customMKAnnotation.properties){
+                view.pinColor = MKPinAnnotationColorPurple;
+            }else{
+                view.pinColor = MKPinAnnotationColorRed;
+            }
+      
         }
         else if ([annotation.title isEqualToString:@"Report Location"]){
             // If the report location annotation has been deselected, we don't want to reset to the default location
@@ -690,30 +694,37 @@ static BOOL mapChangedFromUserInteraction = NO;
     MKPinAnnotationView *pav = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
     MKPinAnnotationView *pavPurple = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:purpleReuseId];
     MKPinAnnotationView *pavGreen = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:greenReuseId];
-    
-    
-    if (![annotation isKindOfClass:[CustomMKPointAnnotation class]] && ![annotation.title isEqualToString:@"Report Location" ]){
-        if (pavPurple == nil){
-            
-            pavPurple = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:purpleReuseId];
-            pavPurple.animatesDrop = NO;
-            UIImageView *leftIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout" ]];
-            leftIconView.frame = CGRectMake(0,0,53,53);
-            pavPurple.leftCalloutAccessoryView = leftIconView;
-            
-            UIButton *rightIconView = [UIButton buttonWithType:UIButtonTypeInfoDark];
-            rightIconView.tintColor = [UIColor darkTextColor];
-            pavPurple.rightCalloutAccessoryView = rightIconView;
-            pavPurple.pinColor = MKPinAnnotationColorPurple;
-            pavPurple.canShowCallout = YES;
-            return pavPurple;
-            
+
+    if ([annotation isKindOfClass:[CustomMKAnnotation class]] && ![annotation.title isEqualToString:@"Report Location" ]){
+
+        CustomMKAnnotation *customMKAnnotation = (CustomMKAnnotation *)annotation;
+      
+        // Check is annotation has nested details - use purple pin for this
+        if (customMKAnnotation.properties){
+            if (pavPurple == nil){
+                
+                pavPurple = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:purpleReuseId];
+                pavPurple.animatesDrop = NO;
+                UIImageView *leftIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout" ]];
+                leftIconView.frame = CGRectMake(0,0,53,53);
+                pavPurple.leftCalloutAccessoryView = leftIconView;
+                
+                UIButton *rightIconView = [UIButton buttonWithType:UIButtonTypeInfoDark];
+                rightIconView.tintColor = [UIColor darkTextColor];
+                pavPurple.rightCalloutAccessoryView = rightIconView;
+                pavPurple.pinColor = MKPinAnnotationColorPurple;
+                pavPurple.canShowCallout = YES;
+                return pavPurple;
+                
+            }
+            else
+            {
+                pavPurple.annotation = annotation;
+                return pavPurple;
+            }
         }
-        else
-        {
-            pavPurple.annotation = annotation;
-            return pavPurple;
-        }
+        
+       
     }
     
     if([annotation.title isEqualToString:@"Report Location"]){
@@ -789,7 +800,7 @@ static BOOL mapChangedFromUserInteraction = NO;
 }
 
 
-- (NSMutableString *)generateDescriptionFromAnnotation:(MKPointAnnotation *)point
+- (NSMutableString *)generateDescriptionFromAnnotation:(CustomMKAnnotation *)point
 {
     NSMutableString *text = [NSMutableString string];
     [text appendString:[NSString stringWithFormat:@"%@ \n", point.title]];
@@ -845,15 +856,11 @@ static BOOL mapChangedFromUserInteraction = NO;
     } else if ([[segue identifier] isEqualToString:@"Location Details"]){
         if ([segue.destinationViewController isKindOfClass:[LocationDetailsViewController class]]) {
             MKAnnotationView *annotationView = (MKAnnotationView *) sender;
-            
-            for (NSDictionary *location in self.locations) {
-                NSString *title = [location valueForKeyPath:@"properties.title"];
-                if ([title isEqualToString:annotationView.annotation.title]){
-                    LocationDetailsViewController *ldvc = (LocationDetailsViewController *)segue.destinationViewController;
-                    ldvc.location = location;
-                    break;
-                }
-            }
+
+            CustomMKAnnotation *customMKAnnotation = (CustomMKAnnotation *)annotationView.annotation;
+            LocationDetailsViewController *ldvc = (LocationDetailsViewController *)segue.destinationViewController;
+            ldvc.location = customMKAnnotation.properties;
+
         }
     }
 }

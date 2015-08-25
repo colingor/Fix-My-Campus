@@ -154,7 +154,9 @@
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
  
     Photo *photo = self.photos[indexPath.row];
-    NSURL *assetUrl = [NSURL URLWithString:photo.url];
+    
+    NSURL *assetUrl = [NSURL URLWithString:[photo.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+
     NSLog(@"%@", photo.url);
     if([[assetUrl scheme] isEqualToString:@"assets-library"]){
         

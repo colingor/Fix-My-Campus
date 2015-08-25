@@ -21,6 +21,8 @@
 		3B71FF1D1B0210070023516B /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B71FF1C1B0210070023516B /* CustomTableViewCell.m */; };
 		3B7DFAE41B664632000164FE /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7DFAE31B664632000164FE /* SSKeychainQuery.m */; };
 		3B9418851B0F16F2007859D8 /* ReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9418841B0F16F2007859D8 /* ReplyViewController.m */; };
+		3B9484581B872EF3007B5630 /* CustomMKAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9484571B872EF3007B5630 /* CustomMKAnnotation.m */; };
+		3B94845B1B8B6087007B5630 /* CustomLocationUITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B94845A1B8B6087007B5630 /* CustomLocationUITableViewCell.m */; };
 		3BA1EDFD1ADFC514004D9470 /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA1EDFC1ADFC514004D9470 /* DescriptionViewController.m */; };
 		3BA1EE001ADFC7EE004D9470 /* SummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA1EDFF1ADFC7EE004D9470 /* SummaryViewController.m */; };
 		3BA1EE031AE00219004D9470 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA1EE021AE00219004D9470 /* AssetsLibrary.framework */; };
@@ -37,11 +39,9 @@
 		3BCBBA731A237EF500A9A246 /* Estates_AuditTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA721A237EF500A9A246 /* Estates_AuditTests.m */; };
 		3BCBBA811A2386A200A9A246 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCBBA801A2386A200A9A246 /* Photo.m */; };
 		3BE607431B219AAD00B68507 /* estates.json in Resources */ = {isa = PBXBuildFile; fileRef = 3BE607421B219AAD00B68507 /* estates.json */; };
-		3BE607461B21C77D00B68507 /* CustomMKPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE607451B21C77D00B68507 /* CustomMKPointAnnotation.m */; };
 		3BF6B2741ADBC8BD00CFC50B /* Photo+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF6B2731ADBC8BD00CFC50B /* Photo+Create.m */; };
 		3BF6B2771ADBC8D000CFC50B /* Report+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF6B2761ADBC8D000CFC50B /* Report+Create.m */; };
 		3C2060411B02445700AD71F3 /* LocationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2060401B02445700AD71F3 /* LocationDetailsViewController.m */; };
-		3C2060431B0362EB00AD71F3 /* EstatesBuildingsImages in Resources */ = {isa = PBXBuildFile; fileRef = 3C2060421B0362EB00AD71F3 /* EstatesBuildingsImages */; };
 		3C7D925C1B00E74200503300 /* uoe-estates-buildings.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D925B1B00E74200503300 /* uoe-estates-buildings.json */; };
 		3C7D92611B00FA6600503300 /* Edinburgh.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D92601B00FA6600503300 /* Edinburgh.gpx */; };
 		7DCB426A1AF777550037C939 /* camera_roll.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DCB42691AF777550037C939 /* camera_roll.png */; };
@@ -92,6 +92,10 @@
 		3B7DFAE31B664632000164FE /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
 		3B9418831B0F16F2007859D8 /* ReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyViewController.h; sourceTree = "<group>"; };
 		3B9418841B0F16F2007859D8 /* ReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyViewController.m; sourceTree = "<group>"; };
+		3B9484561B872EF3007B5630 /* CustomMKAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMKAnnotation.h; sourceTree = "<group>"; };
+		3B9484571B872EF3007B5630 /* CustomMKAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMKAnnotation.m; sourceTree = "<group>"; };
+		3B9484591B8B6086007B5630 /* CustomLocationUITableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomLocationUITableViewCell.h; sourceTree = "<group>"; };
+		3B94845A1B8B6087007B5630 /* CustomLocationUITableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomLocationUITableViewCell.m; sourceTree = "<group>"; };
 		3BA1EDFB1ADFC514004D9470 /* DescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DescriptionViewController.h; path = "Estates Audit/Controller/DescriptionViewController.h"; sourceTree = "<group>"; };
 		3BA1EDFC1ADFC514004D9470 /* DescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DescriptionViewController.m; path = "Estates Audit/Controller/DescriptionViewController.m"; sourceTree = "<group>"; };
 		3BA1EDFE1ADFC7EE004D9470 /* SummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SummaryViewController.h; path = "Estates Audit/Controller/SummaryViewController.h"; sourceTree = "<group>"; };
@@ -120,15 +124,12 @@
 		3BCBBA7F1A2386A200A9A246 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Photo.h; path = Model/Photo.h; sourceTree = "<group>"; };
 		3BCBBA801A2386A200A9A246 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Photo.m; path = Model/Photo.m; sourceTree = "<group>"; };
 		3BE607421B219AAD00B68507 /* estates.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = estates.json; sourceTree = "<group>"; };
-		3BE607441B21C77D00B68507 /* CustomMKPointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMKPointAnnotation.h; sourceTree = "<group>"; };
-		3BE607451B21C77D00B68507 /* CustomMKPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMKPointAnnotation.m; sourceTree = "<group>"; };
 		3BF6B2721ADBC8BD00CFC50B /* Photo+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photo+Create.h"; sourceTree = "<group>"; };
 		3BF6B2731ADBC8BD00CFC50B /* Photo+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Photo+Create.m"; sourceTree = "<group>"; };
 		3BF6B2751ADBC8D000CFC50B /* Report+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Report+Create.h"; sourceTree = "<group>"; };
 		3BF6B2761ADBC8D000CFC50B /* Report+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Report+Create.m"; sourceTree = "<group>"; };
 		3C20603F1B02445700AD71F3 /* LocationDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationDetailsViewController.h; path = "Estates Audit/Controller/LocationDetailsViewController.h"; sourceTree = "<group>"; };
 		3C2060401B02445700AD71F3 /* LocationDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationDetailsViewController.m; path = "Estates Audit/Controller/LocationDetailsViewController.m"; sourceTree = "<group>"; };
-		3C2060421B0362EB00AD71F3 /* EstatesBuildingsImages */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EstatesBuildingsImages; sourceTree = "<group>"; };
 		3C7D925B1B00E74200503300 /* uoe-estates-buildings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "uoe-estates-buildings.json"; sourceTree = "<group>"; };
 		3C7D92601B00FA6600503300 /* Edinburgh.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Edinburgh.gpx; sourceTree = "<group>"; };
 		422F1D710949E86B62365152 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,6 +204,8 @@
 				3BC3AD1F1A25EA5900F2C6C0 /* HomePageViewController.m */,
 				7DFD69251AEE4AE6002F608B /* ReportDetailsViewController.h */,
 				7DFD69261AEE4AE6002F608B /* ReportDetailsViewController.m */,
+				3B9484591B8B6086007B5630 /* CustomLocationUITableViewCell.h */,
+				3B94845A1B8B6087007B5630 /* CustomLocationUITableViewCell.m */,
 				3B71FF1B1B0210070023516B /* CustomTableViewCell.h */,
 				3B71FF1C1B0210070023516B /* CustomTableViewCell.m */,
 				7DD5A1591B03840700B95138 /* ViewPhotoViewController.h */,
@@ -262,8 +265,8 @@
 		3BCBBA521A237EF500A9A246 /* Estates Audit */ = {
 			isa = PBXGroup;
 			children = (
-				3BE607441B21C77D00B68507 /* CustomMKPointAnnotation.h */,
-				3BE607451B21C77D00B68507 /* CustomMKPointAnnotation.m */,
+				3B9484561B872EF3007B5630 /* CustomMKAnnotation.h */,
+				3B9484571B872EF3007B5630 /* CustomMKAnnotation.m */,
 				3B5BB0CA1B00B27200B5CDD6 /* ReportDatabaseAvailability.h */,
 				7DCB42691AF777550037C939 /* camera_roll.png */,
 				7DFD69281AEE840B002F608B /* photo-frame.png */,
@@ -290,7 +293,6 @@
 				3C7D92601B00FA6600503300 /* Edinburgh.gpx */,
 				3C7D925B1B00E74200503300 /* uoe-estates-buildings.json */,
 				3BCBBA631A237EF500A9A246 /* Images.xcassets */,
-				3C2060421B0362EB00AD71F3 /* EstatesBuildingsImages */,
 				3BCBBA541A237EF500A9A246 /* Info.plist */,
 				3BCBBA551A237EF500A9A246 /* main.m */,
 			);
@@ -436,7 +438,6 @@
 				3BCBBA671A237EF500A9A246 /* LaunchScreen.xib in Resources */,
 				3C7D92611B00FA6600503300 /* Edinburgh.gpx in Resources */,
 				3BCBBA641A237EF500A9A246 /* Images.xcassets in Resources */,
-				3C2060431B0362EB00AD71F3 /* EstatesBuildingsImages in Resources */,
 				3C7D925C1B00E74200503300 /* uoe-estates-buildings.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -503,6 +504,7 @@
 				3B00845F1B0636D400EA32A3 /* Comment+Create.m in Sources */,
 				3BC3AD2E1A25EE6D00F2C6C0 /* ReportsTableTableViewController.m in Sources */,
 				3BCBBA5C1A237EF500A9A246 /* Estates_Audit.xcdatamodeld in Sources */,
+				3B9484581B872EF3007B5630 /* CustomMKAnnotation.m in Sources */,
 				3B0084411B04BFB700EA32A3 /* Report+SectionIdentifier.m in Sources */,
 				3BF6B2771ADBC8D000CFC50B /* Report+Create.m in Sources */,
 				3BA1EE001ADFC7EE004D9470 /* SummaryViewController.m in Sources */,
@@ -512,9 +514,9 @@
 				3B0084591B06367900EA32A3 /* Report.m in Sources */,
 				3BC3AD281A25ED6800F2C6C0 /* PictureViewController.m in Sources */,
 				7DD5A15B1B03840700B95138 /* ViewPhotoViewController.m in Sources */,
-				3BE607461B21C77D00B68507 /* CustomMKPointAnnotation.m in Sources */,
 				3B7DFAE41B664632000164FE /* SSKeychainQuery.m in Sources */,
 				3BA1EDFD1ADFC514004D9470 /* DescriptionViewController.m in Sources */,
+				3B94845B1B8B6087007B5630 /* CustomLocationUITableViewCell.m in Sources */,
 				3BCBBA561A237EF500A9A246 /* main.m in Sources */,
 				3B599D191ADBBB27007F4D40 /* AppDelegate+MOC.m in Sources */,
 			);

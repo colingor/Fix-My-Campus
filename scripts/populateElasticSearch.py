@@ -59,16 +59,8 @@ class PopulateElasticSearch:
                          "image":"",
                          "subtitle": loc.get('address'),
                          "title": name,
-                         "information":[{
-                                 "area":"General",
-                                 "items":[{
-                                     "description":"",
-                                     "image": "",
-                                     "notes": "",
-                                     "type" : ""
-                                     }]
-                        }]
-                      },
+                         "information":[]
+                         },
                      "type":"Feature"
                      }
 

@@ -8,6 +8,7 @@
 
 #import "LocationViewController.h"
 #import "LocationDetailsViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface LocationDetailsViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -24,7 +25,7 @@
 NSString *const IMAGES_DIR = @"EstatesBuildingsImages";
 NSString *const IMAGE_SUFFIX = @".JPG";
 NSString *const DEFAULT_CELL_IMAGE = @"MapPinDefaultLeftCallout";
-
+NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/images/";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,17 +34,19 @@ NSString *const DEFAULT_CELL_IMAGE = @"MapPinDefaultLeftCallout";
     
     self.headerLabel.textColor = [[self view]tintColor];
     self.subheaderLabel.textColor = [[self view]tintColor];
-    self.headerLabel.text = [self.location valueForKeyPath:@"properties.title"];
-    self.subheaderLabel.text = [self.location valueForKeyPath:@"properties.subtitle"];
+    self.headerLabel.text = [self.location valueForKeyPath:@"title"];
+    self.subheaderLabel.text = [self.location valueForKeyPath:@"subtitle"];
     
-    NSString *imageStem = [self.location valueForKeyPath:@"properties.image"];
-    NSString *imagePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingFormat:@"/%@/%@%@", IMAGES_DIR, imageStem, IMAGE_SUFFIX];
+    NSString *imageStem = [self.location valueForKeyPath:@"image"];
+    NSString *imagePath = [NSString stringWithFormat:@"%@%@%@", BASE_IMAGE_URL, imageStem, IMAGE_SUFFIX];
+
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.imageView.clipsToBounds = YES;
-    UIImage *locationStreetView = [UIImage imageWithContentsOfFile:imagePath];
-    self.imageView.image = locationStreetView;
+
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:[imagePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
+                      placeholderImage:[UIImage imageNamed:DEFAULT_CELL_IMAGE]];
     
-    self.buildingAreas = [self.location valueForKeyPath:@"properties.information"];
+    self.buildingAreas = [self.location valueForKeyPath:@"information"];
     for (NSDictionary *area in self.buildingAreas){
         NSArray *areaItems = [area valueForKey:@"items"];
         for (NSDictionary *item in areaItems){
@@ -91,8 +94,8 @@ enum AlertButtonIndex : NSInteger
 - (NSMutableDictionary *)reportDictionary {
     NSMutableDictionary *reportDictionary = [[NSMutableDictionary alloc] init];
     
-    NSString *address = [self.location valueForKeyPath:@"properties.title"];
-    NSString *department = [self.location valueForKeyPath:@"properties.subtitle"];
+    NSString *address = [self.location valueForKeyPath:@"title"];
+    NSString *department = [self.location valueForKeyPath:@"subtitle"];
     
     NSDictionary *areaDict = [[self buildingAreas] objectAtIndex:[[self.tableView indexPathForSelectedRow] section]];
     NSString *area= [areaDict valueForKey:@"area"];
@@ -117,26 +120,16 @@ enum AlertButtonIndex : NSInteger
     NSNumber *lat = [f numberFromString:latStr];
     
     NSString *imageStem = [item valueForKeyPath:@"image"];
-    NSString *imagePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingFormat:@"/%@/%@%@", IMAGES_DIR, imageStem, IMAGE_SUFFIX];
     
+    NSString *imagePath = [NSString stringWithFormat:@"%@%@%@", BASE_IMAGE_URL, imageStem, IMAGE_SUFFIX];
+
     [reportDictionary setValue:loc_desc forKey:@"loc_desc"];
     [reportDictionary setValue:lon forKey:@"lon"];
     [reportDictionary setValue:lat forKey:@"lat"];
+    
     [reportDictionary setValue:imagePath forKey:@"photo_url"];
     
     return reportDictionary;
-}
-
-
-- (UIImage *)thumbnailImageFromImage:(UIImage *)image {
-    
-    UIImage *originalImage = image;
-    CGSize destinationSize = CGSizeMake(60.0, 60.0);
-    UIGraphicsBeginImageContext(destinationSize);
-    [originalImage drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
-    UIImage *thumbnailImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return thumbnailImage;
 }
 
 
@@ -144,7 +137,6 @@ enum AlertButtonIndex : NSInteger
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [self.buildingAreas count];
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSDictionary *buildingArea = [self.buildingAreas objectAtIndex:section];
@@ -170,14 +162,13 @@ enum AlertButtonIndex : NSInteger
         cell.accessoryType = UITableViewCellAccessoryNone;
         [cell setTintColor:[UIColor darkTextColor]];
         NSString *imageStem = [item valueForKeyPath:@"image"];
-        UIImage *thumbnail;
-        if ([imageStem length] != 0) {
-            NSString *imagePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingFormat:@"/%@/%@%@", IMAGES_DIR, imageStem, IMAGE_SUFFIX];
-            thumbnail = [self thumbnailImageFromImage:[UIImage imageWithContentsOfFile:imagePath]];
-        } else {
-            thumbnail = [self thumbnailImageFromImage:[UIImage imageNamed:DEFAULT_CELL_IMAGE]];
-        }
-        cell.imageView.image = thumbnail;
+        
+        NSString *imagePath = [NSString stringWithFormat:@"%@%@%@", BASE_IMAGE_URL, imageStem, IMAGE_SUFFIX];
+     
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[imagePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
+                          placeholderImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout"]];
+        
+        
         cell.textLabel.text = [item valueForKeyPath:@"description"];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"Type: %@", [item valueForKey:@"type"]];
     }

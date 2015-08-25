@@ -138,8 +138,8 @@
     NSSet * photos = report.photos;
     Photo * photo = [photos anyObject];
     
-    NSURL *assetUrl = [NSURL URLWithString:photo.url];
-    
+    NSURL *assetUrl = [NSURL URLWithString:[photo.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+
     if([[assetUrl scheme] isEqualToString:@"assets-library"]){
         
         ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
@@ -167,7 +167,6 @@
                        resultBlock:resultblock
                       failureBlock:failureblock];
     } else{
-        // TODO: Placeholder
         [cell.imageView sd_setImageWithURL:assetUrl
                           placeholderImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout"]];
     }
