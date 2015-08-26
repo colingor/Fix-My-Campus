@@ -422,43 +422,35 @@ static BOOL mapChangedFromUserInteraction = NO;
     CustomMKAnnotation *point = [self.locationAnnotations objectAtIndex:indexPath.row];
     
     // Find the corresponding annotation on the map as point won't be the same instance
-    for(MKPointAnnotation *existing in self.mapView.annotations){
-        
-        NSString *existingTitle = existing.title;
-        
-        NSNumber *existinglatNumber = [NSNumber numberWithDouble:existing.coordinate.latitude];
-        NSNumber *newlatNumber = [NSNumber numberWithDouble:point.coordinate.latitude];
-        
-        NSNumber *existinglonNumber = [NSNumber numberWithDouble:existing.coordinate.longitude];
-        NSNumber *newlonNumber = [NSNumber numberWithDouble:point.coordinate.longitude];
-        
-        if([existingTitle isEqualToString:point.title] &&
-           ([existinglatNumber isEqualToNumber:newlatNumber]) &&
-           ([existinglonNumber isEqualToNumber:newlonNumber])){
+    for(CustomMKAnnotation *existing in self.mapView.annotations){
+        if ([existing isKindOfClass:[CustomMKAnnotation class]]){
             
-            NSMutableString *text;
-            text = [self generateDescriptionFromAnnotation:point];
-            self.descriptionText.text = text;
-            
-            self.locationPin.coordinate = existing.coordinate;
-            
-            CLLocationDegrees lat = existing.coordinate.latitude;
-            CLLocationDegrees lon = existing.coordinate.longitude;
-            
-            [self.reportDict setValue:[NSNumber numberWithDouble:lat] forKey:@"lat"];
-            [self.reportDict setValue:[NSNumber numberWithDouble:lon] forKey:@"lon"];
-            
-            // Centre map on point
-            MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
-            region.center.latitude = lat;
-            region.center.longitude = lon;
-            region.span.latitudeDelta = 0.0003;
-            region.span.longitudeDelta = 0.0003;
-            [self.mapView setRegion:region animated:YES];
-            
-            [self.mapView selectAnnotation:existing animated:YES];
+            if([existing.buildingId isEqualToString:point.buildingId]){
 
-            break;
+                NSMutableString *text;
+                text = [self generateDescriptionFromAnnotation:point];
+                self.descriptionText.text = text;
+                
+                self.locationPin.coordinate = existing.coordinate;
+                
+                CLLocationDegrees lat = existing.coordinate.latitude;
+                CLLocationDegrees lon = existing.coordinate.longitude;
+                
+                [self.reportDict setValue:[NSNumber numberWithDouble:lat] forKey:@"lat"];
+                [self.reportDict setValue:[NSNumber numberWithDouble:lon] forKey:@"lon"];
+                
+                // Centre map on point
+                MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
+                region.center.latitude = lat;
+                region.center.longitude = lon;
+                region.span.latitudeDelta = 0.0003;
+                region.span.longitudeDelta = 0.0003;
+                [self.mapView setRegion:region animated:YES];
+                
+                [self.mapView selectAnnotation:existing animated:YES];
+                
+                break;
+            }
         }
     }
 }
