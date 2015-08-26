@@ -661,7 +661,7 @@ static BOOL mapChangedFromUserInteraction = NO;
             CustomMKAnnotation *customMKAnnotation = (CustomMKAnnotation *)annotation;
             
             // Purple annotations have nested properties
-            if(customMKAnnotation.source){
+            if(customMKAnnotation.hasNestedBuildingInformation){
                 view.pinColor = MKPinAnnotationColorPurple;
             }else{
                 view.pinColor = MKPinAnnotationColorRed;
