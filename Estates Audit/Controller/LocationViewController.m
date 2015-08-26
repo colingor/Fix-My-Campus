@@ -399,13 +399,19 @@ static BOOL mapChangedFromUserInteraction = NO;
     static NSString *simpleTableIdentifier = @"BuildingCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.accessibilityHint = nil;
+
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:simpleTableIdentifier];
     }
    
     @try {
         CustomMKAnnotation *point = [self.locationAnnotations objectAtIndex:indexPath.row];
+        if(point.hasNestedBuildingInformation){
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.accessibilityHint = @"Select to see further information about this building";
+        }
         cell.textLabel.text = point.title;
         cell.detailTextLabel.text  = point.subtitle;
     }
@@ -448,6 +454,11 @@ static BOOL mapChangedFromUserInteraction = NO;
                 [self.mapView setRegion:region animated:YES];
                 
                 [self.mapView selectAnnotation:existing animated:YES];
+                
+                if(existing.hasNestedBuildingInformation){
+                    [self performSegueWithIdentifier:@"Location Details" sender:existing];
+                }
+                
                 
                 break;
             }
@@ -842,10 +853,22 @@ static BOOL mapChangedFromUserInteraction = NO;
         }
     } else if ([[segue identifier] isEqualToString:@"Location Details"]){
         if ([segue.destinationViewController isKindOfClass:[LocationDetailsViewController class]]) {
-            MKAnnotationView *annotationView = (MKAnnotationView *) sender;
-
-            CustomMKAnnotation *customMKAnnotation = (CustomMKAnnotation *)annotationView.annotation;
+            
             LocationDetailsViewController *ldvc = (LocationDetailsViewController *)segue.destinationViewController;
+            CustomMKAnnotation  *customMKAnnotation = nil;
+            
+            if([sender isKindOfClass:[CustomMKAnnotation class]]){
+                
+                customMKAnnotation = (CustomMKAnnotation *)sender;
+                
+            }else if([sender isKindOfClass:[MKAnnotationView class]]){
+                
+                MKAnnotationView *annotationView = (MKAnnotationView *) sender;
+                customMKAnnotation = (CustomMKAnnotation *)annotationView.annotation;
+                
+            }
+
+           
             ldvc.location = customMKAnnotation.source;
 
         }
