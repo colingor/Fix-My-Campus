@@ -82,18 +82,26 @@
 
 
 -(IBAction) unwindToMainMenu:(UIStoryboardSegue *)segue {
+    [self removePhotos];
+}
+
+
+-(void) removePhotos{
     if ([self reportDict]){
         if ([self report]){
             // delete existing photo if there is one
             for (Photo *photo in [self.report.photos allObjects]) {
                 [[self managedObjectContext] deleteObject:photo];
             }
+            // Save just to be sure
+            [self.managedObjectContext save:NULL];
+            
         }
+//        [self.reportDict removeObjectForKey:@"photo_url"];
         self.descriptionText.text = [self.reportDict valueForKey:@"loc_desc"];
         self.userSpecfiedLocation = YES;
     }
 }
-
 
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = NO;
@@ -627,6 +635,10 @@ static BOOL mapChangedFromUserInteraction = NO;
     self.userSpecfiedLocation = YES;
     
     MKPointAnnotation *annotation = view.annotation;
+    
+    // Remove any photos that may have been associated if the user has been looking at a nested annotation
+    [self removePhotos];
+            [self.reportDict removeObjectForKey:@"photo_url"];
     
     if (![annotation isKindOfClass:[MKUserLocation class]]){
         if ([annotation isKindOfClass:[CustomMKAnnotation class]]){
