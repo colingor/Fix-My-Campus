@@ -127,8 +127,9 @@ enum AlertButtonIndex : NSInteger
     [reportDictionary setValue:lon forKey:@"lon"];
     [reportDictionary setValue:lat forKey:@"lat"];
     
-    [reportDictionary setValue:imagePath forKey:@"photo_url"];
-    
+    if([imageStem length] > 0){
+        [reportDictionary setValue:imagePath forKey:@"photo_url"];
+    }
     return reportDictionary;
 }
 
