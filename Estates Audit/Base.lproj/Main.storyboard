@@ -1079,11 +1079,29 @@
                                         <color key="textColor" red="0.0" green="0.1960784314" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uNU-Tq-0Jb">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Some general information about the app." selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uNU-Tq-0Jb">
                                         <rect key="frame" x="0.0" y="46" width="320" height="114"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="114" id="0ci-aC-FJS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACCESSIBILITY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3GX-08-3XJ">
+                                        <rect key="frame" x="8" y="168" width="304" height="38"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="38" id="h73-hX-UKO"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <color key="textColor" red="0.0" green="0.1960784314" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hO5-1R-T2g">
+                                        <rect key="frame" x="0.0" y="214" width="320" height="114"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="114" id="7Q4-8e-nLc"/>
                                         </constraints>
                                         <string key="text">Add a help section including information on accessibility that is which includes generic information on how to use the phones settings to change colours, fonts and details on who to contact in the University for assistance. </string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1094,12 +1112,18 @@
                                 <constraints>
                                     <constraint firstItem="uNU-Tq-0Jb" firstAttribute="centerX" secondItem="bei-JZ-ycG" secondAttribute="centerX" id="2gH-Ot-gce"/>
                                     <constraint firstItem="uNU-Tq-0Jb" firstAttribute="top" secondItem="xb4-hl-zN1" secondAttribute="bottom" constant="8" symbolic="YES" id="8k7-oi-bem"/>
+                                    <constraint firstItem="3GX-08-3XJ" firstAttribute="trailing" secondItem="xb4-hl-zN1" secondAttribute="trailing" id="GUN-D5-T4g"/>
                                     <constraint firstItem="xb4-hl-zN1" firstAttribute="leading" secondItem="bei-JZ-ycG" secondAttribute="leadingMargin" id="NB6-gf-5RO"/>
                                     <constraint firstAttribute="trailing" secondItem="uNU-Tq-0Jb" secondAttribute="trailing" id="WZP-Uq-hQ9"/>
                                     <constraint firstItem="xb4-hl-zN1" firstAttribute="top" secondItem="bei-JZ-ycG" secondAttribute="top" id="dmy-bT-2Pk"/>
                                     <constraint firstAttribute="trailing" secondItem="xb4-hl-zN1" secondAttribute="trailing" constant="8" id="hgb-sw-CQC"/>
+                                    <constraint firstItem="3GX-08-3XJ" firstAttribute="leading" secondItem="xb4-hl-zN1" secondAttribute="leading" id="ltC-Zu-nj6"/>
+                                    <constraint firstItem="3GX-08-3XJ" firstAttribute="top" secondItem="uNU-Tq-0Jb" secondAttribute="bottom" constant="8" symbolic="YES" id="pyl-bA-iDU"/>
                                     <constraint firstItem="uNU-Tq-0Jb" firstAttribute="leading" secondItem="bei-JZ-ycG" secondAttribute="leading" id="tT7-JU-Yy0"/>
+                                    <constraint firstItem="hO5-1R-T2g" firstAttribute="trailing" secondItem="uNU-Tq-0Jb" secondAttribute="trailing" id="tcT-g3-UYd"/>
                                     <constraint firstAttribute="bottom" secondItem="uNU-Tq-0Jb" secondAttribute="bottom" constant="408" id="vLa-QA-6en"/>
+                                    <constraint firstItem="hO5-1R-T2g" firstAttribute="top" secondItem="3GX-08-3XJ" secondAttribute="bottom" constant="8" symbolic="YES" id="vnu-Jg-6mK"/>
+                                    <constraint firstItem="hO5-1R-T2g" firstAttribute="leading" secondItem="uNU-Tq-0Jb" secondAttribute="leading" id="wMa-51-Qfs"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
