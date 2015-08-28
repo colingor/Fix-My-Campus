@@ -111,7 +111,6 @@
     [super viewDidLoad];
     
     [self.mapView setDelegate:self];
-    self.descriptionText.delegate = self;
     
     if (nil == self.locationManager)
         self.locationManager = [[CLLocationManager alloc] init];
@@ -206,6 +205,16 @@
     // Get buildings within 500m of current location
     [self listBuildingsNearCurrentLocation];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    [tap setCancelsTouchesInView:NO];
+    [self.view addGestureRecognizer:tap];
+    
+}
+
+-(void)dismissKeyboard {
+    [self.view endEditing:YES];
 }
 
 - (BOOL)mapViewRegionDidChangeFromUserInteraction
@@ -475,6 +484,8 @@ static BOOL mapChangedFromUserInteraction = NO;
 }
 
 - (IBAction)toggleBuildingsView:(id)sender {
+    
+    [self dismissKeyboard];
     
     switch ([sender selectedSegmentIndex]) {
         case 0:
@@ -816,16 +827,6 @@ static BOOL mapChangedFromUserInteraction = NO;
     [text appendString:[NSString stringWithFormat:@"%@ \n", point.title]];
     [text appendString:point.subtitle];
     return text;
-}
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    
-    if([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
-    }
-    
-    return YES;
 }
 
 #pragma mark - Navigation

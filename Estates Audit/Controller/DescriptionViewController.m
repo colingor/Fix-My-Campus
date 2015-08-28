@@ -29,22 +29,19 @@
     // Ensure the UITextView is selected automatically
     [self.problemDescription becomeFirstResponder];
     
-    // Hook up UITextViewDelegate so we can hide keyboard on return
-    self.problemDescription.delegate = self;
     self.problemDescription.text = self.report.desc;
+    
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    [tap setCancelsTouchesInView:NO];
+    [self.view addGestureRecognizer:tap];
 
 }
 
-
-// Hack so we can hide the keyboard when return is hit - seems to be the only way to do it for UITextViews
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    
-    if([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
-    }
-    
-    return YES;
+-(void)dismissKeyboard {
+    [self.view endEditing:YES];
 }
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
@@ -60,10 +57,6 @@
         return YES;
     }
 }
-
-
-
-
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

@@ -96,6 +96,12 @@
     self.photoCollectionView.delegate = self;
     self.photoCollectionView.dataSource = self;
     self.photos =  [NSArray arrayWithArray:[self.report.photos allObjects]];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    [tap setCancelsTouchesInView:NO];
+    [self.view addGestureRecognizer:tap];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -103,6 +109,9 @@
     [self finishAndUpdate];
 }
 
+-(void)dismissKeyboard {
+    [self.view endEditing:YES];
+}
 
 - (void)finishAndUpdate
 {
