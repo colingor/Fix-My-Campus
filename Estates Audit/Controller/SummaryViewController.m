@@ -105,6 +105,9 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+    
     // Check in case we have to reload the data
     [self finishAndUpdate];
 }

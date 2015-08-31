@@ -25,6 +25,9 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
     // We need to do this explictely otherwise the navbar won't appear
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
 }
