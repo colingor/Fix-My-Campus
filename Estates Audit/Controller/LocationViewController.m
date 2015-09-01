@@ -344,10 +344,10 @@ static BOOL mapChangedFromUserInteraction = NO;
                                                   
                                                   // Add to the building list
                                                   [self.locationAnnotations addObject:point];
-                                                  
+                                                  if(point.hasNestedBuildingInformation){
                                                   if(!found){
                                                       [self.mapView addAnnotation:point];
-                                                  }
+                                                  }}
                                               }
                                               
                                               dispatch_async(dispatch_get_main_queue(), ^{

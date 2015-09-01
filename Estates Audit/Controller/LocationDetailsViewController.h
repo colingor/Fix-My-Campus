@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LocationDetailsViewController : UIViewController
+@interface LocationDetailsViewController : UIViewController<UITabBarDelegate>
 
 @property (strong, nonatomic) NSDictionary *location;
 

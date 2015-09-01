@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSMutableArray *buildingItems;
 @property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subheaderLabel;
+@property (weak, nonatomic) IBOutlet UITabBar *tabBar;
 
 @end
 
@@ -26,6 +27,11 @@ NSString *const IMAGES_DIR = @"EstatesBuildingsImages";
 NSString *const IMAGE_SUFFIX = @".JPG";
 NSString *const DEFAULT_CELL_IMAGE = @"MapPinDefaultLeftCallout";
 NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/images/";
+
+
+-(void)viewWillAppear:(BOOL)animated{
+       [self styleTabBar];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,6 +58,37 @@ NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/image
         for (NSDictionary *item in areaItems){
             [self.buildingItems addObject:item];
         }
+    }
+    
+    self.tabBar.delegate = self;
+   
+}
+
+- (void) styleTabBar{
+    // Get rid of tabbar gradient
+    [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
+    [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
+    
+    
+    // Selected image tint colour
+    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+   
+
+ [self.tabBar setSelectedItem:[self.tabBar.items objectAtIndex:0]];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:15.0f],
+                                                        NSForegroundColorAttributeName : [UIColor whiteColor]
+                                                        } forState:UIControlStateSelected];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:15.0f],
+                                                        NSBackgroundColorAttributeName : [UIColor whiteColor]
+                                                        } forState:UIControlStateNormal];    
+}
+
+
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
+    if ([item.title isEqualToString:@"Add Facility"]) { // or whatever your title is
+        [self performSegueWithIdentifier:@"Add Facility" sender:self];
     }
 }
 
