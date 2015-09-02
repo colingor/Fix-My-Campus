@@ -44,10 +44,30 @@
 
 #pragma mark - Navigation
 
+
+#define UNWIND_SEGUE_IDENTIFIER @"Send"
+
+- (void)alert:(NSString *)message
+{
+    [[[UIAlertView alloc] initWithTitle:@"Incomplete Information" message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+    
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if ([identifier isEqualToString:UNWIND_SEGUE_IDENTIFIER]) {
+        if (![self.facilityDescription.text length]) {
+            [self alert:@"Please enter a description"];
+            return NO;
+        }
+    }
+    return YES;
+}
+
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
    
-    if ([[segue identifier] isEqualToString:@"Send"])
+    if ([[segue identifier] isEqualToString:UNWIND_SEGUE_IDENTIFIER])
     {
         LocationDetailsViewController *loccationDetailsvc = (LocationDetailsViewController *)segue.destinationViewController;
     }

@@ -1404,7 +1404,19 @@ as they are resolved</string>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MT0-Yd-4TO">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TYPE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRx-ja-KyO">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please provide details of the facility you would like to add to" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHf-n9-xhR">
+                                        <rect key="frame" x="8" y="8" width="304" height="40"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="NO"/>
+                                        </accessibility>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="PYp-cW-Ezx"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <color key="textColor" red="0.0" green="0.1960784314" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="AREA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBk-Wi-g4k">
                                         <rect key="frame" x="8" y="56" width="372" height="21"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
@@ -1413,8 +1425,22 @@ as they are resolved</string>
                                         <color key="textColor" red="0.0" green="0.1960784314" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xns-l7-9W2">
+                                        <rect key="frame" x="-10" y="85" width="425" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TYPE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRx-ja-KyO">
+                                        <rect key="frame" x="8" y="123" width="372" height="21"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="NO"/>
+                                        </accessibility>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <color key="textColor" red="0.0" green="0.1960784314" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mXP-hB-ZUO">
-                                        <rect key="frame" x="0.0" y="152" width="404" height="128"/>
+                                        <rect key="frame" x="0.0" y="219" width="404" height="128"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <accessibility key="accessibilityConfiguration" hint="Description of reported problem" label="Problem Description"/>
@@ -1425,7 +1451,7 @@ as they are resolved</string>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESCRIPTION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hX9-bn-lgv">
-                                        <rect key="frame" x="8" y="123" width="476" height="21"/>
+                                        <rect key="frame" x="8" y="190" width="476" height="21"/>
                                         <accessibility key="accessibilityConfiguration" hint="" label="">
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
@@ -1437,7 +1463,7 @@ as they are resolved</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PICTURE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUY-6p-h9i">
-                                        <rect key="frame" x="8" y="288" width="476" height="21"/>
+                                        <rect key="frame" x="8" y="355" width="476" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="OtW-X9-yND"/>
                                         </constraints>
@@ -1446,7 +1472,7 @@ as they are resolved</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qbm-z1-Gm2">
-                                        <rect key="frame" x="0.0" y="317" width="404" height="100"/>
+                                        <rect key="frame" x="0.0" y="384" width="404" height="100"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="IbK-ZJ-y8n"/>
@@ -1484,22 +1510,10 @@ as they are resolved</string>
                                         </cells>
                                     </collectionView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GHB-2E-k2j">
-                                        <rect key="frame" x="-10" y="85" width="425" height="30"/>
+                                        <rect key="frame" x="-10" y="152" width="425" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please provide details of the facility you would like to add to" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHf-n9-xhR">
-                                        <rect key="frame" x="8" y="8" width="304" height="40"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <bool key="isElement" value="NO"/>
-                                        </accessibility>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="PYp-cW-Ezx"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                        <color key="textColor" red="0.0" green="0.1960784314" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1510,9 +1524,9 @@ as they are resolved</string>
                                     <constraint firstItem="GHB-2E-k2j" firstAttribute="leading" secondItem="MT0-Yd-4TO" secondAttribute="leading" constant="-10" id="BsN-fv-Gvg"/>
                                     <constraint firstItem="kRx-ja-KyO" firstAttribute="leading" secondItem="YHf-n9-xhR" secondAttribute="leading" id="Efv-i1-jaz"/>
                                     <constraint firstItem="hX9-bn-lgv" firstAttribute="leading" secondItem="kRx-ja-KyO" secondAttribute="leading" id="H4U-qM-aZh"/>
-                                    <constraint firstItem="kRx-ja-KyO" firstAttribute="top" secondItem="YHf-n9-xhR" secondAttribute="bottom" constant="8" symbolic="YES" id="Iye-ph-EQJ"/>
-                                    <constraint firstAttribute="bottom" secondItem="qbm-z1-Gm2" secondAttribute="bottom" constant="151" id="NzM-cn-dDt"/>
-                                    <constraint firstItem="GHB-2E-k2j" firstAttribute="top" secondItem="YHf-n9-xhR" secondAttribute="bottom" constant="37" id="Oo5-hJ-maV"/>
+                                    <constraint firstItem="kRx-ja-KyO" firstAttribute="top" secondItem="YHf-n9-xhR" secondAttribute="bottom" constant="75" id="Iye-ph-EQJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="qbm-z1-Gm2" secondAttribute="bottom" constant="84" id="NzM-cn-dDt"/>
+                                    <constraint firstItem="GHB-2E-k2j" firstAttribute="top" secondItem="YHf-n9-xhR" secondAttribute="bottom" constant="104" id="Oo5-hJ-maV"/>
                                     <constraint firstItem="kRx-ja-KyO" firstAttribute="leading" secondItem="MT0-Yd-4TO" secondAttribute="leadingMargin" id="OxO-zp-Qq6"/>
                                     <constraint firstItem="YHf-n9-xhR" firstAttribute="top" secondItem="MT0-Yd-4TO" secondAttribute="topMargin" id="Q1h-VE-eCD"/>
                                     <constraint firstItem="jUY-6p-h9i" firstAttribute="trailing" secondItem="hX9-bn-lgv" secondAttribute="trailing" id="RpM-ha-OTL"/>
