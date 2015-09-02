@@ -9,6 +9,7 @@
 #import "LocationViewController.h"
 #import "LocationDetailsViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "AddFacilityViewController.h"
 
 @interface LocationDetailsViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -90,6 +91,12 @@ NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/image
     if ([item.title isEqualToString:@"Add Facility"]) { // or whatever your title is
         [self performSegueWithIdentifier:@"Add Facility" sender:self];
     }
+}
+
+
+-(IBAction) unwindToLocationDetails:(UIStoryboardSegue *)segue {
+    NSLog(@"Unwound to location details page");
+    // Maybe update list?
 }
 
 - (NSMutableArray *)buildingItems
@@ -242,6 +249,14 @@ enum AlertButtonIndex : NSInteger
         if ([segue.destinationViewController isKindOfClass:[LocationViewController class]]) {
             LocationViewController *lvc = (LocationViewController *)segue.destinationViewController;
             lvc.reportDict = [self reportDictionary];
+        }
+    }
+    if ([[segue identifier] isEqualToString:@"Add Facility"]){
+        if ([segue.destinationViewController isKindOfClass:[AddFacilityViewController class]]) {
+            AddFacilityViewController *afvc = (AddFacilityViewController *)segue.destinationViewController;
+          
+            NSDictionary *buildingInfo = @{ @"buildingId" : self.buildingId, @"buildingName": self.headerLabel.text};
+            afvc.buildingInfo = buildingInfo;
         }
     }
 }

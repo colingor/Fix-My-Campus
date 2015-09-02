@@ -10,4 +10,6 @@
 
 @interface AddFacilityViewController : UIViewController
 
+@property (strong, nonatomic) NSDictionary *buildingInfo;
+
 @end
