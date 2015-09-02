@@ -28,6 +28,7 @@
 		3BA1EDFD1ADFC514004D9470 /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA1EDFC1ADFC514004D9470 /* DescriptionViewController.m */; };
 		3BA1EE001ADFC7EE004D9470 /* SummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA1EDFF1ADFC7EE004D9470 /* SummaryViewController.m */; };
 		3BA1EE031AE00219004D9470 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA1EE021AE00219004D9470 /* AssetsLibrary.framework */; };
+		3BA757D91B9700EF00B4259D /* ElasticSeachAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA757D81B9700EF00B4259D /* ElasticSeachAPI.m */; };
 		3BC3AD201A25EA5900F2C6C0 /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC3AD1F1A25EA5900F2C6C0 /* HomePageViewController.m */; };
 		3BC3AD251A25EC3100F2C6C0 /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC3AD241A25EC3100F2C6C0 /* LocationViewController.m */; };
 		3BC3AD281A25ED6800F2C6C0 /* PictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC3AD271A25ED6800F2C6C0 /* PictureViewController.m */; };
@@ -107,6 +108,8 @@
 		3BA1EDFE1ADFC7EE004D9470 /* SummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SummaryViewController.h; path = "Estates Audit/Controller/SummaryViewController.h"; sourceTree = "<group>"; };
 		3BA1EDFF1ADFC7EE004D9470 /* SummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SummaryViewController.m; path = "Estates Audit/Controller/SummaryViewController.m"; sourceTree = "<group>"; };
 		3BA1EE021AE00219004D9470 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		3BA757D71B9700EF00B4259D /* ElasticSeachAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElasticSeachAPI.h; sourceTree = "<group>"; };
+		3BA757D81B9700EF00B4259D /* ElasticSeachAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElasticSeachAPI.m; sourceTree = "<group>"; };
 		3BC3AD1E1A25EA5900F2C6C0 /* HomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomePageViewController.h; path = "Estates Audit/Controller/HomePageViewController.h"; sourceTree = "<group>"; };
 		3BC3AD1F1A25EA5900F2C6C0 /* HomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomePageViewController.m; path = "Estates Audit/Controller/HomePageViewController.m"; sourceTree = "<group>"; };
 		3BC3AD231A25EC3100F2C6C0 /* LocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationViewController.h; path = "Estates Audit/Controller/LocationViewController.h"; sourceTree = "<group>"; };
@@ -285,6 +288,8 @@
 				3B599D171ADBBB27007F4D40 /* AppDelegate+MOC.h */,
 				3B599D181ADBBB27007F4D40 /* AppDelegate+MOC.m */,
 				3BCBBA601A237EF500A9A246 /* Main.storyboard */,
+				3BA757D71B9700EF00B4259D /* ElasticSeachAPI.h */,
+				3BA757D81B9700EF00B4259D /* ElasticSeachAPI.m */,
 				3BCBBA651A237EF500A9A246 /* LaunchScreen.xib */,
 				3BC3AD221A25EA8F00F2C6C0 /* Model */,
 				3BCBBA531A237EF500A9A246 /* Supporting Files */,
@@ -527,6 +532,7 @@
 				7DD5A15B1B03840700B95138 /* ViewPhotoViewController.m in Sources */,
 				3B7DFAE41B664632000164FE /* SSKeychainQuery.m in Sources */,
 				3BA1EDFD1ADFC514004D9470 /* DescriptionViewController.m in Sources */,
+				3BA757D91B9700EF00B4259D /* ElasticSeachAPI.m in Sources */,
 				3B15B0A71B8F4EE1001389D6 /* HelpViewController.m in Sources */,
 				3B94845B1B8B6087007B5630 /* CustomLocationUITableViewCell.m in Sources */,
 				3BCBBA561A237EF500A9A246 /* main.m in Sources */,

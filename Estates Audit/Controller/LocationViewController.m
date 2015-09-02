@@ -15,6 +15,7 @@
 #import "Photo+Create.h"
 #import "CustomMKAnnotation.h"
 #import "AppDelegate.h"
+#import "ElasticSeachAPI.h"
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
@@ -252,114 +253,70 @@ static BOOL mapChangedFromUserInteraction = NO;
     }
 }
 
--(void)performSearchWithDictionary: (NSDictionary *) dictionaryToBePosted
+-(void)performSearchWithDictionary: (NSDictionary *) queryJson
 {
-    if([self.appDelegate isNetworkAvailable]){
-        
-        MKMapRect mRect = self.mapView.visibleMapRect;
-        NSMutableDictionary *bb = [self getBoundingBox:mRect];
-        
-        NSString *apiStr = @"http://dlib-brown.edina.ac.uk/buildings/_search?size=500";
-        
-        NSURL *apiUrl = [NSURL URLWithString:[apiStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
-        [request setHTTPMethod:@"POST"];
-        
-        NSDictionary *queryDict = @{ @"query" : @{ @"match_all": @{}} };
-        NSDictionary *filterDict = @{@"filter" : @{ @"geo_bounding_box": @{@"location":bb }} };
-        
-        NSMutableDictionary *jsonPayload =  [[NSMutableDictionary alloc] init];
-        
-        [jsonPayload addEntriesFromDictionary:queryDict];
-        [jsonPayload addEntriesFromDictionary:filterDict];
-        
-        NSError *error;
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionaryToBePosted
-                                                           options:NSJSONWritingPrettyPrinted
-                                                             error:&error];
-        
-        NSString *jsonString = [[NSString alloc] init];
-        if (!jsonData) {
-            NSLog(@"Got an error: %@", error);
-        } else {
-            jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-            //        NSLog(@"jsonString %@", jsonString);
-        }
-        
-        [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
-        
-        NSURLSessionDataTask *task = [self.elasticSearchSession dataTaskWithRequest:request
-                                                                  completionHandler:
-                                      ^(NSData *data, NSURLResponse *response, NSError *error) {
-                                          // this handler is not executing on the main queue, so we can't do UI directly here
-                                          if (!error) {
-                                              NSDictionary *locations = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                        options:0
-                                                                                                          error:NULL];
-                                              
-                                              NSArray *hits = [[locations valueForKey:@"hits"] valueForKey:@"hits"];
-                                              
-                                              // localAnnotations used to populate building list table
-                                              [self.locationAnnotations removeAllObjects];
-                                              
-                                              for (id hit in hits){
-                                                  
-                                                  NSDictionary * source = [hit valueForKey:@"_source"];
-                                                  NSString *buildingId = hit[@"_id"];
-                                                 
-                                                  NSArray *loc = source[@"geometry"][@"location"];
-                                                  NSString * lat = loc[1];
-                                                  NSString * lon = loc[0];
-                                                  
-                                                  NSDictionary *properties = source[@"properties"];
-                                                  NSString * name = properties[@"title"];
-                                                  NSString * address = properties[@"subtitle"];
-                                                                                              
-                                                  // Check if annotation already exists on map
-                                                  NSArray *existingAnnotations = self.mapView.annotations;
-                                                  
-                                                  BOOL found = NO;
-                                                  
-                                                  for(CustomMKAnnotation *existing in existingAnnotations){
-                                                      if ([existing isKindOfClass:[CustomMKAnnotation class]]){
-                                                          
-                                                          if([existing.buildingId isEqualToString:buildingId]){
-                                                              found = YES;
-                                                              break;
-                                                          }
-                                                      }
-                                                  }
-                                                  
-                                                  CLLocationCoordinate2D coord;
-                                                  coord.latitude = [lat floatValue];
-                                                  coord.longitude = [lon floatValue];
 
-                                                  CustomMKAnnotation *point = [[CustomMKAnnotation alloc] initWithLocation:coord];
-                                                  
-                                                  point.buildingId = buildingId;
-                                                  point.title = name;
-                                                  point.subtitle = address;
-                                                  point.source = source;
-                                                  
-                                                  // Add to the building list
-                                                  [self.locationAnnotations addObject:point];
-                                                  if(point.hasNestedBuildingInformation){
-                                                  if(!found){
-                                                      [self.mapView addAnnotation:point];
-                                                  }}
-                                              }
-                                              
-                                              dispatch_async(dispatch_get_main_queue(), ^{
-                                                  [self.tableView reloadData];
-                                              });
-                                          }
-                                      }];
-        [task resume];
-    }else{
-        // Display notification
-        [self.appDelegate displayNetworkNotification];
-    }
+    [[ElasticSeachAPI sharedInstance] searchForBuildingsWithQueryJson:queryJson
+                                                       withCompletion:^(NSDictionary *locations) {
+                                   
+                                   NSArray *hits = [[locations valueForKey:@"hits"] valueForKey:@"hits"];
+                                   
+                                   // localAnnotations used to populate building list table
+                                   [self.locationAnnotations removeAllObjects];
+                                   
+                                   for (id hit in hits){
+                                       
+                                       NSDictionary * source = [hit valueForKey:@"_source"];
+                                       NSString *buildingId = hit[@"_id"];
+                                       
+                                       NSArray *loc = source[@"geometry"][@"location"];
+                                       NSString * lat = loc[1];
+                                       NSString * lon = loc[0];
+                                       
+                                       NSDictionary *properties = source[@"properties"];
+                                       NSString * name = properties[@"title"];
+                                       NSString * address = properties[@"subtitle"];
+                                       
+                                       // Check if annotation already exists on map
+                                       NSArray *existingAnnotations = self.mapView.annotations;
+                                       
+                                       BOOL found = NO;
+                                       
+                                       for(CustomMKAnnotation *existing in existingAnnotations){
+                                           if ([existing isKindOfClass:[CustomMKAnnotation class]]){
+                                               
+                                               if([existing.buildingId isEqualToString:buildingId]){
+                                                   found = YES;
+                                                   break;
+                                               }
+                                           }
+                                       }
+                                       
+                                       CLLocationCoordinate2D coord;
+                                       coord.latitude = [lat floatValue];
+                                       coord.longitude = [lon floatValue];
+                                       
+                                       CustomMKAnnotation *point = [[CustomMKAnnotation alloc] initWithLocation:coord];
+                                       
+                                       point.buildingId = buildingId;
+                                       point.title = name;
+                                       point.subtitle = address;
+                                       point.source = source;
+                                       
+                                       // Add to the building list
+                                       [self.locationAnnotations addObject:point];
+//                                       if(point.hasNestedBuildingInformation){
+                                           if(!found){
+                                               [self.mapView addAnnotation:point];
+                                           }
+//                                   }
+                                   }
+                                   
+                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                       [self.tableView reloadData];
+                                   });
+                                   
+                               }];
 }
 
 
@@ -371,12 +328,12 @@ static BOOL mapChangedFromUserInteraction = NO;
     NSDictionary *queryDict = @{ @"query" : @{ @"match_all": @{}} };
     NSDictionary *filterDict = @{@"filter" : @{ @"geo_bounding_box": @{@"location":bb }} };
     
-    NSMutableDictionary *jsonPayload =  [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *queryJson =  [[NSMutableDictionary alloc] init];
     
-    [jsonPayload addEntriesFromDictionary:queryDict];
-    [jsonPayload addEntriesFromDictionary:filterDict];
+    [queryJson addEntriesFromDictionary:queryDict];
+    [queryJson addEntriesFromDictionary:filterDict];
     
-    [self performSearchWithDictionary: jsonPayload];
+    [self performSearchWithDictionary: queryJson];
     
 }
 
@@ -394,12 +351,12 @@ static BOOL mapChangedFromUserInteraction = NO;
     
     NSDictionary *filterDict = @{@"filter" : @{ @"geo_distance":  locationInfo} };
     
-    NSMutableDictionary *jsonPayload =  [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *queryJson =  [[NSMutableDictionary alloc] init];
     
-    [jsonPayload addEntriesFromDictionary:queryDict];
-    [jsonPayload addEntriesFromDictionary:filterDict];
+    [queryJson addEntriesFromDictionary:queryDict];
+    [queryJson addEntriesFromDictionary:filterDict];
     
-    [self performSearchWithDictionary:jsonPayload];
+    [self performSearchWithDictionary:queryJson];
     
 }
 
