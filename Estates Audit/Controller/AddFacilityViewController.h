@@ -11,5 +11,6 @@
 @interface AddFacilityViewController : UIViewController
 
 @property (strong, nonatomic) NSDictionary *buildingInfo;
+@property (strong, nonatomic) NSMutableDictionary *source;
 
 @end

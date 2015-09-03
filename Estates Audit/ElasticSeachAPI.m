@@ -64,49 +64,155 @@ NSString *const BASE_ELASTICSEARCH_URL = @"http://dlib-brown.edina.ac.uk/buildin
     return _appDelegate;
 }
 
-- (void)searchForBuildingsWithQueryJson: (NSDictionary *)queryJson
-                 withCompletion:(void (^)(NSDictionary *locations))completion
+
+- (NSMutableURLRequest *)setupRequest:(NSURL *)apiUrl queryJson:(NSDictionary *)queryJson
 {
-    if([self.appDelegate isNetworkAvailable]){
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
+    [request setHTTPMethod:@"POST"];
+    
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:queryJson
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    
+    NSString *jsonString = [[NSString alloc] init];
+    if (!jsonData) {
+        NSLog(@"Got an error: %@", error);
+    } else {
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        //        NSLog(@"jsonString %@", jsonString);
+    }
+    
+    [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
+    return request;
+}
+
+-(BOOL)checkNetworkAvailablityAndDisplayNotification{
+    
+    if(![self.appDelegate isNetworkAvailable]){
+        // Display notification
+        [self.appDelegate displayNetworkNotification];
+        return NO;
+    }
+    return YES;
+}
+
+
+- (void)searchForBuildingsWithQueryJson: (NSDictionary *)queryJson
+                         withCompletion:(void (^)(NSMutableDictionary *locations))completion
+{
+    if([self checkNetworkAvailablityAndDisplayNotification]){
 
         // Construct search URL
         NSURL *apiUrl = [NSURL URLWithString:[[BASE_ELASTICSEARCH_URL stringByAppendingString:@"_search?size=500"]
                                               stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:apiUrl];
-        [request setHTTPMethod:@"POST"];
+        NSMutableURLRequest *request = [self setupRequest:apiUrl queryJson:queryJson];
         
-        NSError *error;
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:queryJson
-                                                           options:NSJSONWritingPrettyPrinted
-                                                             error:&error];
         
-        NSString *jsonString = [[NSString alloc] init];
-        if (!jsonData) {
-            NSLog(@"Got an error: %@", error);
-        } else {
-            jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-            //        NSLog(@"jsonString %@", jsonString);
-        }
-        
-        [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
         
         NSURLSessionDataTask *task = [self.elasticSearchSession dataTaskWithRequest:request
                                                                   completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                                       // this handler is not executing on the main queue, so we can't do UI directly here
                                                                       if (!error) {
-                                                                          NSDictionary *locations = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                                                    options:0
-                                                                                                                                      error:NULL];
+                                                                          
+                                                                          // Note results are mutable here in case we add a new facility
+                                                                          NSMutableDictionary *locations = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                                                           options:NSJSONReadingMutableContainers
+                                                                                                                                             error:NULL];
+                                                                          // Turn off network activity
+                                                                          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                                                                          
                                                                           // Process in completion callback
                                                                           completion(locations);
                                                               
                                                                       }
                                                                   }];
+        // Turn on network activity
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         [task resume];
-    }else{
-        // Display notification
-        [self.appDelegate displayNetworkNotification];
     }
 }
+
+- (void)postBuildingFacilityToBuilding:(NSString *) buildingId
+                         withQueryJson:(NSDictionary *)queryJson
+                        withCompletion:(void (^)(NSDictionary *result))completion{
+    
+   /*
+    Need to post something of the form:
+    curl -XPOST "http://dlib-brown.edina.ac.uk:9200/buildings/building/3" -d'
+    {
+        "geometry": {
+            "type": "Point",
+            "location": [
+                         -3.1952404975891113,
+                         55.94966839561511
+                         ]
+        },
+        "type": "Feature",
+        "properties": {
+            "information": [
+                            {
+                                "items": [
+                                          {
+                                              "notes": "This is to test the notes",
+                                              "image": "url",
+                                              "type": "type",
+                                              "description": "d"
+                                          },
+                                          {
+                                              "notes": "This is to test the notes 2",
+                                              "image": "url",
+                                              "type": "type",
+                                              "description": "d"
+                                          }
+                                          ],
+                                "area": "General"
+                            }
+                            ],
+            "image": "url",
+            "title": "New College",
+            "subtitle": "1 Mound Place  Edinburgh EH1 2LU",
+            "area": [
+                     "Central area"
+                     ]
+        }
+    }'*/
+    
+    if([self checkNetworkAvailablityAndDisplayNotification]){
+        
+        NSLog(@"Posting to %@", buildingId);
+        
+        NSURL *apiUrl = [NSURL URLWithString:[[NSString stringWithFormat:@"%@building/%@", BASE_ELASTICSEARCH_URL, buildingId]
+                                              stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSMutableURLRequest *request = [self setupRequest:apiUrl queryJson:queryJson];
+        
+        NSURLSessionDownloadTask *task = [self.elasticSearchSession downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+            if (error) {
+                NSLog(@"%@",error);
+            }else{
+                
+                NSDictionary *result;
+                NSData *locationJSONData = [NSData dataWithContentsOfURL:location];
+                if (locationJSONData) {
+                    result = [NSJSONSerialization JSONObjectWithData:locationJSONData
+                                                             options:0
+                                                               error:NULL];
+                    // Turn off network activity
+                    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+
+                    completion(result);
+                }
+            }
+            
+        }];
+        
+        // Turn on network activity
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+
+        [task resume];
+    }
+}
+
 @end

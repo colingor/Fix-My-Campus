@@ -59,7 +59,7 @@
     return _buildingId;
 }
 
-- (void)setSource:(NSDictionary *)source
+- (void)setSource:(NSMutableDictionary *)source
 {
     [self willChangeValueForKey:@"source"];
     _source = source;

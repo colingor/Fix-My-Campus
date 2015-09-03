@@ -257,6 +257,7 @@ enum AlertButtonIndex : NSInteger
           
             NSDictionary *buildingInfo = @{ @"buildingId" : self.buildingId, @"buildingName": self.headerLabel.text};
             afvc.buildingInfo = buildingInfo;
+            afvc.source = self.location;
         }
     }
 }

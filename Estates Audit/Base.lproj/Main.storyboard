@@ -1563,6 +1563,8 @@ as they are resolved</string>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="facilityArea" destination="Xns-l7-9W2" id="gig-9M-Wok"/>
+                        <outlet property="facilityDescription" destination="mXP-hB-ZUO" id="7LO-Lg-wWh"/>
                         <outlet property="facilityLabel" destination="YHf-n9-xhR" id="ETS-8A-FiE"/>
                         <outlet property="facilityType" destination="GHB-2E-k2j" id="j2g-YO-sNH"/>
                     </connections>

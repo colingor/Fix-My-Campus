@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSString *buildingId;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
-@property (nonatomic, strong) NSDictionary *source;
+@property (nonatomic, strong) NSMutableDictionary *source;
 
 - (id)initWithLocation:(CLLocationCoordinate2D)coord;
 - (BOOL)hasNestedBuildingInformation; 

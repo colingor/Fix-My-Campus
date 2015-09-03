@@ -13,6 +13,10 @@
 + (ElasticSeachAPI *)sharedInstance;
 
 - (void)searchForBuildingsWithQueryJson: (NSDictionary *)queryJson
-                         withCompletion:(void (^)(NSDictionary *locations))completion;
+                         withCompletion:(void (^)(NSMutableDictionary *locations))completion;
+
+- (void)postBuildingFacilityToBuilding:(NSString *) buildingId
+                         withQueryJson:(NSDictionary *)queryJson
+                        withCompletion:(void (^)(NSDictionary *locations))completion;
 
 @end

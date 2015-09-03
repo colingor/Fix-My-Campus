@@ -10,7 +10,7 @@
 
 @interface LocationDetailsViewController : UIViewController<UITabBarDelegate>
 
-@property (strong, nonatomic) NSDictionary *location;
+@property (strong, nonatomic) NSMutableDictionary *location;
 @property (strong, nonatomic) NSString *buildingId;
 
 @end

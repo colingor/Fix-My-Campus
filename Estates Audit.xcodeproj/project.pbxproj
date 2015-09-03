@@ -190,6 +190,8 @@
 		3BC3AD211A25EA6500F2C6C0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3B6318C91B959B1700CBA945 /* AddFacilityViewController.h */,
+				3B6318CA1B959B1700CBA945 /* AddFacilityViewController.m */,
 				3B15B0A51B8F4EE1001389D6 /* HelpViewController.h */,
 				3B15B0A61B8F4EE1001389D6 /* HelpViewController.m */,
 				3B9418831B0F16F2007859D8 /* ReplyViewController.h */,
@@ -251,8 +253,6 @@
 		3BCBBA471A237EF500A9A246 = {
 			isa = PBXGroup;
 			children = (
-				3B6318C91B959B1700CBA945 /* AddFacilityViewController.h */,
-				3B6318CA1B959B1700CBA945 /* AddFacilityViewController.m */,
 				3BA1EE021AE00219004D9470 /* AssetsLibrary.framework */,
 				7DD86BD71A27477300ED3056 /* messaging */,
 				7DD86BD51A2746AA00ED3056 /* MessageUI.framework */,

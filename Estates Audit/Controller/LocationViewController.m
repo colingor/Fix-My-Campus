@@ -257,7 +257,7 @@ static BOOL mapChangedFromUserInteraction = NO;
 {
 
     [[ElasticSeachAPI sharedInstance] searchForBuildingsWithQueryJson:queryJson
-                                                       withCompletion:^(NSDictionary *locations) {
+                                                       withCompletion:^(NSMutableDictionary *locations) {
                                    
                                    NSArray *hits = [[locations valueForKey:@"hits"] valueForKey:@"hits"];
                                    
@@ -266,7 +266,7 @@ static BOOL mapChangedFromUserInteraction = NO;
                                    
                                    for (id hit in hits){
                                        
-                                       NSDictionary * source = [hit valueForKey:@"_source"];
+                                       NSMutableDictionary * source = [hit valueForKey:@"_source"];
                                        NSString *buildingId = hit[@"_id"];
                                        
                                        NSArray *loc = source[@"geometry"][@"location"];
