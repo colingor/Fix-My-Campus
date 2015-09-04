@@ -102,13 +102,8 @@
         [buildingAreas addObject:newArea];
         
     }
-    
-    // POST to ElasticSearch
-    [[ElasticSeachAPI sharedInstance] postBuildingFacilityToBuilding:self.buildingInfo[@"buildingId"] withQueryJson: self.source
-                                                      withCompletion:^(NSDictionary *result) {
-                                                          NSLog(@"Facility added");
-                                                      }];
-    
+
+    // We do the actual POST in LocationDetailViewController as self.source contains the new facility
     return YES;
 }
 

@@ -840,7 +840,7 @@ static BOOL mapChangedFromUserInteraction = NO;
             }
 
            
-            ldvc.location = customMKAnnotation.source;
+//            ldvc.source = customMKAnnotation.source;
             ldvc.buildingId = customMKAnnotation.buildingId;
 
         }

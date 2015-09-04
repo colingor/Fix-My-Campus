@@ -10,6 +10,7 @@
 #import "LocationDetailsViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "AddFacilityViewController.h"
+#import "ElasticSeachAPI.h"
 
 @interface LocationDetailsViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -29,41 +30,75 @@ NSString *const IMAGE_SUFFIX = @".JPG";
 NSString *const DEFAULT_CELL_IMAGE = @"MapPinDefaultLeftCallout";
 NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/images/";
 
-
 -(void)viewWillAppear:(BOOL)animated{
-       [self styleTabBar];
+  
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tabBar.delegate = self;
+    
+    // Populate table with call the ElasticSearch with buildingId
+    [self refresh:nil];
+    
+    [self styleTabBar];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+  
+    // Have to manually add refresh control
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+
+    [self.tableView addSubview:refreshControl];
     
     self.headerLabel.textColor = [[self view]tintColor];
     self.subheaderLabel.textColor = [[self view]tintColor];
-    self.headerLabel.text = [self.location valueForKeyPath:@"properties.title"];
-    self.subheaderLabel.text = [self.location valueForKeyPath:@"properties.subtitle"];
     
-    NSString *imageStem = [self.location valueForKeyPath:@"properties.image"];
-    NSString *imagePath = [NSString stringWithFormat:@"%@%@%@", BASE_IMAGE_URL, imageStem, IMAGE_SUFFIX];
-
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.imageView.clipsToBounds = YES;
+}
 
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:[imagePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
-                      placeholderImage:[UIImage imageNamed:DEFAULT_CELL_IMAGE]];
+- (void)refresh:(UIRefreshControl *)refreshControl {
     
-    self.buildingAreas = [self.location valueForKeyPath:@"properties.information"];
-    for (NSDictionary *area in self.buildingAreas){
-        NSArray *areaItems = [area valueForKey:@"items"];
-        for (NSDictionary *item in areaItems){
-            [self.buildingItems addObject:item];
-        }
-    }
-    
-    self.tabBar.delegate = self;
+    [[ElasticSeachAPI sharedInstance] searchForBuildingWithId:self.buildingId
+                                               withCompletion:^(NSMutableDictionary *source) {
+                                                   
+                                                   self.source = source;
+                                                   
+                                                   self.headerLabel.text = [self.source valueForKeyPath:@"properties.title"];
+                                                   self.subheaderLabel.text = [self.source valueForKeyPath:@"properties.subtitle"];
+                                                   
+                                                   NSString *imageStem = [self.source valueForKeyPath:@"properties.image"];
+                                                   NSString *imagePath = [NSString stringWithFormat:@"%@%@%@", BASE_IMAGE_URL, imageStem, IMAGE_SUFFIX];
+                             
+                                                   
+                                                   [self.imageView sd_setImageWithURL:[NSURL URLWithString:[imagePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
+                                                                     placeholderImage:[UIImage imageNamed:DEFAULT_CELL_IMAGE]];
+                                                   
+                                                   self.buildingAreas = [self.source valueForKeyPath:@"properties.information"];
+                                                   
+                                                   // Important to clear this first otherwise table won't be updated
+                                                   self.buildingItems = nil;
+                                                   
+                                                   for (NSDictionary *area in self.buildingAreas){
+                                                       NSArray *areaItems = [area valueForKey:@"items"];
+                                                       for (NSDictionary *item in areaItems){
+                                                           [self.buildingItems addObject:item];
+                                                       }
+                                                   }
+                     
+                                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                                       [self.tableView reloadData];
+                                                       
+                                                       if(refreshControl){
+                                                            [refreshControl endRefreshing];
+                                                       }
+                                                      
+                                                   });
+                                               }];
    
 }
+
 
 - (void) styleTabBar{
     // Get rid of tabbar gradient
@@ -73,9 +108,9 @@ NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/image
     
     // Selected image tint colour
     [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
-   
-
- [self.tabBar setSelectedItem:[self.tabBar.items objectAtIndex:0]];
+    
+    
+    [self.tabBar setSelectedItem:[self.tabBar.items objectAtIndex:0]];
     
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:15.0f],
                                                         NSForegroundColorAttributeName : [UIColor whiteColor]
@@ -83,7 +118,7 @@ NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/image
     
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:15.0f],
                                                         NSBackgroundColorAttributeName : [UIColor whiteColor]
-                                                        } forState:UIControlStateNormal];    
+                                                        } forState:UIControlStateNormal];
 }
 
 
@@ -95,8 +130,16 @@ NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/image
 
 
 -(IBAction) unwindToLocationDetails:(UIStoryboardSegue *)segue {
-    NSLog(@"Unwound to location details page");
-    // Maybe update list?
+    
+    // POST to ElasticSearch (Note that self.source has been updated in AddFacilityViewController with new facility at this point)
+    [[ElasticSeachAPI sharedInstance] postBuildingFacilityToBuilding:self.buildingId withQueryJson: self.source
+                                                      withCompletion:^(NSDictionary *result) {
+                                                          NSLog(@"Facility added");
+                                                          
+                                                          // Refresh to ensure new facility is added to table
+                                                          [self refresh:nil];
+                                                          
+                                                      }];
 }
 
 - (NSMutableArray *)buildingItems
@@ -138,8 +181,8 @@ enum AlertButtonIndex : NSInteger
 - (NSMutableDictionary *)reportDictionary {
     NSMutableDictionary *reportDictionary = [[NSMutableDictionary alloc] init];
     
-    NSString *address = [self.location valueForKeyPath:@"properties.title"];
-    NSString *department = [self.location valueForKeyPath:@"properties.subtitle"];
+    NSString *address = [self.source valueForKeyPath:@"properties.title"];
+    NSString *department = [self.source valueForKeyPath:@"properties.subtitle"];
     
     NSDictionary *areaDict = [[self buildingAreas] objectAtIndex:[[self.tableView indexPathForSelectedRow] section]];
     NSString *area= [areaDict valueForKey:@"area"];
@@ -157,10 +200,10 @@ enum AlertButtonIndex : NSInteger
     
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     
-    NSString *lonStr = [NSString stringWithFormat:@"%@", [self.location valueForKeyPath:@"geometry.location"][0]];
+    NSString *lonStr = [NSString stringWithFormat:@"%@", [self.source valueForKeyPath:@"geometry.location"][0]];
     NSNumber *lon = [f numberFromString:lonStr];
     
-    NSString *latStr = [NSString stringWithFormat:@"%@", [self.location valueForKeyPath:@"geometry.location"][1]];
+    NSString *latStr = [NSString stringWithFormat:@"%@", [self.source valueForKeyPath:@"geometry.location"][1]];
     NSNumber *lat = [f numberFromString:latStr];
     
     NSString *imageStem = [item valueForKeyPath:@"image"];
@@ -200,6 +243,7 @@ enum AlertButtonIndex : NSInteger
     
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Building Area Detail" forIndexPath:indexPath];
+    cell.textLabel.text = @"";
     NSUInteger offset = [self offsetForSection:indexPath.section];
     NSDictionary *item = [self.buildingItems objectAtIndex:indexPath.row + offset];
     if (item) {
@@ -257,7 +301,7 @@ enum AlertButtonIndex : NSInteger
           
             NSDictionary *buildingInfo = @{ @"buildingId" : self.buildingId, @"buildingName": self.headerLabel.text};
             afvc.buildingInfo = buildingInfo;
-            afvc.source = self.location;
+            afvc.source = self.source;
         }
     }
 }

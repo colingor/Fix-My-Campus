@@ -19,4 +19,7 @@
                          withQueryJson:(NSDictionary *)queryJson
                         withCompletion:(void (^)(NSDictionary *locations))completion;
 
+- (void)searchForBuildingWithId: (NSString *)buildingId
+                 withCompletion:(void (^)(NSMutableDictionary *source))completion;
+
 @end
