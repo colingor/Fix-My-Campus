@@ -589,7 +589,7 @@
                             <constraint firstItem="Cox-U9-p8T" firstAttribute="leading" secondItem="lSY-7O-ShW" secondAttribute="leading" id="w94-pP-3bn"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="nIw-n0-MTv">
+                    <navigationItem key="navigationItem" title="Location Details" id="nIw-n0-MTv">
                         <barButtonItem key="backBarButtonItem" title="Location" id="yPl-Ew-W68"/>
                     </navigationItem>
                     <connections>
@@ -1553,7 +1553,7 @@ as they are resolved</string>
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="jt9-V5-ld2">
+                    <navigationItem key="navigationItem" title="Add Facility" id="jt9-V5-ld2">
                         <barButtonItem key="rightBarButtonItem" title="Send" id="eVh-d2-mkT">
                             <connections>
                                 <action selector="send:" destination="04B-ax-VZX" id="VNk-jL-AtF"/>
