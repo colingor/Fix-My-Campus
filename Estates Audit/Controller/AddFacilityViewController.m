@@ -14,8 +14,10 @@
 
 
 @property (weak, nonatomic) IBOutlet UITextView *facilityDescription;
-@property (weak, nonatomic) IBOutlet UITextField *facilityType;
-@property (weak, nonatomic) IBOutlet UITextField *facilityArea;
+
+@property (weak, nonatomic) IBOutlet UITextView *facilityArea;
+
+@property (weak, nonatomic) IBOutlet UITextView *facilityType;
 
 @property (weak, nonatomic) IBOutlet UILabel *facilityLabel;
 
@@ -110,10 +112,10 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
    
-    if ([[segue identifier] isEqualToString:UNWIND_SEGUE_IDENTIFIER])
-    {
-        LocationDetailsViewController *locationDetailsvc = (LocationDetailsViewController *)segue.destinationViewController;
-    }
+//    if ([[segue identifier] isEqualToString:UNWIND_SEGUE_IDENTIFIER])
+//    {
+//        LocationDetailsViewController *locationDetailsvc = (LocationDetailsViewController *)segue.destinationViewController;
+//    }
     
 }
 
