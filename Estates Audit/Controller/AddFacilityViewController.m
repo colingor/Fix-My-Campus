@@ -10,8 +10,7 @@
 #import "LocationDetailsViewController.h"
 #import "ElasticSeachAPI.h"
 
-@interface AddFacilityViewController ()
-
+@interface AddFacilityViewController () 
 
 @property (weak, nonatomic) IBOutlet UITextView *facilityDescription;
 
@@ -19,24 +18,65 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *facilityType;
 
+@property (weak, nonatomic) IBOutlet UIPickerView *facilityTypePickerView;
+
 @property (weak, nonatomic) IBOutlet UILabel *facilityLabel;
+
+@property (strong, nonatomic) NSArray *areas;
 
 @end
 
-@implementation AddFacilityViewController
+@implementation AddFacilityViewController 
 
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    
+    _areas = @[@"General", @"Basement",
+                      @"First Floor", @"Second Floor", @"Third Floor"];
+    self.facilityTypePickerView.delegate = self;
+    self.facilityTypePickerView.dataSource = self;
+
     NSString *buildingName = self.buildingInfo[@"buildingName"];
     
     self.facilityLabel.text = [NSString stringWithFormat:@"%@ %@", self.facilityLabel.text, buildingName];
+    
+    
+//    self.facilityTypePickerView.transform = CGAffineTransformMakeScale(1, 0.75);
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+
+#pragma mark PickerView DataSource
+
+- (NSInteger)numberOfComponentsInPickerView:
+(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView
+numberOfRowsInComponent:(NSInteger)component
+{
+    return _areas.count;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView
+             titleForRow:(NSInteger)row
+            forComponent:(NSInteger)component
+{
+    return _areas[row];
+}
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
+      inComponent:(NSInteger)component
+{
+    self.facilityArea.text = _areas[row];
 }
 
 
