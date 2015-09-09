@@ -1,14 +1,17 @@
 PODS:
+  - ActionSheetPicker-3.0 (1.7.2)
   - GeoJSONSerialization (0.0.4)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
 
 DEPENDENCIES:
+  - ActionSheetPicker-3.0
   - GeoJSONSerialization (~> 0.0.4)
   - SDWebImage (~> 3.7.3)
 
 SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: c5bdca19fd8b3d798f0c79892cbab6f11a8523ae
   GeoJSONSerialization: 55a3d24fe9af26508e3af76873114b39b13ba479
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
 

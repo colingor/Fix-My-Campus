@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddFacilityViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
+@interface AddFacilityViewController : UIViewController
 
 @property (strong, nonatomic) NSDictionary *buildingInfo;
 @property (strong, nonatomic) NSMutableDictionary *source;
