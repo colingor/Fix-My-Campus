@@ -107,6 +107,79 @@ NSString *const BASE_ELASTICSEARCH_URL = @"http://dlib-brown.edina.ac.uk/buildin
 }
 
 
+- (void)getAllTypesWithCompletion:(void (^)(NSMutableArray *types))completion{
+    
+    // List of distinct types using the type raw field (so results are not tokenised)
+    [self getAggregationsForCustomField:@"properties.information.items.type.raw" withCompletion:^(NSMutableArray *types) {
+        completion(types);
+    }];
+
+}
+
+- (void)getAllAreasWithCompletion:(void (^)(NSMutableArray *areas))completion{
+    
+    // List of distinct areas using the area raw field (so results are not tokenised)
+    [self getAggregationsForCustomField:@"properties.information.area.raw" withCompletion:^(NSMutableArray *areas) {
+        completion(areas);
+    }];
+    
+}
+
+- (void)getAggregationsForCustomField: (NSString *)customField
+                         withCompletion:(void (^)(NSMutableArray *aggregations))completion{
+    
+    if([self checkNetworkAvailablityAndDisplayNotification]){
+        
+        NSURL *apiUrl = [NSURL URLWithString:[[NSString stringWithFormat:@"%@_search", BASE_ELASTICSEARCH_URL]
+                                              stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        
+        // We set size = 0 to avoid returning any acutal hits - we're just interested in the aggregations
+        NSDictionary *queryJson = @{
+                                    @"aggs":@{
+                                            @"aggregation":@{
+                                                    @"terms":@{@"field" : customField, @"order":@{@"_term":@"asc"}},
+                                                   
+                                                    }
+                                            },
+                                    @"size":@"0"
+                                    };
+        
+        NSMutableURLRequest *request = [self setupRequest:apiUrl queryJson:queryJson];
+        
+        NSURLSessionDataTask *task = [self.elasticSearchSession dataTaskWithRequest:request
+                                                                  completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                                      // this handler is not executing on the main queue, so we can't do UI directly here
+                                                                      if (!error) {
+                                                                          
+                                                                          // Note results are mutable here in case we add a new facility
+                                                                          NSDictionary *resultDict = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                                                           options:0
+                                                                                                                                             error:NULL];
+                                                                          
+                                                                          // the buckets element contains the information we are interested in
+                                                                          NSArray *aggregations = [resultDict valueForKeyPath:@"aggregations.aggregation.buckets"];
+                                                                          
+                                                                          NSMutableArray *results = [NSMutableArray array];
+                                                                          for (NSDictionary *item in aggregations) {
+                                                                               [results addObject:item[@"key"]];
+                                                                          }
+                                                                          // Turn off network activity
+                                                                          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                                                                          
+                                                                          // Process in completion callback
+                                                                          completion(results);
+                                                                          
+                                                                      }
+                                                                  }];
+        // Turn on network activity
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        [task resume];
+    }
+    
+}
+
+
 - (void)searchForBuildingsWithQueryJson: (NSDictionary *)queryJson
                          withCompletion:(void (^)(NSMutableDictionary *locations))completion
 {

@@ -12,6 +12,10 @@
 
 + (ElasticSeachAPI *)sharedInstance;
 
+- (void)getAllTypesWithCompletion:(void (^)(NSMutableArray *aggregations))completion;
+
+- (void)getAllAreasWithCompletion:(void (^)(NSMutableArray *aggregations))completion;
+
 - (void)searchForBuildingsWithQueryJson: (NSDictionary *)queryJson
                          withCompletion:(void (^)(NSMutableDictionary *locations))completion;
 

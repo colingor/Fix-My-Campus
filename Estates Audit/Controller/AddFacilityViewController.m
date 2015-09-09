@@ -35,31 +35,37 @@
 NSString *const ADD_NEW_AREA = @"Add new area…";
 NSString *const ADD_NEW_TYPE = @"Add new type…";
 
+
+-(void)awakeFromNib{
+    
+    ElasticSeachAPI *esApi = [ElasticSeachAPI sharedInstance];
+    
+    _areas = [NSMutableArray array];
+    _types = [NSMutableArray array];
+    
+    // Populate the areas and types pickers by querying ElasticSearch for
+    // existing values.  Note that we only add 'Add new…' elements if iOS 8
+    // or above as the current implementation of adding new fields is not supported in iOS 7
+    [esApi getAllAreasWithCompletion:^(NSMutableArray *areas) {
+        
+        _areas = areas;
+        if(IS_OS_8_OR_LATER) {
+            [_areas addObject:ADD_NEW_AREA];
+        }
+    }];
+    
+    [esApi getAllTypesWithCompletion:^(NSMutableArray *types) {
+        
+        _types = types;
+        if(IS_OS_8_OR_LATER){
+            [_types addObject:ADD_NEW_TYPE];
+        }
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    _areas = [NSMutableArray array];
-    [_areas addObject:@"General"];
-    [_areas addObject:@"Basement"];
-    [_areas addObject:@"First Floor"];
-    [_areas addObject:@"Second Floor"];
-    [_areas addObject:@"Third Floor"];
-    
-    if(IS_OS_8_OR_LATER) {
-        [_areas addObject:ADD_NEW_AREA];
-    }
-    
-    _types = [NSMutableArray array];
-    [_types addObject:@"Car Park"];
-    [_types addObject:@"Entrance"];
-    [_types addObject:@"Stairs"];
-    [_types addObject:@"Offices"];
-    [_types addObject:@"Reception"];
-    
-    if(IS_OS_8_OR_LATER){
-       [_types addObject:ADD_NEW_TYPE];
-    }
-    
     NSString *buildingName = self.buildingInfo[@"buildingName"];
 
     self.facilityLabel.text = [NSString stringWithFormat:@"%@ %@", self.facilityLabel.text, buildingName];
