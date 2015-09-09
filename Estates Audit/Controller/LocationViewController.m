@@ -253,111 +253,85 @@ static BOOL mapChangedFromUserInteraction = NO;
     }
 }
 
--(void)performSearchWithDictionary: (NSDictionary *) queryJson
-{
-
-    [[ElasticSeachAPI sharedInstance] searchForBuildingsWithQueryJson:queryJson
-                                                       withCompletion:^(NSMutableDictionary *locations) {
-                                   
-                                   NSArray *hits = [[locations valueForKey:@"hits"] valueForKey:@"hits"];
-                                   
-                                   // localAnnotations used to populate building list table
-                                   [self.locationAnnotations removeAllObjects];
-                                   
-                                   for (id hit in hits){
-                                       
-                                       NSMutableDictionary * source = [hit valueForKey:@"_source"];
-                                       NSString *buildingId = hit[@"_id"];
-                                       
-                                       NSArray *loc = source[@"geometry"][@"location"];
-                                       NSString * lat = loc[1];
-                                       NSString * lon = loc[0];
-                                       
-                                       NSDictionary *properties = source[@"properties"];
-                                       NSString * name = properties[@"title"];
-                                       NSString * address = properties[@"subtitle"];
-                                       
-                                       // Check if annotation already exists on map
-                                       NSArray *existingAnnotations = self.mapView.annotations;
-                                       
-                                       BOOL found = NO;
-                                       
-                                       for(CustomMKAnnotation *existing in existingAnnotations){
-                                           if ([existing isKindOfClass:[CustomMKAnnotation class]]){
-                                               
-                                               if([existing.buildingId isEqualToString:buildingId]){
-                                                   found = YES;
-                                                   break;
-                                               }
-                                           }
-                                       }
-                                       
-                                       CLLocationCoordinate2D coord;
-                                       coord.latitude = [lat floatValue];
-                                       coord.longitude = [lon floatValue];
-                                       
-                                       CustomMKAnnotation *point = [[CustomMKAnnotation alloc] initWithLocation:coord];
-                                       
-                                       point.buildingId = buildingId;
-                                       point.title = name;
-                                       point.subtitle = address;
-                                       point.source = source;
-                                       
-                                       // Add to the building list
-                                       [self.locationAnnotations addObject:point];
-//                                       if(point.hasNestedBuildingInformation){
-                                           if(!found){
-                                               [self.mapView addAnnotation:point];
-                                           }
-//                                   }
-                                   }
-                                   
-                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                       [self.tableView reloadData];
-                                   });
-                                   
-                               }];
+-(void)processSearchResults:(NSMutableDictionary *) locations{
+    
+    NSArray *hits = [[locations valueForKey:@"hits"] valueForKey:@"hits"];
+    
+    // localAnnotations used to populate building list table
+    [self.locationAnnotations removeAllObjects];
+    
+    for (id hit in hits){
+        
+        NSMutableDictionary * source = [hit valueForKey:@"_source"];
+        NSString *buildingId = hit[@"_id"];
+        
+        NSArray *loc = source[@"geometry"][@"location"];
+        NSString * lat = loc[1];
+        NSString * lon = loc[0];
+        
+        NSDictionary *properties = source[@"properties"];
+        NSString * name = properties[@"title"];
+        NSString * address = properties[@"subtitle"];
+        
+        // Check if annotation already exists on map
+        NSArray *existingAnnotations = self.mapView.annotations;
+        
+        BOOL found = NO;
+        
+        for(CustomMKAnnotation *existing in existingAnnotations){
+            if ([existing isKindOfClass:[CustomMKAnnotation class]]){
+                
+                if([existing.buildingId isEqualToString:buildingId]){
+                    found = YES;
+                    break;
+                }
+            }
+        }
+        
+        CLLocationCoordinate2D coord;
+        coord.latitude = [lat floatValue];
+        coord.longitude = [lon floatValue];
+        
+        CustomMKAnnotation *point = [[CustomMKAnnotation alloc] initWithLocation:coord];
+        
+        point.buildingId = buildingId;
+        point.title = name;
+        point.subtitle = address;
+        point.source = source;
+        
+        // Add to the building list
+        [self.locationAnnotations addObject:point];
+//        if(point.hasNestedBuildingInformation){
+            if(!found){
+                [self.mapView addAnnotation:point];
+            }
+//        }
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
 }
-
 
 -(void)displayBuildingsInBoundingBox{
     
     MKMapRect mRect = self.mapView.visibleMapRect;
-    NSMutableDictionary *bb = [self getBoundingBox:mRect];
+    NSDictionary *bb = [self getBoundingBox:mRect];
     
-    NSDictionary *queryDict = @{ @"query" : @{ @"match_all": @{}} };
-    NSDictionary *filterDict = @{@"filter" : @{ @"geo_bounding_box": @{@"location":bb }} };
-    
-    NSMutableDictionary *queryJson =  [[NSMutableDictionary alloc] init];
-    
-    [queryJson addEntriesFromDictionary:queryDict];
-    [queryJson addEntriesFromDictionary:filterDict];
-    
-    [self performSearchWithDictionary: queryJson];
-    
+    [[ElasticSeachAPI sharedInstance] searchForBuildingsWithinBoundingBox:bb withCompletion:^(NSMutableDictionary *locations) {
+        [self processSearchResults:locations];
+    }];
 }
 
+
 -(void)listBuildingsNearCurrentLocation{
-    
-    NSDictionary *queryDict = @{ @"query" : @{ @"match_all": @{}}};
-    
+
     NSDictionary *locationDict =  @{ @"lat": [NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude],
                                      @"lon":[NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude]};
     
-    NSMutableDictionary *locationInfo =  [[NSMutableDictionary alloc] init];
-    
-    [locationInfo addEntriesFromDictionary:@{@"distance":@"0.5km"}];
-    [locationInfo addEntriesFromDictionary:@{@"location":locationDict}];
-    
-    NSDictionary *filterDict = @{@"filter" : @{ @"geo_distance":  locationInfo} };
-    
-    NSMutableDictionary *queryJson =  [[NSMutableDictionary alloc] init];
-    
-    [queryJson addEntriesFromDictionary:queryDict];
-    [queryJson addEntriesFromDictionary:filterDict];
-    
-    [self performSearchWithDictionary:queryJson];
-    
+    [[ElasticSeachAPI sharedInstance] searchForBuildingsNearCoordinate:locationDict withCompletion:^(NSMutableDictionary *locations) {
+        [self processSearchResults:locations];
+    }];
 }
 
 
@@ -527,20 +501,20 @@ static BOOL mapChangedFromUserInteraction = NO;
 }
 
 
--(NSMutableDictionary *)getBoundingBox:(MKMapRect)mRect{
+-(NSDictionary *)getBoundingBox:(MKMapRect)mRect{
     CLLocationCoordinate2D topLeft = [self getNWCoordinate:mRect];
     CLLocationCoordinate2D bottomRight = [self getSECoordinate:mRect];
     
-    
-    NSDictionary *topLeftDict = @{ @"top_left" : @{ @"lat": [NSNumber numberWithDouble:topLeft.latitude] , @"lon":[NSNumber numberWithDouble:topLeft.longitude]}};
-    NSDictionary *bottomRightDict = @{ @"bottom_right" : @{ @"lat": [NSNumber numberWithDouble:bottomRight.latitude], @"lon":[NSNumber numberWithDouble:bottomRight.longitude]}};
-    
-    
-    NSMutableDictionary *bb =  [[NSMutableDictionary alloc] init];
-    
-    [bb addEntriesFromDictionary:topLeftDict];
-    [bb addEntriesFromDictionary:bottomRightDict];
-    
+    NSDictionary *bb = @{ @"top_left":@{
+                                  @"lat":[NSNumber numberWithDouble:topLeft.latitude],
+                                  @"lon":[NSNumber numberWithDouble:topLeft.longitude]
+                                  },
+                          @"bottom_right":@{
+                                  @"lat": [NSNumber numberWithDouble:bottomRight.latitude],
+                                  @"lon":[NSNumber numberWithDouble:bottomRight.longitude]
+                                  }
+                          };
+
     return bb;
 }
 

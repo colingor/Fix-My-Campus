@@ -16,14 +16,17 @@
 
 - (void)getAllAreasWithCompletion:(void (^)(NSMutableArray *aggregations))completion;
 
-- (void)searchForBuildingsWithQueryJson: (NSDictionary *)queryJson
-                         withCompletion:(void (^)(NSMutableDictionary *locations))completion;
-
 - (void)postBuildingFacilityToBuilding:(NSString *) buildingId
                          withQueryJson:(NSDictionary *)queryJson
                         withCompletion:(void (^)(NSDictionary *locations))completion;
 
 - (void)searchForBuildingWithId: (NSString *)buildingId
                  withCompletion:(void (^)(NSMutableDictionary *source))completion;
+
+- (void)searchForBuildingsWithinBoundingBox: (NSDictionary *)bb
+                             withCompletion:(void (^)(NSMutableDictionary *locations))completion;
+
+- (void)searchForBuildingsNearCoordinate: (NSDictionary *)locationDict
+                          withCompletion:(void (^)(NSMutableDictionary *locations))completion;
 
 @end

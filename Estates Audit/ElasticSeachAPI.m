@@ -179,19 +179,62 @@ NSString *const BASE_ELASTICSEARCH_URL = @"http://dlib-brown.edina.ac.uk/buildin
     
 }
 
+- (void)searchForBuildingsNearCoordinate: (NSDictionary *)locationDict
+                          withCompletion:(void (^)(NSMutableDictionary *locations))completion{
+    
+    [self searchForBuildingsWithDict:locationDict withCompletion:^(NSMutableDictionary *locations) {
+        completion(locations);
+    }];
+}
 
-- (void)searchForBuildingsWithQueryJson: (NSDictionary *)queryJson
+
+- (void)searchForBuildingsWithinBoundingBox: (NSDictionary *)bb
                          withCompletion:(void (^)(NSMutableDictionary *locations))completion
 {
-    if([self checkNetworkAvailablityAndDisplayNotification]){
+    [self searchForBuildingsWithDict:bb withCompletion:^(NSMutableDictionary *locations) {
+        completion(locations);
+    }];
+}
 
+
+- (void)searchForBuildingsWithDict: (NSDictionary *)dict
+                             withCompletion:(void (^)(NSMutableDictionary *locations))completion{
+    if([self checkNetworkAvailablityAndDisplayNotification]){
+        
         // Construct search URL
         NSURL *apiUrl = [NSURL URLWithString:[[BASE_ELASTICSEARCH_URL stringByAppendingString:@"_search?size=500"]
                                               stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
+        NSMutableDictionary *queryJson =  [[NSMutableDictionary alloc] init];
+        NSDictionary *filterDict = [[NSDictionary alloc] init];
+
+        
+        
+        NSDictionary *queryDict = @{ @"query" : @{ @"match_all": @{}} };
+        
+        // Construct appropriate search json query
+        if([dict objectForKey:@"top_left"]){
+            // Bounding box search
+            
+            filterDict = @{@"filter" : @{ @"geo_bounding_box": @{@"location":dict }} };
+            
+        }else{
+            // Distance search
+            
+            filterDict = @{@"filter" : @{
+                                   @"geo_distance": @{
+                                           @"distance":@"0.5km",
+                                           @"location":dict
+                                           }
+                                   }
+                           };
+        }
+        
+        [queryJson addEntriesFromDictionary:queryDict];
+        [queryJson addEntriesFromDictionary:filterDict];
+
+        
         NSMutableURLRequest *request = [self setupRequest:apiUrl queryJson:queryJson];
-        
-        
         
         NSURLSessionDataTask *task = [self.elasticSearchSession dataTaskWithRequest:request
                                                                   completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -207,7 +250,7 @@ NSString *const BASE_ELASTICSEARCH_URL = @"http://dlib-brown.edina.ac.uk/buildin
                                                                           
                                                                           // Process in completion callback
                                                                           completion(locations);
-                                                              
+                                                                          
                                                                       }
                                                                   }];
         // Turn on network activity
@@ -215,7 +258,6 @@ NSString *const BASE_ELASTICSEARCH_URL = @"http://dlib-brown.edina.ac.uk/buildin
         [task resume];
     }
 }
-
 
 - (void)searchForBuildingWithId: (NSString *)buildingId
                  withCompletion:(void (^)(NSMutableDictionary *source))completion
