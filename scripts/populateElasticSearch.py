@@ -104,10 +104,14 @@ class PopulateElasticSearch:
                                  "information": {
                                      "properties": {
                                          "area": {
-                                             "type": "string"
+                                             "type": "string",
+                                             "fields": {
+                                                 "raw":   { "type": "string", "index": "not_analyzed" }
+                                                 }
                                              },
                                          "items": {
                                              "type": "nested",
+                                             "include_in_parent": "true",
                                              "properties": {
                                                  "description": {
                                                      "type": "string"
@@ -119,7 +123,10 @@ class PopulateElasticSearch:
                                                      "type": "string"
                                                      },
                                                  "type": {
-                                                     "type": "string"
+                                                     "type": "string",
+                                                     "fields": {
+                                                         "raw":   { "type": "string", "index": "not_analyzed" }
+                                                         }
                                                      }
                                                  }
                                              }
