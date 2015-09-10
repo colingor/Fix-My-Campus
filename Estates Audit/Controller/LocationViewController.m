@@ -40,7 +40,9 @@
 
 @implementation LocationViewController
 
-
+NSString *const LOCATION_PIN_TITLE = @"Report Location";
+#define LOCATION_DETAILS_SEGUE_IDENTIFIER @"Location Details"
+#define TAKE_PICTURE_SEGUE_IDENTIFIER @"Take Picture"
 
 - (NSMutableArray *)locationAnnotations
 {
@@ -136,55 +138,6 @@
     
     // Use this to determine whether user overrides location from locationManager by movin pin
     _userSpecfiedLocation = NO;
-    
-    // load estates buildings information from geojson file and draw on map view
-   /* NSURL *URL = [[NSBundle mainBundle] URLForResource:@"uoe-estates-buildings" withExtension:@"json"];
-    NSData *data = [NSData dataWithContentsOfURL:URL];
-    NSDictionary *geoJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-    self.locations = [geoJSON valueForKeyPath:@"features"];
-    
-    NSArray *shapes = [GeoJSONSerialization shapesFromGeoJSONFeatureCollection:geoJSON error:nil];
-    
-    for (MKShape *shape in shapes) {
-        if ([shape isKindOfClass:[MKPointAnnotation class]]) {
-            [self.mapView addAnnotation:shape];
-        } else if ([shape conformsToProtocol:@protocol(MKOverlay)]) {
-            [self.mapView addOverlay:(id <MKOverlay>)shape];
-        }
-    }*/
-    
-    
-    //Load buildings from estates json
-   /* NSData *estatesData = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"estates" withExtension:@"json"]];
-    NSDictionary *estatesGeoJSON = [NSJSONSerialization JSONObjectWithData:estatesData options:0 error:nil];
-    NSArray *locs = [estatesGeoJSON valueForKeyPath:@"locations"];
-    
-    NSMutableArray *locationAnnotations = [[NSMutableArray alloc] init];
-    
-    for(id location in locs){
-
-        NSString * name = [location valueForKey:@"name"];
-        NSString * lat = [location valueForKey:@"latitude"];
-        NSString * lon = [location valueForKey:@"longitude"];
-        NSString * address = [location valueForKey:@"address"];
-        
-        //add the annotation
-        CustomMKPointAnnotation *point = [[CustomMKPointAnnotation alloc] init];
-       
-        CLLocationCoordinate2D coord;
-        coord.latitude = [lat floatValue];
-        coord.longitude = [lon floatValue];
-        
-        point.coordinate = coord;
-        point.title = name;
-        point.subtitle = address;
-        point.hierarchical = YES;
-        
-        [locationAnnotations addObject:point];
-        [self.locationAnnotations addObject:point];
-    }
-    
-    [self.mapView addAnnotations:locationAnnotations];*/
     
     // Set up listener to move location pin on long press
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
@@ -298,9 +251,6 @@ static BOOL mapChangedFromUserInteraction = NO;
         point.buildingId = buildingId;
         point.title = name;
         point.subtitle = address;
-  
-        NSString *const IMAGE_SUFFIX = @".JPG";
-        NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/images/";
         
         NSString *imageStem = [source valueForKeyPath:@"properties.image"];
         
@@ -530,7 +480,7 @@ static BOOL mapChangedFromUserInteraction = NO;
     // Ensure we're not zoomed out to the extent of all annotations
 //   [self updateVisibleRegion];
     
-    NSString *const LOCATION_PIN_TITLE = @"Report Location";
+
     
     CLLocationCoordinate2D coord = [userLocation coordinate];
     
@@ -603,7 +553,7 @@ static BOOL mapChangedFromUserInteraction = NO;
             [self.reportDict setValue:[NSNumber numberWithDouble:annotation.coordinate.latitude] forKey:@"lat"];
             [self.reportDict setValue:[NSNumber numberWithDouble:annotation.coordinate.longitude] forKey:@"lon"];
         }
-        else if (![annotation.title isEqualToString:@"Report Location"]){
+        else if (![annotation.title isEqualToString:LOCATION_PIN_TITLE]){
             
             view.pinColor = MKPinAnnotationColorGreen;
             // Move location pin and update reportDict
@@ -622,10 +572,10 @@ static BOOL mapChangedFromUserInteraction = NO;
     
     if (![annotation isKindOfClass:[MKUserLocation class]]){
         // Reset pin colour
-        if ([annotation isKindOfClass:[CustomMKAnnotation class]]  && ![annotation.title isEqualToString:@"Report Location"]){
+        if ([annotation isKindOfClass:[CustomMKAnnotation class]]  && ![annotation.title isEqualToString:LOCATION_PIN_TITLE]){
             view.pinColor = MKPinAnnotationColorRed;
         }
-        else if ([annotation.title isEqualToString:@"Report Location"]){
+        else if ([annotation.title isEqualToString:LOCATION_PIN_TITLE]){
             // If the report location annotation has been deselected, we don't want to reset to the default location
             self.userSpecfiedLocation = YES;
         }
@@ -645,7 +595,7 @@ static BOOL mapChangedFromUserInteraction = NO;
     MKPinAnnotationView *pav = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
     MKPinAnnotationView *pavGreen = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:greenReuseId];
 
-    if ([annotation isKindOfClass:[CustomMKAnnotation class]] && ![annotation.title isEqualToString:@"Report Location" ]){
+    if ([annotation isKindOfClass:[CustomMKAnnotation class]] && ![annotation.title isEqualToString:LOCATION_PIN_TITLE ]){
 
         CustomMKAnnotation *customMKAnnotation = (CustomMKAnnotation *)annotation;
       
@@ -654,10 +604,6 @@ static BOOL mapChangedFromUserInteraction = NO;
                 
                 pav = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
                 pav.animatesDrop = NO;
-                
-
-                NSString *const DEFAULT_CELL_IMAGE = @"MapPinDefaultLeftCallout";
-
                 
                 // Add image thumbnail if present
                 NSString *imageUrl = [customMKAnnotation imageUrl];
@@ -686,11 +632,11 @@ static BOOL mapChangedFromUserInteraction = NO;
             }
     }
     
-    if([annotation.title isEqualToString:@"Report Location"]){
+    if([annotation.title isEqualToString:LOCATION_PIN_TITLE]){
         
         if(pavGreen == nil){
             pavGreen = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:greenReuseId];
-            UIImageView *leftIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout" ]];
+            UIImageView *leftIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:DEFAULT_CELL_IMAGE ]];
             leftIconView.frame = CGRectMake(0,0,53,53);
             pavGreen.leftCalloutAccessoryView = leftIconView;
             pavGreen.draggable = YES;
@@ -707,27 +653,13 @@ static BOOL mapChangedFromUserInteraction = NO;
         }
     }
     
-//    if (pav == nil){
-//        
-//        pav = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
-//        pav.animatesDrop = NO;
-//        UIImageView *leftIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout" ]];
-//        leftIconView.frame = CGRectMake(0,0,53,53);
-//        pav.leftCalloutAccessoryView = leftIconView;
-//        pav.canShowCallout = YES;
-//    }
-//    else
-//    {
-//        pav.annotation = annotation;
-//    }
-    
     return pav;
 }
 
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    [self performSegueWithIdentifier:@"Location Details" sender:view];
+    [self performSegueWithIdentifier:LOCATION_DETAILS_SEGUE_IDENTIFIER sender:view];
 }
 
 
@@ -774,8 +706,9 @@ static BOOL mapChangedFromUserInteraction = NO;
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
+
     
-    if ([[segue identifier] isEqualToString:@"Take Picture"]){
+    if ([[segue identifier] isEqualToString:TAKE_PICTURE_SEGUE_IDENTIFIER]){
         if ([segue.destinationViewController isKindOfClass:[PictureViewController class]]) {
             
             PictureViewController *picvc = (PictureViewController *)segue.destinationViewController;
@@ -802,7 +735,7 @@ static BOOL mapChangedFromUserInteraction = NO;
 
 
         }
-    } else if ([[segue identifier] isEqualToString:@"Location Details"]){
+    } else if ([[segue identifier] isEqualToString:LOCATION_DETAILS_SEGUE_IDENTIFIER]){
         if ([segue.destinationViewController isKindOfClass:[LocationDetailsViewController class]]) {
             
             LocationDetailsViewController *ldvc = (LocationDetailsViewController *)segue.destinationViewController;
