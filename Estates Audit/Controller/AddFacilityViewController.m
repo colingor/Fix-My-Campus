@@ -75,6 +75,17 @@ NSString *const ADD_NEW_TYPE = @"Add new type…";
     
     UITapGestureRecognizer *typeTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(typeTap)];
     [self.facilityType addGestureRecognizer:typeTapGesture];
+    
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    [tap setCancelsTouchesInView:NO];
+    [self.view addGestureRecognizer:tap];
+}
+
+-(void)dismissKeyboard {
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -202,16 +213,16 @@ NSString *const ADD_NEW_TYPE = @"Add new type…";
     NSString *facilityArea = self.facilityArea.text;
     NSString *facilityType = self.facilityType.text;
     
-    if (![facilityDescription length]) {
-        [self alert:@"Please enter a description"];
-        return NO;
-    }
     if (![facilityArea length] || [facilityArea isEqualToString:@"Select an area…"]) {
         [self alert:@"Please enter an area"];
         return NO;
     }
     if (![facilityType length] || [facilityType isEqualToString:@"Select a type…"]) {
         [self alert:@"Please enter a type"];
+        return NO;
+    }
+    if (![facilityDescription length]) {
+        [self alert:@"Please enter a description"];
         return NO;
     }
 
