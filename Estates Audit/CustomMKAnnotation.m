@@ -12,9 +12,9 @@
 
 @synthesize coordinate = _coordinate;
 @synthesize buildingId = _buildingId;
-@synthesize source = _source;
 @synthesize title = _title;
 @synthesize subtitle = _subtitle;
+@synthesize imageUrl = _imageUrl;
 
 - (id)initWithLocation:(CLLocationCoordinate2D)coord
 {
@@ -39,14 +39,6 @@
     return _coordinate;
 }
 
-- (BOOL)hasNestedBuildingInformation 
-{
-    if([[self.source valueForKeyPath:@"properties.information"] count] > 0){
-        return YES;
-    }
-    return NO;
-}
-
 - (void)setBuildingId:(NSString *)buildingId
 {
     [self willChangeValueForKey:@"buildingId"];
@@ -57,18 +49,6 @@
 - (NSString *)buildingId
 {
     return _buildingId;
-}
-
-- (void)setSource:(NSMutableDictionary *)source
-{
-    [self willChangeValueForKey:@"source"];
-    _source = source;
-    [self didChangeValueForKey:@"source"];
-}
-
-- (NSDictionary *)source
-{
-    return _source;
 }
 
 - (void)setTitle:(NSString *)title
@@ -99,7 +79,19 @@
     }
 }
 
+- (NSString *)imageUrl
+{
+    return _imageUrl;
+}
 
+- (void)setImageUrl:(NSString *)imageUrl
+{
+    if (_imageUrl != imageUrl) {
+        [self willChangeValueForKey:@"imageUrl"];
+        _imageUrl = imageUrl;
+        [self didChangeValueForKey:@"imageUrl"];
+    }
+}
 
 
 

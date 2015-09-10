@@ -16,6 +16,7 @@
 #import "CustomMKAnnotation.h"
 #import "AppDelegate.h"
 #import "ElasticSeachAPI.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
@@ -297,15 +298,25 @@ static BOOL mapChangedFromUserInteraction = NO;
         point.buildingId = buildingId;
         point.title = name;
         point.subtitle = address;
-        point.source = source;
+  
+        NSString *const IMAGE_SUFFIX = @".JPG";
+        NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/images/";
         
+        NSString *imageStem = [source valueForKeyPath:@"properties.image"];
+        
+        if([imageStem length] > 0){
+            NSString *imagePath = [NSString stringWithFormat:@"%@%@%@", BASE_IMAGE_URL, imageStem, IMAGE_SUFFIX];
+            
+            point.imageUrl = imagePath;
+        }
+  
         // Add to the building list
         [self.locationAnnotations addObject:point];
-//        if(point.hasNestedBuildingInformation){
-            if(!found){
-                [self.mapView addAnnotation:point];
-            }
-//        }
+        
+        if(!found){
+            [self.mapView addAnnotation:point];
+        }
+
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -357,10 +368,9 @@ static BOOL mapChangedFromUserInteraction = NO;
    
     @try {
         CustomMKAnnotation *point = [self.locationAnnotations objectAtIndex:indexPath.row];
-        if(point.hasNestedBuildingInformation){
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.accessibilityHint = @"Select to see further information about this building";
-        }
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessibilityHint = @"Select to see further information about this building";
+        
         cell.textLabel.text = point.title;
         cell.detailTextLabel.text  = point.subtitle;
     }
@@ -404,10 +414,7 @@ static BOOL mapChangedFromUserInteraction = NO;
                 
                 [self.mapView selectAnnotation:existing animated:YES];
                 
-                if(existing.hasNestedBuildingInformation){
-                    [self performSegueWithIdentifier:@"Location Details" sender:existing];
-                }
-                
+                [self performSegueWithIdentifier:@"Location Details" sender:existing];
                 
                 break;
             }
@@ -616,15 +623,7 @@ static BOOL mapChangedFromUserInteraction = NO;
     if (![annotation isKindOfClass:[MKUserLocation class]]){
         // Reset pin colour
         if ([annotation isKindOfClass:[CustomMKAnnotation class]]  && ![annotation.title isEqualToString:@"Report Location"]){
-            CustomMKAnnotation *customMKAnnotation = (CustomMKAnnotation *)annotation;
-            
-            // Purple annotations have nested properties
-            if(customMKAnnotation.hasNestedBuildingInformation){
-                view.pinColor = MKPinAnnotationColorPurple;
-            }else{
-                view.pinColor = MKPinAnnotationColorRed;
-            }
-      
+            view.pinColor = MKPinAnnotationColorRed;
         }
         else if ([annotation.title isEqualToString:@"Report Location"]){
             // If the report location annotation has been deselected, we don't want to reset to the default location
@@ -641,43 +640,50 @@ static BOOL mapChangedFromUserInteraction = NO;
         return nil;
     
     static NSString *reuseId = @"pin";
-    static NSString *purpleReuseId = @"purplePin";
     static NSString *greenReuseId = @"greenPin";
     
     MKPinAnnotationView *pav = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
-    MKPinAnnotationView *pavPurple = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:purpleReuseId];
     MKPinAnnotationView *pavGreen = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:greenReuseId];
 
     if ([annotation isKindOfClass:[CustomMKAnnotation class]] && ![annotation.title isEqualToString:@"Report Location" ]){
 
         CustomMKAnnotation *customMKAnnotation = (CustomMKAnnotation *)annotation;
       
-        // Check is annotation has nested details - use purple pin for this
-        if(customMKAnnotation.hasNestedBuildingInformation){
-            if (pavPurple == nil){
+
+            if (pav == nil){
                 
-                pavPurple = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:purpleReuseId];
-                pavPurple.animatesDrop = NO;
-                UIImageView *leftIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout" ]];
-                leftIconView.frame = CGRectMake(0,0,53,53);
-                pavPurple.leftCalloutAccessoryView = leftIconView;
+                pav = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
+                pav.animatesDrop = NO;
+                
+
+                NSString *const DEFAULT_CELL_IMAGE = @"MapPinDefaultLeftCallout";
+
+                
+                // Add image thumbnail if present
+                NSString *imageUrl = [customMKAnnotation imageUrl];
+                
+                if(imageUrl){
+                    UIImageView *leftIconView = [[UIImageView alloc] initWithImage:nil];
+                    leftIconView.frame = CGRectMake(0,0,53,53);
+                    pav.leftCalloutAccessoryView = leftIconView;
+                    
+                    [leftIconView sd_setImageWithURL:[NSURL URLWithString:[imageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
+                                    placeholderImage:[UIImage imageNamed:DEFAULT_CELL_IMAGE]];
+                }
                 
                 UIButton *rightIconView = [UIButton buttonWithType:UIButtonTypeInfoDark];
                 rightIconView.tintColor = [UIColor darkTextColor];
-                pavPurple.rightCalloutAccessoryView = rightIconView;
-                pavPurple.pinColor = MKPinAnnotationColorPurple;
-                pavPurple.canShowCallout = YES;
-                return pavPurple;
+                pav.rightCalloutAccessoryView = rightIconView;
+
+                pav.canShowCallout = YES;
+                return pav;
                 
             }
             else
             {
-                pavPurple.annotation = annotation;
-                return pavPurple;
+                pav.annotation = annotation;
+                return pav;
             }
-        }
-        
-       
     }
     
     if([annotation.title isEqualToString:@"Report Location"]){
@@ -701,19 +707,19 @@ static BOOL mapChangedFromUserInteraction = NO;
         }
     }
     
-    if (pav == nil){
-        
-        pav = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
-        pav.animatesDrop = NO;
-        UIImageView *leftIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout" ]];
-        leftIconView.frame = CGRectMake(0,0,53,53);
-        pav.leftCalloutAccessoryView = leftIconView;
-        pav.canShowCallout = YES;
-    }
-    else
-    {
-        pav.annotation = annotation;
-    }
+//    if (pav == nil){
+//        
+//        pav = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
+//        pav.animatesDrop = NO;
+//        UIImageView *leftIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout" ]];
+//        leftIconView.frame = CGRectMake(0,0,53,53);
+//        pav.leftCalloutAccessoryView = leftIconView;
+//        pav.canShowCallout = YES;
+//    }
+//    else
+//    {
+//        pav.annotation = annotation;
+//    }
     
     return pav;
 }
@@ -813,8 +819,6 @@ static BOOL mapChangedFromUserInteraction = NO;
                 
             }
 
-           
-//            ldvc.source = customMKAnnotation.source;
             ldvc.buildingId = customMKAnnotation.buildingId;
 
         }

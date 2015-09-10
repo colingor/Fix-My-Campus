@@ -25,7 +25,6 @@
 
 @implementation LocationDetailsViewController
 
-NSString *const IMAGES_DIR = @"EstatesBuildingsImages";
 NSString *const IMAGE_SUFFIX = @".JPG";
 NSString *const DEFAULT_CELL_IMAGE = @"MapPinDefaultLeftCallout";
 NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/images/";
