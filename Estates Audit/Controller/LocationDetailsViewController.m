@@ -64,9 +64,7 @@ NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/image
                                                    
                                                    self.source = source;
                                                    
-                                                   self.headerLabel.text = [self.source valueForKeyPath:@"properties.title"];
-                                                   self.subheaderLabel.text = [self.source valueForKeyPath:@"properties.subtitle"];
-                                                   
+                                               
                                                    NSString *imageStem = [self.source valueForKeyPath:@"properties.image"];
                                                    NSString *imagePath = [NSString stringWithFormat:@"%@%@%@", BASE_IMAGE_URL, imageStem, IMAGE_SUFFIX];
                              
@@ -87,6 +85,10 @@ NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/image
                                                    }
                      
                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                       
+                                                       self.headerLabel.text = [self.source valueForKeyPath:@"properties.title"];
+                                                       self.subheaderLabel.text = [self.source valueForKeyPath:@"properties.subtitle"];
+                                                       
                                                        [self.tableView reloadData];
                                                        
                                                        if(refreshControl){
