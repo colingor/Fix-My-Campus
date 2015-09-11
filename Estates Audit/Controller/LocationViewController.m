@@ -299,6 +299,12 @@ static BOOL mapChangedFromUserInteraction = NO;
 
 
 #pragma mark - Table view data source
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 70;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.locationAnnotations count];
@@ -323,6 +329,12 @@ static BOOL mapChangedFromUserInteraction = NO;
         
         cell.textLabel.text = point.title;
         cell.detailTextLabel.text  = point.subtitle;
+        
+        
+        NSURL *assetUrl = [NSURL URLWithString:[point.imageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        [cell.imageView sd_setImageWithURL:assetUrl
+                          placeholderImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout"]];
     }
     @catch (NSException *exception) {
         NSLog(@"Problem creating custom point: %@", exception.reason);
