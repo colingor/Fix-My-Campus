@@ -12,6 +12,12 @@
 #define COCOAPODS_VERSION_MINOR_ActionSheetPicker_3_0 7
 #define COCOAPODS_VERSION_PATCH_ActionSheetPicker_3_0 2
 
+// DZNEmptyDataSet
+#define COCOAPODS_POD_AVAILABLE_DZNEmptyDataSet
+#define COCOAPODS_VERSION_MAJOR_DZNEmptyDataSet 1
+#define COCOAPODS_VERSION_MINOR_DZNEmptyDataSet 7
+#define COCOAPODS_VERSION_PATCH_DZNEmptyDataSet 1
+
 // GeoJSONSerialization
 #define COCOAPODS_POD_AVAILABLE_GeoJSONSerialization
 #define COCOAPODS_VERSION_MAJOR_GeoJSONSerialization 0

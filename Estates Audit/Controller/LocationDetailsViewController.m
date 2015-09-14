@@ -11,8 +11,11 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "AddFacilityViewController.h"
 #import "ElasticSeachAPI.h"
+#import "UIScrollView+EmptyDataSet.h"
 
-@interface LocationDetailsViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@interface LocationDetailsViewController () <UITableViewDataSource, UITableViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *buildingAreas;
@@ -31,11 +34,18 @@ NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/image
 
 -(void)viewWillAppear:(BOOL)animated{
   
+    
+    self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
+    
+    // A little trick for removing the cell separators
+    self.tableView.tableFooterView = [UIView new];
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tabBar.delegate = self;
     
-    // Populate table with call the ElasticSearch with buildingId
+    // Populate table with results of ElasticSearch buildingId search
     [self refresh:nil];
     
     [self styleTabBar];
@@ -222,7 +232,25 @@ enum AlertButtonIndex : NSInteger
 }
 
 
+#pragma mark - DZNEmptyDataSet
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"This location currently has no facilities associated with it.  Tap 'Add Facility' below to add a facility yourself.";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor blackColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
 #pragma mark - Table view data source
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [self.buildingAreas count];
 }
