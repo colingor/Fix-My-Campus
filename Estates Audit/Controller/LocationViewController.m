@@ -252,10 +252,10 @@ static BOOL mapChangedFromUserInteraction = NO;
         point.title = name;
         point.subtitle = address;
         
-        NSString *imageStem = [source valueForKeyPath:@"properties.image"];
+        NSString *imageName = [source valueForKeyPath:@"properties.image"];
         
-        if([imageStem length] > 0){
-            NSString *imagePath = [NSString stringWithFormat:@"%@%@/download/%@%@", BASE_IMAGE_URL,  buildingId,  imageStem, IMAGE_SUFFIX];
+        if([imageName length] > 0){
+            NSString *imagePath = [NSString stringWithFormat:@"%@%@/download/%@", BASE_IMAGE_URL,  buildingId,  imageName];
             
             point.imageUrl = imagePath;
         }

@@ -13,7 +13,6 @@
 @property (strong, nonatomic) NSMutableDictionary *source;
 @property (strong, nonatomic) NSString *buildingId;
 
-extern NSString *const IMAGE_SUFFIX;
 extern NSString *const DEFAULT_CELL_IMAGE;
 extern NSString *const BASE_IMAGE_URL;
 

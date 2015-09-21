@@ -28,7 +28,6 @@
 
 @implementation LocationDetailsViewController
 
-NSString *const IMAGE_SUFFIX = @".JPG";
 NSString *const DEFAULT_CELL_IMAGE = @"MapPinDefaultLeftCallout";
 NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/api/images/";
 
@@ -76,12 +75,9 @@ NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/api/images/";
                                                   
                                                    self.buildingId = buildingInfo[@"_id"];
                                                
-                                                   NSString *imageStem = [self.source valueForKeyPath:@"properties.image"];
+                                                   NSString *imageName = [self.source valueForKeyPath:@"properties.image"];
                                                    
-                                                   
-                                                   //http://dlib-brown.edina.ac.uk/api/images/1/download/322_Basement%20Plan.JPG
-                                                   
-                                                   NSString *imagePath = [NSString stringWithFormat:@"%@%@/download/%@%@", BASE_IMAGE_URL,  self.buildingId,  imageStem, IMAGE_SUFFIX];
+                                                   NSString *imagePath = [NSString stringWithFormat:@"%@%@/download/%@", BASE_IMAGE_URL,  self.buildingId,  imageName];
                              
                                                    [self.imageView sd_setImageWithURL:[NSURL URLWithString:[imagePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
                                                                      placeholderImage:[UIImage imageNamed:DEFAULT_CELL_IMAGE]];
@@ -221,16 +217,15 @@ enum AlertButtonIndex : NSInteger
     NSString *latStr = [NSString stringWithFormat:@"%@", [self.source valueForKeyPath:@"geometry.location"][1]];
     NSNumber *lat = [f numberFromString:latStr];
     
-    NSString *imageStem = [item valueForKeyPath:@"image"];
+    NSString *imageName = [item valueForKeyPath:@"image"];
     
-    
-    NSString *imagePath = [NSString stringWithFormat:@"%@%@/download/%@%@", BASE_IMAGE_URL,  self.buildingId,  imageStem, IMAGE_SUFFIX];
+    NSString *imagePath = [NSString stringWithFormat:@"%@%@/download/%@", BASE_IMAGE_URL,  self.buildingId,  imageName];
 
     [reportDictionary setValue:loc_desc forKey:@"loc_desc"];
     [reportDictionary setValue:lon forKey:@"lon"];
     [reportDictionary setValue:lat forKey:@"lat"];
     
-    if([imageStem length] > 0){
+    if([imageName length] > 0){
         [reportDictionary setValue:imagePath forKey:@"photo_url"];
     }
     return reportDictionary;
@@ -284,9 +279,9 @@ enum AlertButtonIndex : NSInteger
         cell.imageView.image = nil;
         cell.accessoryType = UITableViewCellAccessoryNone;
         [cell setTintColor:[UIColor darkTextColor]];
-        NSString *imageStem = [item valueForKeyPath:@"image"];
+        NSString *imageName = [item valueForKeyPath:@"image"];
         
-        NSString *imagePath = [NSString stringWithFormat:@"%@%@/download/%@%@", BASE_IMAGE_URL,  self.buildingId,  imageStem, IMAGE_SUFFIX];
+        NSString *imagePath = [NSString stringWithFormat:@"%@%@/download/%@", BASE_IMAGE_URL,  self.buildingId,  imageName];
      
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[imagePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
                           placeholderImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout"]];
