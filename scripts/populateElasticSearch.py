@@ -57,7 +57,7 @@ class PopulateElasticSearch:
                       imageName = item['image'];
                       if imageName:
 
-                          file = {'file': open('EstatesBuildingsImages/'+ imageName + '.JPG', 'rb')}
+                          file = {'file': open('EstatesBuildingsImages/'+ imageName, 'rb')}
 
                           url= '%s/images/%s/upload' %(self.API_BASE_URL, i)
 
