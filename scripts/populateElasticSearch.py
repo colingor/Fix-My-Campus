@@ -3,7 +3,7 @@ from pprint import pprint
 import time
 from elasticsearch import Elasticsearch
 import argparse
-
+import requests
 
 
 parser = argparse.ArgumentParser(description="""Script to read estates.json into ElasticSearch index. To change path to estates.json
@@ -21,11 +21,14 @@ class PopulateElasticSearch:
    ES_HOST = 'dlib-brown.edina.ac.uk'
    ES_PORT = '9200'
 
+   API_BASE_URL = 'http://0.0.0.0:3001/api';
+
    def __init__(self):
        self.es = Elasticsearch([{'host': self.ES_HOST, 'port': self.ES_PORT}])
 
 
    def loadEstatesBuildings(self):
+       headers = {'Content-Type':'application/json'};
 
        i = 1
        with open(self.BUILDING_JSON, 'rU') as data_file:
@@ -33,10 +36,34 @@ class PopulateElasticSearch:
           # for loc in data['locations']:
           for loc in data['features']:
               # Have to modify the locations to ensure they're stored in the correct format for es spatial searching
-              loc['geometry']['location'] =  loc['geometry'].pop('coordinates')
+              loc['geometry']['location'] = loc['geometry'].pop('coordinates')
 
               # Add to index
               self.es.index(index=self.INDEX_NAME, doc_type='building', id=i, body=loc)
+
+              # Post a new image container for this building to loopback Estates-API
+              url= '%s/images' %(self.API_BASE_URL)
+              newImageContainer = {"name": str(i)};
+              r = requests.post(url, headers=headers, data=json.dumps(newImageContainer))
+
+              areas= loc['properties']['information'];
+
+              # POST the images for all facilities in each area
+              for area in areas:
+
+                  items = area['items'];
+
+                  for item in items:
+                      imageName = item['image'];
+                      if imageName:
+
+                          file = {'file': open('EstatesBuildingsImages/'+ imageName + '.JPG', 'rb')}
+
+                          url= '%s/images/%s/upload' %(self.API_BASE_URL, i)
+
+                          r = requests.post(url, files=file)
+                          print r.text
+
               i += 1
 
        with open(self.BUILDING2_JSON, 'rU') as data_file:
