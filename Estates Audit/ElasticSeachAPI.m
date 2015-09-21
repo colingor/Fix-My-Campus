@@ -281,13 +281,11 @@ NSString *const BASE_ELASTICSEARCH_URL = @"http://dlib-brown.edina.ac.uk/buildin
                                                                           NSMutableDictionary *buildingInfo = [NSJSONSerialization JSONObjectWithData:data
                                                                                                                                            options:NSJSONReadingMutableContainers
                                                                                                                                              error:NULL];
-                                                                          
-                                                                          NSMutableDictionary * source = [buildingInfo valueForKey:@"_source"];
                                                                           // Turn off network activity
                                                                           [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                                                                           
                                                                           // Process in completion callback
-                                                                          completion(source);
+                                                                          completion(buildingInfo);
                                                                           
                                                                       }
                                                                   }];

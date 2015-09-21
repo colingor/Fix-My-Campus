@@ -30,7 +30,7 @@
 
 NSString *const IMAGE_SUFFIX = @".JPG";
 NSString *const DEFAULT_CELL_IMAGE = @"MapPinDefaultLeftCallout";
-NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/images/";
+NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/api/images/";
 
 -(void)viewWillAppear:(BOOL)animated{
   
@@ -70,15 +70,19 @@ NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/buildings/image
 - (void)refresh:(UIRefreshControl *)refreshControl {
     
     [[ElasticSeachAPI sharedInstance] searchForBuildingWithId:self.buildingId
-                                               withCompletion:^(NSMutableDictionary *source) {
-                                                   
-                                                   self.source = source;
-                                                   
+                                               withCompletion:^(NSMutableDictionary *buildingInfo) {
+                                                 
+                                                   self.source = [buildingInfo valueForKey:@"_source"];
+                                                  
+                                                   self.buildingId = buildingInfo[@"_id"];
                                                
                                                    NSString *imageStem = [self.source valueForKeyPath:@"properties.image"];
-                                                   NSString *imagePath = [NSString stringWithFormat:@"%@%@%@", BASE_IMAGE_URL, imageStem, IMAGE_SUFFIX];
-                             
                                                    
+                                                   
+                                                   //http://dlib-brown.edina.ac.uk/api/images/1/download/322_Basement%20Plan.JPG
+                                                   
+                                                   NSString *imagePath = [NSString stringWithFormat:@"%@%@/download/%@%@", BASE_IMAGE_URL,  self.buildingId,  imageStem, IMAGE_SUFFIX];
+                             
                                                    [self.imageView sd_setImageWithURL:[NSURL URLWithString:[imagePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
                                                                      placeholderImage:[UIImage imageNamed:DEFAULT_CELL_IMAGE]];
                                                    
@@ -219,7 +223,8 @@ enum AlertButtonIndex : NSInteger
     
     NSString *imageStem = [item valueForKeyPath:@"image"];
     
-    NSString *imagePath = [NSString stringWithFormat:@"%@%@%@", BASE_IMAGE_URL, imageStem, IMAGE_SUFFIX];
+    
+    NSString *imagePath = [NSString stringWithFormat:@"%@%@/download/%@%@", BASE_IMAGE_URL,  self.buildingId,  imageStem, IMAGE_SUFFIX];
 
     [reportDictionary setValue:loc_desc forKey:@"loc_desc"];
     [reportDictionary setValue:lon forKey:@"lon"];
@@ -281,7 +286,7 @@ enum AlertButtonIndex : NSInteger
         [cell setTintColor:[UIColor darkTextColor]];
         NSString *imageStem = [item valueForKeyPath:@"image"];
         
-        NSString *imagePath = [NSString stringWithFormat:@"%@%@%@", BASE_IMAGE_URL, imageStem, IMAGE_SUFFIX];
+        NSString *imagePath = [NSString stringWithFormat:@"%@%@/download/%@%@", BASE_IMAGE_URL,  self.buildingId,  imageStem, IMAGE_SUFFIX];
      
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[imagePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
                           placeholderImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout"]];
