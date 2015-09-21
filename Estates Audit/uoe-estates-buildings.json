@@ -23,43 +23,43 @@
                                 "description":"Office view from Street",
                                 "notes":"View from Rosburgh Street",
                                 "type":"Entrance",
-                                "image":"322_Street View"
+                                "image":"322_Street View.JPG"
                             },
                             {  
                                 "description":"Showing Entrances 1,2 and 3",
                                 "notes":"There is currently no wheelchair access to this building",
                                 "type":"Entrance",
-                                "image":"322_Street Location"
+                                "image":"322_Street Location.JPG"
                             },
                             {  
                                 "description":"Showing nearest University Parking",
                                 "notes":"University Parking requires a permit",
                                 "type":"Car Park",
-                                "image":"322_Parking Locations"
+                                "image":"322_Parking Locations.JPG"
                             },
                             {  
                                 "description":"Shows Disabled Parking Bay",
                                 "notes":"Egress from this car park is via several steps which do not incorporate handrails",
                                 "type":"Car Park",
-                                "image":"322_Disabled Parking"
+                                "image":"322_Disabled Parking.JPG"
                             },
                             {  
                                 "description":"Shows Main Entrance",
                                 "notes":"The Main Entrance is located at 5 Roxburgh Street",
                                 "type":"Entrance",
-                                "image":"322_Main Entrance"
+                                "image":"322_Main Entrance.JPG"
                             },
                             {  
                                 "description":"Reception Area",
                                 "notes":"The reception desk is not recessed, there is no induction loop, lighting levels are good",
                                 "type":"Reception",
-                                "image":"322_Reception"
+                                "image":"322_Reception.JPG"
                             },
                             {  
                                 "description":"Typical Stairs",
                                 "notes":"All stairs have colour contrast nosing and handrails, all lighting levcels are fair to good",
                                 "type":"Stairs",
-                                "image":"322_Stairs"
+                                "image":"322_Stairs.JPG"
                             }
                         ]
                     },
@@ -70,31 +70,31 @@
                                 "description":"Edinburgh Research and Innovation Ltd",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"322_Basement Plan"
+                                "image":"322_Basement Plan.JPG"
                             },
                             {  
                                 "description":"Staff Room",
                                 "notes":"See Plan",
                                 "type":"Social",
-                                "image":"322_Basement Plan"
+                                "image":"322_Basement Plan.JPG"
                             },
                             {  
                                 "description":"Staff Offices",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"322_Basement Plan"
+                                "image":"322_Basement Plan.JPG"
                             },
                             {  
                                 "description":"Meeting Room",
                                 "notes":"See Plan",
                                 "type":"Meeting Room",
-                                "image":"322_Basement Plan"
+                                "image":"322_Basement Plan.JPG"
                             },
                             {  
                                 "description":"Standard Toilets",
                                 "notes":"See Plan",
                                 "type":"Toilet",
-                                "image":"322_Basement Plan"
+                                "image":"322_Basement Plan.JPG"
                             }
                         ]
                     },
@@ -105,31 +105,31 @@
                                 "description":"Research Into Results Ltd",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"322_Ground Floor"
+                                "image":"322_Ground Floor.JPG"
                             },
                             {  
                                 "description":"Edinburgh Research and Innovation Ltd",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"322_Ground Floor"
+                                "image":"322_Ground Floor.JPG"
                             },
                             {  
                                 "description":"Reception",
                                 "notes":"See Plan",
                                 "type":"Reception",
-                                "image":"322_Ground Floor"
+                                "image":"322_Ground Floor.JPG"
                             },
                             {  
                                 "description":"Staff Offices",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"322_Ground Floor"
+                                "image":"322_Ground Floor.JPG"
                             },
                             {  
                                 "description":"Standard Female Toilet",
                                 "notes":"See Plan",
                                 "type":"Toilet",
-                                "image":"322_Ground Floor"
+                                "image":"322_Ground Floor.JPG"
                             }
                         ]
                     },
@@ -140,25 +140,25 @@
                                 "description":"Edinburgh Research and Innovation Ltd",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"322_First Floor"
+                                "image":"322_First Floor.JPG"
                             },
                             {  
                                 "description":"Monro Room",
                                 "notes":"See Plan",
                                 "type":"Meeting Room",
-                                "image":"322_First Floor"
+                                "image":"322_First Floor.JPG"
                             },
                             {  
                                 "description":"Staff Offices",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"322_First Floor"
+                                "image":"322_First Floor.JPG"
                             },
                             {  
                                 "description":"Standard Toilets",
                                 "notes":"See Plan",
                                 "type":"Toilet",
-                                "image":"322_First Floor"
+                                "image":"322_First Floor.JPG"
                             }
                         ]
                     },
@@ -169,25 +169,25 @@
                                 "description":"Edinburgh Research and Innovation Ltd",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"322_Second Floor"
+                                "image":"322_Second Floor.JPG"
                             },
                             {  
                                 "description":"Brewster Room",
                                 "notes":"See Plan",
                                 "type":"Meeting Room",
-                                "image":"322_Second Floor"
+                                "image":"322_Second Floor.JPG"
                             },
                             {  
                                 "description":"Staff Offices",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"322_Second Floor"
+                                "image":"322_Second Floor.JPG"
                             },
                             {  
                                 "description":"Standard Toilets",
                                 "notes":"See Plan",
                                 "type":"Toilet",
-                                "image":"322_Second Floor"
+                                "image":"322_Second Floor.JPG"
                             }
                         ]
                     }
@@ -216,49 +216,49 @@
                                 "description":"View from Drummond Street",
                                 "notes":"View from Drummond Street",
                                 "type":"Entrance",
-                                "image":"311_Street View"
+                                "image":"311_Street View.JPG"
                             },
                             {  
                                 "description":"Showing Street entrances anddisabled parking spots",
                                 "notes":"There is wheelchair access to this building",
                                 "type":"Car Park",
-                                "image":"311_Street Location"
+                                "image":"311_Street Location.JPG"
                             },
                             {  
                                 "description":"Disabled Parking",
                                 "notes":"There are 3 additional spots off Infirmary Street giviong access to the Wheelchair entrance",
                                 "type":"Car Park",
-                                "image":"311_Disabled Parking"
+                                "image":"311_Disabled Parking.JPG"
                             },
                             {  
                                 "description":"Carpark entrance from Drummond Street",
                                 "notes":"University Parking requires a permit",
                                 "type":"Car Park",
-                                "image":"311_Main Carpark"
+                                "image":"311_Main Carpark.JPG"
                             },
                             {  
                                 "description":"View of Main Entrance",
                                 "notes":"Main Entrance",
                                 "type":"Entrance",
-                                "image":"311_Main Entrance"
+                                "image":"311_Main Entrance.JPG"
                             },
                             {  
                                 "description":"View of Secondary Entrance",
                                 "notes":"Wheelchair accessible entrance (Requires University Smartcard to access)",
                                 "type":"Entrance",
-                                "image":"311_Secondary Entrance"
+                                "image":"311_Secondary Entrance.JPG"
                             },
                             {  
                                 "description":"Geography Office Reception",
                                 "notes":"Located to the left of the main entrance, suitable for approach by wheelchair with good lighting levels. No induction loop",
                                 "type":"Reception",
-                                "image":"311_Reception"
+                                "image":"311_Reception.JPG"
                             },
                             {  
                                 "description":"View of the Servitors Office",
                                 "notes":"The servitors can provide assistance for wheelchair users and persons with mobility difficulties.",
                                 "type":"Reception",
-                                "image":"311_Servitors Office"
+                                "image":"311_Servitors Office.JPG"
                             },
                             {  
                                 "description":"Lift Access",
@@ -270,19 +270,19 @@
                                 "description":"All floors are accessible by stairs",
                                 "notes":"Due to the age of the building some of the stairs do not have colourcontrasting nosings. All stairs have a handrail to one or both sides. The lighting level in the main stairwell is not good and lighting level in all other stairwells is fair.",
                                 "type":"Stairs",
-                                "image":"311_Servitors Office"
+                                "image":"311_Servitors Office.JPG"
                             },
                             {  
                                 "description":"Ground Floor Toilet (Accessible)",
                                 "notes":"There is good manoeuvring space in both of the accessible toilet. Both toilets have emergency pull chord alarms, suitably wide doors, dropdown and support rails, high contrast fixtures and good lighting.",
                                 "type":"Toilet",
-                                "image":"311_Ground Floor Toilet"
+                                "image":"311_Ground Floor Toilet.JPG"
                             },
                             {  
                                 "description":"First Floor Toilet (Accessible)",
                                 "notes":"There is good manoeuvring space in both of the accessible toilet. Both toilets have emergency pull chord alarms, suitably wide doors, dropdown and support rails, high contrast fixtures and good lighting.",
                                 "type":"Toilet",
-                                "image":"311_First Floor Toilet"
+                                "image":"311_First Floor Toilet.JPG"
                             },
                             {  
                                 "description":"Basement standard Female toilet",
@@ -311,31 +311,31 @@
                                 "description":"Drummond Rooms A&B",
                                 "notes":"See Plan",
                                 "type":"Teaching Room",
-                                "image":"311_Basement Plan"
+                                "image":"311_Basement Plan.JPG"
                             },
                             {  
                                 "description":"Female Toilets",
                                 "notes":"See Plan",
                                 "type":"Toilet",
-                                "image":"311_Basement Plan"
+                                "image":"311_Basement Plan.JPG"
                             },
                             {  
                                 "description":"Postgraduate Offices",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"311_Basement Plan"
+                                "image":"311_Basement Plan.JPG"
                             },
                             {  
                                 "description":"Social Room",
                                 "notes":"See Plan",
                                 "type":"Social",
-                                "image":"311_Basement Plan"
+                                "image":"311_Basement Plan.JPG"
                             },
                             {  
                                 "description":"Staff Offices",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"311_Basement Plan"
+                                "image":"311_Basement Plan.JPG"
                             }
                         ]
                     },
@@ -346,13 +346,13 @@
                                 "description":"Postgraduate Offices",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"311_Basement Mezzanine Plan"
+                                "image":"311_Basement Mezzanine Plan.JPG"
                             },
                             {  
                                 "description":"Male Toilets",
                                 "notes":"See Plan",
                                 "type":"Toilets",
-                                "image":"311_Basement Mezzanine Plan"
+                                "image":"311_Basement Mezzanine Plan.JPG"
                             }
                         ]
                     },
@@ -363,37 +363,37 @@
                                 "description":"Accessible Toilet",
                                 "notes":"See Plan",
                                 "type":"Toilet",
-                                "image":"311_Ground Floor Plan"
+                                "image":"311_Ground Floor Plan.JPG"
                             },
                             {  
                                 "description":"Geography Office Reception",
                                 "notes":"See Plan",
                                 "type":"Reception",
-                                "image":"311_Ground Floor Plan"
+                                "image":"311_Ground Floor Plan.JPG"
                             },
                             {  
                                 "description":"Library",
                                 "notes":"See Plan",
                                 "type":"Library",
-                                "image":"311_Ground Floor Plan"
+                                "image":"311_Ground Floor Plan.JPG"
                             },
                             {  
                                 "description":"Teaching Rooms",
                                 "notes":"See Plan",
                                 "type":"Teaching Room",
-                                "image":"311_Ground Floor Plan"
+                                "image":"311_Ground Floor Plan.JPG"
                             },
                             {  
                                 "description":"Social Room",
                                 "notes":"See Plan",
                                 "type":"Social",
-                                "image":"311_Ground Floor Plan"
+                                "image":"311_Ground Floor Plan.JPG"
                             },
                             {  
                                 "description":"Staff Offices",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"311_Ground Floor Plan"
+                                "image":"311_Ground Floor Plan.JPG"
                             }
                         ]
                     },
@@ -404,13 +404,13 @@
                                 "description":"Staff Offices",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"311_Ground Floor Mezzanine Plan"
+                                "image":"311_Ground Floor Mezzanine Plan.JPG"
                             },
                             {  
                                 "description":"Postgraduate Offices",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"311_Ground Floor Mezzanine Plan"
+                                "image":"311_Ground Floor Mezzanine Plan.JPG"
                             }
                         ]
                     },
@@ -421,37 +421,37 @@
                                 "description":"Accessible Toilet",
                                 "notes":"See Plan",
                                 "type":"Toilet",
-                                "image":"311_First Floor Plan"
+                                "image":"311_First Floor Plan.JPG"
                             },
                             {  
                                 "description":"Hutton Room",
                                 "notes":"See Plan",
                                 "type":"Teaching Room",
-                                "image":"311_First Floor Plan"
+                                "image":"311_First Floor Plan.JPG"
                             },
                             {  
                                 "description":"Laboratories",
                                 "notes":"See Plan",
                                 "type":"Laboratory",
-                                "image":"311_First Floor Plan"
+                                "image":"311_First Floor Plan.JPG"
                             },
                             {  
                                 "description":"Postgraduate Offices",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"311_First Floor Plan"
+                                "image":"311_First Floor Plan.JPG"
                             },
                             {  
                                 "description":"Staff Offices",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"311_First Floor Plan"
+                                "image":"311_First Floor Plan.JPG"
                             },
                             {  
                                 "description":"Watson Room",
                                 "notes":"See Plan",
                                 "type":"Teaching Room",
-                                "image":"311_First Floor Plan"
+                                "image":"311_First Floor Plan.JPG"
                             }
                         ]
                     },
@@ -462,19 +462,19 @@
                                 "description":"Darwin Room",
                                 "notes":"See Plan",
                                 "type":"Teaching Room",
-                                "image":"311_Second Floor Plan"
+                                "image":"311_Second Floor Plan.JPG"
                             },
                             {  
                                 "description":"Geddes Room",
                                 "notes":"See Plan",
                                 "type":"Teaching Room",
-                                "image":"311_Second Floor Plan"
+                                "image":"311_Second Floor Plan.JPG"
                             },
                             {  
                                 "description":"Staff Offices",
                                 "notes":"See Plan",
                                 "type":"Offices",
-                                "image":"311_Second Floor Plan"
+                                "image":"311_Second Floor Plan.JPG"
                             }
                         ]
                     }
