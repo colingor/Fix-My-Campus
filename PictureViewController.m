@@ -12,6 +12,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ViewPhotoViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "LocationDetailsViewController.h"
 
 @interface PictureViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -23,8 +24,6 @@
 @end
 
 @implementation PictureViewController
-
-NSString *const DEFAULT_IMAGE = @"MapPinDefaultLeftCallout";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -195,7 +194,7 @@ NSString *const DEFAULT_IMAGE = @"MapPinDefaultLeftCallout";
         UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
         
         [photoImageView sd_setImageWithURL:[NSURL URLWithString:[photo.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
-                          placeholderImage:[UIImage imageNamed:DEFAULT_IMAGE]];
+                          placeholderImage:[UIImage imageNamed:DEFAULT_CELL_IMAGE]];
 
     }
     

@@ -11,10 +11,13 @@
 #import "ElasticSeachAPI.h"
 #import "ActionSheetLocalePicker.h"
 #import "ActionSheetStringPicker.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import "ViewPhotoViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
-@interface AddFacilityViewController ()
+@interface AddFacilityViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *facilityDescription;
 
@@ -26,15 +29,20 @@
 
 @property (strong, nonatomic) NSMutableArray *areas;
 
+@property (weak, nonatomic) IBOutlet UICollectionView *photoCollectionView;
+
 @property (strong, nonatomic) NSMutableArray *types;
 
+@property (weak, nonatomic) IBOutlet UIImageView *cameraIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *cameraRoll;
+@property (nonatomic) UIImagePickerController *imagePickerController;
+@property (nonatomic, strong) NSString *photo;
 @end
 
 @implementation AddFacilityViewController 
 
 NSString *const ADD_NEW_AREA = @"Add new area…";
 NSString *const ADD_NEW_TYPE = @"Add new type…";
-
 
 -(void)awakeFromNib{
     
@@ -66,6 +74,19 @@ NSString *const ADD_NEW_TYPE = @"Add new type…";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self.cameraIcon setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *cameraClick =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showImagePickerForCamera:)];
+    [cameraClick setNumberOfTapsRequired:1];
+    [self.cameraIcon addGestureRecognizer:cameraClick];
+    
+    [self.cameraRoll setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *cameraRollClick =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showImagePickerForPhotoPicker:)];
+    [cameraRollClick setNumberOfTapsRequired:1];
+    [self.cameraRoll addGestureRecognizer:cameraRollClick];
+    
+    self.photoCollectionView.delegate = self;
+    self.photoCollectionView.dataSource = self;
+    
     NSString *buildingName = self.buildingInfo[@"buildingName"];
 
     self.facilityLabel.text = [NSString stringWithFormat:@"%@ %@", self.facilityLabel.text, buildingName];
@@ -82,6 +103,37 @@ NSString *const ADD_NEW_TYPE = @"Add new type…";
                                    action:@selector(dismissKeyboard)];
     [tap setCancelsTouchesInView:NO];
     [self.view addGestureRecognizer:tap];
+}
+
+- (IBAction)showImagePickerForCamera:(id)sender {
+    [self showImagePickerForSourceType:UIImagePickerControllerSourceTypeCamera];
+}
+
+- (IBAction)showImagePickerForPhotoPicker:(id)sender {
+    [self showImagePickerForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+- (void)showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType
+{
+    
+    
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    imagePickerController.sourceType = sourceType;
+    imagePickerController.delegate = self;
+    
+    if (sourceType == UIImagePickerControllerSourceTypeCamera)
+    {
+        /*
+         The user wants to use the camera interface. Set up our custom overlay view for the camera.
+         */
+        imagePickerController.showsCameraControls = YES;
+        
+        
+    }
+    
+    self.imagePickerController = imagePickerController;
+    [self presentViewController:self.imagePickerController animated:YES completion:nil];
 }
 
 -(void)dismissKeyboard {
@@ -142,7 +194,7 @@ NSString *const ADD_NEW_TYPE = @"Add new type…";
 
 - (void)typeTap {
     
-    [ActionSheetStringPicker showPickerWithTitle:@"Select an type"
+    [ActionSheetStringPicker showPickerWithTitle:@"Select a type"
                                             rows:self.types
                                 initialSelection:0
                                        doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
@@ -189,6 +241,126 @@ NSString *const ADD_NEW_TYPE = @"Add new type…";
                                      }
                                           origin:self.facilityType];
 }
+
+
+- (void)finishAndUpdate
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.photoCollectionView reloadData];
+    });
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+// This method is called when an image has been chosen from the library or taken from the camera.
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    
+    NSURL *imageUrl = [info valueForKey:UIImagePickerControllerReferenceURL];
+    
+    if (imageUrl == nil) {
+        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            
+            [library writeImageToSavedPhotosAlbum:((UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage]).CGImage
+                                         metadata:[info objectForKey:UIImagePickerControllerMediaMetadata]
+                                  completionBlock:^(NSURL *imageUrl, NSError *error) {
+                                  
+                                      NSString *url = [imageUrl absoluteString];
+                                      self.photo = url;
+                                      
+                                      [self finishAndUpdate];
+                                  }];
+        });
+        
+    }else{
+        // Get image url and add to Report
+        NSString *url = [imageUrl absoluteString];
+        self.photo = url;
+        
+        [self finishAndUpdate];
+    }
+    
+    
+}
+
+
+
+#pragma mark - UICOLLECTION view data source
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+  
+    if([self.photo length]> 0){
+       return 1;
+    }
+    return 0;
+}
+
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *identifier = @"Cell";
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
+   
+    NSURL *assetUrl = [NSURL URLWithString:self.photo];
+    
+    if([[assetUrl scheme] isEqualToString:@"assets-library"]){
+        
+        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
+        {
+            CGImageRef iref = [myasset thumbnail];
+            if (iref) {
+                UIImage *thumbImage = [UIImage imageWithCGImage:iref];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    /* This is the main thread again, where we set the tableView's image to
+                     be what we just fetched. */
+                    
+                    UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
+                    photoImageView.image = thumbImage;
+                    [cell setNeedsLayout];
+                }
+                               );
+                
+                
+            }
+        };
+        
+        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
+        {
+            NSLog(@"Can't get image - %@",[myerror localizedDescription]);
+        };
+        
+        ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+        [assetslibrary assetForURL:assetUrl
+                       resultBlock:resultblock
+                      failureBlock:failureblock];
+    }  else {
+        UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:100];
+        
+        [photoImageView sd_setImageWithURL:[NSURL URLWithString:[self.photo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
+                          placeholderImage:[UIImage imageNamed:DEFAULT_CELL_IMAGE]];
+        
+    }
+
+    
+    return cell;
+}
+
+
+
+
+
+
+
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 
 
 
@@ -269,6 +441,19 @@ NSString *const ADD_NEW_TYPE = @"Add new type…";
 //        LocationDetailsViewController *locationDetailsvc = (LocationDetailsViewController *)segue.destinationViewController;
 //    }
     
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    //what photo chosen
+//    Photo *photo = self.photos[indexPath.row];
+    
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
+                                                             bundle: nil];
+    ViewPhotoViewController* controller = (ViewPhotoViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"viewPhoto"];
+    
+//    controller.photo = photo;
+    
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 
