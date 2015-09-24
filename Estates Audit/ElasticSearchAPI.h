@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ElasticSeachAPI : NSObject
+@interface ElasticSearchAPI : NSObject
 
-+ (ElasticSeachAPI *)sharedInstance;
++ (ElasticSearchAPI *)sharedInstance;
 
 - (void)getAllTypesWithCompletion:(void (^)(NSMutableArray *aggregations))completion;
 
@@ -28,5 +28,10 @@
 
 - (void)searchForBuildingsNearCoordinate: (NSDictionary *)locationDict
                           withCompletion:(void (^)(NSMutableDictionary *locations))completion;
+
+- (void)postImageToEstatesAPI:(NSString *)imageUrl
+                forBuildingId:(NSString *)buildingId
+                       inArea:(NSString *)facilityArea
+               withCompletion:(void (^)(NSDictionary *result))completion;
 
 @end

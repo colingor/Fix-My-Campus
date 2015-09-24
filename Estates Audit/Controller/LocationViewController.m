@@ -15,7 +15,7 @@
 #import "Photo+Create.h"
 #import "CustomMKAnnotation.h"
 #import "AppDelegate.h"
-#import "ElasticSeachAPI.h"
+#import "ElasticSearchAPI.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
@@ -279,7 +279,7 @@ static BOOL mapChangedFromUserInteraction = NO;
     MKMapRect mRect = self.mapView.visibleMapRect;
     NSDictionary *bb = [self getBoundingBox:mRect];
     
-    [[ElasticSeachAPI sharedInstance] searchForBuildingsWithinBoundingBox:bb withCompletion:^(NSMutableDictionary *locations) {
+    [[ElasticSearchAPI sharedInstance] searchForBuildingsWithinBoundingBox:bb withCompletion:^(NSMutableDictionary *locations) {
         [self processSearchResults:locations];
     }];
 }
@@ -290,7 +290,7 @@ static BOOL mapChangedFromUserInteraction = NO;
     NSDictionary *locationDict =  @{ @"lat": [NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude],
                                      @"lon":[NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude]};
     
-    [[ElasticSeachAPI sharedInstance] searchForBuildingsNearCoordinate:locationDict withCompletion:^(NSMutableDictionary *locations) {
+    [[ElasticSearchAPI sharedInstance] searchForBuildingsNearCoordinate:locationDict withCompletion:^(NSMutableDictionary *locations) {
         [self processSearchResults:locations];
     }];
 }

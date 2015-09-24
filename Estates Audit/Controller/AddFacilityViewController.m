@@ -8,7 +8,7 @@
 
 #import "AddFacilityViewController.h"
 #import "LocationDetailsViewController.h"
-#import "ElasticSeachAPI.h"
+#import "ElasticSearchAPI.h"
 #import "ActionSheetLocalePicker.h"
 #import "ActionSheetStringPicker.h"
 #import <AssetsLibrary/AssetsLibrary.h>
@@ -46,7 +46,7 @@ NSString *const ADD_NEW_TYPE = @"Add new type…";
 
 -(void)awakeFromNib{
     
-    ElasticSeachAPI *esApi = [ElasticSeachAPI sharedInstance];
+    ElasticSearchAPI *esApi = [ElasticSearchAPI sharedInstance];
     
     _areas = [NSMutableArray array];
     _types = [NSMutableArray array];
@@ -292,7 +292,7 @@ NSString *const ADD_NEW_TYPE = @"Add new type…";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
   
-    if([self.photo length]> 0){
+    if(self.photo){
        return 1;
     }
     return 0;
@@ -397,14 +397,16 @@ NSString *const ADD_NEW_TYPE = @"Add new type…";
         [self alert:@"Please enter a description"];
         return NO;
     }
-
-    NSDictionary *facility = @{
-                               @"description" :facilityDescription,
-                               @"notes" : @"",
-                               @"image" : @"",
-                               @"type": facilityType
-                               };
     
+   
+    NSDictionary *f = @{
+                        @"description" :facilityDescription,
+                        @"notes" : @"",
+                        @"image" : @"",
+                        @"type": facilityType
+                        };
+    
+    NSMutableDictionary *facility = [f mutableCopy];
     
     NSMutableArray *buildingAreas = [self.source valueForKeyPath:@"properties.information"];
     
@@ -428,6 +430,10 @@ NSString *const ADD_NEW_TYPE = @"Add new type…";
         [buildingAreas addObject:newArea];
         
     }
+    
+   
+  
+    
 
     // We do the actual POST in LocationDetailViewController as self.source contains the new facility
     return YES;
@@ -436,10 +442,66 @@ NSString *const ADD_NEW_TYPE = @"Add new type…";
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
    
-//    if ([[segue identifier] isEqualToString:UNWIND_SEGUE_IDENTIFIER])
-//    {
-//        LocationDetailsViewController *locationDetailsvc = (LocationDetailsViewController *)segue.destinationViewController;
-//    }
+    if ([[segue identifier] isEqualToString:UNWIND_SEGUE_IDENTIFIER])
+    {
+        LocationDetailsViewController *locationDetailsvc = (LocationDetailsViewController *)segue.destinationViewController;
+        
+        if(self.photo){
+            
+
+            NSString *facilityArea = self.facilityArea.text;
+            
+            [[ElasticSearchAPI sharedInstance] postImageToEstatesAPI:self.photo
+                                                       forBuildingId:self.buildingInfo[@"buildingId"]
+                                                              inArea:facilityArea
+                                                      withCompletion:^(NSDictionary *result) {
+                                                          
+                                                          NSLog(@"Image posted successfully");
+                                                          
+                                                          NSDictionary *filesDict = [result valueForKeyPath:@"result.files"];
+                                                          NSString *imageFileName = [[filesDict allKeys] objectAtIndex:0];
+                                                          
+                                                          // Add imageFileName to area
+                                                          BOOL areaFound = NO;
+                                                          
+                                                          for (NSMutableDictionary *area in [self.source valueForKeyPath:@"properties.information"]){
+                                                              
+                                                              if(!areaFound){
+                                                                  
+                                                                  if([area[@"area"] isEqualToString:facilityArea]){
+                                                                      
+                                                                      // Add to existing area
+                                                                      NSMutableArray *areaItems = [area valueForKey:@"items"];
+                                                                      
+                                                                      for (NSMutableDictionary *area in areaItems){
+                                                                          
+                                                                          // Find the correct item
+                                                                          if([area[@"description"] isEqualToString:self.facilityDescription.text] &&
+                                                                             [area[@"type"] isEqualToString:self.facilityType.text]){
+                                                                              
+                                                                              // Assume this is the area we want to update
+                                                                              areaFound = YES;
+                                                                              area[@"image"] = imageFileName;
+                                                                              
+                                                                              // Ensure this is posted to ElasticSearch
+                                                                              [[ElasticSearchAPI sharedInstance] postBuildingFacilityToBuilding:self.buildingInfo[@"buildingId"] withQueryJson: self.source
+                                                                                                                                 withCompletion:^(NSDictionary *result) {
+                                                                                                                                     NSLog(@"Image name added to record");
+                                                                                                                                     [locationDetailsvc refresh:nil];
+                                                                                                                                 }];
+                                                                              break;
+                                                                          }
+                                                                      }
+                                                                      break;
+                                                                  }
+                                                              }
+                                                          }
+                                                      }];
+            
+        }
+
+        
+    }
     
 }
 

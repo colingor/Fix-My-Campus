@@ -514,7 +514,7 @@
         <!--Building Facilities-->
         <scene sceneID="VhX-Lk-EhU">
             <objects>
-                <viewController title="Building Facilities" id="ZJK-kJ-2lz" customClass="LocationDetailsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationDetailsViewController" title="Building Facilities" id="ZJK-kJ-2lz" customClass="LocationDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oIf-6R-ERo"/>
                         <viewControllerLayoutGuide type="bottom" id="aYD-Lu-fuI"/>

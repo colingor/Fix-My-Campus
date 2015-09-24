@@ -10,7 +10,7 @@
 #import "LocationDetailsViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "AddFacilityViewController.h"
-#import "ElasticSeachAPI.h"
+#import "ElasticSearchAPI.h"
 #import "UIScrollView+EmptyDataSet.h"
 
 
@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UITabBar *tabBar;
 
 @end
+
 
 @implementation LocationDetailsViewController
 
@@ -68,7 +69,7 @@ NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/api/images/";
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
     
-    [[ElasticSeachAPI sharedInstance] searchForBuildingWithId:self.buildingId
+    [[ElasticSearchAPI sharedInstance] searchForBuildingWithId:self.buildingId
                                                withCompletion:^(NSMutableDictionary *buildingInfo) {
                                                  
                                                    self.source = [buildingInfo valueForKey:@"_source"];
@@ -143,7 +144,7 @@ NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/api/images/";
 -(IBAction) unwindToLocationDetails:(UIStoryboardSegue *)segue {
     
     // POST to ElasticSearch (Note that self.source has been updated in AddFacilityViewController with new facility at this point)
-    [[ElasticSeachAPI sharedInstance] postBuildingFacilityToBuilding:self.buildingId withQueryJson: self.source
+    [[ElasticSearchAPI sharedInstance] postBuildingFacilityToBuilding:self.buildingId withQueryJson: self.source
                                                       withCompletion:^(NSDictionary *result) {
                                                           NSLog(@"Facility added");
                                                           
@@ -271,6 +272,8 @@ enum AlertButtonIndex : NSInteger
 
     
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Building Area Detail" forIndexPath:indexPath];
     cell.textLabel.text = @"";
     NSUInteger offset = [self offsetForSection:indexPath.section];
@@ -282,7 +285,7 @@ enum AlertButtonIndex : NSInteger
         NSString *imageName = [item valueForKeyPath:@"image"];
         
         NSString *imagePath = [NSString stringWithFormat:@"%@%@/download/%@", BASE_IMAGE_URL,  self.buildingId,  imageName];
-     
+
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[imagePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
                           placeholderImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout"]];
         

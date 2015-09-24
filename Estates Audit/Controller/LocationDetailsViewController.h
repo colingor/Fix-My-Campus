@@ -16,4 +16,7 @@
 extern NSString *const DEFAULT_CELL_IMAGE;
 extern NSString *const BASE_IMAGE_URL;
 
+
+- (void)refresh:(UIRefreshControl *)refreshControl;
+
 @end

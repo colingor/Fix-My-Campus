@@ -6,21 +6,22 @@
 //  Copyright (c) 2015 Colin Gormley. All rights reserved.
 //
 
-#import "ElasticSeachAPI.h"
+#import "ElasticSearchAPI.h"
 #import "AppDelegate.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 
-@interface ElasticSeachAPI ()
+@interface ElasticSearchAPI ()
 
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) NSURLSession *elasticSearchSession;
 @end
 
-@implementation ElasticSeachAPI
+@implementation ElasticSearchAPI
 
 
 NSString *const BASE_ELASTICSEARCH_URL = @"http://dlib-brown.edina.ac.uk/buildings/";
-
+NSString *const BASE_ESTATES_API_URL = @"http://dlib-brown.edina.ac.uk/api/";
 
 - (NSURLSession *)elasticSearchSession
 {
@@ -36,15 +37,15 @@ NSString *const BASE_ELASTICSEARCH_URL = @"http://dlib-brown.edina.ac.uk/buildin
 }
 
 
-+ (ElasticSeachAPI *)sharedInstance
++ (ElasticSearchAPI *)sharedInstance
 {
     // Return single instance
-    static ElasticSeachAPI *_sharedInstance = nil;
+    static ElasticSearchAPI *_sharedInstance = nil;
     
     static dispatch_once_t oncePredicate;
     
     dispatch_once(&oncePredicate, ^{
-        _sharedInstance = [[ElasticSeachAPI alloc] init];
+        _sharedInstance = [[ElasticSearchAPI alloc] init];
     });
     return _sharedInstance;
 }
@@ -375,6 +376,183 @@ NSString *const BASE_ELASTICSEARCH_URL = @"http://dlib-brown.edina.ac.uk/buildin
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 
         [task resume];
+    }
+}
+
+
+
+
+- (void)postImageContainerToEstatesAPIForBuilding:(NSString *) buildingId
+                        withCompletion:(void (^)(NSDictionary *result))completion{
+    
+    
+    if([self checkNetworkAvailablityAndDisplayNotification]){
+        
+        NSLog(@"Posting to %@", buildingId);
+        
+        NSURL *apiUrl = [NSURL URLWithString:[[NSString stringWithFormat:@"%@images", BASE_ESTATES_API_URL]
+                                              stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSDictionary *queryJson = @{@"name" : buildingId};
+        
+        NSMutableURLRequest *request = [self setupRequest:apiUrl queryJson:queryJson];
+        
+        [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        NSURLSessionDownloadTask *task = [self.elasticSearchSession downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+            if (error) {
+                NSLog(@"%@",error);
+                completion(nil);
+            }else{
+                
+                NSDictionary *result;
+                NSData *locationJSONData = [NSData dataWithContentsOfURL:location];
+                if (locationJSONData) {
+                    result = [NSJSONSerialization JSONObjectWithData:locationJSONData
+                                                             options:0
+                                                               error:NULL];
+                    // Turn off network activity
+                    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                    
+                    completion(result);
+                }
+            }
+            
+        }];
+        
+        // Turn on network activity
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        
+        [task resume];
+    }
+}
+
+- (void)postImageToEstatesAPI:(NSString *)imageUrl
+                forBuildingId:(NSString *)buildingId
+                inArea:(NSString *)facilityArea
+               withCompletion:(void (^)(NSDictionary *result))completion{
+    
+    
+    
+    if([self checkNetworkAvailablityAndDisplayNotification]){
+        
+        
+        // Create image container - if already exists this request will do no harm
+        [self postImageContainerToEstatesAPIForBuilding:buildingId withCompletion:^(NSDictionary *result) {
+            
+            
+            NSURL *apiUrl = [NSURL URLWithString:[[NSString stringWithFormat:@"%@images/%@/upload", BASE_ESTATES_API_URL, buildingId]
+                                                  stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            
+            NSMutableURLRequest *request = [self setupRequest:apiUrl queryJson:nil];
+            [request setHTTPMethod:@"POST"];
+            
+            
+            NSMutableData *body = [NSMutableData data];
+            
+            // the boundary string : a random string, that will not repeat in post data, to separate post data fields.
+            NSString *BoundaryConstant = @"----------V2ymHFg03ehbqgZCaKO6jy";
+            
+            // set Content-Type in HTTP header
+            NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BoundaryConstant];
+            [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
+            
+      
+            
+            NSURL *assetUrl = [NSURL URLWithString:[imageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+       
+            
+            if([[assetUrl scheme] isEqualToString:@"assets-library"]){
+                
+                ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset){
+                    ALAssetRepresentation *rep = [myasset defaultRepresentation];
+                    CGImageRef iref = [rep fullResolutionImage];
+                    
+                    if (iref) {
+                        
+                        UIImage *image = [UIImage imageWithCGImage:iref];
+                        
+                        CGImageRef cgRef = image.CGImage;
+                        
+                        // Have to get the orientation directly from the exif data as the orientation
+                        // from image.imageOrientation is always UIImageOrientationUp for some reason.
+                        NSDictionary *metadata = myasset.defaultRepresentation.metadata;
+                        NSDictionary *imageMetadata = [[NSMutableDictionary alloc] initWithDictionary:metadata];
+                        NSNumber *orientation = [imageMetadata valueForKey:@"Orientation"];
+                        
+                        NSLog(@"Orientation : %@", orientation);
+                        
+                        // We have to adjust the orientation in certain cases by creating a new image that has
+                        // been rotated properly.
+                        if([orientation isEqualToNumber:[NSNumber numberWithLong:6]]){
+                            image = [[UIImage alloc] initWithCGImage:cgRef scale:1.0 orientation:UIImageOrientationRight];
+                        }else if([orientation isEqualToNumber:[NSNumber numberWithLong:3]]){
+                            image = [[UIImage alloc] initWithCGImage:cgRef scale:1.0 orientation:UIImageOrientationDown];
+                        }else if([orientation isEqualToNumber:[NSNumber numberWithLong:8]]){
+                            image = [[UIImage alloc] initWithCGImage:cgRef scale:1.0 orientation:UIImageOrientationLeft];
+                        }
+                       
+                        int timestamp = [[NSDate date] timeIntervalSince1970];
+                        NSString *imageFileName = [NSString stringWithFormat:@"%@_%d.JPG",facilityArea,timestamp];
+                        
+                        NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+                        // add image data
+                        
+                        if (imageData) {
+                            [body appendData:[[NSString stringWithFormat:@"--%@\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+                            [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", imageFileName, imageFileName] dataUsingEncoding:NSUTF8StringEncoding]];
+                            [body appendData:[@"Content-Type: image/jpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                            [body appendData:imageData];
+                            [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+                        }
+                        
+                        [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+                        
+                        // setting the body of the post to the reqeust
+                        [request setHTTPBody:body];
+                        
+                        NSURLSessionDownloadTask *task = [self.elasticSearchSession downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+                            if (error) {
+                                NSLog(@"%@",error);
+                            }else{
+                                
+                                NSDictionary *result;
+                                NSData *locationJSONData = [NSData dataWithContentsOfURL:location];
+                                if (locationJSONData) {
+                                    result = [NSJSONSerialization JSONObjectWithData:locationJSONData
+                                                                             options:0
+                                                                               error:NULL];
+                                    NSLog(@"Posted image to EstatesAPI");
+                                    
+                                    // Turn off network activity
+                                    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                                
+                                    
+                                    completion(result);
+                                }
+                            }
+                            
+                        }];
+                        
+                        // Turn on network activity
+                        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+                        
+                        [task resume];
+                        
+                    }
+                };
+                
+                ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+                [
+                 assetslibrary assetForURL:assetUrl
+                 resultBlock:resultblock
+                 failureBlock: ^(NSError *myerror)
+                 {
+                     NSLog(@"Can't get image - %@",[myerror localizedDescription]);
+                 }];
+                
+            }
+        }];
     }
 }
 
