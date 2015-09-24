@@ -350,18 +350,6 @@
             "name": "International Students Centre"
         }, 
         {
-            "address": "30 George Square Edinburgh EH8 9LJ", 
-            "campuses": [
-                "Central area"
-            ], 
-            "categories": [
-                "Buildings"
-            ], 
-            "latitude": "55.9427113171064800", 
-            "longitude": "-3.1891465187072754", 
-            "name": "Main University Library"
-        }, 
-        {
             "abbreviation": "0225", 
             "address": "George Square Edinburgh EH8 9LH", 
             "campuses": [
@@ -2077,18 +2065,6 @@
             "latitude": "55.9495242201428600", 
             "longitude": "-3.1952404975891113", 
             "name": "New College Library"
-        }, 
-        {
-            "address": " ", 
-            "campuses": [
-                "Central area"
-            ], 
-            "categories": [
-                "Libraries"
-            ], 
-            "latitude": "55.9426872835810500", 
-            "longitude": "-3.1888461112976074", 
-            "name": "Main Library"
         }, 
         {
             "address": " ", 

@@ -1,7 +1,7 @@
 {  
     "type":"FeatureCollection",
     "features":[  
-        {  
+{  
             "type":"Feature",
             "geometry":{  
                 "type":"Point",
@@ -188,6 +188,564 @@
                                 "notes":"See Plan",
                                 "type":"Toilet",
                                 "image":"322_Second Floor.JPG"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {  
+            "type":"Feature",
+            "geometry":{  
+                "type":"Point",
+                "coordinates":[  
+                    -3.1888461112976074,
+                    55.94281213615644
+                    ]
+            },
+            "properties":{  
+                "title":"George Square Library",
+                "subtitle":"Main Library",
+                "area":"George Square",
+                "image":"224_Street View.JPG",
+                "information":[  
+                    {  
+                        "area":"General",
+                        "items":[
+                            {  
+                                "description":"Entrance 1",
+                                "notes":"This entrance provides access to the Ground Floor lobby and is located to the front of the building on a level paved surface. This is the main entrance to the library and is the recommended wheelchair access point.",
+                                "type":"Entrance",
+                                "image":"224_Entrance 1.JPG"
+                            },
+                            {  
+                                "description":"Entrances 2",
+                                "notes":"This entrance is located to the front of the building on a level paved surface and is the main entrance to the Library Café. There is internal access between the Library Café and the Ground Floor lobby via a set of security barriers to the rear of the café.",
+                                "type":"Entrance",
+                                "image":"224_Entrance 2.JPG"
+                            },
+                            {  
+                                "description":"Entrance 3",
+                                "notes":"This entrance is located to the side of the building on a level paved surface and is primarily used as a staff entrance. Entrance 3 provides access to the Ground Floor of the building and can be accessed from the front of the building via a level paved footpath.",
+                                "type":"Entrance",
+                                "image":"224_Entrance 3.JPG"
+                            },
+                            {  
+                                "description":"Entrance 4",
+                                "notes":"Please note that Entrance 4 is only recommended for wheelchair users with assistance.This entrance is located to the rear of the library and is primarily used as a staff entrance. Entrance 4 provides access to the Lower Ground Floor of the building and can be accessed via a paved ramp from the adjacent footpath.",
+                                "type":"Entrance",
+                                "image":"224_Entrance 4.JPG"
+                            },
+                            {  
+                                "description":"Disabled Parking - Front",
+                                "notes":"The four disabled parking bays are located on a level paved surface and can only be accessed from the West side of George Square. Please note that the road leading to these bays has an uneven granite sett surface.",
+                                "type":"Parking",
+                                "image":"224_Parking Front.JPG"
+                            },
+			                      {	 
+                                "description":"Disabled Parking - Rear",
+                                "notes":"The disabled parking bay located to the rear of the building has a level tarmac surface and is within close proximity to Entrance 4.",
+                                "type":"Parking",
+                                "image":"224_Parking Rear.JPG"
+                            },
+                            {	 
+                                "description":"Lifts - General",
+                                "notes":"There are three lifts within George Square Library which serve all floors.The lift call points and car controls are at an accessible height.",
+                                "type":"Lift",
+                                "image":""
+                            },
+                             {	 
+                                "description":"Standard Male, Standard Female and Accessible Toilets",
+                                "notes":"All accessible toilets within the building are wheelchair accessible with varying left and right hand lateral transfer space.All toilet doors within the building have identifying braille markings.One Ground Floor accessible toilet incorporates a hoist and one accessible toilet on the Lower Ground Floor incorporates an accessible shower.All toilets within the building are well sign posted with signs on each floor at the top of stairwells and lifts. These signs have location maps at the base with braille markings and You are here signs.",
+                                "type":"Toilets",
+                                "image":""
+                            },
+                          
+                            {  
+                                "description":"Parking - General",
+                                "notes":"There is one University car park located to the rear of the George Square Library. This car park has a level tarmac surface and a limited number of parking bays. There are additional University car parks located around George Square and Buccleuch Place.",
+                                "type":"Parking",
+                                "image":""
+                            }            
+                    ]
+                    },
+                    
+                     {  
+                        "area":"Third Floor",
+                        "items":[
+                            {  
+                                "description":"Library Stacks, Main Collection - Language and Literature",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Entrance",
+                                "image":"224_3F Plan.JPG"
+                            },
+                            {	 
+                                "description":"Third Floor Toilets - Standard Male, Standard Female and Accessible Toilets",
+                                "notes":"All accessible toilets within the building are wheelchair accessible with varying left and right hand lateral transfer space.All toilet doors within the building have identifying braille markings.One Ground Floor accessible toilet incorporates a hoist and one accessible toilet on the Lower Ground Floor incorporates an accessible shower.All toilets within the building are well sign posted with signs on each floor at the top of stairwells and lifts. These signs have location maps at the base with braille markings and You are here signs.",
+                                "type":"Toilets",
+                                "image":"224_3F Plan.jpg"
+                            },
+                            {	 
+                                "description":"Third Floor Lifts",
+                                "notes":"There are three lifts within George Square Library which serve all floors.The lift call points and car controls are at an accessible height.",
+                                "type":"Lift",
+                                "image":"224_3F Plan.jpg"
+                            },
+                            {  
+                                "description":"Library Stacks, Main Collection - Science",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Entrance",
+                                "image":"224_3F Plan.JPG"
+                            },
+                            {  
+                                "description":"Library Stacks, Main Collection - Medicine",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Entrance",
+                                "image":"224_3F Plan.JPG"
+                            },
+                            {  
+                                "description":"Library Stacks, Main Collection - Agriculture",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Entrance",
+                                "image":"224_3F Plan.JPG"
+                            },
+                            {  
+                                "description":"Library Stacks, Main Collection - Technology",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Parking",
+                                "image":"224_3F Plan.JPG"
+                            },
+			                      {	 
+                                "description":"Library Stacks, Main Collection - Military Sciences",
+                                "notes":"TAs some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Parking",
+                                "image":"224_3F Plan.JPG"
+                            },
+                             {	 
+                                "description":"Library Stacks, Main Collection - Naval Sciences",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Toilets",
+                                "image":"224_3F Plan.JPG"
+                            },
+                            {  
+                                "description":"Library Stacks, Main Collection - Medicine Related Subjects",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Entrance",
+                                "image":"224_3F Plan.JPG"
+                            },
+                            {  
+                                "description":"Library Stacks, Main Collection - Bibliography, Library Science",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Entrance",
+                                "image":"224_3F Plan.JPG"
+                            },
+                            {  
+                                "description":"Library Stacks, Main Collection - East Asian Studies Collection",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Entrance",
+                                "image":"224_3F Plan.JPG"
+                            },
+                            {  
+                                "description":"Careers Service",
+                                "notes":"The Careers Services department is located adjacent to the Disability and Student Counselling Services departments on the Third Floor. The Careers Services reception incorporates a desk at a wheelchair accessible height and an induction loop system.Careers Services has an open plan entrance with ample manoeuvring space and a large seating area. ",
+                                "type":"Office",
+                                "image":"224_Careers.jpg"
+                            },
+			                      {	 
+                                "description":"Student Counselling Service",
+                                "notes":"The Student Disability Service and Counselling Service share a reception on the Third Floor which incorporates a desk at a wheelchair accessible height and an induction loop system.Access to the Disability and Student Counselling Services reception is via a set of push pad operated doors from the study area. There is ample manoeuvring space within the reception and a large seating area to the right of the desk.",
+                                "type":"office",
+                                "image":"224_Counselling.jpg"
+                            },
+                             {	 
+                                "description":"Student Disability Service",
+                                "notes":"The Student Disability Service and Counselling Service share a reception on the Third Floor which incorporates a desk at a wheelchair accessible height and an induction loop system.Access to the Disability and Student Counselling Services reception is via a set of push pad operated doors from the study area. There is ample manoeuvring space within the reception and a large seating area to the right of the desk.",
+                                "type":"office",
+                                "image":"224_Counselling.jpg"
+                            }            
+                    ]
+                    },
+                     {  
+                        "area":"Fourth Floor",
+                        "items":[
+                            {  
+                                "description":"Older Learning Collection",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Library Stack",
+                                "image":"224_4F Plan.JPG"
+                            },
+                            {	 
+                                "description":"Fourth Floor Toilets - Standard Male, Standard Female and Accessible Toilets",
+                                "notes":"All accessible toilets within the building are wheelchair accessible with varying left and right hand lateral transfer space.All toilet doors within the building have identifying braille markings.One Ground Floor accessible toilet incorporates a hoist and one accessible toilet on the Lower Ground Floor incorporates an accessible shower.All toilets within the building are well sign posted with signs on each floor at the top of stairwells and lifts. These signs have location maps at the base with braille markings and You are here signs.",
+                                "type":"Toilets",
+                                "image":"224_4F Plan.jpg"
+                            },
+                            {	 
+                                "description":"Fourth Floor Lifts",
+                                "notes":"There are three lifts within George Square Library which serve all floors.The lift call points and car controls are at an accessible height.",
+                                "type":"Lift",
+                                "image":"224_4F Plan.jpg"
+                            },
+                            {  
+                                "description":"Journals (Per, 0-9)",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Library Stack",
+                                "image":"224_4F Plan.JPG"
+                            },
+                            
+                            {  
+                                "description":"Centre for African Studies Collections",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Library Stack",
+                                "image":"224_4F Plan.JPG"
+                            },
+                            {  
+                                "description":"Sergeant, Watt and Smith Collections",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Library Stack",
+                                "image":"224_4F Plan.JPG"
+                            },
+			                      
+                             {	 
+                                "description":"Newspapers",
+                                "notes":"The Student Disability Service and Counselling Service share a reception on the Third Floor which incorporates a desk at a wheelchair accessible height and an induction loop system.Access to the Disability and Student Counselling Services reception is via a set of push pad operated doors from the study area. There is ample manoeuvring space within the reception and a large seating area to the right of the desk.",
+                                "type":"Library Stack",
+                                "image":"224_4F Plan.JPG"
+                            }            
+                    ]
+                    },
+                    
+                    {  
+                        "area":"Sixth Floor",
+                        "items":[
+                            {  
+                                "description":"Centre for Research Collections",
+                                "notes":"The Centre of Research Collections is located on the Sixth Floor within close proximity to the lifts. Access from the lifts to the reception is via a set of push pad operated glass double doors and a large open area.The reception incorporates a desk at a wheelchair accessible height and an induction loop system..",
+                                "type":"Offices",
+                                "image":"224_5F CRC.JPG"
+                            },
+                            {	 
+                                "description":" Sixt Floor Toilets - Standard Male, Standard Female and Accessible Toilets",
+                                "notes":"All accessible toilets within the building are wheelchair accessible with varying left and right hand lateral transfer space.All toilet doors within the building have identifying braille markings.One Ground Floor accessible toilet incorporates a hoist and one accessible toilet on the Lower Ground Floor incorporates an accessible shower.All toilets within the building are well sign posted with signs on each floor at the top of stairwells and lifts. These signs have location maps at the base with braille markings and You are here signs.",
+                                "type":"Toilets",
+                                "image":"224_6F Plan.jpg"
+                            },
+                            {	 
+                                "description":"Sixth Floor Lifts",
+                                "notes":"There are three lifts within George Square Library which serve all floors.The lift call points and car controls are at an accessible height.",
+                                "type":"Lift",
+                                "image":"224_6F Plan.jpg"
+                            },
+                            {  
+                                "description":"Special Collections",
+                                "notes":"See plan.",
+                                "type":"Library Stack",
+                                "image":"224_6F Plan.JPG"
+                            },
+                            {  
+                                "description":"Lothian Health Services Archive",
+                                "notes":"See Plan",
+                                "type":"Library Stack",
+                                "image":"224_6F Plan.JPG"
+                            },
+                            
+                            {  
+                                "description":"Museum Support",
+                                "notes":"See Plan",
+                                "type":"Offices",
+                                "image":"224_6F Plan.JPG"
+                            },
+                            {  
+                                "description":"Research Support Collections",
+                                "notes":"See Plan",
+                                "type":"Library Stack",
+                                "image":"224_6F Plan.JPG"
+                            },
+			                      
+                             {	 
+                                "description":"University Archives",
+                                "notes":"See Plan",
+                                "type":"Offices",
+                                "image":"224_6F Plan.JPG"
+                            }            
+                    ]
+                    },
+                    {  
+                        "area":"Lower Ground Floor",
+                        "items":[
+                            {  
+                                "description":"Staff Offices",
+                                "notes":"",
+                                "type":"Offices",
+                                "image":"224_LGF Plan.jpg"
+                            },
+                            {	 
+                                "description":"Lower Ground Floor Toilets - Standard Male, Standard Female and Accessible Toilets",
+                                "notes":"All accessible toilets within the building are wheelchair accessible with varying left and right hand lateral transfer space.All toilet doors within the building have identifying braille markings.One Ground Floor accessible toilet incorporates a hoist and one accessible toilet on the Lower Ground Floor incorporates an accessible shower.All toilets within the building are well sign posted with signs on each floor at the top of stairwells and lifts. These signs have location maps at the base with braille markings and You are here signs.",
+                                "type":"Toilets",
+                                "image":"224_LGF Plan.jpg"
+                            },
+                            {	 
+                                "description":"Lower Ground Floor Floor Lifts",
+                                "notes":"There are three lifts within George Square Library which serve all floors.The lift call points and car controls are at an accessible height.",
+                                "type":"Lift",
+                                "image":"224_LGF Plan.jpg"
+                            },
+                            {  
+                                "description":"Acquisitions and Metadata",
+                                "notes":"",
+                                "type":"Offices",
+                                "image":"224_LGF Plan.jpg"
+                            },
+                            {  
+                                "description":"Collections Management",
+                                "notes":"",
+                                "type":"",
+                                "image":"224_LGF Plan.jpg"
+                            },
+                            {  
+                                "description":"Consultancy Services",
+                                "notes":"",
+                                "type":"Offices",
+                                "image":"224_LGF Plan.jpg"
+                            },
+                             {  
+                                "description":"E-Resources",
+                                "notes":"",
+                                "type":"Offices",
+                                "image":"224_LGF Plan.jpg"
+                            },
+                            {  
+                                "description":"Help Services",
+                                "notes":"",
+                                "type":"Offices",
+                                "image":"224_LGF Plan.jpg"
+                            },
+                            {  
+                                "description":"Information Systems",
+                                "notes":"",
+                                "type":"Offices",
+                                "image":"224_LGF Plan.jpg"
+                            },
+                             {  
+                                "description":"Operational Servicess",
+                                "notes":"",
+                                "type":"Offices",
+                                "image":"224_LGF Plan.jpg"
+                            },
+                            {  
+                                "description":"Scholarly Communications",
+                                "notes":"",
+                                "type":"Offices",
+                                "image":"224_LGF Plan.jpg"
+                            },
+                            {  
+                                "description":"Reception Point",
+                                "notes":"There is a reception point located on the Lower Ground Floor adjacent to the staff offices. The reception point is well sign posted and consists of a phone with a list of contact numbers mounted on the wall.",
+                                "type":"Reception",
+                                "image":"224_LGF Reception.jpg"
+                            },
+                            {  
+                                "description":"Data Library",
+                                "notes":"",
+                                "type":"Offices",
+                                "image":"224_LGF Plan.jpg"
+                            }
+                        ]
+                    },
+                    {  
+                        "area":"Ground Floor",
+                        "items":[
+                            {  
+                                "description":"Study Area",
+                                "notes":"Group study pods are located on the Ground and First Floors within close proximity to the lifts. These study areas offer ample manoeuvring space and desks which will permit a wheelchair underneath.",
+                                "type":"Study",
+                                "image":"224_Study Pods.JPG"
+                            },
+                            {	 
+                                "description":" Ground Floor Toilets - Standard Male, Standard Female and Accessible Toilets",
+                                "notes":"All accessible toilets within the building are wheelchair accessible with varying left and right hand lateral transfer space.All toilet doors within the building have identifying braille markings.One Ground Floor accessible toilet incorporates a hoist and one accessible toilet on the Lower Ground Floor incorporates an accessible shower.All toilets within the building are well sign posted with signs on each floor at the top of stairwells and lifts. These signs have location maps at the base with braille markings and You are here signs.",
+                                "type":"Toilets",
+                                "image":"224_GF Plan.jpg"
+                            },
+                            {	 
+                                "description":"Ground Floor Lifts",
+                                "notes":"There are three lifts within George Square Library which serve all floors.The lift call points and car controls are at an accessible height.",
+                                "type":"Lift",
+                                "image":"224_GF Plan.jpg"
+                            },
+                            {  
+                                "description":"Computers",
+                                "notes":"See Plan",
+                                "type":"Study",
+                                "image":"224_GF Plan.JPG"
+                            },
+                            {  
+                                "description":"High Use Books (HUB)",
+                                "notes":"Access to the HUB is via a set of swipe card activated barriers which are located to the right of the IS Helpdesk. All barriers will permit the passage of a wheelchair.",
+                                "type":"Library Stack",
+                                "image":"224_GF Hub.jpg"
+                            },
+                            {  
+                                "description":"Helpdesk",
+                                "notes":"The IS Helpdesk is located to the rear of the Ground Floor lobby and to the left of the High Use Books HUB. The IS Helpdesk incorporates a desk at a wheelchair accessible height and an induction loop system.",
+                                "type":"Library",
+                                "image":"224_IS Helpdesk.JPG"
+                            },
+                            {  
+                                "description":"Cafe",
+                                "notes":"There is internal access from the main lobby to the library café via a set of swipe card activated barriers which will permit the passage of a wheelchair. The servery counter within the café is at a wheelchair accessible height.There is an additional servery counter located within a Ground Floor corridor to the rear of the cafe. This counter is at a wheelchair accessible height and incorporates a call button.",
+                                "type":"Social",
+                                "image":"224_GF Cafe.JPG"
+                            },
+                            {  
+                                "description":"Reception",
+                                "notes":"The main reception is located within the Entrance 1 lobby and currently does not incorporate a desk at a wheelchair accessible height or an induction loop system.",
+                                "type":"Reception",
+                                "image":"224_GF Reception.JPG"
+                            },
+                            {  
+                                "description":"Exhibition Room",
+                                "notes":"See Plan",
+                                "type":"Exhibition",
+                                "image":"224_GF Plan.JPG"
+                            },
+                            {  
+                                "description":"Student Information Point",
+                                "notes":"The Student Information Point is located within the Entrance 1 lobby on the Ground Floor. The Student Information Point incorporates a desk at a wheelchair accessible height and an induction loop system.",
+                                "type":"Information",
+                                "image":"224_Student Info.jpg"
+                            },
+                     
+                            {  
+                                "description":"Servitors Desk",
+                                "notes":"The servitors desk is located within the main lobby adjacent to the main reception. The servitors desk incorporates a desk at a wheelchair accessible height and an induction loop system.",
+                                "type":"Servitor",
+                                "image":"224_GF Plan.JPG"
+                            }
+                        ]
+                    },
+                    {  
+                        "area":"First Floor",
+                        "items":[
+                            {  
+                                "description":"Video Conferencing Room",
+                                "notes":"See Plan",
+                                "type":"Offices",
+                                "image":"224_1F Plan.JPG"
+                            },
+                            {	 
+                                "description":"First Floor Toilets - Standard Male, Standard Female and Accessible Toilets",
+                                "notes":"All accessible toilets within the building are wheelchair accessible with varying left and right hand lateral transfer space.All toilet doors within the building have identifying braille markings.One Ground Floor accessible toilet incorporates a hoist and one accessible toilet on the Lower Ground Floor incorporates an accessible shower.All toilets within the building are well sign posted with signs on each floor at the top of stairwells and lifts. These signs have location maps at the base with braille markings and You are here signs.",
+                                "type":"Toilets",
+                                "image":"224_1F Plan.jpg"
+                            },
+                            {	 
+                                "description":"First Floor Lifts",
+                                "notes":"There are three lifts within George Square Library which serve all floors.The lift call points and car controls are at an accessible height.",
+                                "type":"Lift",
+                                "image":"224_1F Plan.jpg"
+                            },
+                            {  
+                                "description":"uCreate",
+                                "notes":"uCreate provides multimedia and specialist IT facilities for all staff and students on a self-service basis at the Main Library",
+                                "type":"Meeting Room",
+                                "image":"224_1F Plan.JPG"
+                            },
+                            {  
+                                "description":"Computers",
+                                "notes":"See Plan",
+                                "type":"Study",
+                                "image":"224_1F Plan.JPG"
+                            },
+                            {  
+                                "description":"Meeting Suite",
+                                "notes":"See Plan",
+                                "type":"Meeting Room",
+                                "image":"224_1F Plan.JPG"
+                            },
+                            {  
+                                "description":"Accessible Study Area",
+                                "notes":"The accessible study rooms are located on the First Floor adjacent to the Meeting Suite reception. Access to the study rooms is only possible with permission from the Student Disability Service.",
+                                "type":"Study",
+                                "image":"224_Access Study.JPG"
+                            },
+                            {  
+                                "description":"Study Area",
+                                "notes":"Group study pods are located on the Ground and First Floors within close proximity to the lifts. These study areas offer ample manoeuvring space and desks which will permit a wheelchair underneath.",
+                                "type":"Study",
+                                "image":"224_Study Pods.jpg"
+                            }
+                        ]
+                    },
+                    {  
+                        "area":"Second Floor",
+                        "items":[
+                            {  
+                                "description":"Library Stacks, Main Collection - Fine Arts",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Library Stacks",
+                                "image":"224_2F Plan.JPG"
+                            },
+                            {	 
+                                "description":"2nd Floor Toilets - Standard Male, Standard Female and Accessible Toilets",
+                                "notes":"All accessible toilets within the building are wheelchair accessible with varying left and right hand lateral transfer space.All toilet doors within the building have identifying braille markings.One Ground Floor accessible toilet incorporates a hoist and one accessible toilet on the Lower Ground Floor incorporates an accessible shower.All toilets within the building are well sign posted with signs on each floor at the top of stairwells and lifts. These signs have location maps at the base with braille markings and You are here signs.",
+                                "type":"Toilets",
+                                "image":"224_2F Plan.jpg"
+                            },
+                            {	 
+                                "description":"Second Floor Lifts",
+                                "notes":"There are three lifts within George Square Library which serve all floors.The lift call points and car controls are at an accessible height.",
+                                "type":"Lift",
+                                "image":"224_2F Plan.jpg"
+                            },
+                            {  
+                                "description":"Library Stacks, Main Collection - Musics",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Library Stacks",
+                                "image":"224_2F Plan.JPG"
+                            },
+                            {  
+                                "description":"Library Stacks, Main Collection - Education",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Library Stacks",
+                                "image":"224_2F Plan.JPG"
+                            },
+                            {  
+                                "description":"Library Stacks, Main Collection - Political Science, Law",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Library Stacks",
+                                "image":"224_2F Plan.JPG"
+                            },
+                             {  
+                                "description":"Library Stacks, Main Collection - Social Sciences, Business, Economics, Sociology",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Library Stacks",
+                                "image":"224_2F Plan.JPG"
+                            },
+                            {  
+                                "description":"Library Stacks, Main Collection - Geography, Anthropology",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Library Stacks",
+                                "image":"224_2F Plan.JPG"
+                            },
+                            {  
+                                "description":"History, Archaeology",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Library Stacks",
+                                "image":"224_2F Plan.JPG"
+                            },
+                            {  
+                                "description":"Library Stacks, Main Collection - Philosophy, Phycology, Religion",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Library Stacks",
+                                "image":"224_2F Plan.JPG"
+                            },
+                            {  
+                                "description":"Library Stacks, Main Collection - General Works",
+                                "notes":"As some library stacks within the building may be too narrow to permit the passage of a wheelchair there is a manual wheelchair available from the main reception to staff, students and visitors who are able to self-transfer.",
+                                "type":"Library Stacks",
+                                "image":"224_2F Plan.JPG"
                             }
                         ]
                     }
