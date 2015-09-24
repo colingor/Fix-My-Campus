@@ -26,6 +26,13 @@ class PopulateElasticSearch:
    def __init__(self):
        self.es = Elasticsearch([{'host': self.ES_HOST, 'port': self.ES_PORT}])
 
+   def postImage(self, imageName, id):
+
+       file = {'file': open('EstatesBuildingsImages/'+ imageName, 'rb')}
+       url= '%s/images/%s/upload' %(self.API_BASE_URL, id)
+       r = requests.post(url, files=file)
+       print r.text
+
 
    def loadEstatesBuildings(self):
        headers = {'Content-Type':'application/json'};
@@ -46,6 +53,10 @@ class PopulateElasticSearch:
               newImageContainer = {"name": str(i)};
               r = requests.post(url, headers=headers, data=json.dumps(newImageContainer))
 
+              buildingImage = loc['properties']['image']
+
+              self.postImage(buildingImage, i)
+
               areas= loc['properties']['information'];
 
               # POST the images for all facilities in each area
@@ -56,13 +67,7 @@ class PopulateElasticSearch:
                   for item in items:
                       imageName = item['image'];
                       if imageName:
-
-                          file = {'file': open('EstatesBuildingsImages/'+ imageName, 'rb')}
-
-                          url= '%s/images/%s/upload' %(self.API_BASE_URL, i)
-
-                          r = requests.post(url, files=file)
-                          print r.text
+                          self.postImage(imageName, i)
 
               i += 1
 
