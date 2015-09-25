@@ -36,7 +36,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *cameraIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *cameraRoll;
 @property (nonatomic) UIImagePickerController *imagePickerController;
-@property (nonatomic, strong) NSString *photo;
+
 @end
 
 @implementation AddFacilityViewController 
@@ -249,6 +249,13 @@ NSString *const ADD_NEW_TYPE = @"Add new type…";
         [self.photoCollectionView reloadData];
     });
 }
+
+- (void)deleteImage
+{
+    self.photo = nil;
+    [self finishAndUpdate];
+}
+
 
 #pragma mark - UIImagePickerControllerDelegate
 
@@ -506,14 +513,11 @@ NSString *const ADD_NEW_TYPE = @"Add new type…";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    //what photo chosen
-//    Photo *photo = self.photos[indexPath.row];
     
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
                                                              bundle: nil];
     ViewPhotoViewController* controller = (ViewPhotoViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"viewPhoto"];
-    
-//    controller.photo = photo;
+    controller.photoUrl = self.photo;
     
     [self.navigationController pushViewController:controller animated:YES];
 }

@@ -10,6 +10,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "Report.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "AddFacilityViewController.h"
 
 @interface ViewPhotoViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -23,13 +24,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+ 
     NSString *status = self.photo.report.status;
     
-    // Only allow option to delete unsubmitted reports at present
-    if([status isEqualToString:@"unsubmitted"]){
+    // Only allow option to delete unsubmitted reports or photos from AddFacilityView at present
+    if([status isEqualToString:@"unsubmitted"] || self.photoUrl){
         self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(deleteAction:)];
     }
-    
+ 
     // Do any additional setup after loading the view.
     [self loadImageAsset];
     
@@ -72,11 +75,17 @@ enum AlertButtonIndex : NSInteger
 {
     if (index == AlertButtonYes){
         
-        NSManagedObjectContext *managedObjectContext = self.photo.managedObjectContext;
-
-        [managedObjectContext deleteObject:self.photo];
-        [managedObjectContext save:NULL];
-   
+        // If we've come from the AddFacility view, we need to access it to delete the photo
+        if(self.photoUrl){
+            AddFacilityViewController *afvc = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
+            [afvc deleteImage];
+        }else{
+            NSManagedObjectContext *managedObjectContext = self.photo.managedObjectContext;
+            
+            [managedObjectContext deleteObject:self.photo];
+            [managedObjectContext save:NULL];
+        }
+ 
         // Return to previous controller
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -94,7 +103,16 @@ enum AlertButtonIndex : NSInteger
     
     [self.spinner startAnimating];
     
-    NSURL *assetUrl = [NSURL URLWithString:[self.photo.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSURL *assetUrl = nil;
+    
+    if(self.photoUrl){
+        assetUrl = [NSURL URLWithString:[self.photoUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+
+    }else{
+        assetUrl = [NSURL URLWithString:[self.photo.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+
+    }
+    
     __block UIImage *image;
     
     if([[assetUrl scheme] isEqualToString:@"assets-library"]){

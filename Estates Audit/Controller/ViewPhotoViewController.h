@@ -10,4 +10,5 @@
 #import "Photo+Create.h"
 @interface ViewPhotoViewController : UIViewController<UIScrollViewDelegate>
 @property(nonatomic, strong) Photo *photo ;
+@property(nonatomic, strong) NSString *photoUrl ;
 @end

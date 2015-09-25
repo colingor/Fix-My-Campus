@@ -12,5 +12,8 @@
 
 @property (strong, nonatomic) NSDictionary *buildingInfo;
 @property (strong, nonatomic) NSMutableDictionary *source;
+@property (nonatomic, strong) NSString *photo;
+
+- (void)deleteImage;
 
 @end
