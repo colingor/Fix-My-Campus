@@ -25,9 +25,9 @@
     [super layoutSubviews];
     self.imageView.contentMode = UIViewContentModeScaleToFill;
     
-    self.imageView.frame = CGRectMake(15, 0, 60, 60);
-    self.textLabel.frame = CGRectMake(85,self.textLabel.frame.origin.y,self.textLabel.frame.size.width,self.textLabel.frame.size.height);
-    self.detailTextLabel.frame = CGRectMake(85,self.detailTextLabel.frame.origin.y,self.detailTextLabel.frame.size.width,self.detailTextLabel.frame.size.height);
+    self.imageView.frame = CGRectMake(10, 1, 55, 55);
+    self.textLabel.frame = CGRectMake(75, self.textLabel.frame.origin.y,self.textLabel.frame.size.width,self.textLabel.frame.size.height);
+    self.detailTextLabel.frame = CGRectMake(75,self.detailTextLabel.frame.origin.y,self.detailTextLabel.frame.size.width,self.detailTextLabel.frame.size.height);
 }
 
 @end
