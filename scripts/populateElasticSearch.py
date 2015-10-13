@@ -51,6 +51,9 @@ class PopulateElasticSearch:
               # Post a new image container for this building to loopback Estates-API
               url= '%s/images' %(self.API_BASE_URL)
               newImageContainer = {"name": str(i)};
+
+              # Remove old image container and any images within
+              requests.delete('%s/%s' % (url, str(i)), headers=headers)
               r = requests.post(url, headers=headers, data=json.dumps(newImageContainer))
 
               buildingImage = loc['properties']['image']
@@ -99,6 +102,8 @@ class PopulateElasticSearch:
 
                   # Add to index
                   self.es.index(index=self.INDEX_NAME, doc_type='building', id=i, body=location)
+
+                  requests.delete('%s/%s' % (url, str(i)), headers=headers)
                   i += 1
 
 
