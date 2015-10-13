@@ -168,6 +168,10 @@ NSString *const BASE_ESTATES_API_URL = @"http://dlib-brown.edina.ac.uk/api/";
                                                                           // Turn off network activity
                                                                           [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                                                                           
+                                                                          
+                                                                          // Remove any blank values from results
+                                                                          [results removeObject:@""];
+                                                                          
                                                                           // Process in completion callback
                                                                           completion(results);
                                                                           
