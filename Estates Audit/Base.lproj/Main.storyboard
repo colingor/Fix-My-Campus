@@ -1205,8 +1205,8 @@
                                     <action selector="loginClicked:" destination="bme-IP-L2m" eventType="editingDidEndOnExit" id="hbo-99-p4e"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlI-qr-6D7">
-                                <rect key="frame" x="16" y="269" width="116" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlI-qr-6D7">
+                                <rect key="frame" x="102" y="269" width="116" height="30"/>
                                 <color key="backgroundColor" red="0.69803921570000005" green="0.50196078430000002" blue="0.027450980390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1215,8 +1215,8 @@
                                     <action selector="loginClicked:" destination="bme-IP-L2m" eventType="touchUpInside" id="Bjf-ug-mNv"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPb-Is-ITy">
-                                <rect key="frame" x="188" y="269" width="116" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPb-Is-ITy">
+                                <rect key="frame" x="102" y="307" width="116" height="30"/>
                                 <color key="backgroundColor" red="0.69803921570000005" green="0.50196078430000002" blue="0.027450980390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Help">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1232,14 +1232,14 @@
                             <constraint firstItem="cbv-E7-Fd1" firstAttribute="top" secondItem="sml-ea-dpg" secondAttribute="bottom" constant="66" id="1Wu-K2-JDK"/>
                             <constraint firstItem="cbv-E7-Fd1" firstAttribute="trailing" secondItem="ppH-cO-H0h" secondAttribute="trailingMargin" id="AmJ-Wi-RO1"/>
                             <constraint firstItem="sml-ea-dpg" firstAttribute="leading" secondItem="cbv-E7-Fd1" secondAttribute="leading" id="DPW-eX-HA1"/>
-                            <constraint firstItem="uPb-Is-ITy" firstAttribute="trailing" secondItem="xlI-qr-6D7" secondAttribute="trailing" constant="172" id="F9C-85-IcO"/>
+                            <constraint firstItem="uPb-Is-ITy" firstAttribute="trailing" secondItem="xlI-qr-6D7" secondAttribute="trailing" id="F9C-85-IcO"/>
                             <constraint firstItem="xlI-qr-6D7" firstAttribute="centerY" secondItem="ppH-cO-H0h" secondAttribute="centerY" id="FDR-vf-ntR"/>
-                            <constraint firstItem="xlI-qr-6D7" firstAttribute="centerX" secondItem="cbv-E7-Fd1" secondAttribute="centerX" constant="-86" id="OBK-nZ-UYk"/>
-                            <constraint firstItem="uPb-Is-ITy" firstAttribute="leading" secondItem="xlI-qr-6D7" secondAttribute="leading" constant="172" id="RSc-1V-xCF"/>
+                            <constraint firstItem="xlI-qr-6D7" firstAttribute="centerX" secondItem="cbv-E7-Fd1" secondAttribute="centerX" id="OBK-nZ-UYk"/>
+                            <constraint firstItem="uPb-Is-ITy" firstAttribute="leading" secondItem="xlI-qr-6D7" secondAttribute="leading" id="RSc-1V-xCF"/>
                             <constraint firstItem="sml-ea-dpg" firstAttribute="leading" secondItem="ppH-cO-H0h" secondAttribute="leadingMargin" id="VwR-aE-Mqk"/>
-                            <constraint firstItem="xlI-qr-6D7" firstAttribute="leading" secondItem="ppH-cO-H0h" secondAttribute="leadingMargin" id="bQq-zF-dML"/>
+                            <constraint firstItem="xlI-qr-6D7" firstAttribute="leading" secondItem="ppH-cO-H0h" secondAttribute="leadingMargin" constant="82" id="bQq-zF-dML"/>
                             <constraint firstItem="cbv-E7-Fd1" firstAttribute="trailing" secondItem="sml-ea-dpg" secondAttribute="trailing" id="d05-YK-NF5"/>
-                            <constraint firstItem="uPb-Is-ITy" firstAttribute="top" secondItem="xlI-qr-6D7" secondAttribute="bottom" constant="-30" id="lC4-sZ-gig"/>
+                            <constraint firstItem="uPb-Is-ITy" firstAttribute="top" secondItem="xlI-qr-6D7" secondAttribute="bottom" constant="8" id="lC4-sZ-gig"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="2PE-oy-Zy3">
@@ -1497,7 +1497,7 @@ as they are resolved</string>
                                         <rect key="frame" x="0.0" y="154" width="320" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        <accessibility key="accessibilityConfiguration" hint="Select the type of the new facility" label="Type">
+                                        <accessibility key="accessibilityConfiguration" hint="Select the type of new facility" label="Type">
                                             <accessibilityTraits key="traits" button="YES"/>
                                         </accessibility>
                                         <constraints>

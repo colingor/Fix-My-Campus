@@ -81,7 +81,7 @@
             
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         
-            int responseStatusCode = [httpResponse statusCode];
+            NSInteger responseStatusCode = [httpResponse statusCode];
             
             // Check if invalid
             if(responseStatusCode == 403){
