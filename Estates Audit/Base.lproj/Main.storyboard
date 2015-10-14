@@ -1421,11 +1421,11 @@ as they are resolved</string>
                         <viewControllerLayoutGuide type="bottom" id="N2v-Iy-gA2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="18h-mU-XTY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="597"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MT0-Yd-4TO">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="649"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="597"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please provide details of the facility you would like to add to" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHf-n9-xhR">
                                         <rect key="frame" x="8" y="8" width="304" height="40"/>
@@ -1629,7 +1629,7 @@ as they are resolved</string>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="dem-bl-grD" firstAttribute="top" secondItem="kRx-ja-KyO" secondAttribute="bottom" constant="8" symbolic="YES" id="0yv-bQ-wtV"/>
-                                    <constraint firstAttribute="bottom" secondItem="qbm-z1-Gm2" secondAttribute="bottom" constant="51" id="3SH-VC-dOG"/>
+                                    <constraint firstAttribute="bottom" secondItem="qbm-z1-Gm2" secondAttribute="bottom" constant="47" id="3SH-VC-dOG"/>
                                     <constraint firstItem="vZB-Av-bTg" firstAttribute="top" secondItem="ZVs-gZ-Vn5" secondAttribute="bottom" constant="8" symbolic="YES" id="85p-BD-hyR"/>
                                     <constraint firstItem="ZVs-gZ-Vn5" firstAttribute="top" secondItem="jUY-6p-h9i" secondAttribute="bottom" constant="8" symbolic="YES" id="FfF-mw-mM7"/>
                                     <constraint firstItem="kRx-ja-KyO" firstAttribute="leading" secondItem="hX9-bn-lgv" secondAttribute="leading" id="Fkr-Kt-VPu"/>
@@ -1667,7 +1667,7 @@ as they are resolved</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="MT0-Yd-4TO" secondAttribute="bottom" constant="-81" id="2kk-tg-4Zk"/>
+                            <constraint firstAttribute="bottom" secondItem="MT0-Yd-4TO" secondAttribute="bottom" id="2kk-tg-4Zk"/>
                             <constraint firstItem="MT0-Yd-4TO" firstAttribute="top" secondItem="18h-mU-XTY" secondAttribute="top" id="9Uy-vm-clW"/>
                             <constraint firstAttribute="trailing" secondItem="MT0-Yd-4TO" secondAttribute="trailing" id="Y0Y-Lz-Axb"/>
                             <constraint firstItem="MT0-Yd-4TO" firstAttribute="leading" secondItem="18h-mU-XTY" secondAttribute="leading" id="xsl-71-a3i"/>
@@ -1683,6 +1683,8 @@ as they are resolved</string>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="597"/>
                     <connections>
                         <outlet property="cameraIcon" destination="9yG-T6-q7s" id="1kb-VI-YsO"/>
                         <outlet property="cameraRoll" destination="LyQ-gs-Lqb" id="hBP-yU-6md"/>
@@ -1691,12 +1693,13 @@ as they are resolved</string>
                         <outlet property="facilityLabel" destination="YHf-n9-xhR" id="ETS-8A-FiE"/>
                         <outlet property="facilityType" destination="dem-bl-grD" id="MZ4-ZQ-hY8"/>
                         <outlet property="photoCollectionView" destination="qbm-z1-Gm2" id="Mum-KC-d2f"/>
+                        <outlet property="selectedPictureLabel" destination="vZB-Av-bTg" id="bIS-SS-u2W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gB6-UD-UU4" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="P21-RM-oem" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1407" y="-222"/>
+            <point key="canvasLocation" x="1407" y="-222.5"/>
         </scene>
     </scenes>
     <resources>

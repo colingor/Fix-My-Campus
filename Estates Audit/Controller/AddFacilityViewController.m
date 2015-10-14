@@ -27,6 +27,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *facilityLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *selectedPictureLabel;
+
 @property (strong, nonatomic) NSMutableArray *areas;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *photoCollectionView;
@@ -103,6 +105,12 @@ NSString *const ADD_NEW_TYPE = @"Add new type…";
                                    action:@selector(dismissKeyboard)];
     [tap setCancelsTouchesInView:NO];
     [self.view addGestureRecognizer:tap];
+    
+    
+    [self.photoCollectionView setHidden:YES];
+    [self.selectedPictureLabel setHidden:YES];
+
+    
 }
 
 - (IBAction)showImagePickerForCamera:(id)sender {
@@ -262,6 +270,9 @@ NSString *const ADD_NEW_TYPE = @"Add new type…";
 // This method is called when an image has been chosen from the library or taken from the camera.
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    
+    [self.photoCollectionView setHidden:NO];
+    [self.selectedPictureLabel setHidden:NO];
     
     [self dismissViewControllerAnimated:YES completion:NULL];
     
