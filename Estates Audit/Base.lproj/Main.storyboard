@@ -1429,9 +1429,6 @@ as they are resolved</string>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please provide details of the facility you would like to add to" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHf-n9-xhR">
                                         <rect key="frame" x="8" y="8" width="304" height="40"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <bool key="isElement" value="NO"/>
-                                        </accessibility>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="K0e-E3-VyG"/>
                                         </constraints>
@@ -1500,7 +1497,9 @@ as they are resolved</string>
                                         <rect key="frame" x="0.0" y="154" width="320" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        <accessibility key="accessibilityConfiguration" hint="Type of new facility" label="Type"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Select the type of the new facility" label="Type">
+                                            <accessibilityTraits key="traits" button="YES"/>
+                                        </accessibility>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="WWK-PK-BaT"/>
                                         </constraints>
@@ -1511,7 +1510,9 @@ as they are resolved</string>
                                         <rect key="frame" x="0.0" y="85" width="320" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        <accessibility key="accessibilityConfiguration" hint="Area where new facility is located" label="Area"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Select an area where new facility is located" label="Area">
+                                            <accessibilityTraits key="traits" button="YES"/>
+                                        </accessibility>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="HXh-gh-aIi"/>
                                         </constraints>
