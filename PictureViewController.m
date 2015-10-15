@@ -20,6 +20,7 @@
 @property (nonatomic) UIImagePickerController *imagePickerController;
 @property (weak, nonatomic) IBOutlet UIImageView *cameraIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *cameraRoll;
+@property (weak, nonatomic) IBOutlet UILabel *selectedPictureLabel;
 
 @end
 
@@ -42,7 +43,12 @@
     self.photoCollectionView.delegate = self;
     self.photoCollectionView.dataSource = self;
     [self finishAndUpdate];
-
+    
+    // If no photos, hide selected photos components
+    if([self.photos count] == 0){
+        [self.photoCollectionView setHidden:YES];
+        [self.selectedPictureLabel setHidden:YES];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -108,6 +114,10 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 
+    // Reveal selected image components
+    [self.photoCollectionView setHidden:NO];
+    [self.selectedPictureLabel setHidden:NO];
+    
     [self dismissViewControllerAnimated:YES completion:NULL];
     
     NSURL *imageUrl = [info valueForKey:UIImagePickerControllerReferenceURL];
@@ -227,7 +237,6 @@
             NSLog(@"%@  %@", locDesc, lat);
             DescriptionViewController *descvc = (DescriptionViewController *)segue.destinationViewController;
 
-            // TODO: Save photo
             
             // Set report in next controller
             descvc.report = self.report;

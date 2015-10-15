@@ -782,6 +782,7 @@
                         <outlet property="cameraIcon" destination="KCB-cM-P0I" id="eZe-Xb-Uxa"/>
                         <outlet property="cameraRoll" destination="tJD-bv-AH5" id="gOS-TF-KLO"/>
                         <outlet property="photoCollectionView" destination="dio-mh-WqW" id="xah-Jq-naL"/>
+                        <outlet property="selectedPictureLabel" destination="n2L-Ez-XM6" id="UUY-H4-UT2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RF9-rW-04M" userLabel="First Responder" sceneMemberID="firstResponder"/>
