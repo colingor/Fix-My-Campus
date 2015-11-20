@@ -183,7 +183,7 @@
     }
     
     
-    [subject appendString:[NSString stringWithFormat:@"Estates Audit Report: %@", description]];
+    [subject appendString:[NSString stringWithFormat:@"Fix My Campus Report: %@", description]];
 
     
     NSString *postString = [NSString stringWithFormat:@"categoryId=0&body=%@&subject=%@&priorityId=0", body, subject];

@@ -347,7 +347,7 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
     if (!self.alertShown) {
         
         [[[UIAlertView alloc] initWithTitle:@"No Network connection available"
-                                    message:@"An active network connection is required for the Estates Audit application to load and submit reports."
+                                    message:@"An active network connection is required for the Fix My Campus application to load and submit reports."
                                    delegate:self
                           cancelButtonTitle:nil
                           otherButtonTitles:@"OK",
