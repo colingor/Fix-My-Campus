@@ -29,7 +29,7 @@
 
 @implementation LocationDetailsViewController
 
-NSString *const DEFAULT_CELL_IMAGE = @"MapPinDefaultLeftCallout";
+NSString *const DEFAULT_CELL_IMAGE = @"fix-my-campus-building";
 NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/api/images/";
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -287,7 +287,7 @@ enum AlertButtonIndex : NSInteger
         NSString *imagePath = [NSString stringWithFormat:@"%@%@/download/%@", BASE_IMAGE_URL,  self.buildingId,  imageName];
 
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[imagePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
-                          placeholderImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout"]];
+                          placeholderImage:[UIImage imageNamed:@"fix-my-campus-building"]];
         
         
         cell.textLabel.text = [item valueForKeyPath:@"description"];

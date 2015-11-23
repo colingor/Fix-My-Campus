@@ -170,7 +170,7 @@
                       failureBlock:failureblock];
     } else{
         [cell.imageView sd_setImageWithURL:assetUrl
-                          placeholderImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout"]];
+                          placeholderImage:[UIImage imageNamed:@"Camera"]];
     }
     
     return cell;

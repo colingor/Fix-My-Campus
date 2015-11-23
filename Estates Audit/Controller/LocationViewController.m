@@ -334,7 +334,7 @@ static BOOL mapChangedFromUserInteraction = NO;
         NSURL *assetUrl = [NSURL URLWithString:[point.imageUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
         [cell.imageView sd_setImageWithURL:assetUrl
-                          placeholderImage:[UIImage imageNamed:@"MapPinDefaultLeftCallout"]];
+                          placeholderImage:[UIImage imageNamed:@"fix-my-campus-building"]];
     }
     @catch (NSException *exception) {
         NSLog(@"Problem creating custom point: %@", exception.reason);
