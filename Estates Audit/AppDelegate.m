@@ -41,7 +41,7 @@
 // how long we'll wait for a JitBit fetch to return when we're in the background
 #define BACKGROUND_JITBIT_FETCH_TIMEOUT (60)
 
-NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
+NSString *const FIX_MY_CAMPUS_KEYCHAIN_SERVICE = @"Fix My Campus";
 
 @implementation AppDelegate
 
@@ -211,7 +211,7 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
 {
     NSError *error = nil;
     
-    [SSKeychain setPassword:password forService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:username error:&error];
+    [SSKeychain setPassword:password forService:FIX_MY_CAMPUS_KEYCHAIN_SERVICE account:username error:&error];
     if ([error code] == SSKeychainErrorNotFound) {
         NSLog(@"Password not set");
     }else{
@@ -221,13 +221,13 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
 
 -(void)removeAllUsersFromKeychain{
     
-    NSArray *accounts = [SSKeychain accountsForService:ESTATES_AUDIT_KEYCHAIN_SERVICE];
+    NSArray *accounts = [SSKeychain accountsForService:FIX_MY_CAMPUS_KEYCHAIN_SERVICE];
     
     for (id account in accounts){
         NSString *user = [account valueForKey:@"acct"];
         
         SSKeychainQuery *query = [[SSKeychainQuery alloc] init];
-        query.service = ESTATES_AUDIT_KEYCHAIN_SERVICE;
+        query.service = FIX_MY_CAMPUS_KEYCHAIN_SERVICE;
         query.account = user;
         
         [query deleteItem:nil];
@@ -278,14 +278,14 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
 {
     NSString *authValue;
     
-    NSArray *accounts = [SSKeychain accountsForService:ESTATES_AUDIT_KEYCHAIN_SERVICE];
+    NSArray *accounts = [SSKeychain accountsForService:FIX_MY_CAMPUS_KEYCHAIN_SERVICE];
     
     if([accounts count] > 0){
         
         for (id account in accounts){
             NSString *user = [account valueForKey:@"acct"];
             if([user isEqualToString:self.username]){
-                NSString *pass = [SSKeychain passwordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:user];
+                NSString *pass = [SSKeychain passwordForService:FIX_MY_CAMPUS_KEYCHAIN_SERVICE account:user];
                 
                 NSString *authStr = [NSString stringWithFormat:@"%@:%@", user, pass];
                 NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
@@ -295,7 +295,7 @@ NSString *const ESTATES_AUDIT_KEYCHAIN_SERVICE = @"Estates Audit";
         // Just use the first one?
         NSDictionary *account = [accounts objectAtIndex:0];
         NSString *user = [account valueForKey:@"acct"];
-        NSString *pass = [SSKeychain passwordForService:ESTATES_AUDIT_KEYCHAIN_SERVICE account:user];
+        NSString *pass = [SSKeychain passwordForService:FIX_MY_CAMPUS_KEYCHAIN_SERVICE account:user];
         
         NSString *authStr = [NSString stringWithFormat:@"%@:%@", user, pass];
         NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
