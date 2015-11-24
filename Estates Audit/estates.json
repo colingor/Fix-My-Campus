@@ -188,7 +188,8 @@
             ], 
             "latitude": "55.9453789457260800", 
             "longitude": "-3.1896400451660156", 
-            "name": "McEwan Hall"
+            "name": "McEwan Hall",
+            "image": "McEwanHall26-S.jpg"
         }, 
         {
             "address": "Bristo Square Edinburgh EH8 9AL", 
@@ -226,7 +227,8 @@
             ], 
             "latitude": "55.9442794724061900", 
             "longitude": "-3.1899189949035645", 
-            "name": "Hugh Robson Building"
+            "name": "Hugh Robson Building",
+            "image":"Hugh-Robson-S.jpg"
         }, 
         {
             "address": "33 Buccluech Place Edinburgh EH8 9JT", 
@@ -289,7 +291,8 @@
             ], 
             "latitude": "55.9435644975969700", 
             "longitude": "-3.1862711906433105", 
-            "name": "David Hume Tower Lecture Theatres"
+            "name": "David Hume Tower Lecture Theatres",
+            "image": "Hume-Tower-S.jpg"
         }, 
         {
             "abbreviation": "0228", 
@@ -1273,7 +1276,8 @@
             ], 
             "latitude": "55.9441765328811300", 
             "longitude": "-3.1908416748046875", 
-            "name": "Chrystal Macmillan Building"
+            "name": "Chrystal Macmillan Building",
+            "image": "Chrystal-Mac-S.jpg"
         }, 
         {
             "address": "2 Charles Street Edinburgh EH8 9AD", 
@@ -1613,7 +1617,8 @@
             ], 
             "latitude": "55.9444785414622100", 
             "longitude": "-3.1886368989944460", 
-            "name": "Psychology Building"
+            "name": "Psychology Building",
+            "image": "Psychology-S.jpg"
         }, 
         {
             "address": "Easter Bush Midlothian Edinburgh EH25 9RG", 
