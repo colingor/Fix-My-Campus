@@ -7,185 +7,210 @@ import requests
 
 
 parser = argparse.ArgumentParser(description="""Script to read estates.json into ElasticSearch index. To change path to estates.json
-        buildings file or ElasticSearch host and port please modify class variables directly. Note that you have to install the
+    buildings file or ElasticSearch host and port please modify class variables directly. Note that you have to install the
         elasticsearch module with 'pip install elasticsearch' to use this script""")
 results = parser.parse_args()
 
+
 class PopulateElasticSearch:
 
-   # INDEX_NAME = 'estates'
-   INDEX_NAME = 'buildings'
-   BUILDING2_JSON = 'estates.json'
-   BUILDING_JSON = 'uoe-estates-buildings.json'
+    # INDEX_NAME = 'estates'
+    INDEX_NAME = 'buildings'
+    BUILDING2_JSON = 'estates.json'
+    BUILDING_JSON = 'uoe-estates-buildings.json'
 
-   ES_HOST = 'dlib-brown.edina.ac.uk'
-   ES_PORT = '9200'
+    # ES_HOST = 'localhost'
+    ES_HOST = 'dlib-brown.edina.ac.uk'
+    ES_PORT = '9200'
 
-   API_BASE_URL = 'http://0.0.0.0:3001/api';
+    API_BASE_URL = 'http://dlib-brown.edina.ac.uk:3001/api'
+    # API_BASE_URL = 'http://0.0.0.0:3001/api'
 
-   def __init__(self):
-       self.es = Elasticsearch([{'host': self.ES_HOST, 'port': self.ES_PORT}])
+    def __init__(self):
+        self.es = Elasticsearch([{'host': self.ES_HOST, 'port': self.ES_PORT}])
 
-   def postImage(self, imageName, id):
+    def postImage(self, imageName, id):
 
-       file = {'file': open('EstatesBuildingsImages/'+ imageName, 'rb')}
-       url= '%s/images/%s/upload' %(self.API_BASE_URL, id)
-       r = requests.post(url, files=file)
-       print r.text
+        file = {'file': open('EstatesBuildingsImages/' + imageName, 'rb')}
+        url = '%s/images/%s/upload' % (self.API_BASE_URL, id)
+        r = requests.post(url, files=file)
+        print r.text
 
+    def postImageContainer(self, i, headers):
+        url = '%s/images' % (self.API_BASE_URL)
+        newImageContainer = {"name": str(i)}
 
-   def loadEstatesBuildings(self):
-       headers = {'Content-Type':'application/json'};
+        requests.post(url, headers=headers,
+                      data=json.dumps(newImageContainer))
 
-       i = 1
-       with open(self.BUILDING_JSON, 'rU') as data_file:
-          data = json.load(data_file)
-          # for loc in data['locations']:
-          for loc in data['features']:
-              # Have to modify the locations to ensure they're stored in the correct format for es spatial searching
-              loc['geometry']['location'] = loc['geometry'].pop('coordinates')
+    def loadEstatesBuildings(self):
+        headers = {'Content-Type': 'application/json'}
 
-              # Add to index
-              self.es.index(index=self.INDEX_NAME, doc_type='building', id=i, body=loc)
+        i = 1
+        with open(self.BUILDING_JSON, 'rU') as data_file:
+            data = json.load(data_file)
+            # for loc in data['locations']:
+            for loc in data['features']:
+                # Have to modify the locations to ensure they're stored in the
+                # correct format for es spatial searching
+                loc['geometry']['location'] = loc[
+                    'geometry'].pop('coordinates')
 
-              # Post a new image container for this building to loopback Estates-API
-              url= '%s/images' %(self.API_BASE_URL)
-              newImageContainer = {"name": str(i)};
+                # Add to index
+                self.es.index(index=self.INDEX_NAME,
+                              doc_type='building', id=i, body=loc)
 
-              # Remove old image container and any images within
-              requests.delete('%s/%s' % (url, str(i)), headers=headers)
-              r = requests.post(url, headers=headers, data=json.dumps(newImageContainer))
+                # Post a new image container for this building to loopback
+                # Estates-API
 
-              buildingImage = loc['properties']['image']
+                # Remove old image container and any images within
+                url = '%s/images' % (self.API_BASE_URL)
+                requests.delete('%s/%s' % (url, str(i)), headers=headers)
 
-              self.postImage(buildingImage, i)
+                self.postImageContainer(i, headers)
 
-              areas= loc['properties']['information'];
+                buildingImage = loc['properties']['image']
 
-              # POST the images for all facilities in each area
-              for area in areas:
+                self.postImage(buildingImage, i)
 
-                  items = area['items'];
+                areas = loc['properties']['information']
 
-                  for item in items:
-                      imageName = item['image'];
-                      if imageName:
-                          self.postImage(imageName, i)
+                # POST the images for all facilities in each area
+                for area in areas:
 
-              i += 1
+                    items = area['items']
 
-       with open(self.BUILDING2_JSON, 'rU') as data_file:
-          data = json.load(data_file)
-          for loc in data['locations']:
-              # Have to modify the locations to ensure they're stored in the correct format for es spatial searching
-              name = loc.get('name');
-              if name:
-                  latitude = loc['latitude'];
-                  longitude = loc['longitude'];
+                    for item in items:
+                        imageName = item['image']
+                        if imageName:
+                            self.postImage(imageName, i)
 
-                  # Populate expected template
-                  location = {
-                     "geometry":{
-                        "location":[float(longitude), float(latitude)],
-                         "type": "Point"
-                      },
-                     "properties":{
-                         "area": loc.get('campuses'),
-                         "image":"",
-                         "subtitle": loc.get('address'),
-                         "title": name,
-                         "information":[]
-                         },
-                     "type":"Feature"
-                     }
+                i += 1
 
+        with open(self.BUILDING2_JSON, 'rU') as data_file:
 
-                  # Add to index
-                  self.es.index(index=self.INDEX_NAME, doc_type='building', id=i, body=location)
+            data = json.load(data_file)
+            for loc in data['locations']:
+                # Have to modify the locations to ensure they're stored in the
+                # correct format for es spatial searching
+                name = loc.get('name')
 
-                  requests.delete('%s/%s' % (url, str(i)), headers=headers)
-                  i += 1
+                url = '%s/images' % (self.API_BASE_URL)
+                requests.delete('%s/%s' % (url, str(i)), headers=headers)
 
+                if name:
+                    latitude = loc['latitude']
+                    longitude = loc['longitude']
+                    image = loc.get('image')
+                    if image:
+                        # Post a new image container for this
+                        # building to loopback Estates-API
+                        self.postImageContainer(i, headers)
+                        self.postImage(image, i)
+                    else:
+                        image = ''
+                        
+                    # Populate expected template
+                    location = {
+                        "geometry": {
+                            "location": [float(longitude), float(latitude)],
+                            "type": "Point"
+                        },
+                        "properties": {
+                            "area": loc.get('campuses'),
+                            "image": image,
+                            "subtitle": loc.get('address'),
+                            "title": name,
+                            "information": []
+                        },
+                        "type": "Feature"
+                    }
 
-   def recreateElasticSearchIndex(self):
-     try:
-         # For now we'll delete and recreate the index
-         self.es.indices.delete(index=self.INDEX_NAME)
-     except Exception:
-         # Ignore exception caused when no index to delete
-         pass
+                    # Add to index
+                    self.es.index(index=self.INDEX_NAME,
+                                  doc_type='building', id=i, body=location)
 
-     # have to specify mapping so geo_points are indexed correctly
-     mapping = {
-             "mappings": {
-                 "building": {
-                     "properties": {
-                         "geometry": {
-                             "properties": {
-                                 "location": {
-                                     "type": "geo_point"
-                                     },
-                                 "type": {
-                                     "type": "string"
-                                     }
-                                 }
-                             },
-                         "properties": {
-                             "properties": {
-                                 "area": {
-                                     "type": "string"
-                                     },
-                                 "image": {
-                                     "type": "string"
-                                     },
-                                 "information": {
-                                     "properties": {
-                                         "area": {
-                                             "type": "string",
-                                             "fields": {
-                                                 "raw":   { "type": "string", "index": "not_analyzed" }
-                                                 }
-                                             },
-                                         "items": {
-                                             "type": "nested",
-                                             "include_in_parent": "true",
-                                             "properties": {
-                                                 "description": {
-                                                     "type": "string"
-                                                     },
-                                                 "image": {
-                                                     "type": "string"
-                                                     },
-                                                 "notes": {
-                                                     "type": "string"
-                                                     },
-                                                 "type": {
-                                                     "type": "string",
-                                                     "fields": {
-                                                         "raw":   { "type": "string", "index": "not_analyzed" }
-                                                         }
-                                                     }
-                                                 }
-                                             }
-                                         }
-                                     },
-                                 "subtitle": {
-                                     "type": "string"
-                                     },
-                                 "title": {
-                                     "type": "string"
-                                     }
-                                 }
-                             },
-                         "type": {
-                                 "type": "string"
-                                 }
-                         }
-      }
-   }
-}
+                    i += 1
 
-     self.es.indices.create(index=self.INDEX_NAME, body=mapping)
+    def recreateElasticSearchIndex(self):
+        try:
+            # For now we'll delete and recreate the index
+            self.es.indices.delete(index=self.INDEX_NAME)
+        except Exception:
+            # Ignore exception caused when no index to delete
+            pass
+
+        # have to specify mapping so geo_points are indexed correctly
+        mapping = {
+            "mappings": {
+                "building": {
+                    "properties": {
+                        "geometry": {
+                            "properties": {
+                                "location": {
+                                    "type": "geo_point"
+                                },
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "properties": {
+                            "properties": {
+                                "area": {
+                                    "type": "string"
+                                },
+                                "image": {
+                                    "type": "string"
+                                },
+                                "information": {
+                                    "properties": {
+                                        "area": {
+                                            "type": "string",
+                                            "fields": {
+                                                    "raw":   {"type": "string", "index": "not_analyzed"}
+                                            }
+                                        },
+                                        "items": {
+                                            "type": "nested",
+                                            "include_in_parent": "true",
+                                            "properties": {
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                "image": {
+                                                        "type": "string"
+                                                        },
+                                                "notes": {
+                                                        "type": "string"
+                                                        },
+                                                "type": {
+                                                        "type": "string",
+                                                        "fields": {
+                                                            "raw":   {"type": "string", "index": "not_analyzed"}
+                                                        }
+                                                        }
+                                            }
+                                        }
+                                    }
+                                },
+                                "subtitle": {
+                                    "type": "string"
+                                },
+                                "title": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+
+        self.es.indices.create(index=self.INDEX_NAME, body=mapping)
 
 # Begin
 loader = PopulateElasticSearch()
@@ -194,5 +219,6 @@ loader.loadEstatesBuildings()
 
 # print loader.es.get(index=loader.INDEX_NAME, doc_type="building", id=1)
 time.sleep(2)
-res = loader.es.search(index=loader.INDEX_NAME, body={"query": {"match_all": {}}})
+res = loader.es.search(index=loader.INDEX_NAME, body={
+                       "query": {"match_all": {}}})
 print("Done : Indexed %d buildings" % res['hits']['total'])
