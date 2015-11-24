@@ -121,7 +121,7 @@
 		3BC3AD271A25ED6800F2C6C0 /* PictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureViewController.m; sourceTree = "<group>"; };
 		3BC3AD2C1A25EE6D00F2C6C0 /* ReportsTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportsTableTableViewController.h; sourceTree = "<group>"; };
 		3BC3AD2D1A25EE6D00F2C6C0 /* ReportsTableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportsTableTableViewController.m; sourceTree = "<group>"; };
-		3BCBBA501A237EF500A9A246 /* Estates Audit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Estates Audit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BCBBA501A237EF500A9A246 /* Fix My Campus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fix My Campus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BCBBA541A237EF500A9A246 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BCBBA551A237EF500A9A246 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3BCBBA571A237EF500A9A246 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 		3BCBBA611A237EF500A9A246 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3BCBBA631A237EF500A9A246 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3BCBBA661A237EF500A9A246 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		3BCBBA6C1A237EF500A9A246 /* Estates AuditTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Estates AuditTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BCBBA6C1A237EF500A9A246 /* Fix My Campus.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fix My Campus.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BCBBA711A237EF500A9A246 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BCBBA721A237EF500A9A246 /* Estates_AuditTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Estates_AuditTests.m; sourceTree = "<group>"; };
 		3BCBBA7F1A2386A200A9A246 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Photo.h; path = Model/Photo.h; sourceTree = "<group>"; };
@@ -274,8 +274,8 @@
 		3BCBBA511A237EF500A9A246 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3BCBBA501A237EF500A9A246 /* Estates Audit.app */,
-				3BCBBA6C1A237EF500A9A246 /* Estates AuditTests.xctest */,
+				3BCBBA501A237EF500A9A246 /* Fix My Campus.app */,
+				3BCBBA6C1A237EF500A9A246 /* Fix My Campus.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -366,9 +366,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3BCBBA4F1A237EF500A9A246 /* Estates Audit */ = {
+		3BCBBA4F1A237EF500A9A246 /* Fix My Campus */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3BCBBA761A237EF500A9A246 /* Build configuration list for PBXNativeTarget "Estates Audit" */;
+			buildConfigurationList = 3BCBBA761A237EF500A9A246 /* Build configuration list for PBXNativeTarget "Fix My Campus" */;
 			buildPhases = (
 				88778790D18E1AA4A99E5DB2 /* Check Pods Manifest.lock */,
 				3BCBBA4C1A237EF500A9A246 /* Sources */,
@@ -380,14 +380,14 @@
 			);
 			dependencies = (
 			);
-			name = "Estates Audit";
+			name = "Fix My Campus";
 			productName = "Estates Audit";
-			productReference = 3BCBBA501A237EF500A9A246 /* Estates Audit.app */;
+			productReference = 3BCBBA501A237EF500A9A246 /* Fix My Campus.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3BCBBA6B1A237EF500A9A246 /* Estates AuditTests */ = {
+		3BCBBA6B1A237EF500A9A246 /* Fix My CampusTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3BCBBA791A237EF500A9A246 /* Build configuration list for PBXNativeTarget "Estates AuditTests" */;
+			buildConfigurationList = 3BCBBA791A237EF500A9A246 /* Build configuration list for PBXNativeTarget "Fix My CampusTests" */;
 			buildPhases = (
 				3BCBBA681A237EF500A9A246 /* Sources */,
 				3BCBBA691A237EF500A9A246 /* Frameworks */,
@@ -398,9 +398,9 @@
 			dependencies = (
 				3BCBBA6E1A237EF500A9A246 /* PBXTargetDependency */,
 			);
-			name = "Estates AuditTests";
+			name = "Fix My CampusTests";
 			productName = "Estates AuditTests";
-			productReference = 3BCBBA6C1A237EF500A9A246 /* Estates AuditTests.xctest */;
+			productReference = 3BCBBA6C1A237EF500A9A246 /* Fix My Campus.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -427,7 +427,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3BCBBA4B1A237EF500A9A246 /* Build configuration list for PBXProject "Estates Audit" */;
+			buildConfigurationList = 3BCBBA4B1A237EF500A9A246 /* Build configuration list for PBXProject "Fix My Campus" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -440,8 +440,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3BCBBA4F1A237EF500A9A246 /* Estates Audit */,
-				3BCBBA6B1A237EF500A9A246 /* Estates AuditTests */,
+				3BCBBA4F1A237EF500A9A246 /* Fix My Campus */,
+				3BCBBA6B1A237EF500A9A246 /* Fix My CampusTests */,
 			);
 		};
 /* End PBXProject section */
@@ -559,7 +559,7 @@
 /* Begin PBXTargetDependency section */
 		3BCBBA6E1A237EF500A9A246 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3BCBBA4F1A237EF500A9A246 /* Estates Audit */;
+			target = 3BCBBA4F1A237EF500A9A246 /* Fix My Campus */;
 			targetProxy = 3BCBBA6D1A237EF500A9A246 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -672,8 +672,8 @@
 				INFOPLIST_FILE = "Estates Audit/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.ac.edina.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.ac.edina.Estates-Audit";
+				PRODUCT_NAME = "Fix My Campus";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -689,8 +689,8 @@
 				INFOPLIST_FILE = "Estates Audit/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.ac.edina.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.ac.edina.Estates-Audit";
+				PRODUCT_NAME = "Fix My Campus";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -710,8 +710,8 @@
 				INFOPLIST_FILE = "Estates AuditTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.ac.edina.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Estates Audit.app/Estates Audit";
+				PRODUCT_NAME = "Fix My Campus";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fix My Campus.app/Fix My Campus";
 			};
 			name = Debug;
 		};
@@ -726,15 +726,15 @@
 				INFOPLIST_FILE = "Estates AuditTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.ac.edina.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Estates Audit.app/Estates Audit";
+				PRODUCT_NAME = "Fix My Campus";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fix My Campus.app/Fix My Campus";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3BCBBA4B1A237EF500A9A246 /* Build configuration list for PBXProject "Estates Audit" */ = {
+		3BCBBA4B1A237EF500A9A246 /* Build configuration list for PBXProject "Fix My Campus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3BCBBA741A237EF500A9A246 /* Debug */,
@@ -743,7 +743,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3BCBBA761A237EF500A9A246 /* Build configuration list for PBXNativeTarget "Estates Audit" */ = {
+		3BCBBA761A237EF500A9A246 /* Build configuration list for PBXNativeTarget "Fix My Campus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3BCBBA771A237EF500A9A246 /* Debug */,
@@ -752,7 +752,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3BCBBA791A237EF500A9A246 /* Build configuration list for PBXNativeTarget "Estates AuditTests" */ = {
+		3BCBBA791A237EF500A9A246 /* Build configuration list for PBXNativeTarget "Fix My CampusTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3BCBBA7A1A237EF500A9A246 /* Debug */,

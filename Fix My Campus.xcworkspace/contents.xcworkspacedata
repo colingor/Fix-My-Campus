@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Estates Audit.xcodeproj">
+      location = "group:/Users/colin/Code/STSWorkspaces/Workspace1/git/Estates Audit/Fix My Campus.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
