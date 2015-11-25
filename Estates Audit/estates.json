@@ -11,7 +11,8 @@
             ], 
             "latitude": "55.9496683956151100", 
             "longitude": "-3.1952404975891113", 
-            "name": "New College"
+            "name": "New College",
+            "image" : "New-College-S.jpg"
         }, 
         {
             "abbreviation": "0008", 
@@ -63,10 +64,11 @@
             ], 
             "latitude": "55.9501219441207600", 
             "longitude": "-3.1797266006469727", 
-            "name": "Paterson's Land"
+            "name": "Paterson's Land",
+            "image" : "Patersons-Land-S.jpg"
         }, 
         {
-            "address": "2 Hope Park Square  Edinburgh EH8 9NW", 
+            "address": "2 Hope Park Square Edinburgh EH8 9NW", 
             "campuses": [
                 "Central area"
             ], 
@@ -99,7 +101,7 @@
             "latitude": "55.9474035772206400", 
             "longitude": "-3.1872797012329100", 
             "name": "Old College",
-            "image": "OLD COLLEGE 2-S.jpg"
+            "image": "Old-College-S.jpg"
         }, 
         {
             "address": "Main University Library 30 George Square Edinburgh EH8 9LJ", 
@@ -137,7 +139,8 @@
             ], 
             "latitude": "55.9461719890707060", 
             "longitude": "-3.1879234313964844", 
-            "name": "Potterow"
+            "name": "Potterow",
+            "image" : "Potterrow-S.jpg"
         }, 
         {
             "address": "University of Edinburgh Business School 29 Buccleuch Place Edinburgh EH8 9JS", 
@@ -177,7 +180,8 @@
             ], 
             "latitude": "55.9452347542822000", 
             "longitude": "-3.1905627250671387", 
-            "name": "Medical School (Old Medical School)"
+            "name": "Medical School (Old Medical School)",
+            "image" : "Old-Medical-School-S.jpg"
         }, 
         {
             "abbreviation": "0114", 
@@ -1208,7 +1212,8 @@
             ], 
             "latitude": "55.9446652929679200", 
             "longitude": "-3.1875371932983400", 
-            "name": "Informatics Forum"
+            "name": "Informatics Forum",
+            "image" : "Infomatics-Forum-S.jpg"
         }, 
         {
             "address": "3 Charles Street Edinburgh EH8 9AD", 
@@ -2037,7 +2042,8 @@
             ], 
             "latitude": "55.9449286238358500", 
             "longitude": "-3.1891578435900670", 
-            "name": "Reid Museum of Musical Instruments"
+            "name": "Reid Museum of Musical Instruments",
+            "image" : "Reid-Museum-S.jpg"
         }, 
         {
             "address": " ", 
@@ -2551,7 +2557,8 @@
             "categories": [], 
             "latitude": "55.9494235973597600", 
             "longitude": "-3.1796447932720184", 
-            "name": "St Leonard's Land"
+            "name": "St Leonard's Land",
+            "image" : "St-Leonards-S.jpg"
         }, 
         {
             "address": "5 Forrest Hill  Edinburgh EH1 2QL", 
