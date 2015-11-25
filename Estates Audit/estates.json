@@ -146,10 +146,11 @@
             ], 
             "categories": [
                 "Buildings"
-            ], 
+            ],
             "latitude": "55.9431078681228900", 
             "longitude": "-3.1873118877410890", 
-            "name": "Business School"
+            "name": "Business School",
+            "image" : "Edinburgh-Business-School-S.jpg"
         }, 
         {
             "abbreviation": "0104", 
@@ -162,7 +163,8 @@
             ], 
             "latitude": "55.9463762551806900", 
             "longitude": "-3.1908202171325684", 
-            "name": "Bedlam Theatre"
+            "name": "Bedlam Theatre",
+            "image" : "Bedlam-S.jpg"
         }, 
         {
             "abbreviation": "0113", 
@@ -1218,7 +1220,8 @@
             ], 
             "latitude": "55.9451506423586760", 
             "longitude": "-3.1878590583801270", 
-            "name": "Dugald Stewart Building"
+            "name": "Dugald Stewart Building",
+            "image" : "Dugald-Stewart-S.jpg"
         }, 
         {
             "address": " ", 
@@ -2558,7 +2561,8 @@
             "categories": [], 
             "latitude": "55.9460157848478160", 
             "longitude": "-3.1919199228286743", 
-            "name": "Forrest Hill Building"
+            "name": "Forrest Hill Building",
+            "image" : "Forrest-Hill-S.jpg"
         }, 
         {
             "address": "46 Pleasance  Edinburgh EH8 9TJ", 
