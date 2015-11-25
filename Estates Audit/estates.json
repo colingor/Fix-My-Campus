@@ -1267,7 +1267,8 @@
             ], 
             "latitude": "55.9220181396980500", 
             "longitude": "-3.1368756294250490", 
-            "name": "Chancellor's Building"
+            "name": "Chancellor's Building",
+            "image" : "Chancellors-Building-S.jpg"
         }, 
         {
             "address": "47 Little France Crescent Edinburgh EH16 4TJ", 
@@ -1279,7 +1280,8 @@
             ], 
             "latitude": "55.9222413693940400", 
             "longitude": "-3.1388711929321290", 
-            "name": "Queen's Medical Research Institute"
+            "name": "Queen's Medical Research Institute",
+            "image" : "QMRI-S.jpg"
         }, 
         {
             "address": "15a George Square Edinburgh EH8 9LD", 
@@ -1342,7 +1344,8 @@
             ], 
             "latitude": "55.8658360390777300", 
             "longitude": "-3.2010340690612793", 
-            "name": "Royal (Dick) School of Veterinary Studies"
+            "name": "Royal (Dick) School of Veterinary Studies",
+            "image" : "Royal-Dick-S.jpg"
         }, 
         {
             "address": "Buccleuch Place Edinburgh ", 
@@ -1531,7 +1534,8 @@
             ], 
             "latitude": "55.8654627786743400", 
             "longitude": "-3.1981158256530760", 
-            "name": "Roslin Institute"
+            "name": "Roslin Institute",
+            "image" : "Roslin-institute-S.jpg"
         }, 
         {
             "address": "13 Infirmary Street Edinburgh EH1 1LT", 
@@ -1840,7 +1844,8 @@
             ], 
             "latitude": "55.9213756958468900", 
             "longitude": "-3.1307816505432130", 
-            "name": "Scottish Centre for Regenerative Medicine"
+            "name": "Scottish Centre for Regenerative Medicine",
+            "image" : "SCRM-S.jpg"
         }, 
         {
             "address": "47 Little France Crescent Edinburgh EH16 4TJ", 
