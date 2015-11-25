@@ -259,7 +259,8 @@
             ], 
             "latitude": "55.9444416917442200", 
             "longitude": "-3.1870651245117188", 
-            "name": "Appleton Tower"
+            "name": "Appleton Tower",
+            "image" : "Appleton-Tower-S.jpg"
         }, 
         {
             "address": "55-56 George Square Edinburgh EH8 9JU", 
@@ -297,8 +298,7 @@
             ], 
             "latitude": "55.9435644975969700", 
             "longitude": "-3.1862711906433105", 
-            "name": "David Hume Tower Lecture Theatres",
-            "image": "Hume-Tower-S.jpg"
+            "name": "David Hume Tower Lecture Theatres"
         }, 
         {
             "abbreviation": "0228", 
@@ -311,7 +311,8 @@
             ], 
             "latitude": "55.9432040010911400", 
             "longitude": "-3.1866574287414550", 
-            "name": "David Hume Tower"
+            "name": "David Hume Tower",
+            "image": "Hume-Tower-S.jpg"
         }, 
         {
             "address": "Main University Library 30 George Square Edinburgh EH8 9LJ", 
@@ -678,12 +679,13 @@
             "categories": [], 
             "latitude": "55.9230950007645600", 
             "longitude": "-3.1776666641235350", 
-            "name": "Crew Building"
+            "name": "Crew Building",
+            "image" : "Crew-Building.jpg"
         }, 
         {
             "abbreviation": "0632", 
             "address": "David Brewster Road King's Buildings Edinburgh EH9 3FJ", 
-            "campuses": [
+            "campuses":[ 
                 "King's Buildings"
             ], 
             "categories": [], 
@@ -753,7 +755,8 @@
             "categories": [], 
             "latitude": "55.9216702674879260", 
             "longitude": "-3.1740939617156982", 
-            "name": "James Clerk Maxwell Building"
+            "name": "James Clerk Maxwell Building",
+            "image" : "JCMB-S.jpg"
         }, 
         {
             "abbreviation": "0640-0644", 
@@ -764,7 +767,8 @@
             "categories": [], 
             "latitude": "55.9239606359128100", 
             "longitude": "-3.1727099418640137", 
-            "name": "Ashworth Laboratories"
+            "name": "Ashworth Laboratories",
+            "image" : "Ashworth-S.jpg"
         }, 
         {
             "address": "Robert Stevenson Road King's Buildings Edinburgh EH9 3FB", 
@@ -774,7 +778,8 @@
             "categories": [], 
             "latitude": "55.9231010121864360", 
             "longitude": "-3.1717228889465330", 
-            "name": "Sanderson Building"
+            "name": "Sanderson Building",
+            "image" : "Sanderson-S.jpg"
         }, 
         {
             "abbreviation": "0605", 
@@ -839,7 +844,8 @@
             "categories": [], 
             "latitude": "55.9216101510083200", 
             "longitude": "-3.1719267368316650", 
-            "name": "Michael Swann Building"
+            "name": "Michael Swann Building",
+            "image" : "Michael-Swann-S.jpg"
         }, 
         {
             "address": "James Hutton Road King's Buildings Edinburgh EH9 3FE", 
@@ -1200,7 +1206,8 @@
             ], 
             "latitude": "55.9435284480973960", 
             "longitude": "-3.1886315345764160", 
-            "name": "George Square"
+            "name": "George Square",
+            "image" : "George-Sq-Gardens-S.jpg"
         }, 
         {
             "address": "10 Crichton Street Edinburgh EH8 9AB", 
@@ -1347,7 +1354,8 @@
             ], 
             "latitude": "55.9428735430130360", 
             "longitude": "-3.1865286827087402", 
-            "name": "Buccleuch Place"
+            "name": "Buccleuch Place",
+            "image" : "Buccleuch-S.jpg"
         }, 
         {
             "abbreviation": "0658", 
@@ -1358,7 +1366,8 @@
             "categories": [], 
             "latitude": "55.9213997425953900", 
             "longitude": "-3.1745553016662598", 
-            "name": "Erskine Williamson Building"
+            "name": "Erskine Williamson Building",
+            "image" : "Ersikine-William-S.jpg"
         }, 
         {
             "abbreviation": "0109", 
@@ -1381,7 +1390,8 @@
             "categories": [], 
             "latitude": "55.9225299229466700", 
             "longitude": "-3.1731122732162476", 
-            "name": "William Rankine Building"
+            "name": "William Rankine Building",
+            "image" : "William-Rankine-S.jpg"
         }, 
         {
             "abbreviation": "0560", 
@@ -1601,7 +1611,8 @@
             "categories": [], 
             "latitude": "55.9216402092597900", 
             "longitude": "-3.1700813770294190", 
-            "name": "C.H. Waddington Building"
+            "name": "C.H. Waddington Building",
+            "image" : "Waddington-S.jpg"
         }, 
         {
             "address": "George Square Edinburgh EH8 9JZ.", 
@@ -1613,7 +1624,8 @@
             ], 
             "latitude": "55.9438284590276300", 
             "longitude": "-3.1895273923873900", 
-            "name": "Labyrinth"
+            "name": "Labyrinth",
+            "image" : "Labyrinth-S.jpg"
         }, 
         {
             "address": "7 George Square Edinburgh EH8 9JZ", 
@@ -2018,7 +2030,8 @@
             "categories": [], 
             "latitude": "55.9229507263602100", 
             "longitude": "-3.1750380992889404", 
-            "name": "Noreen and Kenneth Murray Library"
+            "name": "Noreen and Kenneth Murray Library",
+            "image" : "Noreen-Kenneth-Murray-Library.jpg"
         }, 
         {
             "address": "Doorway 3, Medical School Teviot Place Edinburgh EH8 9AG", 
