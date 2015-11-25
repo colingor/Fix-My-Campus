@@ -325,7 +325,7 @@ static BOOL mapChangedFromUserInteraction = NO;
     @try {
         CustomMKAnnotation *point = [self.locationAnnotations objectAtIndex:indexPath.row];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.accessibilityHint = @"Select to see further information about this building";
+        cell.accessibilityHint = [point.title stringByAppendingString:point.subtitle];
         
         cell.textLabel.text = point.title;
         cell.detailTextLabel.text  = point.subtitle;
