@@ -206,7 +206,8 @@
             ], 
             "latitude": "55.9448983054919800", 
             "longitude": "-3.1894040107727050", 
-            "name": "Reid Concert Hall"
+            "name": "Reid Concert Hall",
+            "image" : "Reid-Concert-Hall-S.jpg"
         }, 
         {
             "abbreviation": "0116", 
@@ -1321,7 +1322,8 @@
             ], 
             "latitude": "55.9471933088459540", 
             "longitude": "-3.1878644227981567", 
-            "name": "Talbot Rice Gallery"
+            "name": "Talbot Rice Gallery",
+            "image" : "Talbot-Rice-Gallery-S.jpg"
         }, 
         {
             "abbreviation": "0009", 
@@ -1775,7 +1777,8 @@
             ], 
             "latitude": "55.9460736605762700", 
             "longitude": "-3.2005995512008667", 
-            "name": "Evolution House"
+            "name": "Evolution House",
+            "image" : "Evolution-House-S.JPG"
         }, 
         {
             "address": "Lauriston Place Edinburgh EH3 9DF", 
@@ -1799,7 +1802,8 @@
             ], 
             "latitude": "55.9458551741833600", 
             "longitude": "-3.1990599632263184", 
-            "name": "ECA Main Building"
+            "name": "ECA Main Building",
+            "image" : "ECA-main-S.jpg"
         }, 
         {
             "address": "Lauriston Place Edinburgh EH3 9DF", 
@@ -2100,7 +2104,8 @@
             ], 
             "latitude": "55.9495242201428600", 
             "longitude": "-3.1952404975891113", 
-            "name": "New College Library"
+            "name": "New College Library",
+            "image" : "New-College-Library-S.jpg"
         }, 
         {
             "address": " ", 
