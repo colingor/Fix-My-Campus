@@ -139,8 +139,7 @@
             ], 
             "latitude": "55.9461719890707060", 
             "longitude": "-3.1879234313964844", 
-            "name": "Potterow",
-            "image" : "Potterrow-S.jpg"
+            "name": "Potterow"
         }, 
         {
             "address": "University of Edinburgh Business School 29 Buccleuch Place Edinburgh EH8 9JS", 
@@ -348,7 +347,8 @@
             ], 
             "latitude": "55.9501339585784900", 
             "longitude": "-3.1795978546142580", 
-            "name": "Office of Lifelong Learning"
+            "name": "Office of Lifelong Learning",
+            "image" : "Office-Of-Lifelong-Learning-S.jpg"
         }, 
         {
             "address": "  Edinburgh ", 
@@ -623,7 +623,8 @@
             ], 
             "latitude": "55.9449944340160300", 
             "longitude": "-3.1886208057403564", 
-            "name": "Teviot Row House"
+            "name": "Teviot Row House",
+            "image" : "Teviot-Row-House-S.jpg"
         }, 
         {
             "address": " ", 
@@ -635,7 +636,8 @@
             ], 
             "latitude": "55.9460097769805000", 
             "longitude": "-3.1882989406585693", 
-            "name": "The Potterow"
+            "name": "The Potterow",
+            "image" : "Potterrow-S.jpg"
         }, 
         {
             "address": " ", 
@@ -691,7 +693,8 @@
             "categories": [], 
             "latitude": "55.9236600703440500", 
             "longitude": "-3.1762075424194336", 
-            "name": "Joseph Black Building"
+            "name": "Joseph Black Building",
+            "image" : "Joseph-Black-S.jpg"
         }, 
         {
             "abbreviation": "0648", 
