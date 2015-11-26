@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -1275,14 +1276,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZuG-IX-nao">
                                 <rect key="frame" x="46" y="94" width="228" height="444"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fix-my-campus-image" translatesAutoresizingMaskIntoConstraints="NO" id="2Pp-pd-IQG">
-                                        <rect key="frame" x="100" y="8" width="30" height="110"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="110" id="VPR-AU-Y0z"/>
-                                        </constraints>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DtW-8A-otZ">
-                                        <rect key="frame" x="57" y="244" width="116" height="30"/>
+                                        <rect key="frame" x="57" y="256" width="116" height="30"/>
                                         <color key="backgroundColor" red="0.69803921568627447" green="0.50196078431372548" blue="0.027450980392156862" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="spX-Px-o43"/>
@@ -1295,7 +1290,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xnG-rz-SbG">
-                                        <rect key="frame" x="57" y="282" width="116" height="30"/>
+                                        <rect key="frame" x="57" y="294" width="116" height="30"/>
                                         <color key="backgroundColor" red="0.69803921570000005" green="0.50196078430000002" blue="0.027450980390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="RSE-Qr-ajS"/>
@@ -1308,7 +1303,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2SV-GY-SBi">
-                                        <rect key="frame" x="57" y="358" width="116" height="30"/>
+                                        <rect key="frame" x="57" y="370" width="116" height="30"/>
                                         <color key="backgroundColor" red="0.69803921570000005" green="0.50196078430000002" blue="0.027450980390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="T0V-Dt-sfb"/>
@@ -1321,7 +1316,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jd1-Xj-lwJ">
-                                        <rect key="frame" x="57" y="320" width="116" height="30"/>
+                                        <rect key="frame" x="57" y="332" width="116" height="30"/>
                                         <color key="backgroundColor" red="0.69803921570000005" green="0.50196078430000002" blue="0.027450980390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Yt3-EC-IJh"/>
@@ -1334,7 +1329,13 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fix-my-campus-text" translatesAutoresizingMaskIntoConstraints="NO" id="Tjl-wa-EW1">
-                                        <rect key="frame" x="8" y="126" width="212" height="110"/>
+                                        <rect key="frame" x="8" y="156" width="212" height="92"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fix-my-campus-image" translatesAutoresizingMaskIntoConstraints="NO" id="2Pp-pd-IQG">
+                                        <rect key="frame" x="-11" y="27" width="250" height="125"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="2Pp-pd-IQG" secondAttribute="height" multiplier="2:1" id="CmA-gF-cQm"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.19607843137254902" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1342,19 +1343,19 @@
                                     <constraint firstItem="xnG-rz-SbG" firstAttribute="trailing" secondItem="jd1-Xj-lwJ" secondAttribute="trailing" id="6ZR-yK-m8Q"/>
                                     <constraint firstItem="jd1-Xj-lwJ" firstAttribute="trailing" secondItem="2SV-GY-SBi" secondAttribute="trailing" id="7ti-m6-bhe"/>
                                     <constraint firstItem="xnG-rz-SbG" firstAttribute="leading" secondItem="DtW-8A-otZ" secondAttribute="leading" id="CPz-jc-n49"/>
-                                    <constraint firstItem="Tjl-wa-EW1" firstAttribute="top" secondItem="2Pp-pd-IQG" secondAttribute="bottom" constant="8" symbolic="YES" id="CV2-Fd-qpk"/>
                                     <constraint firstItem="DtW-8A-otZ" firstAttribute="leading" secondItem="ZuG-IX-nao" secondAttribute="leading" constant="57" id="F3m-vZ-Z2H"/>
-                                    <constraint firstAttribute="bottom" secondItem="2SV-GY-SBi" secondAttribute="bottom" constant="56" id="Lo5-SC-PZf"/>
-                                    <constraint firstAttribute="trailing" secondItem="2Pp-pd-IQG" secondAttribute="trailing" constant="98" id="PwV-Xf-6RV"/>
+                                    <constraint firstAttribute="bottom" secondItem="2SV-GY-SBi" secondAttribute="bottom" multiplier="1.11" id="Lo5-SC-PZf"/>
                                     <constraint firstAttribute="trailing" secondItem="DtW-8A-otZ" secondAttribute="trailing" constant="55" id="SYk-pY-x1J"/>
                                     <constraint firstItem="jd1-Xj-lwJ" firstAttribute="leading" secondItem="2SV-GY-SBi" secondAttribute="leading" id="VgO-n2-TUl"/>
                                     <constraint firstItem="2SV-GY-SBi" firstAttribute="top" secondItem="jd1-Xj-lwJ" secondAttribute="bottom" constant="8" symbolic="YES" id="cqg-xu-U2z"/>
                                     <constraint firstItem="DtW-8A-otZ" firstAttribute="trailing" secondItem="xnG-rz-SbG" secondAttribute="trailing" id="f5W-sj-Bcb"/>
-                                    <constraint firstItem="2Pp-pd-IQG" firstAttribute="top" secondItem="ZuG-IX-nao" secondAttribute="topMargin" id="fMb-xU-OYv"/>
+                                    <constraint firstItem="2Pp-pd-IQG" firstAttribute="width" secondItem="ZuG-IX-nao" secondAttribute="width" multiplier="1.1" id="hbU-cY-UVY"/>
                                     <constraint firstItem="DtW-8A-otZ" firstAttribute="top" secondItem="Tjl-wa-EW1" secondAttribute="bottom" constant="8" symbolic="YES" id="iCi-hd-xap"/>
+                                    <constraint firstAttribute="centerY" secondItem="Tjl-wa-EW1" secondAttribute="centerY" multiplier="1.1" id="iZr-ze-5QW"/>
                                     <constraint firstItem="jd1-Xj-lwJ" firstAttribute="top" secondItem="xnG-rz-SbG" secondAttribute="bottom" constant="8" symbolic="YES" id="jHl-y5-dXL"/>
-                                    <constraint firstItem="2Pp-pd-IQG" firstAttribute="centerX" secondItem="DtW-8A-otZ" secondAttribute="centerX" id="jad-Qg-BUv"/>
+                                    <constraint firstItem="2Pp-pd-IQG" firstAttribute="centerY" secondItem="ZuG-IX-nao" secondAttribute="centerY" multiplier="0.4" id="la6-RO-VpM"/>
                                     <constraint firstItem="xnG-rz-SbG" firstAttribute="leading" secondItem="jd1-Xj-lwJ" secondAttribute="leading" id="p4F-4G-kf7"/>
+                                    <constraint firstItem="2Pp-pd-IQG" firstAttribute="centerX" secondItem="ZuG-IX-nao" secondAttribute="centerX" id="qmk-7Q-dBj"/>
                                     <constraint firstItem="Tjl-wa-EW1" firstAttribute="trailing" secondItem="ZuG-IX-nao" secondAttribute="trailingMargin" id="tzM-ga-JRe"/>
                                     <constraint firstItem="xnG-rz-SbG" firstAttribute="top" secondItem="DtW-8A-otZ" secondAttribute="bottom" constant="8" symbolic="YES" id="wEA-sm-LAh"/>
                                     <constraint firstItem="Tjl-wa-EW1" firstAttribute="leading" secondItem="ZuG-IX-nao" secondAttribute="leadingMargin" id="yyg-s3-BZy"/>
@@ -1706,9 +1707,9 @@
         <image name="fix-my-campus-text" width="596" height="842"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VL8-5R-2Wf"/>
+        <segue reference="R6w-vE-Bht"/>
         <segue reference="eYS-Se-99Z"/>
-        <segue reference="VX7-ui-gdz"/>
+        <segue reference="VL8-5R-2Wf"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
