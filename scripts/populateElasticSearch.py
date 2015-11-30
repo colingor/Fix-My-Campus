@@ -19,8 +19,8 @@ class PopulateElasticSearch:
     BUILDING2_JSON = 'estates.json'
     BUILDING_JSON = 'uoe-estates-buildings.json'
 
-    # ES_HOST = 'localhost'
-    ES_HOST = 'dlib-brown.edina.ac.uk'
+    ES_HOST = 'localhost'
+    # ES_HOST = 'dlib-brown.edina.ac.uk'
     ES_PORT = '9200'
 
     API_BASE_URL = 'http://dlib-brown.edina.ac.uk:3001/api'

@@ -23,11 +23,12 @@
 - (void)searchForBuildingWithId: (NSString *)buildingId
                  withCompletion:(void (^)(NSMutableDictionary *source))completion;
 
-- (void)searchForBuildingsWithinBoundingBox: (NSDictionary *)bb
-                             withCompletion:(void (^)(NSMutableDictionary *locations))completion;
-
-- (void)searchForBuildingsNearCoordinate: (NSDictionary *)locationDict
+- (void)searchForBuildingsNearCoordinate: (NSDictionary *)centre
                           withCompletion:(void (^)(NSMutableDictionary *locations))completion;
+
+- (void)searchForBuildingsWithinBoundingBox: (NSDictionary *)bb
+                                 withCentre: (NSDictionary *)centre
+                             withCompletion:(void (^)(NSMutableDictionary *locations))completion;
 
 - (void)postImageToEstatesAPI:(NSString *)imageUrl
                 forBuildingId:(NSString *)buildingId

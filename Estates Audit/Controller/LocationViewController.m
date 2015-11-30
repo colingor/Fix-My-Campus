@@ -279,23 +279,23 @@ static BOOL mapChangedFromUserInteraction = NO;
     MKMapRect mRect = self.mapView.visibleMapRect;
     NSDictionary *bb = [self getBoundingBox:mRect];
     
-    [[ElasticSearchAPI sharedInstance] searchForBuildingsWithinBoundingBox:bb withCompletion:^(NSMutableDictionary *locations) {
+    [[ElasticSearchAPI sharedInstance] searchForBuildingsWithinBoundingBox:bb withCentre:[self centreCoords] withCompletion:^(NSMutableDictionary *locations) {
         [self processSearchResults:locations];
     }];
 }
 
 
 -(void)listBuildingsNearCurrentLocation{
-
-    NSDictionary *locationDict =  @{ @"lat": [NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude],
-                                     @"lon":[NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude]};
     
-    [[ElasticSearchAPI sharedInstance] searchForBuildingsNearCoordinate:locationDict withCompletion:^(NSMutableDictionary *locations) {
+    [[ElasticSearchAPI sharedInstance] searchForBuildingsNearCoordinate:[self centreCoords] withCompletion:^(NSMutableDictionary *locations) {
         [self processSearchResults:locations];
     }];
 }
 
-
+-(NSDictionary *)centreCoords{
+    return  @{ @"lat": [NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude],
+               @"lon":[NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude]};
+}
 
 
 #pragma mark - Table view data source

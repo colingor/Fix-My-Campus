@@ -184,26 +184,29 @@ NSString *const BASE_ESTATES_API_URL = @"http://dlib-brown.edina.ac.uk/api/";
     
 }
 
-- (void)searchForBuildingsNearCoordinate: (NSDictionary *)locationDict
+- (void)searchForBuildingsNearCoordinate: (NSDictionary *)centre
                           withCompletion:(void (^)(NSMutableDictionary *locations))completion{
     
-    [self searchForBuildingsWithDict:locationDict withCompletion:^(NSMutableDictionary *locations) {
+    [self searchForBuildingsWithDict:nil withCentre:centre withCompletion:^(NSMutableDictionary *locations) {
         completion(locations);
     }];
 }
 
 
 - (void)searchForBuildingsWithinBoundingBox: (NSDictionary *)bb
-                         withCompletion:(void (^)(NSMutableDictionary *locations))completion
+                                 withCentre: (NSDictionary *)centre
+                             withCompletion:(void (^)(NSMutableDictionary *locations))completion
 {
-    [self searchForBuildingsWithDict:bb withCompletion:^(NSMutableDictionary *locations) {
+    [self searchForBuildingsWithDict:bb withCentre: centre withCompletion:^(NSMutableDictionary *locations) {
         completion(locations);
     }];
 }
 
 
-- (void)searchForBuildingsWithDict: (NSDictionary *)dict
+- (void)searchForBuildingsWithDict: (NSDictionary *)bbDict
+                        withCentre: (NSDictionary *)centre
                              withCompletion:(void (^)(NSMutableDictionary *locations))completion{
+    
     if([self checkNetworkAvailablityAndDisplayNotification]){
         
         // Construct search URL
@@ -213,30 +216,68 @@ NSString *const BASE_ESTATES_API_URL = @"http://dlib-brown.edina.ac.uk/api/";
         NSMutableDictionary *queryJson =  [[NSMutableDictionary alloc] init];
         NSDictionary *filterDict = [[NSDictionary alloc] init];
 
-        
-        
-        NSDictionary *queryDict = @{ @"query" : @{ @"match_all": @{}} };
-        
-        // Construct appropriate search json query
-        if([dict objectForKey:@"top_left"]){
+        if(bbDict){
             // Bounding box search
-            
-            filterDict = @{@"filter" : @{ @"geo_bounding_box": @{@"location":dict }} };
-            
+            if([bbDict objectForKey:@"top_left"]){
+                filterDict = @{@"filter" : @{ @"geo_bounding_box": @{@"geometry.location":bbDict }} };
+            }
         }else{
-            // Distance search
+            /* Point proximity search like:
+             {
+                "query": {
+                    "filtered": {
+                        "filter": {
+                            "geo_distance": {
+                                "distance": "1km",
+                                "geometry.location": {
+                                    "lat": 55.93292837590634,
+                                    "lon": -3.1823691373333958
+                                }
+                            }
+                        }
+                    }
+                },
+                "sort": [
+                         {
+                             "_geo_distance": {
+                                 "geometry.location": {
+                                     "lat": 55.93292837590634,
+                                     "lon": -3.1823691373333958
+                                 },
+                                 "order": "asc",
+                                 "unit": "km",
+                                 "distance_type": "plane"
+                             }
+                         }
+                         ]
+            }*/
             
             filterDict = @{@"filter" : @{
                                    @"geo_distance": @{
-                                           @"distance":@"0.5km",
-                                           @"location":dict
+                                           @"distance":@"0.1km",
+                                           @"geometry.location":centre
                                            }
                                    }
                            };
         }
         
+        NSDictionary *queryDict = @{ @"query" : @{ @"filtered": filterDict} };
+        
+        NSDictionary *sortDict = @{@"sort" : @[
+                                           @{
+                                               @"_geo_distance": @{
+                                                       @"geometry.location":centre,
+                                                       @"order":@"asc",
+                                                       @"unit":@"km",
+                                                       @"distance_type":@"plane"
+                                                       }
+                                               }
+                                           ]
+                                   };
+        
+        
         [queryJson addEntriesFromDictionary:queryDict];
-        [queryJson addEntriesFromDictionary:filterDict];
+        [queryJson addEntriesFromDictionary:sortDict];
 
         
         NSMutableURLRequest *request = [self setupRequest:apiUrl queryJson:queryJson];
