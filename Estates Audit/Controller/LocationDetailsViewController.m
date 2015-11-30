@@ -49,6 +49,8 @@ NSString *const BASE_IMAGE_URL = @"http://dlib-brown.edina.ac.uk/api/images/";
     [self refresh:nil];
     
     [self styleTabBar];
+    
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidLoad {
